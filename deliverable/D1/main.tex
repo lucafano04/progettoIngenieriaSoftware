@@ -9,16 +9,43 @@
 \usepackage{lastpage}
 \usepackage{titlesec}
 
-
+% Ridefinizione per il titolo dei capitoli
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
 
+% Definizione della path per le immagini
 \graphicspath{{../images/}}
 
+% Definizione dei dati del documento
 \title{}
 \author{Facchini Luca, Prigione Luca, Faa Enrico}
 \date{A.A. 2024/2025}
 % Set the version of the document
 \newcommand{\version}{0.1}
+
+% Definizione counter Requisiti Funzionali
+\newcounter{rfCounter}
+\newcounter{rnfCounter}
+
+% Definisci un nuovo comando per il formato RF/RNF
+\newcommand{\RF}{RF\arabic{rfCounter}}
+\newcommand{\RNF}{RNF\arabic{rnfCounter}}
+
+% Definizione nuovo comando per lista con RF/RNF automatici in modo che NON si resettino ad ogni lista
+% Ambiente per la lista di RF
+\newenvironment{rfList}{
+    \begin{list}{\textbf{\RF:}}{ \setlength{\itemsep}{0pt} } % Lista RF
+        \setcounter{rfCounter}{\value{rfCounter}} % Mantieni il valore corrente
+}{\end{list}}
+
+% Ambiente per la lista di RNF
+\newenvironment{rnfList}{
+    \begin{list}{\textbf{\RNF:}}{ \setlength{\itemsep}{0pt} } % Lista RNF
+        \setcounter{rnfCounter}{\value{rnfCounter}} % Mantieni il valore corrente
+}{\end{rnfList}}
+
+% comandi per gli item delle liste RF e RNF
+\newcommand{\rfItem}{\stepcounter{rfCounter}\item}
+\newcommand{\rnfItem}{\stepcounter{rnfCounter}\item}
 
 
 \fancypagestyle{stdPage}{
@@ -67,9 +94,12 @@
             \end{tabular}
         \end{center}
     \end{titlepage}
+    
     \begingroup
+        \setcounter{tocdepth}{0}
         \tableofcontents
         \thispagestyle{stdPage}
     \endgroup
     \include{chapters/01-slidepitch}
+    \include{chapters/02-requisitiFunzionali}
 \end{document}

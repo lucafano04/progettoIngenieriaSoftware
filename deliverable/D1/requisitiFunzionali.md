@@ -25,13 +25,13 @@
 
 # Requisiti non funzionali
 - RNF1: La web app deve essere compatibile con le seguenti versioni di browser: Chrome 80+, Firefox 80+, Safari 14+, Edge 80+ fornendo a ciascuna una pari esperienza per quanto riguarda il numero delle funzionalità disponibili
-- RNF2: Il sistema deve essere in grado di fornire i dati richiesti all’utente entro 2 secondi dalla loro rischesta
+- RNF2: Il sistema deve essere in grado di fornire i dati richiesti all’utente entro 2 secondi dalla loro richiesta
 - RNF3: Il sistema deve riuscire a gestire almeno 1000 utenti connessi simultaneamente, senza che nessuna funzionalità sia compromessa
 - RNF4: I dati non accessibili a tutti dovranno essere memorizzati in modo sicuro e protetti tramite protocollo HTTPS e autenticazione per le richieste client-server
 - RNF5: Progettazione di un piano di backup dei dati in modo sicuro su un server locale interno all'edificio (6h/12h/1d) e un backup meno frequente remoto (1d/3d/1w)
 - RNF6: Il sistema deve permettere ai Sondaggisti di caricare anche quantità di dati con unità di misura del Gigabyte in meno di 10 minuti
 - RNF7: Il sistema deve permettere di aggiungere/modificare/eliminare i dati regolarmente mantenendo una struttura logica intatta
 - RNF8: I dati sulla felicità caricati hanno validità massima di circa 6 mesi al fine di mantenerli attuali
-- RNF9: Il sistema farà uso di un design accessibile tramite una navigazione tramite topbar accessibile sia da schermi con risoluzione desktop, laptop e tablet
+- RNF9: Il sistema farà uso di un design accessibile tramite una navigazione con top-bar accessibile sia da schermi con risoluzione desktop, laptop e tablet
 - RNF10: La parte grafica generale deve essere di facile utilizzo per tutti gli utenti, la parte della web-app disponibile a tutti gli utenti deve essere comprensibile fin dal primo utilizzo ed entro 10 minuti dovrebbe essere chiaro a chiunque come funzioni l'app nella sua interezza
 - RNF11: La lingua selezionata inizialmente deve essere l'italiano, però devono essere disponibili anche la lingua inglese e tedesca

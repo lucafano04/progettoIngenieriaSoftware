@@ -1,0 +1,75 @@
+\documentclass[twoside]{report}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{lastpage}
+\usepackage{titlesec}
+
+
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
+
+\graphicspath{{../images/}}
+
+\title{}
+\author{Facchini Luca, Prigione Luca, Faa Enrico}
+\date{A.A. 2024/2025}
+% Set the version of the document
+\newcommand{\version}{0.1}
+
+
+\fancypagestyle{stdPage}{
+    \setlength{\headheight}{24.0pt} 
+    \fancyhead{}
+    \fancyfoot{}
+    \fancyhead[LE,RO]{\begin{tabular}{l l}
+        \textbf{Document:} & Descrizione del progetto \\
+        \textbf{Version:} & \version
+    \end{tabular}}
+    \fancyfoot[LE,RO]{\thepage / \pageref{LastPage}}
+}
+
+\begin{document}
+    \pagestyle{fancy}
+    \fancyhead{}
+    \fancyfoot{}
+    \fancyfoot[LE,RO]{\thepage / \pageref{LastPage}}
+    
+    \begin{titlepage}
+        \thispagestyle{stdPage}
+        \includegraphics[width=0.33\textwidth]{logoUni.png}
+        \vspace{1cm}\newline
+        \textbf{Progetto:}
+        \vspace{0.5cm}
+        \begin{center}
+            \textbf{\Huge{Nome del progetto}}
+        \end{center}
+        \vspace{1cm}
+        \textbf{Titolo del documento:}
+        \vspace{0.5cm}
+        \begin{center}
+            \textbf{\Huge{Descrizione del progetto}}
+        \end{center}
+        \vspace{1cm}
+        \textbf{Document Info}
+        \vspace{0.5cm}
+        % Table with document info
+        \begin{center}
+            \begin{tabular}{|l|l|l|c|}  
+                \hline
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Doc. Name}}   & D1 - nomeProgetto - Descrizione Progetto & {\cellcolor[rgb]{0,0.502,1}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0,0.502,1}}l@{}}\textcolor{white}{\textbf{Doc.}}\\\textcolor{white}{\textbf{Number}}\end{tabular} & D1 V\version  \\ 
+                \hline
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Description}} & \multicolumn{3}{l|}{Documento di analisi dei requisiti funzionali, non funzionali e front-end}                                                                                                                               \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{titlepage}
+    \begingroup
+        \tableofcontents
+        \thispagestyle{stdPage}
+    \endgroup
+    \include{chapters/01-slidepitch}
+\end{document}

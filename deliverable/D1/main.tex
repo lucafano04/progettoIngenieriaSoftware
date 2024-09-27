@@ -1,4 +1,4 @@
-\documentclass[twoside]{report}
+\documentclass[twoside, a4paper, 10pt]{report}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1in]{geometry}
@@ -11,6 +11,7 @@
 
 % Ridefinizione per il titolo dei capitoli
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
+\titlespacing{\chapter}{0pt}{0pt}{1em}
 
 % Definizione della path per le immagini
 \graphicspath{{../images/}}
@@ -41,7 +42,7 @@
 \newenvironment{rnfList}{
     \begin{list}{\textbf{\RNF:}}{ \setlength{\itemsep}{0pt} } % Lista RNF
         \setcounter{rnfCounter}{\value{rnfCounter}} % Mantieni il valore corrente
-}{\end{rnfList}}
+}{\end{list}}
 
 % comandi per gli item delle liste RF e RNF
 \newcommand{\rfItem}{\stepcounter{rfCounter}\item}
@@ -102,4 +103,5 @@
     \endgroup
     \include{chapters/01-slidepitch}
     \include{chapters/02-requisitiFunzionali}
+    \include{chapters/03-requisitiNonFunzionali}
 \end{document}

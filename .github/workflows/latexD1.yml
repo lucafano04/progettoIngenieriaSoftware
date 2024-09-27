@@ -11,5 +11,5 @@ jobs:
       - name: Build LaTeX
         uses: xu-cheng/latex-action@3.2.0
         with:
-          working-directory: deliverable/D1
-          root-file: deliverable/D1/main.tex
+          working_directory: deliverable/D1
+          root_file: deliverable/D1/main.tex

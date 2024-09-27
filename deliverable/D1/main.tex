@@ -22,6 +22,8 @@
 \date{A.A. 2024/2025}
 % Set the version of the document
 \newcommand{\version}{0.1}
+\newcommand{\ProjectTitle}{Nome del progetto}
+\newcommand{\ProjectDescription}{Descrizione del progetto}
 
 % Definizione counter Requisiti Funzionali
 \newcounter{rfCounter}
@@ -48,7 +50,7 @@
 \newcommand{\rfItem}{\stepcounter{rfCounter}\item}
 \newcommand{\rnfItem}{\stepcounter{rnfCounter}\item}
 
-
+% Definizione del layout della pagina
 \fancypagestyle{stdPage}{
     \setlength{\headheight}{24.0pt} 
     \fancyhead{}
@@ -73,13 +75,13 @@
         \textbf{Progetto:}
         \vspace{0.5cm}
         \begin{center}
-            \textbf{\Huge{Nome del progetto}}
+            \textbf{\Huge{\ProjectTitle}}
         \end{center}
         \vspace{1cm}
         \textbf{Titolo del documento:}
         \vspace{0.5cm}
         \begin{center}
-            \textbf{\Huge{Descrizione del progetto}}
+            \textbf{\huge{\ProjectDescription}}
         \end{center}
         \vspace{1cm}
         \textbf{Document Info}
@@ -88,7 +90,7 @@
         \begin{center}
             \begin{tabular}{|l|l|l|c|}  
                 \hline
-                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Doc. Name}}   & D1 - nomeProgetto - Descrizione Progetto & {\cellcolor[rgb]{0,0.502,1}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0,0.502,1}}l@{}}\textcolor{white}{\textbf{Doc.}}\\\textcolor{white}{\textbf{Number}}\end{tabular} & D1 V\version  \\ 
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Doc. Name}}   & D1 - \ProjectTitle - \ProjectDescription & {\cellcolor[rgb]{0,0.502,1}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0,0.502,1}}l@{}}\textcolor{white}{\textbf{Doc.}}\\\textcolor{white}{\textbf{Number}}\end{tabular} & D1 V\version  \\ 
                 \hline
                 {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Description}} & \multicolumn{3}{l|}{Documento di analisi dei requisiti funzionali, non funzionali e front-end}                                                                                                                               \\
                 \hline

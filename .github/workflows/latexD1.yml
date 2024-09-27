@@ -1,6 +1,6 @@
 name: LatexD1 CI
-run-name: ${{ github.run_id }} # This is the name of the run
-on: [pull_request, push]
+run-name: Building LaTeX Deliverable 1 file
+on: [pull_request]
 jobs:
   # Build usign Github Action for LaTeX
   build_latex:
@@ -12,4 +12,4 @@ jobs:
         uses: xu-cheng/latex-action@3.2.0
         with:
           working_directory: deliverable/D1
-          root_file: deliverable/D1/main.tex
+          root_file: main.tex

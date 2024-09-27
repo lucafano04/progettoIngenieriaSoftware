@@ -10,6 +10,7 @@
 \usepackage{titlesec}
 \usepackage{float}
 \usepackage{subcaption}
+\usepackage{hyperref}
 
 % Ridefinizione per il titolo dei capitoli
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
@@ -25,7 +26,8 @@
 % Set the version of the document
 \newcommand{\version}{0.1}
 \newcommand{\ProjectTitle}{Nome del progetto}
-\newcommand{\ProjectDescription}{Descrizione del progetto}
+\newcommand{\ProjectTitleShort}{NomeProgetto}
+\newcommand{\FileName}{D1-\ProjectTitleShort-descrizioneProgetto}
 
 % Definizione counter Requisiti Funzionali
 \newcounter{rfCounter}
@@ -58,7 +60,7 @@
     \fancyhead{}
     \fancyfoot{}
     \fancyhead[LE,RO]{\begin{tabular}{l l}
-        \textbf{Document:} & Descrizione del progetto \\
+        \textbf{Document:} & Descrizione di progetto \\
         \textbf{Version:} & \version
     \end{tabular}}
     \fancyfoot[LE,RO]{\thepage / \pageref{LastPage}}
@@ -83,7 +85,7 @@
         \textbf{Titolo del documento:}
         \vspace{0.5cm}
         \begin{center}
-            \textbf{\huge{\ProjectDescription}}
+            \textbf{\huge{Descrizione di Progetto}}
         \end{center}
         \vspace{1cm}
         \textbf{Document Info}
@@ -92,7 +94,7 @@
         \begin{center}
             \begin{tabular}{|l|l|l|c|}  
                 \hline
-                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Doc. Name}}   & D1 - \ProjectTitle - \ProjectDescription & {\cellcolor[rgb]{0,0.502,1}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0,0.502,1}}l@{}}\textcolor{white}{\textbf{Doc.}}\\\textcolor{white}{\textbf{Number}}\end{tabular} & D1 V\version  \\ 
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Doc. Name}}   & \FileName & {\cellcolor[rgb]{0,0.502,1}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0,0.502,1}}l@{}}\textcolor{white}{\textbf{Doc.}}\\\textcolor{white}{\textbf{Number}}\end{tabular} & D1 V\version  \\ 
                 \hline
                 {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Description}} & \multicolumn{3}{l|}{Documento di analisi dei requisiti funzionali, non funzionali e front-end}                                                                                                                               \\
                 \hline
@@ -108,4 +110,5 @@
     \include{chapters/01-slidepitch}
     \include{chapters/02-requisitiFunzionali}
     \include{chapters/03-requisitiNonFunzionali}
+    \include{chapters/04-ilDesignFrontEnd}
 \end{document}

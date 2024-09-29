@@ -1,1 +1,9 @@
 ~$*
+*.log
+*.log.*
+*.fdb_latexmk
+*.fls
+*.aux
+*.synctex.gz
+*.toc
+*.out

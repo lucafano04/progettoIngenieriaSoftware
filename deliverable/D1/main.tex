@@ -1,0 +1,124 @@
+\documentclass[twoside, a4paper, 10pt]{report}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+% Ridefinizione per il titolo dei capitoli
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
+\titlespacing{\chapter}{0pt}{0pt}{1em}
+
+% Definizione della path per le immagini
+\graphicspath{{../images/}}
+
+% Set the version of the document
+\newcommand{\version}{0.1}
+\newcommand{\ProjectTitle}{SatisTrento}
+\newcommand{\ProjectTitleShort}{satisTrento}
+\newcommand{\FileName}{D1-\ProjectTitleShort-descrizioneProgetto}
+
+% Definizione dei dati del documento
+\title{Descrizione di Progetto - \ProjectTitle}
+\author{Facchini Luca, Prigione Luca, Faa Enrico}
+\date{A.A. 2024/2025}
+
+% Definizione metadati PDF
+\hypersetup{
+    pdftitle={\ProjectTitle},
+    pdfauthor={Facchini Luca, Prigione Luca, Faa Enrico},
+    pdfsubject={Descrizione di Progetto},
+    pdfkeywords={\ProjectTitle, Descrizione di Progetto, Documento di Analisi, Comune di Trento, UniTN}
+}
+
+% Definizione counter Requisiti Funzionali
+\newcounter{rfCounter}
+\newcounter{rnfCounter}
+
+% Definisci un nuovo comando per il formato RF/RNF
+\newcommand{\RF}{RF\arabic{rfCounter}}
+\newcommand{\RNF}{RNF\arabic{rnfCounter}}
+
+% Definizione nuovo comando per lista con RF/RNF automatici in modo che NON si resettino ad ogni lista
+% Ambiente per la lista di RF
+\newenvironment{rfList}{
+    \begin{list}{\textbf{\RF:}}{ \setlength{\itemsep}{0pt} } % Lista RF
+        \setcounter{rfCounter}{\value{rfCounter}} % Mantieni il valore corrente
+}{\end{list}}
+
+% Ambiente per la lista di RNF
+\newenvironment{rnfList}{
+    \begin{list}{\textbf{\RNF:}}{ \setlength{\itemsep}{0pt} } % Lista RNF
+        \setcounter{rnfCounter}{\value{rnfCounter}} % Mantieni il valore corrente
+}{\end{list}}
+
+% comandi per gli item delle liste RF e RNF
+\newcommand{\rfItem}{\stepcounter{rfCounter}\item}
+\newcommand{\rnfItem}{\stepcounter{rnfCounter}\item}
+
+% Definizione del layout della pagina
+\fancypagestyle{stdPage}{
+    \setlength{\headheight}{24.0pt} 
+    \fancyhead{}
+    \fancyfoot{}
+    \fancyhead[LE,RO]{\begin{tabular}{l l}
+        \textbf{Document:} & Descrizione di progetto \\
+        \textbf{Version:} & \version
+    \end{tabular}}
+    \fancyfoot[LE,RO]{\thepage / \pageref{LastPage}}
+}
+
+\begin{document}
+    \pagestyle{fancy}
+    \fancyhead{}
+    \fancyfoot{}
+    \fancyfoot[LE,RO]{\thepage / \pageref{LastPage}}
+    
+    \begin{titlepage}
+        \thispagestyle{stdPage}
+        \includegraphics[width=0.33\textwidth]{logoUni.png}
+        \vspace{1cm}\newline
+        \textbf{Progetto:}
+        \vspace{0.5cm}
+        \begin{center}
+            \textbf{\Huge{\ProjectTitle}}
+        \end{center}
+        \vspace{1cm}
+        \textbf{Titolo del documento:}
+        \vspace{0.5cm}
+        \begin{center}
+            \textbf{\huge{Descrizione di Progetto}}
+        \end{center}
+        \vspace{1cm}
+        \textbf{Document Info}
+        \vspace{0.5cm}
+        % Table with document info
+        \begin{center}
+            \begin{tabular}{|l|l|l|c|}  
+                \hline
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Doc. Name}}   & \FileName & {\cellcolor[rgb]{0,0.502,1}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0,0.502,1}}l@{}}\textcolor{white}{\textbf{Doc.}}\\\textcolor{white}{\textbf{Number}}\end{tabular} & D1 V\version  \\ 
+                \hline
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Description}} & \multicolumn{3}{l|}{Documento di analisi dei requisiti funzionali, non funzionali e front-end}                                                                                                                               \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{titlepage}
+    
+    \begingroup
+        \setcounter{tocdepth}{0}
+        \tableofcontents
+        \thispagestyle{stdPage}
+    \endgroup
+    \pagestyle{stdPage}
+    \include{chapters/01-slidepitch}
+    \include{chapters/02-requisitiFunzionali}
+    \include{chapters/03-requisitiNonFunzionali}
+    \include{chapters/04-ilDesignFrontEnd}
+\end{document}

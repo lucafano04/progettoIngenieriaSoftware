@@ -3,16 +3,18 @@
 
 %capo la mia conoscenza di latex si sta espandendo però probabilmente questo non compila comunque, halp me plz
 % ho fatto del mio meglio per preparare un brodo degno di gordon ramsay
+% by @Boss314
 
 \section{Pagina Iniziale}
 
+    \label{fig:4.1}
     \begin{figure}[H]
         \center
-        \includegraphics[width=0.2\textwidth]{placeholder.jpg} %PLACEHOLDER QUI CI VA LA PRIMA SLIDE DI LUCA
-        \caption{Figura 1 PLACEHOLDER}
+        \includegraphics[width=0.6\textwidth]{Interfaccia_grafica/home.PNG}
+        \caption{Schermata principale dell'applicazione}
     \end{figure}
 
-    La Figura 1 mostra un mockup della pagina principale dell'applicazione, questa schermata sarà visibile a tutti gli utenti, loggati e non loggati.
+    La Figura 4.1 mostra un mockup della pagina principale dell'applicazione, questa schermata sarà visibile a tutti gli utenti, loggati e non loggati.
 
     \begin{itemize} %sono piuttosto sicuro che questa lista uscira tutta incasinata
         \item \textbf{RF1: Homepage} \begin{itemize}
@@ -22,10 +24,13 @@
                 \item L'interfaccia contiene tre pulsanti, ognuno contenente una bandiera corrispondente a una delle lingue supportate dall'applicazione (italiano, inglese, tedesco). Cliccando sui pulsanti cambierà la lingua in cui è presentata l'applicazione.
         \end{itemize}
         \item \textbf{RF5: Autenticazione} \begin{itemize} 
-            \item L'interfaccia presenta un pulsante, rappresentato da un'icona, che permette di iniziare il processo di autenticazione degli utenti. Questo permette agli utenti loggati di acceder al proprio account tramite SPID, CNS, CIE, CPS; come dettato dal requisito.
+            \item L'interfaccia presenta un pulsante, rappresentato da un'icona a forma di "persona", che permette di iniziare il processo di autenticazione degli utenti. Questo permette agli utenti loggati di acceder al proprio account tramite SPID, CNS, CIE, CPS; come dettato dal requisito.
         \end{itemize}
         \item \textbf{RNF9: Facilità d’uso} \begin{itemize}
-                \item La grafica disponibile a tutti gli utenti utilizza un design chiaro, usando icone per rendere la navigazione dell'interfaccia il più accessibile e intuitiva possibile.
+                \item La grafica disponibile a tutti gli utenti utilizza un design chiaro, usando icone per rendere la navigazione dell'interfaccia il più accessibile e intuitiva possibile. 
+        \end{itemize}
+        \item \textbf{RNF10: Facilità di navigazione} \begin{itemize}
+            \item L'interfaccia permette all'utente di navigare facilmente tra le pagine, inoltre è possibile accedere a tutte le funzionalità dell'applicazione (se l'utente risulterà loggato) tramite il menù a tendina, che si apre cliccando sull'icona ad "hamburger" presente nella parte superiore destra della schermata.
         \end{itemize}
         \item \textbf{RNF11: Multilingua} \begin{itemize} 
             \item All'inizio, l'interfaccia sarà presentata in lingua italiana. Il design include pulsanti, sempre presenti nella parte alta della schermata, per cambiare la lingua in inglese o tedesco.
@@ -33,43 +38,73 @@
     \end{itemize}
 
 
-
+\newpage
 \section{Utente Loggato, Dati in Tabella}
 
     \begin{figure}[H]
         \center
-        \includegraphics[width=0.2\textwidth]{placeholder.jpg} %PLACEHOLDER QUI CI VA LA SECONDA SLIDE DI LUCA
-        \caption{Figura 2 PLACEHOLDER}
+        \includegraphics[width=0.6\textwidth]{Interfaccia_grafica/dataDetail.PNG}
+        \caption{Dettaglio dati per analisti e amministratori}
     \end{figure}    
 
-    La Figura 2 mostra il mockup della schermata visibile a qualsiasi utente loggato (tabella solo per analisti e amministratori) una volta eseguito l'accesso al proprio account.
+    La Figura 4.2 mostra il mockup della schermata visibile a qualsiasi utente loggato (tabella solo per analisti e amministratori) una volta eseguito l'accesso al proprio account.
 
     \begin{itemize}
         \item \textbf{RF5: Autenticazione} \begin{itemize} 
             \item Dopo essere stata eseguita l'autenticazione, l'icona di login è sostituita da una icona differente a simboleggiare l'accesso eseguito. Inoltre è presente il pulsante per aprire il menù a tendina per permettere all'utente di usufruire delle funzionalità abilitate al proprio account e di eseguire il logout.
         \end{itemize}
         \item \textbf{RF6: Visualizzazione Analisi} \begin{itemize}
-            \item Sebbene il mockup mostri i dati dell'applicazione in una tabella, questa funzionalità sarà attiva solo quando l'utente è loggato ed è abilitato come analista e/o amministratore. Tutti gli utenti loggati senza privilegi speciali vedranno solo i dati generali, come mostrato nella Figura 1.
+            \item Sebbene il mockup mostri i dati dell'applicazione in una tabella, questa funzionalità sarà attiva solo quando l'utente è loggato ed è abilitato come analista e/o amministratore. Tutti gli utenti loggati senza privilegi speciali vedranno solo i dati generali, come mostrato nella \hyperref[fig:4.1]{Figura 4.1}.
+            \item Inoltre se si preferisce la "mappa" allora c'è la possibilità di abilitarla tramite le icone presenti nella parte destra della mappa sull'angolo in alto. 
         \end{itemize}
+        \item \textbf{RNF9: Facilità d’uso} \begin{itemize}
+            \item L'interfaccia è stata progettata per essere il più intuitiva possibile, i dati sono presentati in una tabella la quale potrà essere ordinata e filtrata per facilitare la consultazione. Il tutto tramite pulsanti e icone facilmente riconoscibili. Quali le icone di "mappa" e "tabella" per cambiare la visualizzazione dei dati, oppure le icone di "freccia" per ordinare i dati in base a una colonna specifica.
+        \end{itemize}
+        \item \textbf{RNF10: Facilità di navigazione} \begin{itemize}
+            \item L'interfaccia permette all'utente di navigare facilmente tra le pagine, inoltre è possibile accedere a tutte le funzionalità dell'applicazione tramite il menù a tendina, che si apre cliccando sull'icona standard ad "hamburger" presente nella parte superiore destra della schermata.
+            \end{itemize}
     \end{itemize}
-
-
-
-
+\newpage
 \section{Selezione di un Quartiere}
-
     \begin{figure}[H]
         \center
-        \includegraphics[width=0.2\textwidth]{placeholder.jpg} %PLACEHOLDER QUI CI VA LA TERZA SLIDE DI LUCA
-        \caption{Figura 3 PLACEHOLDER}
+        \includegraphics[width=0.6\textwidth]{Interfaccia_grafica/quartiereSelected.PNG}
+        \caption{Dettaglio dati per un quartiere selezionato}
     \end{figure}    
 
-    La Figura 3 mostra il mockup della schermata visibile dopo che l'utente ha cliccato su uno dei quartieri presenti nella mappa.
+    La Figura 4.3 mostra il mockup della schermata visibile dopo che l'utente ha cliccato su uno dei quartieri presenti nella mappa.
 
     \begin{itemize}
         \item \textbf{RF3: Accesso dati quartieri} \begin{itemize}
             \item Selezionare un quartiere è possibile cliccandolo sulla mappa. Una volta che un quartiere è selezionato la mappa lo mostra al centro e ingrandito, e le informazioni relative a esso vengono presentate al fianco della mappa. Nel mockup l'interfaccia mostra solo i dati generali, visibili dagli utenti non loggati. Ma agli account abilitati è consentito osservare anche i dati più approfonditi.
         \end{itemize} 
+        \item \textbf{RF7: Visualizzazione Analisi Storico} \begin{itemize}
+            \item Si noti che è presente un grafico che mostra l'\textbf{andamento nel tempo} del grado di felicità del quartiere selezionato. 
+            \item Questo viene tenuto \textbf{aggiornato}, dal pannello dedicato ai sondaggisti, inoltre nel pannello per gli utenti analisti saranno presenti anche altri grafici per analizzare tutti i dati a disposizione.
+        \end{itemize}
     \end{itemize}
-
-
+\section{Caricamento sondaggi e modifica dati}
+    \begin{figure}[H]
+        \center
+        \includegraphics[width=0.6\textwidth]{Interfaccia_grafica/uploadData.PNG}
+        \caption{Caricamento dati e visualizzazione elenco}
+    \end{figure} 
+    La figura 4.4 mostra il mockup della schermata visibile ai sondaggisti e agli amministratori, in cui è possibile caricare i dati sui sondaggi effettuati.\newline
+    Il presente layout sarà la base per tutte le visualizzazioni lato amministratore per la gestione dei dati e utenti.
+    \begin{itemize}
+        \item \textbf{RF8: Visualizzazione dati sondaggisti} \begin{itemize}
+            \item La seguente pagina permetterà ai sondaggisti di visualizzare i dati caricati da loro stessi, inoltre è presente per ogni sondaggio lo stato di approvazione da parte degli amministratori.
+        \end{itemize}
+        \item \textbf{RF9: Caricamento dati sondaggisti} \begin{itemize}
+            \item La pagina permette ai sondaggisti di caricare i dati dei sondaggi effettuati tramite file. È presente anche lo stato di avanzamento di caricamento dei dati.
+        \end{itemize}
+        \item \textbf{RF10: Modifica ed eliminazione dati sondaggisti} \begin{itemize}
+            \item La seguente pagina fungerà da accesso per la modifica e/o eliminazione di dati caricati da sondaggisti non ancora approvati.
+        \end{itemize}
+        \item \textbf{RNF6: Capacità di caricamento} \begin{itemize}
+            \item Questa sarà la principale pagina di caricamento dati sull'applicazione una volta che sull'applicazione saranno caricati i dati di base. In quanto i dati dei sondaggi potrebbero essere pesanti e numerosi, l'interfaccia dovrà essere in grado di gestire il caricamento di grandi quantità di dati in breve tempo.
+        \end{itemize}
+        \item \textbf{RNF9: Facilità d’uso} \begin{itemize}
+            \item Si nota come l'interfaccia è intuitiva e permette all'utente di capire facilmente come caricare i dati e come vedere l'elenco delle informazioni già caricate.
+        \end{itemize}
+    \end{itemize}

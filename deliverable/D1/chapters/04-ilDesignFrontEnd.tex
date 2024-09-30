@@ -15,11 +15,26 @@
 
     \begin{itemize} %sono piuttosto sicuro che questa lista uscira tutta incasinata
         \item RF1: La homepage dell'applicazione mostra la mappa del Comune di Trento in primo piano, sono visibili anche i confini tra i singoli quartieri della città
-        \item RF2: L'interfaccia contiene tre pulsanti, ognuno contenente una bandiera corrispondente a una delle lingue supportate dall'applicazione (italiano, inglese, tedesco). Cliccare sui pulsanti cambierà la lingua in cui è presentata l'interfaccia grafica 
+        \item RF2: L'interfaccia contiene tre pulsanti, ognuno contentendo una bandiera corrispondente a una delle lingue supportate dall'applicazione (italiano, inglese, tedesco). Cliccare sui pulsanti cambierà la lingua in cui è presentata l'interfaccia grafica 
         \item RF5: L'interfaccia presenta un pulsante, rappresentato da un'icona, che permette di iniziare il processo di autenticazione degli utenti. Questo permette agli utenti loggati di acceder al proprio account tramite SPID, CNS, CIE, CPS; come dettato dal requisito.
-        \item RNF1: L'interfaccia usa un design semplice, che rende facile supportare l'uso dell'applicazione sui browswer Chrome, Firefox, Safari, Edge (come specificato dal requisito)
-        \item RNF9: La grafica presentata all'utente utilizza un design chiaro, usando una top bar e icone per rendere la navigazione dell'interfaccia il più accessibile possibile
-        \item RNF11: All'inizio, l'interfaccia sarà presentata in lingua italiana. Il design include modo di cambiare la lingua in inglese o tedesco
+        \item RNF9: La grafica disponibile a tutti gli utenti utilizza un design chiaro, usando icone per rendere la navigazione dell'interfaccia il più accessibile possibile
+        \item RNF11: All'inizio, l'interfaccia sarà presentata in lingua italiana. Il design include pulsanti, sempre presenti nella parte alta della schermata, per cambiare la lingua in inglese o tedesco
+    \end{itemize}
+
+
+
+\section{Utente Loggato, Dati in Tabella}
+
+    \begin{figure}
+        \includegraphics[width=\textwidth]{slides/placeholder.jpg} %PLACEHOLDER QUI CI VA LA SECONDA SLIDE DI LUCA
+        \caption{Figura 2 PLACEHOLDER}
+    \end{figure}    
+
+    La Figura 2 mostra il mockup della schermata visibile a qualsiasi utente loggato una volta eseguito l'accesso al proprio account
+
+    \begin{itemize}
+        \item RF5: Dopo essere stata eseguita l'autenticazione, l'icona di login è sostituita dall'immagine di profilo dell'utente. Inoltre è presente il pulsante per aprire il menù a tendina per permettere all'utente di usufruire delle funzionalità abilitate al proprio account e di eseguire il logout
+        \item RF6: Sebbene il mockup mostri i dati dell'applicazione in una tabella, questa funzionalità sarà attiva solo quando l'utente loggato possiede un account analista. Gli altri tipi di utenti loggati vedranno i dati sulla mappa come nella Figura 1.
     \end{itemize}
 
 
@@ -28,15 +43,14 @@
 \section{Selezione di un Quartiere}
 
     \begin{figure}
-        \includegraphics[width=\textwidth]{slides/placeholder.jpg} %PLACEHOLDER QUI CI VA LA SECONDA SLIDE DI LUCA
-        \caption{Figura 2 PLACEHOLDER}
+        \includegraphics[width=\textwidth]{slides/placeholder.jpg} %PLACEHOLDER QUI CI VA LA TERZA SLIDE DI LUCA
+        \caption{Figura 3 PLACEHOLDER}
     \end{figure}    
 
-    La Figura 2 mostra il mockup della schermata visibile dopo che l'utente ha cliccato su uno dei quartieri, l'immagine del quartiere è ingrandita per rendere chiaro che è stato selezionato
+    La Figura 3 mostra il mockup della schermata visibile dopo che l'utente ha cliccato su uno dei quartieri
 
     \begin{itemize}
-        \item RF3: Selezionare un qualunque dei quartieri di Trento sarà possibile con un click, una colta selezionato un quartiere, l'interfaccia dell'applicazione mostrerà i dati relativi a esso. La figura mostra solo i dati generali, visibili dagli utenti non loggati, una volta che un utente si sarà autenticato, verranno mostrati anche i dati più approfonditi
+        \item RF3: Selezionare un quartiere è possibile cliccandolo sulla mappa. Una volta che un quartiere è selezionato la mappa lo mostra al centro e ingrandito, e le informazioni relative a esso vengono presentate al fianco della mappa. Nel mockup l'interfaccia mostra solo i dati generali, visibili dagli utenti non loggati. Ma agli account abilitati è consentito osservare anche i dati più approfonditi.
     \end{itemize}
 
 
-%qui ci va la descrizione della terza immagine...

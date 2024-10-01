@@ -13,3 +13,8 @@ jobs:
         with:
           working_directory: deliverable/D1
           root_file: main.tex
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: Deliverable1
+          path: deliverable/D1/main.pdf

@@ -63,26 +63,46 @@
 \newcommand{\rfItem}{\stepcounter{rfCounter}\item}
 \newcommand{\rnfItem}{\stepcounter{rnfCounter}\item}
 
+% Rimozione scritta "Capitolo" dai titoli dei capitoli
+\renewcommand{\chaptermark}[1]{%
+    \markboth{
+        \thechapter.\ #1%
+    }{}%
+}
 % Definizione del layout della pagina
 \fancypagestyle{stdPage}{
     \setlength{\headheight}{24.0pt} 
+    \renewcommand{\footrulewidth}{0.4pt}
     \fancyhead{}
     \fancyfoot{}
     \fancyhead[LE,RO]{\begin{tabular}{l l}
         \textbf{Document:} & Descrizione di progetto \\
         \textbf{Version:} & \version
     \end{tabular}}
-    \fancyfoot[LE,RO]{\thepage / \pageref{LastPage}}
+    \fancyfoot[LE,RO]{\thepage / \pageref*{LastPage}}
+    \fancyhead[RE,LO]{\leftmark}
+}
+\fancypagestyle{plain}{
+    \pagestyle{stdPage}
+}
+\fancypagestyle{index}{
+    \pagestyle{stdPage}
+    \fancyfoot[LE,RO]{\thepage}
+}
+
+\fancypagestyle{emptyPage}{
+    \setlength{\headheight}{24.0pt} 
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
+    \fancyfoot{}
 }
 
 \begin{document}
     \pagestyle{fancy}
-    \fancyhead{}
-    \fancyfoot{}
-    \fancyfoot[LE,RO]{\thepage / \pageref{LastPage}}
+    \pagenumbering{Roman} 
     
     \begin{titlepage}
-        \thispagestyle{stdPage}
+        \thispagestyle{emptyPage}
         \includegraphics[width=0.33\textwidth]{logoUni.png}
         \vspace{1cm}\newline
         \textbf{Progetto:}
@@ -127,9 +147,13 @@
     \begingroup
         \setcounter{tocdepth}{0}
         \tableofcontents
-        \thispagestyle{stdPage}
+        \thispagestyle{index}
     \endgroup
     \pagestyle{stdPage}
+    
+    \newpage
+    \pagenumbering{arabic} 
+    
     \include{chapters/01-slidepitch}
     \include{chapters/02-requisitiFunzionali}
     \include{chapters/03-requisitiNonFunzionali}

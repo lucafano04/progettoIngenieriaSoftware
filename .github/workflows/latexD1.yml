@@ -1,6 +1,10 @@
 name: LatexD1 CI
 run-name: Building LaTeX Deliverable 1 file
-on: [pull_request]
+on: 
+  push:
+      paths:
+        - 'deliverable/D1/**'
+        - 'deliverable/images/**'
 jobs:
   # Build usign Github Action for LaTeX
   build_latex:

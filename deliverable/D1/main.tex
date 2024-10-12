@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{hyperref}
+\usepackage{afterpage}
 
 % Ridefinizione per il titolo dei capitoli
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
@@ -75,19 +76,19 @@
     \renewcommand{\footrulewidth}{0.4pt}
     \fancyhead{}
     \fancyfoot{}
-    \fancyhead[LE,RO]{\begin{tabular}{l l}
+    \fancyhead[LO,RE]{\begin{tabular}{l l}
         \textbf{Document:} & Descrizione di progetto \\
         \textbf{Version:} & \version
     \end{tabular}}
-    \fancyfoot[LE,RO]{\thepage / \pageref*{LastPage}}
-    \fancyhead[RE,LO]{\leftmark}
+    \fancyfoot[LO,RE]{\thepage / \pageref*{LastPage}}
+    \fancyhead[LE,RO]{\leftmark}
 }
 \fancypagestyle{plain}{
     \pagestyle{stdPage}
 }
 \fancypagestyle{index}{
     \pagestyle{stdPage}
-    \fancyfoot[LE,RO]{\thepage}
+    \fancyfoot[LO,RE]{\thepage}
 }
 
 \fancypagestyle{emptyPage}{
@@ -96,6 +97,13 @@
     \fancyhead{}
     \fancyfoot{}
 }
+
+% Definizione della pagina bianca
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
 
 \begin{document}
     \pagestyle{fancy}
@@ -143,7 +151,7 @@
         \end{flushright}
         \vfill
     \end{titlepage}
-    
+    \afterpage{\blankpage}
     \begingroup
         \setcounter{tocdepth}{0}
         \tableofcontents
@@ -158,4 +166,5 @@
     \include{chapters/02-requisitiFunzionali}
     \include{chapters/03-requisitiNonFunzionali}
     \include{chapters/04-ilDesignFrontEnd}
+    \afterpage{\blankpage}
 \end{document}

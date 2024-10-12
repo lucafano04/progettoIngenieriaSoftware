@@ -17,3 +17,7 @@ Il sistema deve permettere a tutti gli utenti di selezionare qualunque dei vari 
 - Come utente voglio poter visualizzare i dati del quartiere selezionato, così da poter ricevere informazioni più dettagliate di tale quartiere
 - Come utente voglio avere una visualizzazione più dettagliata del quartiere selezionato e del suo circondario, così da avere una visione più dettagliata del quartiere e così da potermi muovere con un singolo click nei quartieri circostanti
 - Come utente voglio poter tornare alla visualizzazione integrale della mappa, così da poter cambiare il quartiere selezionato
+
+### RF 6 Autenticazione (Leggermente Rivisitata)
+Il sistema deve permettere a tutti gli utenti loggati di accedere al loro account premendo un tasto di login in altro a destra, il quale renderizzerà gli utenti alla pagina di login attraverso l'inserimento di: "Nome Utente" e "Password". Una volta eseguito l'accesso si verrà renderizzati alla pagina appropriata a seconda dei ruoli abilitati del sistema, se l'utente non ha un ruolo abilitato non potrà allora verrà reindirizzato alla pagina principale con un messaggio di errore tramite un pop-up che informerà l'utente che non ha i permessi per accedere al sistema. Se l'utente è già loggato al posto del tasto di login comparirà l'icona del proprio profilo affianco a quella del tipo "hamburger" che attiverà un menu.
+- 

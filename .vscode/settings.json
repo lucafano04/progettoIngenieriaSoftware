@@ -8,5 +8,6 @@
         "pdfsubject",
         "SatisTrento",
         "SPID"
-    ]
+    ],
+    "editor.wordWrap": "on"
 }

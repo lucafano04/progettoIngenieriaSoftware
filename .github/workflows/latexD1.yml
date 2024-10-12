@@ -8,7 +8,7 @@ on:
 jobs:
   # Build usign Github Action for LaTeX
   build_latex:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       steps:
       - name: Set up Git
         uses: actions/checkout@v4

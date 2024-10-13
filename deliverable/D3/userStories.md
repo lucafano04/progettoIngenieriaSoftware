@@ -32,3 +32,5 @@ Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina ded
 - Come sondaggista voglio visualizzare i vari sondaggi con il relativo stato di approvazione, così da poter sapere quali sondaggi sono da finire, quali da modificare o quali da cancellare
 
 ### RF 9 Accesso come sondaggista
+Il sistema successivamente al processo di autenticazione reindirizzerà automaticamente i vari account sondaggisti alla corrispettiva pagina dedicata, così facendo verrà velocizzata e semplificata la procedura d'accesso limitando inoltre le funzionalità fornite ai sondaggisti.
+- Come sondaggista voglio visualizzare subito l'interfaccia per gestire i sondaggi, così da poter raggiungere con un singolo click l'interfaccia

@@ -21,7 +21,7 @@
 \graphicspath{{../images/}}
 
 % Set the version of the document
-\newcommand{\version}{0.1}
+\newcommand{\version}{0.1} % TO Be Evaluated => Shall be this updated to 0.2 since the changes made? Not TBE - it wont be 1.0 until the final version
 \newcommand{\ProjectTitle}{SatisTrento}
 \newcommand{\ProjectTitleShort}{satisTrento}
 \newcommand{\FileName}{D1-\ProjectTitleShort-descrizioneProgetto}
@@ -76,19 +76,19 @@
     \renewcommand{\footrulewidth}{0.4pt}
     \fancyhead{}
     \fancyfoot{}
-    \fancyhead[LO,RE]{\begin{tabular}{l l}
+    \fancyhead[LE,RO]{\begin{tabular}{l l}
         \textbf{Document:} & Descrizione di progetto \\
         \textbf{Version:} & \version
     \end{tabular}}
-    \fancyfoot[LO,RE]{\thepage / \pageref*{LastPage}}
-    \fancyhead[LE,RO]{\leftmark}
+    \fancyfoot[LE,RO]{\thepage / \pageref*{LastPage}}
+    \fancyhead[LO,RE]{\leftmark}
 }
 \fancypagestyle{plain}{
     \pagestyle{stdPage}
 }
 \fancypagestyle{index}{
     \pagestyle{stdPage}
-    \fancyfoot[LO,RE]{\thepage}
+    \fancyfoot[LE,RO]{\thepage}
 }
 
 \fancypagestyle{emptyPage}{
@@ -102,7 +102,6 @@
 \newcommand\blankpage{%
     \null
     \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
     \newpage}
 
 \begin{document}
@@ -151,14 +150,14 @@
         \end{flushright}
         \vfill
     \end{titlepage}
-    \afterpage{\blankpage}
+    % \afterpage{\blankpage} % Uncomment this line if to print as a booklet
     \begingroup
         \setcounter{tocdepth}{0}
         \tableofcontents
         \thispagestyle{index}
     \endgroup
     \pagestyle{stdPage}
-    
+    % \afterpage{\blankpage} % Uncomment this line if to print as a booklet
     \newpage
     \pagenumbering{arabic} 
     
@@ -166,5 +165,5 @@
     \include{chapters/02-requisitiFunzionali}
     \include{chapters/03-requisitiNonFunzionali}
     \include{chapters/04-ilDesignFrontEnd}
-    \afterpage{\blankpage}
+    % \afterpage{\blankpage} % Uncomment this line if to print as a booklet
 \end{document}

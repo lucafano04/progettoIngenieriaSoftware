@@ -27,5 +27,6 @@ Successivamente al processo di autenticazione per qualsiasi utente loggato verr�
 - Come utente loggato voglio poter visualizzare l'immagine del profilo, così da essere sicuro di aver effettuato l'accesso con l'account giusto
 
 ### RF 8 Visualizzazione dati sondaggisti
-Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina dedicata, accessibile dalla top-bar dopo aver effettuato il login, una tabella contenente il riassunto dei dati relativi ai sondaggi inseriti da loro stessi con relativo stato di approvazione e se non approvati dei pulsanti per eliminare e/o modificare i dati inseriti. 
-- 
+Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina dedicata l'interfaccia per gestire i sondaggi. In questa interfaccia deve essere presente una tabella contenente il riassunto dei dati relativi alle cartelle di sondaggi inserite da loro stessi con relativo stato di approvazione, nel caso in cui non fossero ancora stati approvati saranno inoltre disponibili dei pulsanti per eliminare e/o modificare i dati inseriti. 
+- Come sondaggista voglio creare o caricare una cartella di sondaggi, così da poter iniziare una nuova sessione di sondaggi
+- Come sondaggista voglio visualizzare le varie cartelle di sondaggi con il relativo stato di approvazione, così da poter sapere quali cartelle sono da finire, quali da modificare o quali da cancellare

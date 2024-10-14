@@ -10,18 +10,16 @@ Il sistema deve consentire a tutti gli utenti di essere in grado di visualizzare
 Il sistema deve permettere a tutti gli utenti di interagire con la mappa del comune di Trento, in particolare deve essere possibile: ingrandire, rimpicciolire e spostarsi all'interno della mappa tramite il mouse o i pulsanti.
 - Come utente voglio poter ingrandire o rimpicciolire la mappa, così da poter avere una visione migliore dell'area che si vuole visualizzare
 - Come utente voglio poter spostare il focus della mappa, così da poter cambiare l'area che si sta visualizzando
-- Come utente voglio poter cliccare sulla mappa, così da poter selezionare un quartiere del quale si vogliono avere maggiori informazioni
-<!-- Valutare rimozione del terzo punto in quanto possibile duplicato con punto RF4.1-->
 
 ### RF 4 Accesso dati quartieri
 Il sistema deve permettere a tutti gli utenti di selezionare qualunque dei vari quartieri della città. Selezionare un quartiere consentirà all'utente di visualizzare i dati generici (num popolazione, felicità, età media, servizi,\dots) relativi al quartiere selezionato. Inoltre la mappa visualizzata sposterà il focus e si ingrandirà su di questo. Quando un quartiere è selezionato verrà evidenziato, sarà inoltre possibile de-selezionarlo cliccando nuovamente sullo stesso quartiere o cliccando su di un altro quartiere.
 - Come utente voglio poter visualizzare i dati del quartiere selezionato, così da poter ricevere informazioni più dettagliate di tale quartiere
 - Come utente voglio avere una visualizzazione più dettagliata del quartiere selezionato e del suo circondario, così da avere una visione più dettagliata del quartiere e così da potermi muovere con un singolo click nei quartieri circostanti
-- Come utente voglio poter tornare alla visualizzazione integrale della mappa, così da poter cambiare il quartiere selezionato <!-- Valutare se aggiungere anche la possibilità di deselezionare il quartiere selezionato cliccando nuovamente sullo stesso (stesso punto)-->
+- Come utente voglio poter tornare alla visualizzazione integrale della mappa, così da poter cambiare il quartiere selezionato
 
 ### RF 6 Autenticazione (Leggermente Rivisitata)
 Il sistema deve permettere a tutti gli utenti loggati di accedere al loro account premendo un tasto di login in altro a destra, il quale renderizzerà gli utenti alla pagina di login attraverso l'inserimento di: "Nome Utente" e "Password". Nel caso in cui l'utente non avesse un ruolo abilitato questo verrà reindirizzato alla pagina principale con un messaggio di errore tramite pop-up che informerà dei mancati permessi per accedere al sistema.
-- Come utente voglio poter accedere tramite Nome Utente e Password, così da poter avere accesso ad un più ampio numero di funzionalità <!-- Non mi suona bene lo scopo, secondo me potrebbe essere una cosa del genere: `..., così da poter usare le funzionalità alla quale sono stato abilitato` -->
+- Come utente voglio poter accedere tramite Nome Utente e Password, così da poter avere accesso alle funzionalità fornite dall'utente
 
 ### RF 7 Cambio icona login
 Successivamente al processo di autenticazione per qualsiasi utente loggato verrà sostituita l'icona del login con l'immagine del profilo con il quale si è fatto l'accesso.
@@ -35,4 +33,4 @@ Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina ded
 
 ### RF 9 Accesso come sondaggista
 Il sistema successivamente al processo di autenticazione reindirizzerà automaticamente i vari account sondaggisti alla corrispettiva pagina dedicata, così facendo verrà velocizzata e semplificata la procedura d'accesso limitando inoltre le funzionalità fornite ai sondaggisti.
-- Come sondaggista voglio visualizzare subito l'interfaccia per gestire i sondaggi, così da poter raggiungere con un singolo click l'interfaccia <!-- Lo scopo mi suona male valutare una cosa del tipo:`..., così da poter iniziare, modificare o eliminare i sondaggi rapidamente` -->
+- Come sondaggista voglio visualizzare subito l'interfaccia per gestire i sondaggi, così da poter iniziare, modificare o eliminare i sondaggi rapidamente

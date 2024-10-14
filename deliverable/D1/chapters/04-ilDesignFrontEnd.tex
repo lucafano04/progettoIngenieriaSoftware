@@ -46,21 +46,21 @@
         \caption{Dettaglio dati per analisti e amministratori}
     \end{figure}    
 
-    La Figura 4.2 mostra il mockup della schermata visibile a qualsiasi utente loggato (tabella solo per analisti e amministratori) una volta eseguito l'accesso al proprio account.
+    La Figura 4.2 mostra il mockup della schermata di homepage modificata visibile agli utenti di tipo: analista, circoscrizione e amministratore. Questa schermata sarà visibile solo dopo che l'utente ha effettuato l'accesso e sarà visibile solo agli utenti con i privilegi sopra citati.
 
     \begin{itemize}
         \item \textbf{RF6: Autenticazione} \begin{itemize} 
-            \item Dopo essere stata eseguita l'autenticazione, l'icona di login è sostituita da una icona differente a simboleggiare l'accesso eseguito. Inoltre è presente il pulsante per aprire il menù a tendina per permettere all'utente di usufruire delle funzionalità abilitate al proprio account e di eseguire il logout.
+            \item Inoltre è presente il pulsante per aprire il menù a tendina per permettere all'utente di usufruire delle funzionalità abilitate al proprio account e di eseguire il logout.
         \end{itemize}
         \item \textbf{RF7: Cambio icona login} \begin{itemize} 
-            \item L'icona di login è sostituita da un'icona differente per simboleggiare l'accesso eseguito. Questo permette all'utente di capire facilmente se è loggato o meno.
+            \item L'icona di login è sostituita da un'icona differente per simboleggiare l'accesso eseguito. Questo permette all'utente di individuare l'account con il quale si ha fatto il login
         \end{itemize}
         \item \textbf{RF12: Modifica Homepage} \begin{itemize}
-            \item Sebbene il mockup mostri i dati dell'applicazione in una tabella, questa funzionalità sarà attiva solo quando l'utente è loggato ed è abilitato come analista e/o amministratore e/o circoscrizione. Tutti gli utenti loggati senza privilegi speciali vedranno solo i dati generali, come mostrato nella \hyperref[fig:4.1]{Figura 4.1}.
-            \item Inoltre se si preferisce la "mappa" allora c'è la possibilità di abilitarla tramite le icone presenti nella parte destra della mappa sull'angolo in alto. 
+            \item Sebbene il mockup mostri i dati dell'applicazione in una tabella, questa funzionalità sarà disponibile solo quando l'utente è loggato come analista, amministratore o circoscrizione. Tutti gli utenti loggati senza privilegi speciali vedranno solo i dati generali, come mostrato nella \hyperref[fig:4.1]{Figura 4.1}.
+            \item Inoltre se si preferisce la visualizzazione tramite "mappa" sarà possibile passare a questa tramite icone presenti nella parte destra della mappa sull'angolo in alto. 
         \end{itemize}
         \item \textbf{RF13: Accesso come analista, circoscrizione o amministratore} \begin{itemize}
-            \item La presente interfaccia sarà la prima cosa visibile ad: analisti, circoscrizioni e amministratori dopo che questi abbiano effettuato l'accesso.
+            \item Gli utenti: analisti, circoscrizioni e amministratori, dopo aver eseguito l'accesso verranno reindirizzati alla presente interfaccia.
         \end{itemize}
         \item \textbf{RNF9: Facilità d’uso} \begin{itemize}
             \item L'interfaccia è stata progettata per essere il più intuitiva possibile, i dati sono presentati in una tabella la quale potrà essere ordinata e filtrata per facilitare la consultazione. Il tutto tramite pulsanti e icone facilmente riconoscibili. Quali le icone di "mappa" e "tabella" per cambiare la visualizzazione dei dati, oppure le icone di "freccia" per ordinare i dati in base a una colonna specifica.
@@ -84,9 +84,8 @@
             \item Selezionare un quartiere è possibile cliccandolo sulla mappa. Una volta che un quartiere è selezionato la mappa lo mostra al centro e ingrandito, e le informazioni relative a esso vengono presentate al fianco della mappa. Nel mockup l'interfaccia mostra solo i dati generali, visibili dagli utenti non loggati. Ma agli account abilitati è consentito osservare anche i dati più approfonditi.
         \end{itemize} 
         \item \textbf{RF15: Visualizzazione Analisi Storico} \begin{itemize}
-            \item Si noti che è presente un grafico che mostra l'\textbf{andamento nel tempo} del grado di felicità del quartiere selezionato. 
-            \item Questo viene tenuto \textbf{aggiornato}, dal pannello dedicato ai sondaggisti, inoltre nel pannello per gli utenti analisti saranno presenti anche altri grafici per analizzare tutti i dati a disposizione.
-            \item Anche se questo non è specifico per questa tipologia di utente, si è deciso di includere questo requisito in quanto ciò è un esempio di come l'interfaccia più specifica lato analista potrebbe apparire.
+            \item Si noti che è presente un grafico che mostra l'\textbf{andamento nel tempo} del grado di soddisfazione del quartiere selezionato. 
+            \item Nonostante il grafico, e l'analisi nel tempo, sia un requisito specifico per utenti analisti, si è deciso di includere suddetto requisito in quanto questo è un esempio di come l'interfaccia può risultare lato analista.
         \end{itemize}
     \end{itemize}
 \section{Caricamento sondaggi e modifica dati}
@@ -97,16 +96,13 @@
         \caption{Caricamento dati e visualizzazione elenco}
     \end{figure} 
     La figura 4.4 mostra il mockup della schermata visibile ai sondaggisti e agli amministratori, in cui è possibile caricare i dati sui sondaggi effettuati.\newline
-    Il presente layout sarà la base per tutte le visualizzazioni lato amministratore per la gestione dei dati e utenti.
+    Il presente layout sarà la base le visualizzazioni lato amministratore per la gestione dei dati e utenti.
     \begin{itemize}
         \item \textbf{RF8: Visualizzazione dati sondaggisti} \begin{itemize}
             \item La seguente pagina permetterà ai sondaggisti di visualizzare i dati caricati da loro stessi, inoltre è presente per ogni sondaggio lo stato di approvazione da parte degli amministratori.
         \end{itemize}
         \item \textbf{RF9: Accesso come sondaggista} \begin{itemize}
-            \item L'interfaccia mostrata sarà la prima cosa visibile ai sondaggisti dopo che questi abbiano effettuato l'accesso, inoltre sarà visibile solo a sondaggisti.
-        \end{itemize}
-        \item \textbf{RF10: Caricamento dati sondaggisti} \begin{itemize}
-            \item La pagina permette ai sondaggisti di caricare i dati dei sondaggi effettuati tramite file. È presente anche lo stato di avanzamento di caricamento dei dati.
+            \item Gli utenti: sondaggisti, dopo aver effettuato l'accesso verranno reindirizzati alla presente interfaccia la quale sarà inoltre disponibile solamente a tale tipologia di utente
         \end{itemize}
         \item \textbf{RF11: Modifica ed eliminazione dati sondaggisti} \begin{itemize}
             \item La seguente pagina fungerà da accesso per la modifica e/o eliminazione di dati caricati da sondaggisti non ancora approvati.

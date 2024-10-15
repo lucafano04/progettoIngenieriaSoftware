@@ -49,3 +49,8 @@ Il sistema deve permettere ai sondaggisti di aggiungere o rimuovere i voti ai so
 Per gli utenti: analista, circoscrizione e amministratore, all'interno della Homepage verrà fornita la possibilità di visualizzare una tabella contenente le informazioni più importanti dei vari quartieri (Nome, percentuale di soddisfazione, numero di abitanti) al posto della mappa, sarà inoltre possibile passare dalla visualizzazione della mappa a quella della tabella (o viceversa) attraverso l'utilizzo di un pulsante di selezione.
 - Come analista, circoscrizione o amministratore voglio visualizzare i quartieri sotto forma di tabella, così da avere una visualizzazione ordinata secondo i propri criteri dei vari quartieri
 - Come analista, circoscrizione o amministratore voglio passare dalla visualizzazione tramite tabella a quella tramite mappa, così da avere una migliore visione di insieme della soddisfazione cittadina
+
+### RF 13 Accesso come analista, circoscrizione o amministratore
+Successivamente al processo di autenticazione per gli utenti: analista, circoscrizione e amministratore, verranno reindirizzati alla Homepage modificata con la visualizzazione della città sotto forma di tabella.
+- Come analista, circoscrizione o amministratore voglio visualizzare subito la Homepage modificata con la visualizzazione tramite tabella, così da poter avere fin da subito la visione della situazione cittadina senza dover cambiare pagina
+

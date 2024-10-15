@@ -36,8 +36,11 @@ Il sistema successivamente al processo di autenticazione reindirizzerà automati
 
 ### RF 10 Creazione nuovi sondaggi
 Il sistema deve permettera ai sondaggisti di creare nuovi sondaggi. Questo deve essere possibile in due maniere diverse: creando un nuovo sondaggio vuoto oppure caricando un file contenente i dati di un sondaggio in corso. Questi sondaggi "in sospeso" potranno essere cancellati oppure presentati agli amministratori per essere accettati nel sistema o rifiutati. I dati inseriti dei sondaggi in sospeso non saranno visibili agli altri utenti e non saranno neanche considerati dal sistema fino a quando non verranno approvati da un utente amministratore.
-- Come sodaggista voglio poter creare o caricare dei nuovi sondaggi, così da poter iniziare un nuovo sondaggio
-<!--  dubbio: devo mettere delle US per il caricamento o la modifica anche se potrei metterli per l'RF12?  -->
+- Come sodaggista voglio creare o caricare dei nuovi sondaggi, così da iniziare un nuovo sondaggio
+- Come sondaggista voglio modificare i sondaggi, così da aggiungere nuovi voti o modificare gli errori
+- Come sondaggista voglio eliminare i sondaggi, così da rimuovere sondaggi creati per errore
 
 ### RF 11 Svolgimento sondaggi
-Il sistema deve permettere ai sondaggisti di aggiungere nuovi voti ai sondaggi in sospeso. Tramite una pagina apposita, utilizzabile anche da sistemi mobili, sarà possibile inserire nuovi voti, aggiungendo obbligatoriamente informazioni sulla circoscrizione di appartenenza e a scelta volontaria del cittadino la propria età.
+Il sistema deve permettere ai sondaggisti di aggiungere o rimuovere i voti ai sondaggi in sospeso. Tramite una pagina apposita, sarà possibile inserire o eliminare nuovi voti, aggiungendo informazioni sulla circoscrizione di appartenenza e a scelta volontaria del cittadino la propria età.
+- Come sondaggista voglio creare nuovi voti, così da permettere al cittadino di espriere il proprio grado di soddisfazione
+- Come sondaggista voglio eliminare i voti di un sondaggio, così da poter correggere eventuali errori

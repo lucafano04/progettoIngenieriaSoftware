@@ -32,7 +32,7 @@ Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina ded
 
 ### RF 9 Accesso come sondaggista
 Il sistema successivamente al processo di autenticazione reindirizzerà automaticamente i vari account sondaggisti alla corrispettiva pagina dedicata, così facendo verrà velocizzata e semplificata la procedura d'accesso limitando inoltre le funzionalità fornite ai sondaggisti.
-- Come sondaggista voglio visualizzare subito l'interfaccia per gestire i sondaggi, così da poter iniziare, modificare o eliminare i sondaggi rapidamente
+- Come sondaggista voglio visualizzare subito l'interfaccia per gestire i sondaggi, così da poter iniziare, modificare o eliminare i sondaggi senza dover cambiare pagina
 
 ### RF 10 Creazione nuovi sondaggi
 Il sistema deve permettera ai sondaggisti di creare nuovi sondaggi. Questo deve essere possibile in due maniere diverse: creando un nuovo sondaggio vuoto oppure caricando un file contenente i dati di un sondaggio in corso. Questi sondaggi "in sospeso" potranno essere cancellati oppure presentati agli amministratori per essere accettati nel sistema o rifiutati. I dati inseriti dei sondaggi in sospeso non saranno visibili agli altri utenti e non saranno neanche considerati dal sistema fino a quando non verranno approvati da un utente amministratore.
@@ -44,3 +44,8 @@ Il sistema deve permettera ai sondaggisti di creare nuovi sondaggi. Questo deve 
 Il sistema deve permettere ai sondaggisti di aggiungere o rimuovere i voti ai sondaggi in sospeso. Tramite una pagina apposita, sarà possibile inserire o eliminare nuovi voti, aggiungendo informazioni sulla circoscrizione di appartenenza e a scelta volontaria del cittadino la propria età.
 - Come sondaggista voglio creare nuovi voti, così da permettere al cittadino di espriere il proprio grado di soddisfazione
 - Come sondaggista voglio eliminare i voti di un sondaggio, così da poter correggere eventuali errori
+
+### RF 12 Modifica Homepage
+Per gli utenti: analista, circoscrizione e amministratore, all'interno della Homepage verrà fornita la possibilità di visualizzare una tabella contenente le informazioni più importanti dei vari quartieri (Nome, percentuale di soddisfazione, numero di abitanti) al posto della mappa, sarà inoltre possibile passare dalla visualizzazione della mappa a quella della tabella (o viceversa) attraverso l'utilizzo di un pulsante di selezione.
+- Come analista, circoscrizione o amministratore voglio visualizzare i quartieri sotto forma di tabella, così da avere una visualizzazione ordinata secondo i propri criteri dei vari quartieri
+- Come analista, circoscrizione o amministratore voglio passare dalla visualizzazione tramite tabella a quella tramite mappa, così da avere una migliore visione di insieme della soddisfazione cittadina

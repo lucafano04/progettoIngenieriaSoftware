@@ -24,7 +24,6 @@ Il sistema deve permettere a tutti gli utenti loggati di accedere al loro accoun
 ### RF 7 Cambio icona login
 Successivamente al processo di autenticazione per qualsiasi utente loggato verrà sostituita l'icona del login con l'immagine del profilo con il quale si è fatto l'accesso.
 - Come utente loggato voglio poter visualizzare l'immagine del profilo, così da essere sicuro di aver effettuato l'accesso con l'account giusto
-<!-- `...visualizzare l'immagine del profilo...` MAI DISCUSSO, necessita discussione-->
 
 ### RF 8 Visualizzazione dati sondaggisti
 Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina dedicata l'interfaccia per gestire i sondaggi. In questa interfaccia deve essere presente una tabella contenente il riassunto dei dati relativi alle cartelle di sondaggi inserite da loro stessi con relativo stato di approvazione, nel caso in cui non fossero ancora stati approvati saranno inoltre disponibili dei pulsanti per eliminare e/o modificare i dati inseriti.
@@ -34,3 +33,11 @@ Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina ded
 ### RF 9 Accesso come sondaggista
 Il sistema successivamente al processo di autenticazione reindirizzerà automaticamente i vari account sondaggisti alla corrispettiva pagina dedicata, così facendo verrà velocizzata e semplificata la procedura d'accesso limitando inoltre le funzionalità fornite ai sondaggisti.
 - Come sondaggista voglio visualizzare subito l'interfaccia per gestire i sondaggi, così da poter iniziare, modificare o eliminare i sondaggi rapidamente
+
+### RF 10 Creazione nuovi sondaggi
+Il sistema deve permettera ai sondaggisti di creare nuovi sondaggi. Questo deve essere possibile in due maniere diverse: creando un nuovo sondaggio vuoto oppure caricando un file contenente i dati di un sondaggio in corso. Questi sondaggi "in sospeso" potranno essere cancellati oppure presentati agli amministratori per essere accettati nel sistema o rifiutati. I dati inseriti dei sondaggi in sospeso non saranno visibili agli altri utenti e non saranno neanche considerati dal sistema fino a quando non verranno approvati da un utente amministratore.
+- Come sodaggista voglio poter creare o caricare dei nuovi sondaggi, così da poter iniziare un nuovo sondaggio
+<!--  dubbio: devo mettere delle US per il caricamento o la modifica anche se potrei metterli per l'RF12?  -->
+
+### RF 11 Svolgimento sondaggi
+Il sistema deve permettere ai sondaggisti di aggiungere nuovi voti ai sondaggi in sospeso. Tramite una pagina apposita, utilizzabile anche da sistemi mobili, sarà possibile inserire nuovi voti, aggiungendo obbligatoriamente informazioni sulla circoscrizione di appartenenza e a scelta volontaria del cittadino la propria età.

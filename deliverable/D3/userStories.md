@@ -1,7 +1,5 @@
 # Requisiti funzionali
 
-## Requisiti funzionali comuni a tutti gli utenti
-
 ### RF 1 Homepage
 Il sistema deve consentire a tutti gli utenti di essere in grado di visualizzare integralmente la mappa del comune di Trento divisa per quartieri non appena si apre la web-app.
 - Come utente voglio visualizzare la mappa del comune di Trento divisa per quartieri, così da perter avere una visione d'insieme
@@ -27,7 +25,6 @@ Successivamente al processo di autenticazione per qualsiasi utente loggato verr�
 
 ### RF 8 Visualizzazione dati sondaggisti
 Il sistema deve permettere ai sondaggisti di visualizzare tramite una pagina dedicata l'interfaccia per gestire i sondaggi. In questa interfaccia deve essere presente una tabella contenente il riassunto dei dati relativi alle cartelle di sondaggi inserite da loro stessi con relativo stato di approvazione, nel caso in cui non fossero ancora stati approvati saranno inoltre disponibili dei pulsanti per eliminare e/o modificare i dati inseriti.
-- Come sondaggista voglio creare o caricare i sondaggi, così da poter iniziare una nuova sessione di sondaggi
 - Come sondaggista voglio visualizzare i vari sondaggi con il relativo stato di approvazione, così da poter sapere quali sondaggi sono da finire, quali da modificare o quali da cancellare
 
 ### RF 9 Accesso come sondaggista
@@ -54,3 +51,7 @@ Per gli utenti: analista, circoscrizione e amministratore, all'interno della Hom
 Successivamente al processo di autenticazione per gli utenti: analista, circoscrizione e amministratore, verranno reindirizzati alla Homepage modificata con la visualizzazione della città sotto forma di tabella.
 - Come analista, circoscrizione o amministratore voglio visualizzare subito la Homepage modificata con la visualizzazione tramite tabella, così da poter avere fin da subito la visione della situazione cittadina senza dover cambiare pagina
 
+### RF 14 Visualizzazione dati analista
+Il sistema deve permettere agli analisti di visualizzare, quando si accede ai sigoli quartieri, una visione più specifica dei dati. Per semplificare il più possibile l'interfaccia verrà fornito un raggruppamento dei dati per tipologia. Dovrà inoltre essere possibile selezionare la tipologia di informazioni permettendo una visualizzazione settoriale e specifica del quartiere in questione.
+- Come analista voglio accedere ad una quantità maggiore di dati, così da poter avere una migliore idea delle cause dell'insoddisfazione del quartiere analizzato
+- Come analista voglio cambiare settore di visualizzazione delle informazioni, così da visualizzare i dati di interesse dell'utente

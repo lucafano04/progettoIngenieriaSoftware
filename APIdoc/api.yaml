@@ -71,6 +71,12 @@ components:
         maxItems: 2
       minItems: 1
       uniqueItems: true
+    Soddisfazione: 
+        type: "number"
+        description: "Soddisfazione media degli abitanti del quartiere."
+        format: "double"
+        minimum: 0
+        maximum: 100
     CircoscrizioneBase: 
       description: Oggetto contenente le informazioni di Base di una circoscrizione.
       type: object
@@ -83,6 +89,8 @@ components:
           description: Nome della circoscrizione.
         coordinate:
           "$ref": "#/components/schemas/Coordinate"
+        soddisfazione:
+          "$ref": "#/components/schemas/Soddisfazione"
     Circoscrizione:
       description: Oggetto contenente le informazioni di una circoscrizione.
       allOf:
@@ -92,6 +100,8 @@ components:
       properties:
         servizi:
           "$ref": "#/components/schemas/ServiziGenerali"
+        storicoSoddisfazione:
+          "$ref": "#/components/schemas/ArrayStoricoSoddisfazione"
     QuartiereBase: 
       description: Oggetto contenente le informazioni di base di un quartiere.
       type: object
@@ -106,6 +116,8 @@ components:
           "$ref": "#/components/schemas/Coordinate"
         circoscrizione:
           "$ref": "#/components/schemas/CircoscrizioneBase"
+        soddisfazione:
+          "$ref": "#/components/schemas/Soddisfazione"
     Quartiere: 
       description: Oggetto contenente le informazioni di un quartiere.
       allOf:
@@ -115,6 +127,23 @@ components:
       properties:
         servizi:
           "$ref": "#/components/schemas/ServiziGenerali"
+        storicoSoddisfazione:
+          "$ref": "#/components/schemas/ArrayStoricoSoddisfazione"
+    StoricoSoddisfazione:
+      description: Oggetto contenente le informazioni storiche sulla soddisfazione di un quartiere.
+      type: object
+      properties:
+        data:
+          type: string
+          description: Data in cui è stata effettuata la misurazione.
+          format: date
+        soddisfazione:
+          "$ref": "#/components/schemas/Soddisfazione"
+    ArrayStoricoSoddisfazione:
+      description: Array di oggetti contenenti le informazioni storiche sulla soddisfazione di un quartiere.
+      type: array
+      items:
+        "$ref": "#/components/schemas/StoricoSoddisfazione"
     User:
       description: Oggetto contenente le informazioni di un utente.
       type: object
@@ -129,13 +158,22 @@ components:
           type: string
           description: Cognome dell'utente.
         ruolo:
+          type: string
           enum:
             - "amministratore"
             - "analista"
             - "sondaggista"
             - "circoscrizione"
           description: Ruolo dell'utente.
-
+    Session: 
+      description: Oggetto contenente le informazioni di una sessione.
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token di autenticazione dell'utente.
+        user:
+          "$ref": "#/components/schemas/User"
     Error:
       description: Oggetto contenente le informazioni di un errore.
       type: object
@@ -316,7 +354,7 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/Session"
         401:
           description: "Credenziali non valide."
           content:

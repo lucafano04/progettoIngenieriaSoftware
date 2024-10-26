@@ -184,6 +184,9 @@ components:
             - "sondaggista"
             - "circoscrizione"
           description: Ruolo dell'utente.
+        imageUrl: 
+          type: string
+          description: Url dell'immagine profilo dell'utente. (gravatar)
     Session: 
       description: Oggetto contenente le informazioni di una sessione.
       type: object
@@ -207,6 +210,105 @@ components:
           type: string
           description: Dettagli dell'errore.
           nullable: true
+    BasicOkResponse:
+      description: Oggetto contenente le informazioni di una risposta di successo.
+      type: object
+      properties:
+        ok:
+          type: boolean
+          description: Indica se la richiesta è stata eseguita con successo.
+          default: true
+        message:
+          type: string
+          description: Messaggio di successo della richiesta.
+          nullable: true
+    SondaggioBase: 
+      description: Oggetto contenente le informazioni di base di un sondaggio.
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificatore univoco del sondaggio.
+        titolo:
+          type: string
+          description: Titolo del sondaggio.
+        dataInizio:
+          type: string
+          description: Data di inizio del sondaggio.
+          format: date
+        isAperto:
+          type: boolean
+          description: Indica se il sondaggio è aperto (in corso) o chiuso.
+        statoApprovazione:
+          type: string
+          enum:
+            - "approvato"
+            - "in attesa"
+            - "rifiutato"
+          description: Stato di approvazione del sondaggio.
+        sondaggista:
+          "$ref": "#/components/schemas/User"
+    ElencoSondaggi:
+      description: Array di oggetti contenenti le informazioni di base di un sondaggio (visualizzaione sonfaggista/admin).
+      type: array
+      items:
+        "$ref": "#/components/schemas/SondaggioBase"
+    Voto:
+      description: Oggetto contenente le informazioni di un voto.
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificatore univoco del voto.
+        dataOra:
+          type: string
+          description: Data e ora in cui è stato effettuato il voto.
+          format: date-time
+        eta:
+          type: integer
+          description: Età dell'utente che ha effettuato il voto.
+          minimum: 0 # TODO: @Boss314 & @Lukil33 decidere se mettere dei range o lasciare il numero libero
+        voto:
+          type: integer
+          description: Voto assegnato al quartiere.
+          minimum: 1
+          maximum: 5
+        quartiere:
+          type: integer
+          description: Identificatore univoco del quartiere.
+    MediaVoti:
+      description: Oggetto semplice contenente la media dei voti di un quartiere.
+      type: object
+      properties:
+        media:
+          type: number
+          description: Media dei voti assegnati al quartiere.
+          format: double
+          minimum: 1
+          maximum: 5
+        quartiere:
+          type: integer
+          description: Identificatore univoco del quartiere.
+    Sondaggio:
+      description: Oggetto contenente le informazioni di un sondaggio.
+      allOf:
+        - "$ref": "#/components/schemas/SondaggioBase"
+      type: object
+      properties:
+        descrizione:
+          type: string
+          description: Descrizione del sondaggio.
+        voti:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Voto"
+          description: Array di oggetti contenenti i voti assegnati al sondaggio.
+        mediaVoti:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MediaVoti"
+          description: Array di oggetti contenenti la media dei voti assegnati ai quartieri presenti nel sondaggio (quelli non presenti non vengono visualizzati).
+        
 
 paths:
   '/api/quartieri' :
@@ -380,3 +482,80 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
+    delete: 
+      description: "Elimina la sessione dell'utente."
+      parameters:
+        - name: token
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Sessione eliminata con successo."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BasicOkResponse"
+        401:
+          description: "Sessione non trovata."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  '/api/sondaggi' :
+    description: "Risorsa che restituisce la lista dei sondaggi dell'utente corrente, se amministratore allora restituisce tutti i sondaggi."
+    get: 
+      description: "Restituisce la lista dei sondaggi dell'utente corrente."
+      parameters:
+        - name: token
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ElencoSondaggi"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  '/api/sondaggi/{id}' :
+    description: "Risorsa che restituisce le informazioni di un sondaggio."
+    get: 
+      description: "Restituisce le informazioni di un sondaggio."
+      parameters:
+        - name: token
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Sondaggio"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  

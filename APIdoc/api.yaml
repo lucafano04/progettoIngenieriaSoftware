@@ -20,43 +20,58 @@ components:
           type: number
           description: Superficie del quartiere in km^2.
           format: double
-        etaMedia:
-          type: number
-          description: Età media degli abitanti del quartiere.
-          format: double
+        serviziTotali: 
+          type: integer
+          description: Numero totale di servizi presenti nel quartiere.
         soddisfazioneMedia:
           type: number
           description: Soddisfazione media degli abitanti del quartiere.
           format: double
           minimum: 0
           maximum: 100
+        interventiPolizia: 
+          type: integer
+          description: Numero di interventi delle forze dell'ordine nel quartiere.
+        etaMedia:
+          type: number
+          description: Età media degli abitanti del quartiere.
+          format: double
     ServiziGenerali:
       description: Oggetto contenente le informazioni sui servizi presenti in un quartiere.
       type: object
       properties:
-        parchi:
+        areeVerdi:
           type: integer
-          description: Numero di parchi presenti nel quartiere.
+          description: Numero di aree verdi presenti nel quartiere.
           minimum: 0
         scuole:
           type: integer
           description: Numero di scuole presenti nel quartiere.
           minimum: 0
-        ristoranti:
+        serviziRistorazione:
           type: integer
-          description: Numero di ristoranti presenti nel quartiere.
+          description: Numero di servizi di ristorazione presenti nel quartiere.
           minimum: 0
-        luoghiDiSvago:
+        localiNotturni: 
           type: integer
-          description: Numero di luoghi di svago presenti nel quartiere.
+          description: Numero di locali notturni presenti nel quartiere.
           minimum: 0
-        supermercati:
+    Sicurezza:
+      description: Oggetto contenente le informazioni sulla sicurezza di un quartiere.
+      type: object
+      properties:
+        numeroInterventi:
           type: integer
-          description: Numero di supermercati presenti nel quartiere.
+          description: Numero di interventi delle forze dell'ordine nel quartiere.
           minimum: 0
-        farmacie:
+        incidenti: 
           type: integer
-          description: Numero di farmacie presenti nel quartiere.
+          description: Numero di incidenti nel quartiere.
+          minimum: 0
+        tassoCriminalita:
+          type: number
+          description: Tasso di criminalità del quartiere.
+          format: double
           minimum: 0
     Coordinate:
       description: Array di coordinate che definiscono un quartiere e/o circoscrizione.
@@ -89,7 +104,7 @@ components:
           description: Nome della circoscrizione.
         coordinate:
           "$ref": "#/components/schemas/Coordinate"
-        soddisfazione:
+        soddisfazioneMedia:
           "$ref": "#/components/schemas/Soddisfazione"
     Circoscrizione:
       description: Oggetto contenente le informazioni di una circoscrizione.
@@ -102,6 +117,8 @@ components:
           "$ref": "#/components/schemas/ServiziGenerali"
         storicoSoddisfazione:
           "$ref": "#/components/schemas/ArrayStoricoSoddisfazione"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
     QuartiereBase: 
       description: Oggetto contenente le informazioni di base di un quartiere.
       type: object
@@ -116,7 +133,7 @@ components:
           "$ref": "#/components/schemas/Coordinate"
         circoscrizione:
           "$ref": "#/components/schemas/CircoscrizioneBase"
-        soddisfazione:
+        soddisfazioneMedia:
           "$ref": "#/components/schemas/Soddisfazione"
     Quartiere: 
       description: Oggetto contenente le informazioni di un quartiere.
@@ -129,6 +146,8 @@ components:
           "$ref": "#/components/schemas/ServiziGenerali"
         storicoSoddisfazione:
           "$ref": "#/components/schemas/ArrayStoricoSoddisfazione"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
     StoricoSoddisfazione:
       description: Oggetto contenente le informazioni storiche sulla soddisfazione di un quartiere.
       type: object
@@ -137,7 +156,7 @@ components:
           type: string
           description: Data in cui è stata effettuata la misurazione.
           format: date
-        soddisfazione:
+        soddisfazioneMedia:
           "$ref": "#/components/schemas/Soddisfazione"
     ArrayStoricoSoddisfazione:
       description: Array di oggetti contenenti le informazioni storiche sulla soddisfazione di un quartiere.

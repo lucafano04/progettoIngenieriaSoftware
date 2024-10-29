@@ -9,3 +9,4 @@
 *.out
 .vs
 node_modules
+.env

@@ -115,8 +115,6 @@ components:
       properties:
         servizi:
           "$ref": "#/components/schemas/ServiziGenerali"
-        storicoSoddisfazione:
-          "$ref": "#/components/schemas/ArrayStoricoSoddisfazione"
         sicurezza:
           "$ref": "#/components/schemas/Sicurezza"
     QuartiereBase: 
@@ -144,25 +142,8 @@ components:
       properties:
         servizi:
           "$ref": "#/components/schemas/ServiziGenerali"
-        storicoSoddisfazione:
-          "$ref": "#/components/schemas/ArrayStoricoSoddisfazione"
         sicurezza:
           "$ref": "#/components/schemas/Sicurezza"
-    StoricoSoddisfazione:
-      description: Oggetto contenente le informazioni storiche sulla soddisfazione di un quartiere.
-      type: object
-      properties:
-        data:
-          type: string
-          description: Data in cui è stata effettuata la misurazione.
-          format: date
-        soddisfazioneMedia:
-          "$ref": "#/components/schemas/Soddisfazione"
-    ArrayStoricoSoddisfazione:
-      description: Array di oggetti contenenti le informazioni storiche sulla soddisfazione di un quartiere.
-      type: array
-      items:
-        "$ref": "#/components/schemas/StoricoSoddisfazione"
     User:
       description: Oggetto contenente le informazioni di un utente.
       type: object
@@ -222,13 +203,10 @@ components:
           type: string
           description: Messaggio di successo della richiesta.
           nullable: true
-    SondaggioBase: 
-      description: Oggetto contenente le informazioni di base di un sondaggio.
+    AddSondaggio:
+      description: Oggetto contenente le informazioni per aggiungere un sondaggio.
       type: object
       properties:
-        id:
-          type: integer
-          description: Identificatore univoco del sondaggio.
         titolo:
           type: string
           description: Titolo del sondaggio.
@@ -236,6 +214,15 @@ components:
           type: string
           description: Data di inizio del sondaggio.
           format: date
+    SondaggioBase: 
+      description: Oggetto contenente le informazioni di base di un sondaggio.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/AddSondaggio"
+      properties:
+        id:
+          type: integer
+          description: Identificatore univoco del sondaggio.
         isAperto:
           type: boolean
           description: Indica se il sondaggio è aperto (in corso) o chiuso.
@@ -250,9 +237,29 @@ components:
           "$ref": "#/components/schemas/User"
     ElencoSondaggi:
       description: Array di oggetti contenenti le informazioni di base di un sondaggio (visualizzaione sonfaggista/admin).
-      type: array
-      items:
-        "$ref": "#/components/schemas/SondaggioBase"
+      oneOf:
+        - type: array
+          items:
+            "$ref": "#/components/schemas/SondaggioBase"
+        - type: array
+          items:
+            "$ref": "#/components/schemas/Sondaggio"
+    AddVoto:
+      description: Oggetto contenente le informazioni per aggiungere un voto.
+      type: object
+      properties:
+        eta:
+          type: integer
+          description: Età dell'utente che ha effettuato il voto.
+          minimum: 0
+        voto:
+          type: integer
+          description: Voto assegnato al quartiere.
+          minimum: 1
+          maximum: 5
+        quartiere:
+          type: integer
+          description: Identificatore univoco del quartiere.
     Voto:
       description: Oggetto contenente le informazioni di un voto.
       type: object
@@ -264,18 +271,8 @@ components:
           type: string
           description: Data e ora in cui è stato effettuato il voto.
           format: date-time
-        eta:
-          type: integer
-          description: Età dell'utente che ha effettuato il voto.
-          minimum: 0 # TODO: @Boss314 & @Lukil33 decidere se mettere dei range o lasciare il numero libero
-        voto:
-          type: integer
-          description: Voto assegnato al quartiere.
-          minimum: 1
-          maximum: 5
-        quartiere:
-          type: integer
-          description: Identificatore univoco del quartiere.
+      allOf:
+        - "$ref": "#/components/schemas/AddVoto"
     MediaVoti:
       description: Oggetto semplice contenente la media dei voti di un quartiere.
       type: object
@@ -295,9 +292,6 @@ components:
         - "$ref": "#/components/schemas/SondaggioBase"
       type: object
       properties:
-        descrizione:
-          type: string
-          description: Descrizione del sondaggio.
         voti:
           type: array
           items:
@@ -308,7 +302,6 @@ components:
           items:
             "$ref": "#/components/schemas/MediaVoti"
           description: Array di oggetti contenenti la media dei voti assegnati ai quartieri presenti nel sondaggio (quelli non presenti non vengono visualizzati).
-        
 
 paths:
   '/api/quartieri' :
@@ -429,7 +422,7 @@ paths:
     get:
       description: "Restituisce le informazioni della sessione dell'utente, se presente."
       parameters:
-        - name: token
+        - name: Authorization
           in: header
           description: "Token di autenticazione dell'utente."
           required: true
@@ -476,6 +469,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Session"
+        400:
+          description: "Dati della sessione non validi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Credenziali non valide."
           content:
@@ -485,7 +484,7 @@ paths:
     delete: 
       description: "Elimina la sessione dell'utente."
       parameters:
-        - name: token
+        - name: Authorization
           in: header
           description: "Token di autenticazione dell'utente."
           required: true
@@ -507,14 +506,22 @@ paths:
   '/api/sondaggi' :
     description: "Risorsa che restituisce la lista dei sondaggi dell'utente corrente, se amministratore allora restituisce tutti i sondaggi."
     get: 
-      description: "Restituisce la lista dei sondaggi dell'utente corrente."
+      description: "Restituisce la lista dei sondaggi dell'utente corrente. Se l'utente è amministratore, restituisce tutti i sondaggi."
       parameters:
-        - name: token
+        - name: Authorization
           in: header
           description: "Token di autenticazione dell'utente."
           required: true
           schema:
             type: string
+        - name: deepData
+          in: query
+          description: "Se impostato a true, restituisce le informazioni complete di ogni sondaggio."
+          required: false
+          schema:
+            type: boolean
+            default: false
+          allowEmptyValue: true
       responses:
         200:
           description: "Successful response"
@@ -524,6 +531,52 @@ paths:
                 "$ref": "#/components/schemas/ElencoSondaggi"
         401:
           description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per visualizzare i sondaggi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+    post: 
+      description: "Crea un nuovo sondaggio. Solo per utenti con ruolo 'sondaggista'."
+      parameters:
+        - name: Authorization
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddSondaggio"
+      responses:
+        200:
+          description: "Sondaggio creato con successo."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SondaggioBase"
+        400:
+          description: "Dati del sondaggio non validi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per creare un sondaggio."
           content:
             application/json:
               schema:
@@ -552,8 +605,220 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per visualizzare il sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         404:
           description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+    patch: 
+      description: "Modifica un sondaggio. Solo per utenti con ruolo 'sondaggista'."
+      parameters:
+        - name: Authorization
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - "$ref": "#/components/schemas/AddSondaggio"
+              type: object
+              properties:
+                isAperto:
+                  type: boolean
+                  description: "Indica se il sondaggio è aperto (in corso) o chiuso."
+      responses:
+        200:
+          description: "Sondaggio modificato con successo."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SondaggioBase"
+        400:
+          description: "Dati del sondaggio non validi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per modificare il sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+    delete:
+      description: "Elimina un sondaggio. Solo l'utente che ha creato il sondaggio può eliminarlo o un amministratore, se il sondaggio è in attesa. Se il sondaggio è approvato o rifiutato, solo l'amministratore può eliminarlo."
+      parameters:
+        - name: Authorization
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Sondaggio eliminato con successo."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BasicOkResponse"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per eliminare il sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  '/api/sondaggi/{id}/voti' :
+    description: "Risorsa per la gestione dei voti di un sondaggio."
+    get: 
+      description: "Restituisce la lista dei voti assegnati al sondaggio."
+      parameters:
+        - name: Authorization
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Voto"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per visualizzare i voti."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+    post:
+      description: "Aggiunge un voto al sondaggio."
+      parameters:
+        - name: Authorization
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddVoto"
+      responses:
+        200:
+          description: "Voto aggiunto con successo."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Voto"
+        400: 
+          description: "Dati del voto non validi."
+          content: 
+            application/json: 
+              schema: 
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per aggiungere un voto."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  '/api/sondaggi/{id}/voti/{idVoto}' :
+    description: "Risorsa per la gestione di un voto di un sondaggio."
+    delete:
+      description: "Elimina un voto. Solo l'utente che ha effettuato il voto può eliminarlo"
+      parameters:
+        - name: Authorization
+          in: header
+          description: "Token di autenticazione dell'utente."
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Voto eliminato con successo."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/BasicOkResponse"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per eliminare il voto."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Voto non trovato."
           content:
             application/json:
               schema:

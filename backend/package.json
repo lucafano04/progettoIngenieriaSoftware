@@ -1,0 +1,23 @@
+{
+  "name": "progetto-comune",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucafano04/progettoComune.git"
+  },
+  "author": "Luca Facchini & Luca Prigione & Enrico Faa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucafano04/progettoComune/issues"
+  },
+  "homepage": "https://github.com/lucafano04/progettoComune#readme",
+  "dependencies": {
+    "mongodb": "^6.10.0"
+  }
+}

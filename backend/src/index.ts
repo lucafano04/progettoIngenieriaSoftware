@@ -1,4 +1,4 @@
-import db from './db/index.js';                                             // Import and initialize the database connection
+import db from './db'                                             // Import and initialize the database connection
 // To access the database connection, use db.mongoose for the mongoose object and db.schemas for a object containing the schemas
 
 

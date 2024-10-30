@@ -13,6 +13,7 @@
     "conventionalCommits.scopes": [
         "D1",
         "D2",
-        "D3"
+        "D3",
+        "backend"
     ]
 }

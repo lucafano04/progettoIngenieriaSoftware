@@ -13,21 +13,20 @@ const sicurezza = new Schema({
     tassoCriminalita : Number
 });
 
-const coordinate = new Schema([[Number]]);
 
 const soddisfazione = new Schema(Number);
 
 const circoscrizioneBase = new Schema({
     id : Number,
     nome : String,
-    coordinate : coordinate,
+    coordinate : [[Number]],
     soddisfazioneMedia : soddisfazione
 });
 
 const circoscrizione = new Schema({
     id : Number,
     nome : String,
-    coordinate : coordinate,
+    coordinate : [[Number]],
     soddisfazioneMedia : soddisfazione,
     popolazione : Number,
     superficie : Number,
@@ -41,7 +40,7 @@ const circoscrizione = new Schema({
 const quartiere = new Schema({
     id : Number,
     nome : String,
-    coordinate : coordinate,
+    coordinate : [[Number]],
     circoscrizione : circoscrizioneBase,
     soddisfazioneMedia : soddisfazione,
     popolazione : Number,
@@ -56,7 +55,6 @@ const quartiere = new Schema({
 const schemas = {
     serviziGenerali,
     sicurezza,
-    coordinate,
     soddisfazione,
     circoscrizioneBase,
     circoscrizione,
@@ -67,7 +65,6 @@ export default schemas;
 export {
     serviziGenerali,
     sicurezza,
-    coordinate,
     soddisfazione,
     circoscrizioneBase,
     circoscrizione,

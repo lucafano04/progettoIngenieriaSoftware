@@ -17,7 +17,7 @@ Il sistema deve permettere a tutti gli utenti di selezionare qualunque dei vari 
 
 ### RF 6 Autenticazione (Leggermente Rivisitata)
 Il sistema deve permettere a tutti gli utenti loggati di accedere al loro account premendo un tasto di login in altro a destra, il quale renderizzerà gli utenti alla pagina di login attraverso l'inserimento di: "Nome Utente" e "Password". Nel caso in cui l'utente non avesse un ruolo abilitato questo verrà reindirizzato alla pagina principale con un messaggio di errore tramite pop-up che informerà dei mancati permessi per accedere al sistema.
-- Come utente voglio poter accedere tramite Nome Utente e Password, così da poter avere accesso alle funzionalità fornite dall'utente
+- Come utente voglio poter accedere tramite Nome Utente e Password, così da poter avere accesso alle funzionalità fornite all'utente
 
 ### RF 7 Cambio icona login
 Successivamente al processo di autenticazione per qualsiasi utente loggato verrà sostituita l'icona del login con l'immagine del profilo con il quale si è fatto l'accesso.

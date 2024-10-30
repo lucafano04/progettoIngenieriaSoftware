@@ -1,72 +1,35 @@
-import { Schema } from 'mongoose';
+import { Schema, Types } from 'mongoose';
+import { CircoscrizioneBase, ServiziGenerali, Sicurezza } from '../types';
 
-const serviziGenerali = new Schema({
-    areeVerdi : Number,
-    scuole : Number,
-    serviziRistorazione : Number,
-    localiNotturni : Number
+
+// Definizione degli schemi senza modello
+const serviziGeneraliSchema = new Schema<ServiziGenerali>({
+    areeVerdi : { type : Number, required : true },
+    scuole : { type : Number, required : true },
+    serviziRistorazione : { type : Number, required : true },
+});
+const sicurezzaSchema = new Schema<Sicurezza>({
+    numeroInterventi : { type : Number, required : true },
+    incidenti : { type : Number, required : true },
+    tassoCriminalita : { type : Number, required : true }
+});
+const circoscrizioneBaseSchema = new Schema<CircoscrizioneBase>({
+    nome : { type : String, required : true },
+    coordinate : { type : [[Number]], required : true },
+    soddisfazioneMedia : { type : Number, required : true },
+    id : { type : Types.ObjectId, required : true }
 });
 
-const sicurezza = new Schema({
-    numeroInterventi : Number,
-    incidenti : Number,
-    tassoCriminalita : Number
-});
-
-
-const soddisfazione = new Schema(Number);
-
-const circoscrizioneBase = new Schema({
-    id : Number,
-    nome : String,
-    coordinate : [[Number]],
-    soddisfazioneMedia : soddisfazione
-});
-
-const circoscrizione = new Schema({
-    id : Number,
-    nome : String,
-    coordinate : [[Number]],
-    soddisfazioneMedia : soddisfazione,
-    popolazione : Number,
-    superficie : Number,
-    serviziTotali : Number,
-    interventiPolizia : Number,
-    etaMedia : Number,
-    servizi : serviziGenerali,
-    sicurezza : sicurezza
-});
-
-const quartiere = new Schema({
-    id : Number,
-    nome : String,
-    coordinate : [[Number]],
-    circoscrizione : circoscrizioneBase,
-    soddisfazioneMedia : soddisfazione,
-    popolazione : Number,
-    superficie : Number,
-    serviziTotali : Number,
-    interventiPolizia : Number,
-    etaMedia : Number,
-    servizi : serviziGenerali,
-    sicurezza : sicurezza
-});
 
 const schemas = {
-    serviziGenerali,
-    sicurezza,
-    soddisfazione,
-    circoscrizioneBase,
-    circoscrizione,
-    quartiere
+    serviziGenerali: serviziGeneraliSchema,
+    sicurezza: sicurezzaSchema,
+    circoscrizioneBase: circoscrizioneBaseSchema,
 };
 
 export default schemas;
 export {
-    serviziGenerali,
-    sicurezza,
-    soddisfazione,
-    circoscrizioneBase,
-    circoscrizione,
-    quartiere
+    serviziGeneraliSchema as serviziGenerali,
+    sicurezzaSchema as sicurezza,
+    circoscrizioneBaseSchema as circoscrizioneBase
 };

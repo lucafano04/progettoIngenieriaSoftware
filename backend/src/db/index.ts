@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import schemas from './schemas';
+import circoscrizioni from './models/circoscrizioni'; // Import the circoscrizioni model
 
 if(process.env.MONGO_DB_USER === undefined || process.env.MONGO_DB_PASS === undefined || process.env.MONGO_DB_CLUSTER === undefined || process.env.MONGO_DB_APP_NAME === undefined) {
     console.log(process.env);
@@ -17,22 +17,21 @@ mongoose.connection.on('open', ()=>{
     console.log("[INFO] Connected to MongoDB");
 });
 
-// Esempio di creazione di un model per la collezione Circoscrizione
-const circoscrizioni = mongoose.model('Circoscrizione', schemas.circoscrizione);
 
-
+// Definizione del gruppo di modelli da esportare
 const models = {
     circoscrizioni
 };
+// Definizione dell'oggetto da esportare
 const exportsOBJ = {
     mongoose,
     models,
-    schemas
 };
 
+// Esportazione dell'oggetto
 export default exportsOBJ;
+// Esportazione dei singoli elementi
 export {
     mongoose,
     models,
-    schemas
 };

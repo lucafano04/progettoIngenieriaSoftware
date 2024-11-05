@@ -3,7 +3,7 @@ import ServiziGenerali from './ServiziGenerali';
 import Sicurezza from './Sicurezza';
 
 type Circoscrizione = {
-    __id : Types.ObjectId,
+    _id : Number,
     nome : String,
     coordinate : [[Number]],
     soddisfazioneMedia : Number,

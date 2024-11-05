@@ -1,9 +1,9 @@
 import {Schema, model} from 'mongoose';
 import schemas from '../schemas';
-import { Circoscrizione, Sicurezza } from '../../types';
+import { Circoscrizione } from '../../types';
 
 const circoscrizioneSchema = new Schema<Circoscrizione>({
-    __id : { type : Schema.Types.ObjectId, required : true },
+    _id : { type : Number, required : true },
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },
     soddisfazioneMedia : { type : Number, required : true },
@@ -16,6 +16,6 @@ const circoscrizioneSchema = new Schema<Circoscrizione>({
     sicurezza : { type : schemas.sicurezza, required : true }
 });
 
-const circoscrizioni = model('Circoscrizione', circoscrizioneSchema);
+const Circoscrizioni = model('Circoscrizione', circoscrizioneSchema);
 
-export default circoscrizioni;
+export default Circoscrizioni;

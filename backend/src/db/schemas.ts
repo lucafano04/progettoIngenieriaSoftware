@@ -17,7 +17,7 @@ const circoscrizioneBaseSchema = new Schema<CircoscrizioneBase>({
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },
     soddisfazioneMedia : { type : Number, required : true },
-    id : { type : Types.ObjectId, required : true }
+    _id : { type : Types.ObjectId, required : true }
 });
 
 

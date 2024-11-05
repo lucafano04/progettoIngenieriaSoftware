@@ -3,7 +3,7 @@ import serviziGenerali from "./ServiziGenerali";
 import sicurezza from "./Sicurezza";
 
 type Quartiere = {
-    id : Number,
+    _id : Number,
     nome : String,
     coordinate : [[Number]],
     circoscrizione : circoscrizioneBase,

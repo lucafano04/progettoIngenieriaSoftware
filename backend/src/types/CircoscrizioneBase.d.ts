@@ -1,5 +1,5 @@
 type CircoscrizioneBase = {
-    id : Number,
+    _id : Number,
     nome : String,
     coordinate : [[Number]],
     soddisfazioneMedia : Number,

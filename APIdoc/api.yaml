@@ -96,7 +96,7 @@ components:
       description: Oggetto contenente le informazioni di Base di una circoscrizione.
       type: object
       properties:
-        id:
+        _id:
           type: integer
           description: Identificatore univoco della circoscrizione.
         nome:
@@ -121,7 +121,7 @@ components:
       description: Oggetto contenente le informazioni di base di un quartiere.
       type: object
       properties:
-        id:
+        _id:
           type: "integer"
           description: "Identificatore univoco del quartiere."
         nome:
@@ -220,7 +220,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/AddSondaggio"
       properties:
-        id:
+        _id:
           type: integer
           description: Identificatore univoco del sondaggio.
         isAperto:
@@ -264,7 +264,7 @@ components:
       description: Oggetto contenente le informazioni di un voto.
       type: object
       properties:
-        id:
+        _id:
           type: integer
           description: Identificatore univoco del voto.
         dataOra:

@@ -1,4 +1,3 @@
-
 type ServiziGenerali = {
     areeVerdi : Number,
     scuole : Number,

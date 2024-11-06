@@ -1,9 +1,8 @@
 import user from "./User"
-import addSondaggio from "./AddSondaggio"
+import AddSondaggio from "./AddSondaggio"
 
-type SondaggioBase = {
+type SondaggioBase = AddSondaggio & {
     _id : Number,
-    datiSondaggio : addSondaggio,
     isAperto : Boolean,
     statoApprovazione : "Approvato" | "In attesa" | "Rifiutato",
     sondaggista : user

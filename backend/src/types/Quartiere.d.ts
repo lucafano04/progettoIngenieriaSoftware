@@ -1,18 +1,9 @@
-import circoscrizioneBase from "./CircoscrizioneBase";
 import serviziGenerali from "./ServiziGenerali";
 import sicurezza from "./Sicurezza";
+import QuartiereBase from "./QuartiereBase";
+import DatiBase from "./DatiBase";
 
-type Quartiere = {
-    _id : Number,
-    nome : String,
-    coordinate : [[Number]],
-    circoscrizione : circoscrizioneBase,
-    soddisfazioneMedia : Number,
-    popolazione : Number,
-    superficie : Number,
-    serviziTotali : Number,
-    interventiPolizia : Number,
-    etaMedia : Number,
+type Quartiere = DatiBase & QuartiereBase & {
     servizi : serviziGenerali,
     sicurezza : sicurezza
 };

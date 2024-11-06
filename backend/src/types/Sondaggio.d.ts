@@ -1,14 +1,9 @@
-import user from "./User"
 import voti from "./Voti"
 import mediaVoti from "./MediaVoti"
-import addSondaggio from "./AddSondaggio";
+import AddSondaggio from "./AddSondaggio";
+import SondaggioBase from "./SondaggioBase";
 
-type Sondaggio = {
-    _id : Number,
-    datiSondaggio : addSondaggio,
-    isAperto : Boolean,
-    statoApprovazione : "Approvato" | "In attesa" | "Rifiutato",
-    sondaggista : user,
+type Sondaggio = AddSondaggio & SondaggioBase & {
     voti : [voti],
     mediaVoti : [mediaVoti]
 };

@@ -1,17 +1,9 @@
-import { Types } from 'mongoose';
 import ServiziGenerali from './ServiziGenerali';
 import Sicurezza from './Sicurezza';
+import CircoscrizioneBase from './CircoscrizioneBase';
+import DatiBase from './DatiBase';
 
-type Circoscrizione = {
-    _id : Number,
-    nome : String,
-    coordinate : [[Number]],
-    soddisfazioneMedia : Number,
-    popolazione : Number,
-    superficie : Number,
-    serviziTotali : Number,
-    interventiPolizia : Number,
-    etaMedia : Number,
+type Circoscrizione = CircoscrizioneBase & DatiBase &{
     servizi : ServiziGenerali,
     sicurezza : Sicurezza
 }

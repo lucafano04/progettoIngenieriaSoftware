@@ -1,7 +1,7 @@
 import circoscrizioneBase from "./CircoscrizioneBase";
 
 type QuartiereBase = {
-    id : Number,
+    _id : Number,
     nome : String,
     coordinate : [[Number]],
     circoscrizione : circoscrizioneBase,

@@ -1,11 +1,11 @@
 import user from "./User"
+import addSondaggio from "./AddSondaggio"
 
 type SondaggioBase = {
-    titolo : String,
-    dataInizio : Date,
-    id : Number,
+    _id : Number,
+    datiSondaggio : addSondaggio,
     isAperto : Boolean,
-    statoApprovazione : String,
+    statoApprovazione : "Approvato" | "In attesa" | "Rifiutato",
     sondaggista : user
 };
 

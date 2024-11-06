@@ -2,7 +2,7 @@ type User = {
     email : String,
     nome : String,
     cognome : String,
-    ruolo : String,
+    ruolo : "Amministratore" | "Analista" | "Circoscrizione" | "Sondaggista",
     imageUrl : String
 };
 

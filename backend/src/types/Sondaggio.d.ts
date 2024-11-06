@@ -1,13 +1,13 @@
 import user from "./User"
 import voti from "./Voti"
 import mediaVoti from "./MediaVoti"
+import addSondaggio from "./AddSondaggio";
 
 type Sondaggio = {
-    titolo : String,
-    dataInizio : Date,
-    id : Number,
+    _id : Number,
+    datiSondaggio : addSondaggio,
     isAperto : Boolean,
-    statoApprovazione : String,
+    statoApprovazione : "Approvato" | "In attesa" | "Rifiutato",
     sondaggista : user,
     voti : [voti],
     mediaVoti : [mediaVoti]

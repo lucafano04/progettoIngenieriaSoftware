@@ -1,8 +1,8 @@
 type Voti = {
+    _id : Number,
     eta : Number,
     voto : Number,
     quartiere : Number,
-    id : Number,
     dataOra : Date
 };
 

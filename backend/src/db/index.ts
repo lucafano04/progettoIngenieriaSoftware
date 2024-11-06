@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Circoscrizioni from './models/circoscrizioni'; // Import the circoscrizioni model
+import models from './models'; // Import the entire model
 
 if(process.env.MONGO_DB_USER === undefined || process.env.MONGO_DB_PASS === undefined || process.env.MONGO_DB_CLUSTER === undefined || process.env.MONGO_DB_APP_NAME === undefined) {
     console.log(process.env);
@@ -19,14 +19,10 @@ mongoose.connection.on('open', ()=>{
 });
 
 
-// Definizione del gruppo di modelli da esportare
-const models = {
-    Circoscrizioni
-};
 // Definizione dell'oggetto da esportare
 const exportsOBJ = {
     mongoose,
-    models,
+    models
 };
 
 // Esportazione dell'oggetto

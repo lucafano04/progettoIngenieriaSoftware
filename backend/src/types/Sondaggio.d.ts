@@ -1,9 +1,8 @@
 import voti from "./Voti"
 import mediaVoti from "./MediaVoti"
-import AddSondaggio from "./AddSondaggio";
-import SondaggioBase from "./SondaggioBase";
+import SondaggioDB from "./SondaggioDB";
 
-type Sondaggio = AddSondaggio & SondaggioBase & {
+type Sondaggio = SondaggioDB & {
     voti : [voti],
     mediaVoti : [mediaVoti]
 };

@@ -12,8 +12,10 @@ import Sessione from "./Session";
 import Sicurezza from "./Sicurezza";
 import Sondaggio from "./Sondaggio";
 import SondaggioBase from "./SondaggioBase";
+import SondaggioDB from "./SondaggioDB";
 import User from "./User";
 import Voti from "./Voti";
+import VotoDB from "./VotoDB";
 
 export {
     AddSondaggio,
@@ -30,6 +32,8 @@ export {
     Sicurezza,
     Sondaggio,
     SondaggioBase,
+    SondaggioDB,
     User,
-    Voti
+    Voti,
+    VotoDB
 };

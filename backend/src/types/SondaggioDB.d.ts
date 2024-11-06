@@ -1,7 +1,8 @@
 import AddSondaggio from "./AddSondaggio";
-import SondaggioBase from "./SondaggioBase";
+import SondaggioBaseBase from "./SondaggioBaseBase";
 
-type SondaggioDB = AddSondaggio & SondaggioBase & {
+type SondaggioDB = AddSondaggio & SondaggioBaseBase & {
+    sondaggista: Number,
 };
 
 export default SondaggioDB;

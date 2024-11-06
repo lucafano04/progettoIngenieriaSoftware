@@ -1,11 +1,8 @@
 import circoscrizioneBase from "./CircoscrizioneBase";
+import QuartiereBaseBase from "./QuartiereBaseBase";
 
-type QuartiereBase = {
-    _id : Number,
-    nome : String,
-    coordinate : [[Number]],
+type QuartiereBase = QuartiereBaseBase & {
     circoscrizione : circoscrizioneBase,
-    soddisfazioneMedia : Number
 };
 
 export default QuartiereBase;

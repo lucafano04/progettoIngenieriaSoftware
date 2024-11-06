@@ -1,6 +1,5 @@
 import Circoscrizione from "./Circoscrizione";
 import Quartiere from "./Quartiere";
-import Sessione from "./Sessione";
 import Sondaggio from "./Sondaggio";
 import User from "./User";
 import Voti from "./Voto";
@@ -9,7 +8,6 @@ import Voti from "./Voto";
 const exportsOBJ = {
     Circoscrizione,
     Quartiere,
-    Sessione,
     Sondaggio,
     User,
     Voti
@@ -20,7 +18,6 @@ export default exportsOBJ;
 export {
     Circoscrizione,
     Quartiere,
-    Sessione,
     Sondaggio,
     User,
     Voti

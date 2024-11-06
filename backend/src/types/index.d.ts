@@ -7,8 +7,10 @@ import Errors from "./Errors";
 import MediaVoti from "./MediaVoti";
 import Quartiere from "./Quartiere";
 import QuartiereBase from "./QuartiereBase";
+import QuartiereDB from "./QuartiereDB";
 import ServiziGenerali from "./ServiziGenerali";
-import Sessione from "./Session";
+import Session from "./Session";
+import SessionDB from "./SessioneDB";
 import Sicurezza from "./Sicurezza";
 import Sondaggio from "./Sondaggio";
 import SondaggioBase from "./SondaggioBase";
@@ -27,8 +29,8 @@ export {
     MediaVoti,
     Quartiere,
     QuartiereBase,
+    QuartiereDB,
     ServiziGenerali,
-    Sessione,
     Sicurezza,
     Sondaggio,
     SondaggioBase,

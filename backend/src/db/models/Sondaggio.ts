@@ -7,8 +7,8 @@ const sondaggioSchema = new Schema<SondaggioDB>({
     titolo : { type : String, required : true },
     dataInizio : { type : Date, required : true },
     isAperto : {type : Boolean, required : true },
-    statoApprovazione : { type : String, emun : ["Approvato", "In attesa", "Rifiutato"], required : true },
-    sondaggista : { type : user, required : true }
+    statoApprovazione : { type : String, enum : ["Approvato", "In attesa", "Rifiutato"], required : true },
+    sondaggista : { type : Number, ref: 'User', required : true }
 });
 
 const Sondaggio = model('Sondaggio', sondaggioSchema);

@@ -1,0 +1,143 @@
+\documentclass[twoside, a4paper, 10pt]{report}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{afterpage}
+
+% Ridefinizione per il titolo dei capitoli
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
+\titlespacing{\chapter}{0pt}{0pt}{1em}
+
+% Definizione della path per le immagini
+\graphicspath{{../images/}}
+
+% Set the version of the document
+\newcommand{\version}{0.1}
+\newcommand{\ProjectTitle}{SatisTrento}
+\newcommand{\ProjectTitleShort}{satisTrento}
+\newcommand{\FileName}{D2-\ProjectTitleShort-analisiProgettazione}
+
+% Definizione dei dati del documento
+\title{Analisi e Progettazione - \ProjectTitle}
+\author{Facchini Luca, Prigione Luca, Faa Enrico}
+\date{A.A. 2024/2025}
+
+% Definizione metadati PDF
+\hypersetup{
+    pdftitle={\ProjectTitle},
+    pdfauthor={Facchini Luca, Prigione Luca, Faa Enrico},
+    pdfsubject={Analisi e Progettazione},
+    pdfkeywords={\ProjectTitle, Analisi e Progettazione, Comune di Trento, UniTN}
+}
+
+% Rimozione scritta "Capitolo" dai titoli dei capitoli
+\renewcommand{\chaptermark}[1]{%
+    \markboth{
+        \thechapter.\ #1%
+    }{}%
+}
+% Definizione del layout della pagina
+\fancypagestyle{stdPage}{
+    \setlength{\headheight}{24.0pt} 
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyhead{}
+    \fancyfoot{}
+    \fancyhead[LE,RO]{\begin{tabular}{l l}
+        \textbf{Document:} & Descrizione di progetto \\
+        \textbf{Version:} & \version
+    \end{tabular}}
+    \fancyfoot[LE,RO]{\thepage / \pageref*{LastPage}}
+    \fancyhead[LO,RE]{\leftmark}
+}
+\fancypagestyle{plain}{
+    \pagestyle{stdPage}
+}
+\fancypagestyle{index}{
+    \pagestyle{stdPage}
+    \fancyfoot[LE,RO]{\thepage}
+}
+
+\fancypagestyle{emptyPage}{
+    \setlength{\headheight}{24.0pt} 
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
+    \fancyfoot{}
+}
+
+% Definizione della pagina bianca
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+\begin{document}
+    \pagestyle{fancy}
+    \pagenumbering{Roman} 
+    
+    \begin{titlepage}
+        \thispagestyle{emptyPage}
+        \includegraphics[width=0.33\textwidth]{logoUni.png}
+        \vspace{1cm}\newline
+        \textbf{Progetto:}
+        \vspace{0.5cm}
+        \begin{center}
+            \textbf{\Huge{\ProjectTitle}}
+        \end{center}
+        \vspace{1cm}
+        \textbf{Titolo del documento:}
+        \vspace{0.5cm}
+        \begin{center}
+            \textbf{\huge{Analisi e Progettazione}}
+        \end{center}
+        \vspace{1cm}
+        \textbf{Document Info}
+        \vspace{0.5cm}
+        % Table with document info
+        \begin{center}
+            \begin{tabular}{|l|l|l|c|}  
+                \hline
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Doc. Name}}   & \FileName & {\cellcolor[rgb]{0,0.502,1}}\begin{tabular}[c]{@{}>{\cellcolor[rgb]{0,0.502,1}}l@{}}\textcolor{white}{\textbf{Doc.}}\\\textcolor{white}{\textbf{Number}}\end{tabular} & D2 V\version  \\ 
+                \hline
+                {\cellcolor[rgb]{0,0.502,1}}\textcolor{white}{\textbf{Description}} & \multicolumn{3}{l|}{Documento di analisi dei requisiti funzionali, non funzionali e front-end}                                                                                                                               \\
+                \hline
+            \end{tabular}
+        \end{center}
+        % Document authors (1 per line) with name and ID aligned to the right but with some space from the right border 
+        \vspace{1.5in}
+        \vfill
+        \begin{flushright}
+            \rightskip=2cm
+            \begin{tabular}{r l}
+                \multicolumn{2}{c}{\textbf{Authors}} \\
+                Facchini Luca & 245965 \\
+                Prigione Luca & 242880 \\
+                Faa Enrico & 243889
+            \end{tabular}
+        \end{flushright}
+        \vfill
+    \end{titlepage}
+    % \afterpage{\blankpage} % Uncomment this line if to print as a booklet
+    \begingroup
+        \setcounter{tocdepth}{0}
+        \tableofcontents
+        \thispagestyle{index}
+    \endgroup
+    \pagestyle{stdPage}
+    % \afterpage{\blankpage} % Uncomment this line if to print as a booklet
+    \newpage
+    \pagenumbering{arabic} 
+    
+    \include{chapter/01-requisitiFunzionali}
+    
+    % \afterpage{\blankpage} % Uncomment this line if to print as a booklet
+\end{document}

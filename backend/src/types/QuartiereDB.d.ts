@@ -1,10 +1,11 @@
-import DatiBase from "./DatiBase";
+import DatiBaseDB from "./DatiBaseDB";
 import QuartiereBaseBase from "./QuartiereBaseBase";
 import ServiziGenerali from "./ServiziGenerali";
 import Sicurezza from "./Sicurezza";
+import {Types} from "mongoose";
 
-type QuartiereDB = DatiBase & QuartiereBaseBase & {
-    circoscrizione: Number,
+type QuartiereDB = DatiBaseDB & QuartiereBaseBase & {
+    circoscrizione: Types.ObjectId,
     servizi : ServiziGenerali,
     sicurezza : Sicurezza
 };

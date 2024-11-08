@@ -1,8 +1,9 @@
+import {Types} from "mongoose";
+
 type QuartiereBaseBase = {
-    _id : Number,
+    _id : Types.ObjectId,
     nome : String,
-    coordinate : [[Number]],
-    soddisfazioneMedia : Number
+    coordinate : number[][],
 };
 
 export default QuartiereBaseBase;

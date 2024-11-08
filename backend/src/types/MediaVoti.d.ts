@@ -1,6 +1,6 @@
 type MediaVoti = {
-    media : Number,
-    quartiere : Number
+    media : number,
+    quartiere : number
 };
 
 export default MediaVoti;

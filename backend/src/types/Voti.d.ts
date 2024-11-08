@@ -1,8 +1,10 @@
+import {Types} from "mongoose";
+
 type Voti = {
-    _id : Number,
-    eta : Number,
-    voto : Number,
-    quartiere : Number,
+    _id : Types.ObjectId,
+    eta : number,
+    voto : number,
+    quartiere : Types.ObjectId,
     dataOra : Date
 };
 

@@ -1,8 +1,10 @@
+import {Types} from "mongoose";
+
 type CircoscrizioneBase = {
-    _id : Number,
+    _id : Types.ObjectId,
     nome : String,
-    coordinate : [[Number]],
-    soddisfazioneMedia : Number,
+    coordinate : [[number]],
+    soddisfazioneMedia : number,
 }
 
 export default CircoscrizioneBase;

@@ -1,5 +1,7 @@
+import {Types} from "mongoose";
+
 type SondaggioBaseBase = {
-    _id : Number,
+    _id : Types.ObjectId,
     isAperto : Boolean,
     statoApprovazione : "Approvato" | "In attesa" | "Rifiutato"
 };

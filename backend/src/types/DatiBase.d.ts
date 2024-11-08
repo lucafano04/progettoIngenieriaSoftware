@@ -1,10 +1,7 @@
-type DatiBase = {
-    popolazione : Number,
-    superficie : Number,
-    serviziTotali : Number,
-    soddisfazioneMedia : Number,
-    interventiPolizia : Number,
-    etaMedia : Number
+import DatiBaseDB from "./DatiBaseDB";
+
+type DatiBase = DatiBaseDB & {
+    soddisfazioneMedia : number,
 };
 
 export default DatiBase;

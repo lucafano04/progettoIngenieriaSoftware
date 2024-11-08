@@ -1,7 +1,8 @@
 import Voti from "./Voti";
+import {Types} from "mongoose";
 
 type VotoDB = Voti & {
-    sondaggio : Number
+    sondaggio : Types.ObjectId
 };
 
 export default VotoDB;

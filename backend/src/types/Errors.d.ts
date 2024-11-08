@@ -1,5 +1,5 @@
 type Errors = {
-    code : Number,
+    code : number,
     message : String,
     details ?: String
 }

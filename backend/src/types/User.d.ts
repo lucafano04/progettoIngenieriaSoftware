@@ -1,5 +1,7 @@
+import {Types} from "mongoose";
+
 type User = {
-    _id : Number,
+    _id : Types.ObjectId,
     email : String,
     nome : String,
     cognome : String,

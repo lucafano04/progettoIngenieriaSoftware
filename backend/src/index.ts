@@ -10,6 +10,9 @@ const app: Express = express(); // Create an express app
 
 db.mongoose.startSession().then(()=>{ // Start a session with the database
     console.log("[INFO] Connected to MongoDB"); // Log that the connection was successful
+}).catch((err)=>{ 
+    console.error("[ERROR] Could not connect to MongoDB", err); 
+    process.exit(1);
 });
 /* async function getCircoscrizioni() {                                    // Define the getCircoscrizioni function
     const circoscrizioni = await db.models.Circoscrizione.find();       // Get all the Circoscrizioni 

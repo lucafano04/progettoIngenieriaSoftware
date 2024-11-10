@@ -4,7 +4,7 @@ info:
   description: Documentazione API per il progetto "SatisTrento" all'interno del progetto "100 progetti per il comune di Trento" per il corso di Ingegneria del Software a.a. 2024/2025 corso di laurea in Informatica presso l'Università degli Studi di Trento.
   version: 0.0.1
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3000/api/v1
     description: Development server for testing
 
 components:
@@ -97,7 +97,7 @@ components:
       type: object
       properties:
         _id:
-          type: integer
+          type: string
           description: Identificatore univoco della circoscrizione.
         nome:
           type: string
@@ -122,7 +122,7 @@ components:
       type: object
       properties:
         _id:
-          type: "integer"
+          type: string
           description: "Identificatore univoco del quartiere."
         nome:
           type: "string"
@@ -221,7 +221,7 @@ components:
         - $ref: "#/components/schemas/AddSondaggio"
       properties:
         _id:
-          type: integer
+          type: string
           description: Identificatore univoco del sondaggio.
         isAperto:
           type: boolean
@@ -265,7 +265,7 @@ components:
       type: object
       properties:
         _id:
-          type: integer
+          type: string
           description: Identificatore univoco del voto.
         dataOra:
           type: string
@@ -310,7 +310,7 @@ components:
       description: Token di autenticazione fornito all'utente per accedere alle risorse specifiche protette.
 
 paths:
-  '/api/quartieri' :
+  '/quartieri' :
     description: "Risorsa che restituisce la lista dei quartieri di Trento."
     get: 
       summary: "Ottieni lista dei quartieri"
@@ -340,7 +340,7 @@ paths:
       tags:
         - Quartieri
         - Dati Statici
-  '/api/quartieri/{id}' :
+  '/quartieri/{id}' :
     description: "Risorsa che restituisce le informazioni di un quartiere di Trento con le informazioni di base e i servizi presenti."
     parameters:
       - name: id
@@ -367,7 +367,7 @@ paths:
       tags:
         - Quartieri
         - Dati Statici
-  '/api/circoscrizioni' : 
+  '/circoscrizioni' : 
     description: "Risorsa che restituisce la lista delle circoscrizioni di Trento."
     get: 
       summary: "Ottieni lista delle circoscrizioni"
@@ -397,7 +397,7 @@ paths:
       tags:
         - Circoscrizioni
         - Dati Statici
-  '/api/circoscrizioni/{id}' :
+  '/circoscrizioni/{id}' :
     description: "Risorsa che restituisce le informazioni di una circoscrizione di Trento con le informazioni di base e i servizi presenti."
     parameters:
       - name: id
@@ -424,7 +424,7 @@ paths:
       tags:
         - Circoscrizioni
         - Dati Statici
-  '/api/generalInfo' :
+  '/generalInfo' :
     description: "Risorsa che restituisce le informazioni generali della città di Trento."
     get: 
       summary: "Ottieni informazioni generali"
@@ -456,7 +456,7 @@ paths:
                     maximum: 100
       tags:
         - Dati Statici
-  '/api/session':
+  '/session':
     description: "Risorsa che restituisce le informazioni della sessione dell'utente."
     get:
       summary: "Ottieni informazioni della sessione"
@@ -541,7 +541,7 @@ paths:
                 "$ref": "#/components/schemas/Error"
       tags:
         - Utenti
-  '/api/sondaggi' :
+  '/sondaggi' :
     description: "Risorsa che restituisce la lista dei sondaggi dell'utente corrente, se amministratore allora restituisce tutti i sondaggi."
     get: 
       summary: "Ottieni lista dei sondaggi"
@@ -619,7 +619,7 @@ paths:
       tags:
         - Sondaggi
         - Sondaggista
-  '/api/sondaggi/{id}' :
+  '/sondaggi/{id}' :
     description: "Risorsa che restituisce le informazioni di un sondaggio."
     parameters:
       - name: id
@@ -755,7 +755,7 @@ paths:
         - Sondaggi
         - Sondaggista
         - Amministratore
-  '/api/voti/{idSondaggio}' :
+  '/voti/{idSondaggio}' :
     description: "Risorsa per la gestione dei voti di un sondaggio."
     parameters:
       - name: idSondaggio
@@ -844,7 +844,7 @@ paths:
       tags:
         - Sondaggi
         - Sondaggista
-  '/api/voti/{idVoto}' :
+  '/voti/{idVoto}' :
     description: "Risorsa per la gestione di un voto di un sondaggio."
     parameters:
       - name: idVoto

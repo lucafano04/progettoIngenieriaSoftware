@@ -7,7 +7,8 @@ const userSchema = new Schema<UserDB>({
     nome : { type : String, required : true },
     cognome : { type : String, required : true },
     ruolo : { type : String, enum : ["Amministratore", "Analista", "Circoscrizione", "Sondaggista"], required : true },
-    imageUrl : { type : String, required : true }
+    imageUrl : { type : String, required : true },
+    password : { type : String, required : true },
 });
 
 const User = model('User', userSchema);

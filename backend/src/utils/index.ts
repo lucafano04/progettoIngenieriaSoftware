@@ -1,9 +1,12 @@
 import circoscrizioni from './circoscrizioni';
+import token from './token';
 
 const utils = {
-    circoscrizioni
+    circoscrizioni,
+    token
 };
 export default utils;
 export {
-    circoscrizioni
+    circoscrizioni,
+    token
 }

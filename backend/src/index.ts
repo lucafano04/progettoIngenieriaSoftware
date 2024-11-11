@@ -1,12 +1,25 @@
 import db from './db' // Import and initialize the database connection
 import express, {Express} from 'express' // Import the express library
-import { quartieri } from './routes';
+import { quartieri, session } from './routes';
 // To access the database connection, use db.mongoose for the mongoose object and db.schemas for a object containing the schemas
 
 const BASE_URL = process.env.BASE_API || '/api/v1'; // Define the base URL for the API
 const PORT = process.env.PORT || 3000; // Define the port for the server
 
 const app: Express = express(); // Create an express app
+
+if(!process.env.JWT_SECRET){
+    console.error('[ERROR] JWT_SECRET not set');
+    process.exit(1);
+}
+if(!process.env.AVATAR_BASE || !process.env.AVATAR_QUERY){
+    console.warn('[WARN] AVATAR_BASE or AVATAR_QUERY not set, will use default values');
+    process.env.AVATAR_BASE = 'https://gravatar.com/avatar/';
+    process.env.AVATAR_QUERY = 's=400&d=identicon&r=x';
+}
+// Generate a random secret for the session
+process.env.RANDOM_SECRET = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+console.log(`[INFO] Random secret: ${process.env.RANDOM_SECRET}`);
 
 db.mongoose.startSession().then(()=>{ // Start a session with the database
     console.log("[INFO] Connected to MongoDB"); // Log that the connection was successful
@@ -52,6 +65,7 @@ app.route(BASE_URL + '/').get((req, res) => {                                   
 });
 
 app.use(BASE_URL + '/quartieri',quartieri);
+app.use(BASE_URL + '/session', session);
 
 app.listen(PORT, () => {                            // Start the server on port 3000
     console.log('[INFO] Server is running at http://localhost:3000');                      // Log that the server is running

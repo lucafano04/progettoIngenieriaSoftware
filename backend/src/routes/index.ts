@@ -1,4 +1,4 @@
-import quartieri from './Quartieri'; // Import the Quartieri router
+import quartieri from './quartieri'; // Import the Quartieri router
 
 const routers = {
     quartieri

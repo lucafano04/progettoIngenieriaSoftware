@@ -36,13 +36,23 @@ getCircoscrizioni().then(()=>{                                          // Call 
 app.use(express.json());                                                // Use the express.json middleware to parse JSON bodies
 app.use(express.urlencoded({extended: true}));                          // Use the express.urlencoded middleware to parse URL-encoded bodies
 
+/* Debug logs Privacy goes brrrr */
+/* app.get(BASE_URL+'/*', (req, res, next) => {
+    console.log(`Request @ ${new Date().toISOString()}`);
+    console.log(`URI: ${req.url} method: ${req.method}`);
+    console.log(`IP: ${req.ip}`);
+    console.log(`Headers: ${JSON.stringify(req.headers)}`);
+    if(req.body) console.log(`Body: ${JSON.stringify(req.body)}`);
+    
+    next();
+}); */
 
 app.route(BASE_URL + '/').get((req, res) => {                                      // Define a route for the root path
-    res.send('Hello World!');                                           // Send "Hello World!" as a response
+    res.send('Hello World!');                                                      // Send "Hello World!" as a response
 });
 
 app.use(BASE_URL + '/quartieri',quartieri);
 
 app.listen(PORT, () => {                            // Start the server on port 3000
-    console.log('[INFO] Server is running at https://localhost:3000');                      // Log that the server is running
+    console.log('[INFO] Server is running at http://localhost:3000');                      // Log that the server is running
 });

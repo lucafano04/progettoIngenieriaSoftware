@@ -2,6 +2,7 @@ import express from 'express';
 import db from '../db'; // Import the database connection from the db file
 import { CircoscrizioneBase, CircoscrizioneDB, Errors, Quartiere, QuartiereBase, QuartiereDB } from '../types';
 import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
+import {Types} from "mongoose";
 
 const router = express.Router(); // Create a new router
 
@@ -26,7 +27,10 @@ router.get('/', async (req, res) => {
             // Caso deepData = true quindi voglio tutti i dati del quartiere non solo quelli base
             quartieri = await Promise.all(quartieriDB.map(async (quartiere) => {
                 // Cerco la circoscrizione associata al quartiere
-                const cirBase : CircoscrizioneBase | undefined = circoscrizioniBase.find((cir) => cir._id.equals(quartiere.circoscrizione));
+                const cirBase : CircoscrizioneBase | undefined = circoscrizioniBase.find(
+                    (cir) => 
+                        new Types.ObjectId(cir.self.split('/').pop()).equals(quartiere.circoscrizione) // creo un oggetto ObjectId con l'id della circoscrizione estratto dalla stringa self e controllo se è uguale all'id della circoscrizione del quartiere 
+                );
                 // Se non trovo la circoscrizione, restituisco un errore (Inconsistenza nel DB)
                 if(!cirBase){
                     const response: Errors = {
@@ -40,7 +44,7 @@ router.get('/', async (req, res) => {
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
                 const quartiereRet: Quartiere = {
-                    _id: quartiere._id,
+                    self: `/api/v1/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
                     coordinate: quartiere.coordinate,
                     circoscrizione: cirBase,
@@ -59,7 +63,10 @@ router.get('/', async (req, res) => {
             // Caso deepData = false quindi voglio solo i dati base del quartiere
             quartieri = await Promise.all(quartieriDB.map(async (quartiere) => {
                 // Cerco la circoscrizione associata al quartiere
-                const cirBase : CircoscrizioneBase | undefined = circoscrizioniBase.find((cir) => cir._id.equals(quartiere.circoscrizione));
+                const cirBase : CircoscrizioneBase | undefined = circoscrizioniBase.find(
+                    (cir) => 
+                        new Types.ObjectId(cir.self.split('/').pop()).equals(quartiere.circoscrizione) // creo un oggetto ObjectId con l'id della circoscrizione estratto dalla stringa self e controllo se è uguale all'id della circoscrizione del quartiere 
+                );
                 // Se non trovo la circoscrizione, restituisco un errore (Inconsistenza nel DB)
                 if(!cirBase){
                     const response: Errors = {
@@ -73,7 +80,7 @@ router.get('/', async (req, res) => {
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
                 const quartiereRet: QuartiereBase = {
-                    _id: quartiere._id,
+                    self: `/api/v1/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
                     coordinate: quartiere.coordinate,
                     circoscrizione: cirBase,
@@ -119,11 +126,11 @@ router.get('/:id', async (req, res) => {
         const mediaVoti = await getMediaVoti(quartiereDB);
         // Creo l'oggetto da restituire
         const quartiere: Quartiere = {
-            _id: quartiereDB._id,
+            self: `/api/v1/quartieri/${quartiereDB._id}`,
             nome: quartiereDB.nome,
             coordinate: quartiereDB.coordinate,
             circoscrizione: {
-                _id: circoscrizione._id,
+                self: circoscrizione.self,
                 nome: circoscrizione.nome,
                 coordinate: circoscrizione.coordinate,
                 soddisfazioneMedia: circoscrizione.soddisfazioneMedia,

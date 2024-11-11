@@ -1,11 +1,8 @@
-import {Types} from "mongoose";
+import VotoBase from "./VotiBase";
 
-type Voti = {
-    _id : Types.ObjectId,
-    eta : number,
-    voto : number,
-    quartiere : Types.ObjectId,
-    dataOra : Date
+type Voti = VotoBase & {
+    self: string,
+    quartiere: string,
 };
 
 export default Voti;

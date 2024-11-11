@@ -1,6 +1,6 @@
 type AddSondaggio = {
-    titolo : String,
-    dataInizio : Date
+    titolo: String,
+    dataInizio: Date
 };
 
 export default AddSondaggio;

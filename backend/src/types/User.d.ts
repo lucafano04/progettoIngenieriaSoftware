@@ -1,12 +1,7 @@
-import {Types} from "mongoose";
+import UserBase from "./UserBase";
 
-type User = {
-    _id : Types.ObjectId,
-    email : String,
-    nome : String,
-    cognome : String,
-    ruolo : "Amministratore" | "Analista" | "Circoscrizione" | "Sondaggista",
-    imageUrl : String
+type User = UserBase & {
+    self: string,
 };
 
 export default User;

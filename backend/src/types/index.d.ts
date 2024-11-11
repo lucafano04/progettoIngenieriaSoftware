@@ -16,7 +16,10 @@ import Sondaggio from "./Sondaggio";
 import SondaggioBase from "./SondaggioBase";
 import SondaggioDB from "./SondaggioDB";
 import User from "./User";
+import UserBase from "./UserBase";
+import UserDB from "./UserDB";
 import Voti from "./Voti";
+import VotiBase from "./VotiBase";
 import VotoDB from "./VotoDB";
 
 export {
@@ -38,6 +41,8 @@ export {
     SondaggioBase,
     SondaggioDB,
     User,
+    UserDB,
     Voti,
+    VotiBase,
     VotoDB
 };

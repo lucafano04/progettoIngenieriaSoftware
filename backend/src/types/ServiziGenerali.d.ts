@@ -1,8 +1,8 @@
 type ServiziGenerali = {
-    areeVerdi : number,
-    scuole : number,
-    serviziRistorazione : number,
-    localiNotturni : number
+    areeVerdi: number,
+    scuole: number,
+    serviziRistorazione: number,
+    localiNotturni: number
 };
 
 export default ServiziGenerali;

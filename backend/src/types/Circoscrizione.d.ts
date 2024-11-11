@@ -4,8 +4,8 @@ import CircoscrizioneBase from './CircoscrizioneBase';
 import DatiBase from './DatiBase';
 
 type Circoscrizione = CircoscrizioneBase & DatiBase &{
-    servizi : ServiziGenerali,
-    sicurezza : Sicurezza
+    servizi: ServiziGenerali,
+    sicurezza: Sicurezza
 }
 
 export default Circoscrizione;

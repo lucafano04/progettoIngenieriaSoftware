@@ -1,7 +1,7 @@
 import DatiBaseDB from "./DatiBaseDB";
 
 type DatiBase = DatiBaseDB & {
-    soddisfazioneMedia : number,
+    soddisfazioneMedia: number,
 };
 
 export default DatiBase;

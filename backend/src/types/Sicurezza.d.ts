@@ -1,7 +1,7 @@
 type Sicurezza = {
-    numeroInterventi : number,
-    incidenti : number,
-    tassoCriminalita : number
+    numeroInterventi: number,
+    incidenti: number,
+    tassoCriminalita: number
 }
 
 export default Sicurezza;

@@ -4,8 +4,8 @@ import SondaggioDB from "./SondaggioDB";
 import SondaggioBase from "./SondaggioBase";
 
 type Sondaggio = SondaggioBase & {
-    voti : [voti],
-    mediaVoti : [mediaVoti]
+    voti: [voti],
+    mediaVoti: [mediaVoti]
 };
 
 export default Sondaggio;

@@ -14,7 +14,6 @@ const sicurezzaSchema = new Schema<Sicurezza>({
     tassoCriminalita : { type : Number, required : true }
 });
 const circoscrizioneBaseSchema = new Schema<CircoscrizioneBase>({
-    _id : { type : Schema.Types.ObjectId, required : true },
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },
     soddisfazioneMedia : { type : Number, required : true }

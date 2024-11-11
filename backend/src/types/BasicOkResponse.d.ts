@@ -1,6 +1,6 @@
 type BasicOkResponse = {
-    ok : Boolean,
-    message : String
+    ok: Boolean,
+    message: String
 };
 
 export default BasicOkResponse;

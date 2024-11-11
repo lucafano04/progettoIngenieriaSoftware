@@ -17,7 +17,7 @@ async function getCircoscrizioniWithSoddisfazioneMedia(): Promise<Circoscrizione
         // Calcolo la media dei voti della circoscrizione
         const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
         const cirBase: CircoscrizioneBase = {
-            _id: circoscrizione._id,
+            self: `/api/v1/circoscrizioni/${circoscrizione._id}`,
             nome: circoscrizione.nome,
             coordinate: circoscrizione.coordinate,
             soddisfazioneMedia: mediaVoti,
@@ -45,7 +45,7 @@ async function getCircoscrizioneWithSoddisfazioneMedia(id: Types.ObjectId): Prom
     // Calcolo la media dei voti della circoscrizione
     const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
     const cirBase: CircoscrizioneBase = {
-        _id: circoscrizioneDB._id,
+        self: `/api/v1/circoscrizioni/${circoscrizioneDB._id}`,
         nome: circoscrizioneDB.nome,
         coordinate: circoscrizioneDB.coordinate,
         soddisfazioneMedia: mediaVoti,

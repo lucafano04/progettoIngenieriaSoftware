@@ -8,7 +8,6 @@ const quartiereSchema = new Schema<QuartiereDB>({
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },
     circoscrizione : {type : Schema.Types.ObjectId, ref : 'Circoscrizione', required : true},
-    //soddisfazioneMedia : { type : Number, required : true },
     popolazione : { type : Number, required : true },
     superficie : { type : Number, required : true },
     serviziTotali : { type : Number, required : true },

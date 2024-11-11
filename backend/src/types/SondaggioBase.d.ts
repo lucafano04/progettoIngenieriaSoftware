@@ -3,7 +3,8 @@ import AddSondaggio from "./AddSondaggio"
 import SondaggioBaseBase from "./SondaggioBaseBase";
 
 type SondaggioBase = AddSondaggio & SondaggioBaseBase & {
-    sondaggista : user
+    self: string,
+    sondaggista: user
 };
 
 export default SondaggioBase;

@@ -236,7 +236,7 @@ components:
         sondaggista:
           "$ref": "#/components/schemas/User"
     ElencoSondaggi:
-      description: Array di oggetti contenenti le informazioni di base di un sondaggio (visualizzaione sonfaggista/admin).
+      description: Array di oggetti contenenti le informazioni di base di un sondaggio (visualizzazione sondaggista/admin).
       oneOf:
         - type: array
           items:
@@ -527,12 +527,8 @@ paths:
       security:
         - BearerAuth: []
       responses:
-        200:
+        204:
           description: "Sessione eliminata con successo."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/BasicOkResponse"
         401:
           description: "Sessione non trovata."
           content:
@@ -721,18 +717,62 @@ paths:
       tags:
         - Sondaggi
         - Sondaggista
+    put:
+      summary: "Approva o rifiuta un sondaggio"
+      description: "Approva o rifiuta un sondaggio. Solo per utenti con ruolo 'amministratore'."
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statoApprovazione:
+                  type: string
+                  enum:
+                    - "approvato"
+                    - "rifiutato"
+                  description: "Stato di approvazione del sondaggio."
+      responses:
+        204:
+          description: "Sondaggio approvato o rifiutato con successo."
+        400:
+          description: "Dati del sondaggio non validi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per approvare o rifiutare il sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Amministratore
     delete:
       summary: "Elimina un sondaggio"
       description: "Elimina un sondaggio. Solo l'utente che ha creato il sondaggio può eliminarlo o un amministratore, se il sondaggio è in attesa. Se il sondaggio è approvato o rifiutato, solo l'amministratore può eliminarlo."
       security:
         - BearerAuth: []
       responses:
-        200:
+        204:
           description: "Sondaggio eliminato con successo."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/BasicOkResponse"
         401:
           description: "Utente non autenticato."
           content:
@@ -860,12 +900,8 @@ paths:
         - BearerAuth: []
       
       responses:
-        200:
+        204:
           description: "Voto eliminato con successo."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/BasicOkResponse"
         401:
           description: "Utente non autenticato."
           content:

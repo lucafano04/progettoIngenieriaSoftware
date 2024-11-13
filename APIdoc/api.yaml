@@ -326,7 +326,7 @@ paths:
           allowEmptyValue: true
       responses: 
         200: 
-          description: "Successful response"
+          description: "Risposta con la lista dei quartieri."
           content:
             application/json:
               schema: 
@@ -507,6 +507,11 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Session"
+          headers:
+            Location: 
+              description: "Url della risorsa creata."
+              schema:
+                type: string
         400:
           description: "Dati della sessione non validi."
           content:
@@ -590,10 +595,11 @@ paths:
       responses:
         201:
           description: "Sondaggio creato con successo."
-          content:
-            application/json:
+          headers:
+            Location:
+              description: "Url della risorsa creata."
               schema:
-                "$ref": "#/components/schemas/SondaggioBase"
+                type: string
         400:
           description: "Dati del sondaggio non validi."
           content:
@@ -686,10 +692,11 @@ paths:
       responses:
         200:
           description: "Sondaggio modificato con successo."
-          content:
-            application/json:
+          headers:
+            Location:
+              description: "Url della risorsa modificata."
               schema:
-                "$ref": "#/components/schemas/SondaggioBase"
+                type: string
         400:
           description: "Dati del sondaggio non validi."
           content:
@@ -795,11 +802,11 @@ paths:
         - Sondaggi
         - Sondaggista
         - Amministratore
-  '/voti/{idSondaggio}' :
+  '/voti' :
     description: "Risorsa per la gestione dei voti di un sondaggio."
     parameters:
       - name: idSondaggio
-        in: path
+        in: query
         description: "Identificatore univoco del sondaggio."
         required: true
         schema:
@@ -853,10 +860,11 @@ paths:
       responses:
         201:
           description: "Voto aggiunto con successo."
-          content:
-            application/json:
+          headers:
+            Location:
+              description: "Url della risorsa creata."
               schema:
-                "$ref": "#/components/schemas/Voto"
+                type: string
         400: 
           description: "Dati del voto non validi."
           content: 

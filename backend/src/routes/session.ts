@@ -14,8 +14,6 @@ router.post('', async (req, res) => {
 
     // Find user with email
     const user = await User.findOne({ email });
-    // Just to test
-    // console.log(user);
     if(!user){
         const response: Errors = {
             code: 404,
@@ -55,7 +53,6 @@ router.post('', async (req, res) => {
         process.exit(1);
     }
     const secret = process.env.JWT_SECRET + process.env.RANDOM_SECRET;
-    console.log(secret);
     if(!secret){
         const response: Errors = {
             code: 500,

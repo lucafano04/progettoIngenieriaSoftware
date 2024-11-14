@@ -16,13 +16,13 @@
     La Figura 4.1 mostra un mockup della pagina principale dell'applicazione, questa schermata sarà visibile a tutti gli utenti, loggati e non loggati.
 
     \begin{itemize}
-        \item \textbf{RF1: Homepage} \begin{itemize}
+        \item \textbf{RF1: Mappa} \begin{itemize}
             \item La homepage dell'applicazione mostra la mappa del Comune di Trento in primo piano, sono visibili anche i confini tra i singoli quartieri della città.
         \end{itemize}
-        \item \textbf{RF3: Multi lingua} \begin{itemize} 
+        \item \textbf{RF2: Multi lingua} \begin{itemize} 
                 \item L'interfaccia contiene tre pulsanti, ognuno contenente una bandiera corrispondente a una delle lingue supportate dall'applicazione (italiano, inglese, tedesco). Cliccando sui pulsanti cambierà la lingua in cui è presentata l'applicazione.
         \end{itemize}
-        \item \textbf{RF6: Autenticazione} \begin{itemize} 
+        \item \textbf{RF5: Autenticazione} \begin{itemize} 
             \item L'interfaccia presenta un pulsante, rappresentato da un'icona a forma di "persona", che permette di iniziare il processo di autenticazione degli utenti. Questo permette agli utenti loggati di accedere al proprio account tramite SPID, CNS, CIE, CPS; come dettato dal requisito.
         \end{itemize}
         \item \textbf{RNF10: Facilità d'uso} \begin{itemize}
@@ -49,17 +49,17 @@
     La Figura 4.2 mostra il mockup della schermata di homepage modificata visibile agli utenti di tipo: analista, circoscrizione e amministratore. Questa schermata sarà visibile solo dopo che l'utente ha effettuato l'accesso e sarà visibile solo agli utenti con i privilegi sopra citati.
 
     \begin{itemize}
-        \item \textbf{RF6: Autenticazione} \begin{itemize} 
+        \item \textbf{RF5: Autenticazione} \begin{itemize} 
             \item Inoltre è presente il pulsante per aprire il menù a tendina per permettere all'utente di usufruire delle funzionalità abilitate al proprio utente e di eseguire il logout.
         \end{itemize}
-        \item \textbf{RF7: Cambio icona login} \begin{itemize} 
+        \item \textbf{RF6: Cambio icona login} \begin{itemize} 
             \item L'icona di login è sostituita da un'icona differente per simboleggiare l'accesso eseguito. Questo permette all'utente di individuare l'account con il quale si ha fatto il login
         \end{itemize}
-        \item \textbf{RF12: Modifica Homepage} \begin{itemize}
+        \item \textbf{RF11: Modifica Homepage} \begin{itemize}
             \item Sebbene il mockup mostri i dati dell'applicazione in una tabella, questa funzionalità sarà disponibile solo quando l'utente è loggato come analista, amministratore o circoscrizione. Tutti gli utenti non loggati, oppure loggati senza privilegi speciali non avranno la possibilità di visualizzare le diverse zone della città tramite tabella, come mostrato nella \hyperref[fig:4.1]{Figura 4.1}.
             \item Inoltre se si preferisce la visualizzazione tramite "mappa" sarà possibile passare a questa tramite icone presenti nella parte destra della mappa sull'angolo in alto. 
         \end{itemize}
-        \item \textbf{RF13: Accesso come analista, circoscrizione o amministratore} \begin{itemize}
+        \item \textbf{RF12: Accesso come analista, circoscrizione o amministratore} \begin{itemize}
             \item Gli utenti: analisti, circoscrizioni e amministratori, dopo aver eseguito l'accesso verranno reindirizzati alla presente interfaccia.
         \end{itemize}
         \item \textbf{RNF10: Facilità d'uso} \begin{itemize}
@@ -80,10 +80,10 @@
     La Figura 4.3 mostra il mockup della schermata visibile dopo che l'utente ha cliccato su uno dei quartieri presenti nella mappa.
 
     \begin{itemize}
-        \item \textbf{RF4: Accesso dati zona selezionata} \begin{itemize}
+        \item \textbf{RF3: Accesso dati zona selezionata} \begin{itemize}
             \item Ogni zona della città è selezionabile cliccando su di essa utilizzando la mappa. ogni volta che una zona viene selezionata, questa viene ingrandita e mostrata al centro della mappa con le relative informazioni generali  presentate al fianco della mappa. Nel mockup l'interfaccia vengono mostrati solamente i dati generali, visibili dagli utenti non loggati. Ma agli utenti analisti sarà consentito anche osservare i dati più approfonditi raggruppati per tipologia.
         \end{itemize} 
-        \item \textbf{RF15: Visualizzazione Analisi Storico} \begin{itemize}
+        \item \textbf{RF14: Visualizzazione Analisi Storico} \begin{itemize}
             \item Si noti che è presente un grafico che mostra l'\textbf{andamento nel tempo} del grado di soddisfazione del quartiere selezionato.
             \item Nonostante il grafico e l'analisi nel tempo, sia un requisito specifico per utenti analisti, si è deciso di includere suddetto requisito in quanto questo è un esempio di come l'interfaccia può risultare lato analista.
         \end{itemize}
@@ -98,17 +98,17 @@
     La figura 4.4 mostra il mockup della schermata visibile ai sondaggisti e agli amministratori, in cui è possibile caricare i dati sui sondaggi effettuati.\newline
     Il presente layout sarà la base le visualizzazioni lato amministratore per la gestione dei dati e utenti.
     \begin{itemize}
-        \item \textbf{RF8: Visualizzazione dati sondaggisti} \begin{itemize}
+        \item \textbf{RF7: Visualizzazione dati sondaggisti} \begin{itemize}
             \item La seguente pagina permetterà ai sondaggisti di visualizzare i dati caricati da loro stessi, inoltre è presente per ogni sondaggio lo stato di approvazione da parte degli amministratori.
         \end{itemize}
-        \item \textbf{RF9: Accesso come sondaggista} \begin{itemize}
+        \item \textbf{RF8: Accesso come sondaggista} \begin{itemize}
             \item Gli utenti: sondaggisti, dopo aver effettuato l'accesso verranno reindirizzati alla presente interfaccia la quale sarà inoltre disponibile solamente a tale tipologia di utente
         \end{itemize}
-        \item \textbf{RF10: Creazione nuovi sondaggi} \begin{itemize}
+        \item \textbf{RF9: Creazione nuovi sondaggi} \begin{itemize}
             \item La presente interfaccia permette agli utenti di tipo sondaggista di caricare un file contenente un sondaggio effettuato in precedenza. Inoltre permette di creare un nuovo sondaggio, inserendo i dati generali.
             \item La seguente pagina fungerà da accesso per la modifica e/o eliminazione di dati caricati da sondaggisti non ancora approvati.
         \end{itemize}
-        \item \textbf{RF16-17-18-20: Approvazione e disapprovazione sondaggi, modifica dati statici, modifica utenti abilitati} \begin{itemize}
+        \item \textbf{RF15-16-17-19: Approvazione e disapprovazione sondaggi, modifica dati statici, modifica utenti abilitati} \begin{itemize}
             \item Sebbene la figura rappresenti l'interfaccia delle funzioni per gli utenti sondaggisti, un layout simile può essere usato per l'interfaccia degli utenti amministratori. Tabelle, come quella visibile nella figura, possono essere usate per mostrare i dati statici memorizzati nel sistema e i sondaggi inseriti dai sondaggisti per approvarli o rifiutarli. Un'altra interfaccia simile può permettere agli amministratori di visualizzare e modificare la lista degli utenti loggati e dei loro privilegi.
         \end{itemize} 
         \item \textbf{RNF6: Capacità di caricamento} \begin{itemize}
@@ -130,7 +130,7 @@
     La figura 4.5 mostra il mockup della schermata visibile ai sondaggisti durante una sessione di sondaggio. L'interfaccia mostra informazioni sul sondaggio attuale.
 
     \begin{itemize}
-        \item \textbf{RF11: Svolgimento sondaggi} \begin{itemize}
+        \item \textbf{RF10: Svolgimento sondaggi} \begin{itemize}
             \item L'interfaccia permette ai sondaggisti di aggiungere nuovi voti al sondaggio attuale, selezionando circoscrizione di appartenenza e età.
             \item Da questa interfaccia è anche possibile: visualizzare i dati raccolti fino a quel momento, chiudere la sessione di sondaggio e inviare i dati per la revisione, sospendere la sessione per continuare in un secondo momento oppure eliminare tutti i dati raccolti fino a quel momento.
             \item Infine sempre dalla seguente interfaccia è possibile vedere un elenco dei voti raccolti fino a quel momento, con la possibilità di eliminare i voti singolarmente.

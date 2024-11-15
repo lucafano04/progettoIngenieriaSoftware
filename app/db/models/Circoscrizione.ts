@@ -1,13 +1,12 @@
 import {Schema, model} from 'mongoose';
 import schemas from '../schemas';
-import circoscrizioneSchema from './Circoscrizione';
-import { QuartiereDB } from '../../types';
+import { CircoscrizioneDB } from '../../../types';
 
-const quartiereSchema = new Schema<QuartiereDB>({
+const circoscrizioneSchema = new Schema<CircoscrizioneDB>({
     _id : { type : Schema.Types.ObjectId, required : true },
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },
-    circoscrizione : {type : Schema.Types.ObjectId, ref : 'Circoscrizione', required : true},
+    // soddisfazioneMedia : { type : Number, required : true }, // Questo campo deve essere calcolato tramite i voti dei sondaggi
     popolazione : { type : Number, required : true },
     superficie : { type : Number, required : true },
     serviziTotali : { type : Number, required : true },
@@ -17,6 +16,6 @@ const quartiereSchema = new Schema<QuartiereDB>({
     sicurezza : { type : schemas.sicurezza, required : true }
 });
 
-const Quartiere = model('Quartiere', quartiereSchema);
+const Circoscrizione = model('Circoscrizione', circoscrizioneSchema);
 
-export default Quartiere;
+export default Circoscrizione;

@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import db from '../db';
-import { CircoscrizioneBase } from '../types';
+import { CircoscrizioneBase } from '../../types';
 
 /**
  * Funzione che restituisce un array di oggetti di tipo CircoscrizioneBase contenente i dati delle circoscrizioni con la relativa soddisfazione media

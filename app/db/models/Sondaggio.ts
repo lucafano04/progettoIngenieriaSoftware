@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
 import user from './User';
-import { SondaggioDB } from '../../types';
+import { SondaggioDB } from '../../../types';
 
 const sondaggioSchema = new Schema<SondaggioDB>({
     _id : { type : Schema.Types.ObjectId, required : true },

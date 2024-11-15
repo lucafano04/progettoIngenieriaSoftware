@@ -1,5 +1,0 @@
-{
-    "watch": "**/*",
-    "ext": "ts, json",
-    "exec": "ts-node -r dotenv/config ./src/index.ts"
-}

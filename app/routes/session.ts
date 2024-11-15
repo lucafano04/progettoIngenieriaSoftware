@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import { User } from '../db/models';
-import { Errors } from '../types';
+import { Errors } from '../../types';
 import { token } from '../utils';
 import { revoke } from '../utils/token';
 import { SignOptions } from 'jsonwebtoken';

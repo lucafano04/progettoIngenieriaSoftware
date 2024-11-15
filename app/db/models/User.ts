@@ -1,5 +1,5 @@
 import {Schema, model} from 'mongoose';
-import { UserDB } from '../../types';
+import { UserDB } from '../../../types';
 
 const userSchema = new Schema<UserDB>({
     _id : { type : Schema.Types.ObjectId, required : true },

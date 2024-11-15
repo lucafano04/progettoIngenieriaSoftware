@@ -1,5 +1,5 @@
 import {Schema, model} from 'mongoose';
-import { VotoDB } from '../../types';
+import { VotoDB } from '../../../types';
 
 const votoSchema = new Schema<VotoDB>({
     _id : { type : Schema.Types.ObjectId, required : true },

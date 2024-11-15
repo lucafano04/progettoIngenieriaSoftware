@@ -1,5 +1,5 @@
 import { Schema, Types } from 'mongoose';
-import { CircoscrizioneBase, ServiziGenerali, Sicurezza } from '../types';
+import { CircoscrizioneBase, ServiziGenerali, Sicurezza } from '../../types';
 
 
 // Definizione degli schemi senza modello

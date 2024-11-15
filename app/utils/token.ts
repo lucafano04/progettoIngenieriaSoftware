@@ -1,7 +1,7 @@
 // File per il controllo del token JWT
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { Errors } from '../types';
+import { Errors } from '../../types';
 
 const revokeList = new Set<string>();
 

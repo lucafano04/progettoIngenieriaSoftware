@@ -1,6 +1,6 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
-import { CircoscrizioneBase, CircoscrizioneDB, Errors, Quartiere, QuartiereBase, QuartiereDB } from '../types';
+import { Circoscrizione, CircoscrizioneBase, CircoscrizioneDB, Errors, Quartiere, QuartiereBase, QuartiereDB } from '../types';
 import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 import { serviziGenerali, sicurezza } from '../db/schemas';
@@ -10,70 +10,87 @@ const router = express.Router(); // Create a new router
 
 // rotta per ottenere un array delle circoscrizioni di Trento, in base ai parametri vengono restituiti dati base o dati completi
 router.get('/', async (req,res)=>{
-    //ottengo il parametro deepdata che indica se dovrò restituire i dati base o completi delle circoscrizioni
-    const { deepdata } = req.query;
+    //ottengo il parametro deepData che indica se dovrò restituire i dati base o completi delle circoscrizioni
+    const { deepData } = req.query;
 
     //le circoscrizioni che restituirò, potrebbero essere di tipo Circoscrizione oppure CircoscrizioneBase
     let circoscrizioni: Circoscrizione[] | CircoscrizioneBase[];
 
-    //ottengo la lista di circoscrizionibase
-    const circoscrizionibase = await getCircoscrizioniWithSoddisfazioneMedia();
+    try{
+        //ottengo la lista di circoscrizioniBase
+        const circoscrizioniBase = await getCircoscrizioniWithSoddisfazioneMedia();
 
-    if(deepdata){
-        //devo restituire i dati completi delle circoscrizioni, quindi devo recuperare i dati completi dal database
-        const circoscrizionidb = await db.models.Circoscrizione.find();
+        if(deepData){
+            //devo restituire i dati completi delle circoscrizioni, quindi devo recuperare i dati completi dal database
+            const circoscrizioniDB = await db.models.Circoscrizione.find();
 
-        //mappo ogni circoscrizione base alla corrispondente circoscrizione completa usando i dati ottenuti dalla query
-        circoscrizioni= await Promise.all(circoscrizionibase.map( async (cirbase)=>{
-            //trovo la circoscrizioneDB corrispondente (dove il self di quella base è uguale al _id di quella DB)
-            const cirdb=circoscrizionidb.find(async (cir)=>(
-                 new Types.ObjectId(cirbase.self.split('/').pop()).equals(cir._id)
-            ));
+            //mappo ogni circoscrizione base alla corrispondente circoscrizione completa usando i dati ottenuti dalla query
+            circoscrizioni= await Promise.all(circoscrizioniBase.map( async (cirBase)=>{
+                //trovo la circoscrizioneDB corrispondente (dove il self di quella base è uguale al _id di quella DB)
+                const cirDB=circoscrizioniDB.find(async (cir)=>(
+                    new Types.ObjectId(cirBase.self.split('/').pop()).equals(cir._id)
+                ));
+                if(!cirDB){
+                    const errore: Errors = {
+                        code: 500,
+                        message: "Errore nel server",
+                        details: `Circoscrizione ${cirBase.self} non trovata nel database`,
+                    };
+                    throw new Error(JSON.stringify(errore));
+                }
 
-            //combino i dati dalla circoscrizionebase e la ciscoscrizioneDB per creare la circoscrizione completa
-            const circompleta : Circoscrizione = {
-                self: cirbase.self,
-                nome: cirbase.nome,
-                coordinate: cirbase.coordinate,
-                soddisfazionemedia: cirbase.soddisfazioneMedia,
-                servizi: cirdb.servizi,
-                sicurezza: cirdb.sicurezza,
-                popolazione: cirdb.popolazione,
-                superficie: cirdb.superficie,
-                serviziTotali: cirdb.serviziTotali,
-                interventiPolizia: cirdb.interventiPolizia,
-                etaMedia: cirdb.etaMedia,
-            };
+                //combino i dati dalla circoscrizioneBase e la circoscrizioneDB per creare la circoscrizione completa
+                const cirCompleta : Circoscrizione = {
+                    self: cirBase.self,
+                    nome: cirBase.nome,
+                    coordinate: cirBase.coordinate,
+                    soddisfazioneMedia: cirBase.soddisfazioneMedia,
+                    servizi: cirDB.servizi,
+                    sicurezza: cirDB.sicurezza,
+                    popolazione: cirDB.popolazione,
+                    superficie: cirDB.superficie,
+                    serviziTotali: cirDB.serviziTotali,
+                    interventiPolizia: cirDB.interventiPolizia,
+                    etaMedia: cirDB.etaMedia,
+                };
 
-            return circompleta;
-        }));
-    }else{
-        //devo restituire solo i dati base, mi basta mandare l'array circoscrizionibase che ho già
-        circoscrizioni=circoscrizionibase;
+                return cirCompleta;
+            }));
+        }else{
+            //devo restituire solo i dati base, mi basta mandare l'array circoscrizioniBase che ho già
+            circoscrizioni=circoscrizioniBase;
+        }
+
+
+        res.status(200).json(circoscrizioni);
+    }catch(err){
+        console.error(err);
+        if(err instanceof Error){
+            res.status(500).json(JSON.parse(err.message));
+        }else{
+            res.status(500).json({code: 500, message: "Errore nel server", details: err});
+        }
     }
-
-
-    res.status(200).json(circoscrizioni);
 });
 
 
 
-// rotta per ottenere i dati di una circoscriozione specifica
+// rotta per ottenere i dati di una circoscrizione specifica
 router.get('/:id',async (req,res) =>{
     //potrei fare tutto questo usando la funzione getCircoscrizioneWithSoddisfazioneMedia() ma quella mi restituisce dati di tipo CircoscrizioneBase e a me servono Circoscrizione, dunque sarei costretto a fare una seconda query per le circoscrizioni, quindi faccio tutte le query necessarie direttamente qui
 
 
 
-    const {idcircoscrizione} = req.query;
+    const { id } = req.params;
 
     
-    const circoscrizioneDB = await db.models.Circoscrizione.findById(idcircoscrizione);
+    const circoscrizioneDB = await db.models.Circoscrizione.findById(id);
     
     if(!circoscrizioneDB){
         const errore: Errors = {
             code: 404,
             message: "Circoscrizione non trovata",
-            details: `Circoscrizione con id ${idcircoscrizione} non trovata`,
+            details: `Circoscrizione con id ${id} non trovata`,
         };
         res.status(404).json(errore);
         return;
@@ -102,6 +119,7 @@ router.get('/:id',async (req,res) =>{
             etaMedia:circoscrizioneDB.etaMedia,
             servizi: circoscrizioneDB.servizi,
             sicurezza: circoscrizioneDB.sicurezza,
+            superficie: circoscrizioneDB.superficie,
         };
 
         //rispondo alla richiesta mandando la circoscrizione
@@ -115,3 +133,5 @@ router.get('/:id',async (req,res) =>{
         }
     }
 });
+
+export default router; // Export the router

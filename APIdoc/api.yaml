@@ -348,7 +348,7 @@ paths:
         description: "Identificatore univoco del quartiere."
         required: true
         schema:
-          type: integer
+          type: string
     get: 
       summary: "Ottieni informazioni di un quartiere"
       responses: 
@@ -405,7 +405,7 @@ paths:
         description: "Identificatore univoco della circoscrizione."
         required: true
         schema:
-          type: integer
+          type: string
     get: 
       summary: "Ottieni informazioni di una circoscrizione"
       responses: 
@@ -579,7 +579,6 @@ paths:
                 "$ref": "#/components/schemas/Error"
       tags:
         - Sondaggi
-        - Amministratore
         - Sondaggista
     post: 
       summary: "Crea un nuovo sondaggio"
@@ -629,17 +628,10 @@ paths:
         description: "Identificatore univoco del sondaggio."
         required: true
         schema:
-          type: integer
+          type: string
     get: 
       summary: "Ottieni informazioni di un sondaggio"
       description: "Restituisce le informazioni di un sondaggio, solo per utenti con ruolo 'sondaggista' o 'amministratore'."
-      parameters:
-        - name: id
-          in: path
-          description: "Identificatore univoco del sondaggio."
-          required: true
-          schema:
-            type: integer
       security:
         - BearerAuth: []
       responses:
@@ -669,7 +661,6 @@ paths:
                 "$ref": "#/components/schemas/Error"
       tags:
         - Sondaggi
-        - Amministratore
         - Sondaggista
     patch: 
       summary: "Modifica un sondaggio"
@@ -724,54 +715,6 @@ paths:
       tags:
         - Sondaggi
         - Sondaggista
-    put:
-      summary: "Approva o rifiuta un sondaggio"
-      description: "Approva o rifiuta un sondaggio. Solo per utenti con ruolo 'amministratore'."
-      security:
-        - BearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                statoApprovazione:
-                  type: string
-                  enum:
-                    - "approvato"
-                    - "rifiutato"
-                  description: "Stato di approvazione del sondaggio."
-      responses:
-        204:
-          description: "Sondaggio approvato o rifiutato con successo."
-        400:
-          description: "Dati del sondaggio non validi."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        401:
-          description: "Utente non autenticato."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        403:
-          description: "Utente loggato ma non ha i permessi per approvare o rifiutare il sondaggio."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        404:
-          description: "Sondaggio non trovato."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-      tags:
-        - Sondaggi
-        - Amministratore
     delete:
       summary: "Elimina un sondaggio"
       description: "Elimina un sondaggio. Solo l'utente che ha creato il sondaggio può eliminarlo o un amministratore, se il sondaggio è in attesa. Se il sondaggio è approvato o rifiutato, solo l'amministratore può eliminarlo."
@@ -801,7 +744,6 @@ paths:
       tags:
         - Sondaggi
         - Sondaggista
-        - Amministratore
   '/voti' :
     description: "Risorsa per la gestione dei voti di un sondaggio."
     parameters:

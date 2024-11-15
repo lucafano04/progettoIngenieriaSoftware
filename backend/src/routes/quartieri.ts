@@ -92,7 +92,7 @@ router.get('/', async (req, res) => {
             
         }
         // Restituisco i quartieri sia che questi siano completi o base
-        res.json(quartieri);
+        res.status(200).json(quartieri);
     }catch(err: any){
         console.error(err);
         if(err instanceof Error){
@@ -145,7 +145,7 @@ router.get('/:id', async (req, res) => {
             superficie: quartiereDB.superficie,
         };
         // Restituisco il quartiere
-        res.json(quartiere);
+        res.status(200).json(quartiere);
     }catch(err: any){
         console.error(err);
         if(err instanceof Error){

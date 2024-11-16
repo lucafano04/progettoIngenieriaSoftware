@@ -1,8 +1,7 @@
 import express, {Express} from 'express' // Import the express library
 import { circoscrizioni, generalInfo, quartieri, session } from './routes';
+import { BASE_URL } from './variables';
 // To access the database connection, use db.mongoose for the mongoose object and db.schemas for a object containing the schemas
-
-const BASE_URL = process.env.BASE_API || '/api/v1'; // Define the base URL for the API
 
 const app: Express = express(); // Create an express app
 

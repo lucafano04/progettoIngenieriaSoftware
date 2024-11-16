@@ -4,6 +4,7 @@ import { Circoscrizioni, Errors, Quartieri } from '../../types';
 import { getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 import { Dati } from '../../types';
+import { BASE_URL } from '../variables';
 
 const router = express.Router(); //creo un nuovo router
 
@@ -54,6 +55,7 @@ router.get('/', async (req,res)=>{
         
         //creo un oggetto contenente i quattro dati da mandare in risposta
         const datiGeneraliCitta={
+            self: `${BASE_URL}/generalInfo`,
             popolazione: popolazioneTotale,
             superficie: superficieTotale,
             etaMedia: etaMediaTotale,

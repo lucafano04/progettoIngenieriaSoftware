@@ -5,6 +5,7 @@ import { Errors } from '../../types';
 import { token } from '../utils';
 import { revoke } from '../utils/token';
 import { SignOptions } from 'jsonwebtoken';
+import { AVATAR_BASE, AVATAR_QUERY, JWT_SECRET, RANDOM_SECRET } from '../variables';
 
 const router = Router();
 
@@ -40,7 +41,7 @@ router.post('', async (req, res) => {
         nome: user.nome,
         cognome: user.cognome,
         ruolo: user.ruolo,
-        imageUrl: (process.env.AVATAR_BASE || 'https://gravatar.com/avatar/') + user.imageUrl + '?' + process.env.AVATAR_QUERY
+        imageUrl: AVATAR_BASE + user.imageUrl + '?' + AVATAR_QUERY
     };
     if(!process.env.JWT_SECRET){
         const response: Errors = {
@@ -52,17 +53,7 @@ router.post('', async (req, res) => {
         console.error('[ERROR] JWT secret not set');
         process.exit(1);
     }
-    const secret = process.env.JWT_SECRET + process.env.RANDOM_SECRET;
-    if(!secret){
-        const response: Errors = {
-            code: 500,
-            message: 'Internal Server Error',
-            details: 'JWT secret not set'
-        }
-        res.status(500).json(response);
-        console.error('[ERROR] JWT secret not set');
-        process.exit(1);
-    }
+    const secret = JWT_SECRET + RANDOM_SECRET;
     const options: SignOptions = {
         expiresIn: '6h',
     }

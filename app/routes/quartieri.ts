@@ -3,6 +3,7 @@ import db from '../db'; // Import the database connection from the db file
 import { Circoscrizioni, Errors, Quartieri } from '../../types';
 import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
+import { BASE_URL } from '../variables';
 
 const router = express.Router(); // Create a new router
 
@@ -44,7 +45,7 @@ router.get('/', async (req, res) => {
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
                 const quartiereRet: Quartieri.Quartiere = {
-                    self: `/api/v1/quartieri/${quartiere._id}`,
+                    self: `${BASE_URL}/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
                     coordinate: quartiere.coordinate,
                     circoscrizione: cirBase,
@@ -80,7 +81,7 @@ router.get('/', async (req, res) => {
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
                 const quartiereRet: Quartieri.Minimal = {
-                    self: `/api/v1/quartieri/${quartiere._id}`,
+                    self: `${BASE_URL}/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
                     coordinate: quartiere.coordinate,
                     circoscrizione: cirBase,

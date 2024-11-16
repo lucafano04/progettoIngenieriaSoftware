@@ -3,6 +3,7 @@ import db from '../db'; // Import the database connection from the db file
 import { Circoscrizioni, Errors } from '../../types';
 import { getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
+import { BASE_URL } from '../variables';
 
 const router = express.Router(); // Create a new router
 
@@ -93,7 +94,7 @@ router.get('/:id',async (req,res) =>{
         const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
         // uso i dati che ho raccolto per creare la risposta di tipo Circoscrizione
         const circoscrizione: Circoscrizioni.Circoscrizione = {
-            self: `/api/v1/circoscrizioni/${circoscrizioneDB._id}`,
+            self: `${BASE_URL}/circoscrizioni/${circoscrizioneDB._id}`,
             nome: circoscrizioneDB.nome,
             coordinate: circoscrizioneDB.coordinate,
             soddisfazioneMedia: mediaVoti,

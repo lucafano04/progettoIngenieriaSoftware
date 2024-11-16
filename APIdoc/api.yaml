@@ -437,6 +437,9 @@ paths:
               schema: 
                 type: "object"
                 properties: 
+                  self:
+                    type: "string"
+                    description: "Url della risorsa."
                   popolazione :
                     type: integer
                     description: "Numero di abitanti della città di Trento."

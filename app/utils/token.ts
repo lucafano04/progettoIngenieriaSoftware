@@ -2,6 +2,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { Errors } from '../../types';
+import { JWT_SECRET, RANDOM_SECRET } from '../variables';
 
 const revokeList = new Set<string>();
 
@@ -31,27 +32,7 @@ function checker(req: Request, res: Response, next: NextFunction) {
         res.status(401).json(response);
         return;
     }
-    if(!process.env.JWT_SECRET || !process.env.RANDOM_SECRET){
-        const response: Errors = {
-            code: 500,
-            message: 'Internal Server Error',
-            details: 'JWT secret not set'
-        }
-        res.status(500).json(response);
-        console.error('[ERROR] JWT secret not set');
-        process.exit(1);
-    }
-    const secret = process.env.JWT_SECRET + process.env.RANDOM_SECRET;
-    if(!secret){
-        const response: Errors = {
-            code: 500,
-            message: 'Internal Server Error',
-            details: 'JWT secret not set'
-        }
-        res.status(500).json(response);
-        console.error('[ERROR] JWT secret not set');
-        process.exit(1);
-    }
+    const secret = JWT_SECRET + RANDOM_SECRET;
     // Check if the token is valid
     jwt.verify(parts[1], secret, (err, decoded) => {
         if(err){
@@ -82,12 +63,33 @@ function revoke(token: string){
     revokeList.add(token);
 }
 
+function checkTokens(){
+    // Esegui la funzione ogni ora
+    setInterval(()=>{
+        const now = new Date();
+        console.log('[INFO] Checking tokens @', now);
+        // Per ogni token nella lista
+        revokeList.forEach((token)=>{
+            // Verifica il token
+            jwt.verify(token, JWT_SECRET + RANDOM_SECRET, (err, decoded) => {
+                // Se il token è scaduto e/o non è valido
+                if(err){
+                    // Rimuovi il token dalla lista
+                    revokeList.delete(token);
+                }
+            });
+        });
+    }, 1000*60*60); // 1 ora
+}
+
 export default {
     checker,
-    revoke
+    revoke,
+    checkTokens
 }
 
 export {
     checker,
-    revoke
+    revoke,
+    checkTokens
 }

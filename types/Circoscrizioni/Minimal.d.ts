@@ -1,10 +1,8 @@
-import {Types} from "mongoose";
-
-type CircoscrizioneBase = {
+type Minimal = {
     self: string,
     nome: String,
     coordinate: [[number]],
     soddisfazioneMedia: number,
 }
 
-export default CircoscrizioneBase;
+export default Minimal;

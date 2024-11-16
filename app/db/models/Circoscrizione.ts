@@ -1,8 +1,8 @@
 import {Schema, model} from 'mongoose';
 import schemas from '../schemas';
-import { CircoscrizioneDB } from '../../../types';
+import { Circoscrizioni } from '../../../types';
 
-const circoscrizioneSchema = new Schema<CircoscrizioneDB>({
+const circoscrizioneSchema = new Schema<Circoscrizioni.DB>({
     _id : { type : Schema.Types.ObjectId, required : true },
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },

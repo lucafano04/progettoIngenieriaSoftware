@@ -1,5 +1,5 @@
 import express, {Express} from 'express' // Import the express library
-import { circoscrizioni, quartieri, session } from './routes';
+import { circoscrizioni, generalInfo, quartieri, session } from './routes';
 // To access the database connection, use db.mongoose for the mongoose object and db.schemas for a object containing the schemas
 
 const BASE_URL = process.env.BASE_API || '/api/v1'; // Define the base URL for the API
@@ -32,6 +32,9 @@ app.use(BASE_URL + '/quartieri', quartieri);
 
 // Imposto il router per le sessioni
 app.use(BASE_URL + '/session', session);
+
+// Imposto il router per le informazioni generali
+app.use(BASE_URL + '/generalInfo', generalInfo);
 
 
 export default app; // Export the app object

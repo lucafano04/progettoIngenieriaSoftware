@@ -1,10 +1,10 @@
 import {Types} from "mongoose";
-import VotoBase from "./VotiBase";
+import Minimal from "./Minimal";
 
-type VotoDB = VotoBase & {
+type DB = Minimal & {
     _id: Types.ObjectId,
     sondaggio: Types.ObjectId,
     quartiere: Types.ObjectId
 };
 
-export default VotoDB;
+export default DB;

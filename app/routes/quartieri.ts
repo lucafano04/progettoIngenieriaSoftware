@@ -1,6 +1,6 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
-import { CircoscrizioneBase, CircoscrizioneDB, Errors, Quartiere, QuartiereBase, QuartiereDB } from '../../types';
+import { Circoscrizioni, Errors, Quartieri } from '../../types';
 import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 
@@ -19,15 +19,15 @@ router.get('/', async (req, res) => {
     try{
         // Oggetto da restituire che può essere di due tipi: Quartiere[] o QuartiereBase[] a seconda del valore di deepData
         // Questo oggetto non conterrà mai tipi misti di Quartiere e QuartiereBase (o tutti Quartiere o tutti QuartiereBase)
-        let quartieri: Quartiere[] | QuartiereBase[];
-        const circoscrizioniBase: CircoscrizioneBase[] = await getCircoscrizioniWithSoddisfazioneMedia();
+        let quartieri: Quartieri.Quartiere[] | Quartieri.Minimal[];
+        const circoscrizioniBase: Circoscrizioni.Minimal[] = await getCircoscrizioniWithSoddisfazioneMedia();
         // Se deepData è true, restituisco tutti i dati altrimenti solo i dati base (come definito nell'API doc)
         // Se deepData è assente/`undefined`/`null` lo tratto come `false`
         if(deepData){
             // Caso deepData = true quindi voglio tutti i dati del quartiere non solo quelli base
             quartieri = await Promise.all(quartieriDB.map(async (quartiere) => {
                 // Cerco la circoscrizione associata al quartiere
-                const cirBase : CircoscrizioneBase | undefined = circoscrizioniBase.find(
+                const cirBase : Circoscrizioni.Minimal | undefined = circoscrizioniBase.find(
                     (cir) => 
                         new Types.ObjectId(cir.self.split('/').pop()).equals(quartiere.circoscrizione) // creo un oggetto ObjectId con l'id della circoscrizione estratto dalla stringa self e controllo se è uguale all'id della circoscrizione del quartiere 
                 );
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
                 // Calcolo la media dei voti del quartiere
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
-                const quartiereRet: Quartiere = {
+                const quartiereRet: Quartieri.Quartiere = {
                     self: `/api/v1/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
                     coordinate: quartiere.coordinate,
@@ -63,7 +63,7 @@ router.get('/', async (req, res) => {
             // Caso deepData = false quindi voglio solo i dati base del quartiere
             quartieri = await Promise.all(quartieriDB.map(async (quartiere) => {
                 // Cerco la circoscrizione associata al quartiere
-                const cirBase : CircoscrizioneBase | undefined = circoscrizioniBase.find(
+                const cirBase : Circoscrizioni.Minimal | undefined = circoscrizioniBase.find(
                     (cir) => 
                         new Types.ObjectId(cir.self.split('/').pop()).equals(quartiere.circoscrizione) // creo un oggetto ObjectId con l'id della circoscrizione estratto dalla stringa self e controllo se è uguale all'id della circoscrizione del quartiere 
                 );
@@ -79,7 +79,7 @@ router.get('/', async (req, res) => {
                 // Ottengo i sondaggi approvati
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
-                const quartiereRet: QuartiereBase = {
+                const quartiereRet: Quartieri.Minimal = {
                     self: `/api/v1/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
                     coordinate: quartiere.coordinate,
@@ -125,7 +125,7 @@ router.get('/:id', async (req, res) => {
         // Calcolo la media dei voti del quartiere
         const mediaVoti = await getMediaVoti(quartiereDB);
         // Creo l'oggetto da restituire
-        const quartiere: Quartiere = {
+        const quartiere: Quartieri.Quartiere = {
             self: `/api/v1/quartieri/${quartiereDB._id}`,
             nome: quartiereDB.nome,
             coordinate: quartiereDB.coordinate,
@@ -160,10 +160,10 @@ export default router; // Export the router
 
 /**
  * Funzione che calcola la media dei voti di un quartiere
- * @param {QuartiereDB} quartiere oggetto quartiere del quale calcolare la media dei voti
+ * @param {Quartieri.DB} quartiere oggetto quartiere del quale calcolare la media dei voti
  * @returns la media dei voti del quartiere (1-5) o 0 se non ci sono voti
  */
-async function getMediaVoti(quartiere: QuartiereDB): Promise<number> {
+async function getMediaVoti(quartiere: Quartieri.DB): Promise<number> {
     const sondaggi = await db.models.Sondaggio.find({ statoApprovazione: 'Approvato' }).select('_id');
     // Ottengo i voti dei sondaggi approvati relativi al quartiere
     const voti = await db.models.Voti.find({ sondaggio: { $in: sondaggi }, quartiere: quartiere._id }).select('voto');

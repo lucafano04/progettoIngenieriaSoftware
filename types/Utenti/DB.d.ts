@@ -1,9 +1,9 @@
-import UserBase from "./UserBase";
+import Base from "./Base";
 import { Types } from "mongoose";
 
-type UserDB = UserBase & {
+type DB = Base & {
     _id: Types.ObjectId,
     password: string,
 };
 
-export default UserDB;
+export default DB;

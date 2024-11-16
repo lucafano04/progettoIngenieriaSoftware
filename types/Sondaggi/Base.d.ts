@@ -1,6 +1,6 @@
-type SondaggioBaseBase = {
+type Base = {
     isAperto: Boolean,
     statoApprovazione: "Approvato" | "In attesa" | "Rifiutato"
 };
 
-export default SondaggioBaseBase;
+export default Base;

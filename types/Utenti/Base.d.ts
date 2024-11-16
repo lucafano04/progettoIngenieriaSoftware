@@ -1,4 +1,4 @@
-type UserBase = {
+type Base = {
     email: String,
     nome: String,
     cognome: String,
@@ -6,4 +6,4 @@ type UserBase = {
     imageUrl: String
 };
 
-export default UserBase;
+export default Base;

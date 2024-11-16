@@ -1,6 +1,6 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
-import { Circoscrizione, CircoscrizioneBase, Errors } from '../../types';
+import { Circoscrizioni, Errors } from '../../types';
 import { getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 
@@ -12,7 +12,7 @@ router.get('/', async (req,res)=>{
     //ottengo il parametro deepData che indica se dovrò restituire i dati base o completi delle circoscrizioni
     const { deepData } = req.query;
     //le circoscrizioni che restituirò, potrebbero essere di tipo Circoscrizione oppure CircoscrizioneBase
-    let circoscrizioni: Circoscrizione[] | CircoscrizioneBase[];
+    let circoscrizioni: Circoscrizioni.Circoscrizione[] | Circoscrizioni.Minimal[];
     try{
         //ottengo la lista di circoscrizioniBase
         const circoscrizioniBase = await getCircoscrizioniWithSoddisfazioneMedia();
@@ -34,7 +34,7 @@ router.get('/', async (req,res)=>{
                     throw new Error(JSON.stringify(errore));
                 }
                 //combino i dati dalla circoscrizioneBase e la circoscrizioneDB per creare la circoscrizione completa
-                const cirCompleta : Circoscrizione = {
+                const cirCompleta : Circoscrizioni.Circoscrizione = {
                     self: cirBase.self,
                     nome: cirBase.nome,
                     coordinate: cirBase.coordinate,
@@ -92,7 +92,7 @@ router.get('/:id',async (req,res) =>{
         // Calcolo la media dei voti della circoscrizione
         const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
         // uso i dati che ho raccolto per creare la risposta di tipo Circoscrizione
-        const circoscrizione: Circoscrizione = {
+        const circoscrizione: Circoscrizioni.Circoscrizione = {
             self: `/api/v1/circoscrizioni/${circoscrizioneDB._id}`,
             nome: circoscrizioneDB.nome,
             coordinate: circoscrizioneDB.coordinate,

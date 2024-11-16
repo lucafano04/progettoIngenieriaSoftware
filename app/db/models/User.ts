@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
-import { UserDB } from '../../../types';
+import { Utenti } from '../../../types';
 
-const userSchema = new Schema<UserDB>({
+const userSchema = new Schema<Utenti.DB>({
     _id : { type : Schema.Types.ObjectId, required : true },
     email : { type : String, required : true },
     nome : { type : String, required : true },

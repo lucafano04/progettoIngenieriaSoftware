@@ -1,9 +1,8 @@
 import {Schema, model} from 'mongoose';
 import schemas from '../schemas';
-import circoscrizioneSchema from './Circoscrizione';
-import { QuartiereDB } from '../../../types';
+import { Quartieri } from '../../../types';
 
-const quartiereSchema = new Schema<QuartiereDB>({
+const quartiereSchema = new Schema<Quartieri.DB>({
     _id : { type : Schema.Types.ObjectId, required : true },
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },

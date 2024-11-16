@@ -1,8 +1,8 @@
 import {Schema, model} from 'mongoose';
 import user from './User';
-import { SondaggioDB } from '../../../types';
+import { Sondaggi } from '../../../types';
 
-const sondaggioSchema = new Schema<SondaggioDB>({
+const sondaggioSchema = new Schema<Sondaggi.DB>({
     _id : { type : Schema.Types.ObjectId, required : true },
     titolo : { type : String, required : true },
     dataInizio : { type : Date, required : true },

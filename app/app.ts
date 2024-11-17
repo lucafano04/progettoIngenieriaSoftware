@@ -1,6 +1,7 @@
 import express, {Express} from 'express' // Import the express library
-import { circoscrizioni, generalInfo, quartieri, session } from './routes';
+import { circoscrizioni, generalInfo, quartieri, session, voti} from './routes';
 import { BASE_URL } from './variables';
+import { checker } from './utils/token';
 // To access the database connection, use db.mongoose for the mongoose object and db.schemas for a object containing the schemas
 
 const app: Express = express(); // Create an express app
@@ -34,6 +35,15 @@ app.use(BASE_URL + '/session', session);
 
 // Imposto il router per le informazioni generali
 app.use(BASE_URL + '/generalInfo', generalInfo);
+
+
+
+// Imposto l'uso del middleware checker per controllare i token di autenticazione, tutte le route dopo questa riga eseguiranno il controllo del token per assicurarsi che gli utenti siano autenticati
+app.use(checker);
+
+// Imposto il router per i voti
+app.use(BASE_URL + '/voti', voti);
+
 
 
 export default app; // Export the app object

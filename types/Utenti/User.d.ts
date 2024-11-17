@@ -1,6 +1,6 @@
-import UserBase from "./UserBase";
+import Base from "./Base";
 
-type User = UserBase & {
+type User = Base & {
     self: string,
 };
 

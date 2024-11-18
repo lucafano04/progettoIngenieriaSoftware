@@ -1,9 +1,6 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
-import { Circoscrizioni, Errors, Quartieri, Sondaggi, Voti } from '../../types';
-import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
-import {Types} from "mongoose";
-import { Sondaggio } from '../db/models';
+import {Errors, Voti } from '../../types';
 import { BASE_URL } from '../variables';
 
 const router = express.Router(); // Create a new router
@@ -12,7 +9,7 @@ const router = express.Router(); // Create a new router
 //rotta per ottenere un array di tutti i voti appartenenti a un dato sondaggio
 router.get('/', async (req,res)=>{
     // ricavo le informazioni sull'autenticazione dell'utente dal token decodificato dalla funzione checker in token.ts
-    const {utente} = req.body.user;
+    const utente = req.body.user;
 
     // mi assicuro che i dati dell'autenticazione effettivamente ci siano e altrimenti rispondo con un errore
     // tecnicamente questo non dovrebbe mai succedere perché il caso in cui la richiesta non ha token dovrebbe essere già controllato dal checker middleware
@@ -116,10 +113,10 @@ router.get('/', async (req,res)=>{
 //rotta per aggiungere a un determinato sondaggio un voto inviato dall'utente
 router.post('/',async(req,res)=>{
     // ricavo le informazioni sull'autenticazione dell'utente dal token decodificato dalla funzione checker in token.ts
-    const {utente} = req.body.user;
+    const {user} = req.body;
 
     // mi assicuro che i dati dell'autenticazione effettivamente ci siano e altrimenti rispondo con un errore
-    if(!utente){
+    if(!user){
         const response: Errors ={
             code: 401,
             message: "Unauthorized",
@@ -159,30 +156,28 @@ router.post('/',async(req,res)=>{
     }
 
     //l'utente ha il diritto ad aggiungere voti al sondaggio se e solo se è il sondaggista che ha creato quel sondaggio
-    const puoVisualizzare = (utente.ruolo == 'Sondaggista' && utente._id == sondaggioDB.sondaggista);
+    const puoAggiungere = (user.ruolo == 'Sondaggista' && sondaggioDB.sondaggista.equals(user._id));
 
     //se l'utente non è autorizzato a vedere i dati del sondaggio richiesto rispondo con un errore
-    if(!puoVisualizzare){
+    if(!puoAggiungere){
         const response: Errors ={
             code: 403,
             message: "Forbidden",
-            details: `L'utente ${utente._id} non ha il permesso di accedere al sondaggio ${idSondaggio}`,
+            details: `L'utente ${user._id} non ha il permesso di accedere al sondaggio ${idSondaggio}`,
         }
         res.status(403).json(response)
         return;
     }
 
     //ricavo i dati su eta del cittadino che ha votato, voto del cittadino, e quartiere a cui si riverisce il voto dal body della richeista
-    const eta=req.body.eta;
-    const voto=req.body.voto;
-    const quartiere=req.body.quartiere;
+    const {eta,voto,quartiere} = req.body;
 
     //mi assicuro che tutti i dati siano presenti e rispondo con un errore in caso contrario
     if(!eta || !voto || !quartiere){
         const response: Errors ={
             code: 400,
             message: "Bad Request",
-            details: `Dati eta, voto, quartiere non tutti presenti`,
+            details: `Campi età, voto, quartiere mancanti`,
         }
         res.status(400).json(response)
         return;
@@ -221,17 +216,19 @@ router.post('/',async(req,res)=>{
     }
 
     //creo un nuovo oggetto dello schema db.models.Voti e lo salvo nel database
-    const now=new Date();
-    let votoDB= new db.models.Voti({
+    let nuovoVoto= new db.models.Voti({
         eta: eta,
         voto: voto,
         quartiere: quartiere,
-        dataOra: now,
+        dataOra: new Date(),
         sondaggio: idSondaggio,
     });
-    votoDB= await votoDB.save();
+    nuovoVoto= await nuovoVoto.save();
 
-    res.location(`${BASE_URL}/voti/${votoDB._id}`).status(201).send();
+
+
+    //mando la risposta con l'url della nuova risorsa creata
+    res.status(201).location(`${BASE_URL}/voti/${nuovoVoto._id}`);
 });
 
 
@@ -241,7 +238,7 @@ router.post('/',async(req,res)=>{
 //rotta per eliminare un voto specifico, un voto può essere eliminato solo dall'utente sondaggista che ha creato il sondaggio al quale il voto appartiene
 router.delete(':idVoto',async (req,res)=>{
     // ricavo le informazioni sull'autenticazione dell'utente dal token decodificato dalla funzione checker in token.ts
-    const {utente} = req.body.user;
+    const utente = req.body.user;
 
     // mi assicuro che i dati dell'autenticazione effettivamente ci siano e altrimenti rispondo con un errore
     if(!utente){

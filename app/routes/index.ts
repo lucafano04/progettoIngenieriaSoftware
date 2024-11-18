@@ -3,6 +3,7 @@ import session from './session'; // Import the Session router
 import circoscrizioni from './circoscrizioni'; // Import the Circoscrizioni router
 import generalInfo from './generalInfo'; //Import the GeneralInfo router
 import voti from './voti';//Import the Voti router 
+import sondaggi from './sondaggi'; //Import the Sondaggi router
 
 
 const routers = {
@@ -10,6 +11,7 @@ const routers = {
     generalInfo,
     quartieri,
     session,
+    sondaggi,
     voti,
 }
 
@@ -19,5 +21,6 @@ export {
     generalInfo,
     quartieri,
     session,
+    sondaggi,
     voti
 }

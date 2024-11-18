@@ -1,10 +1,9 @@
 import voti from "../Voti"
-import mediaVoti from "../MediaVoti"
 import Minimal from "./Minimal";
 
 type Sondaggio = Minimal & {
-    voti: [voti],
-    mediaVoti: [mediaVoti]
+    voti: voti.Voto[],
+    mediaVoti: voti.Media[]
 };
 
 export default Sondaggio;

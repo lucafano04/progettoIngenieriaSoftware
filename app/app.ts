@@ -1,5 +1,5 @@
 import express, {Express} from 'express' // Import the express library
-import { circoscrizioni, generalInfo, quartieri, session, voti} from './routes';
+import { circoscrizioni, generalInfo, quartieri, session, sondaggi, voti} from './routes';
 import { BASE_URL } from './variables';
 import { checker } from './utils/token';
 // To access the database connection, use db.mongoose for the mongoose object and db.schemas for a object containing the schemas
@@ -44,6 +44,8 @@ app.use(checker);
 // Imposto il router per i voti
 app.use(BASE_URL + '/voti', voti);
 
+// Imposto il router per i sondaggi
+app.use(BASE_URL + '/sondaggi', sondaggi);
 
 
 export default app; // Export the app object

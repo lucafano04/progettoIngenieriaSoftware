@@ -10,7 +10,7 @@ app.use(express.json());                                                // Use t
 app.use(express.urlencoded({extended: true}));                          // Use the express.urlencoded middleware to parse URL-encoded bodies
 
 /* Debug logs Privacy goes brrrr */
-/* app.get(BASE_URL+'/*', (req, res, next) => {
+/* app.all('*', (req, res, next) => {
     console.log(`Request @ ${new Date().toISOString()}`);
     console.log(`URI: ${req.url} method: ${req.method}`);
     console.log(`IP: ${req.ip}`);
@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: true}));                          // Use t
     if(req.body) console.log(`Body: ${JSON.stringify(req.body)}`);
     
     next();
-}); */
+});*/
 
 app.route(BASE_URL + '/').get((req, res) => {                                      // Define a route for the root path
     res.send('Hello World!');                                                      // Send "Hello World!" as a response

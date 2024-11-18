@@ -1,7 +1,8 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
-import {Errors, Voti } from '../../types';
-import { BASE_URL } from '../variables';
+import {Errors, Utenti, Voti } from '../../types';
+import { BASE_URL, RESPONSE_MESSAGES } from '../variables';
+import { Types } from 'mongoose';
 
 const router = express.Router(); // Create a new router
 
@@ -9,31 +10,27 @@ const router = express.Router(); // Create a new router
 //rotta per ottenere un array di tutti i voti appartenenti a un dato sondaggio
 router.get('/', async (req,res)=>{
     // ricavo le informazioni sull'autenticazione dell'utente dal token decodificato dalla funzione checker in token.ts
-    const utente = req.body.user;
-
-    // mi assicuro che i dati dell'autenticazione effettivamente ci siano e altrimenti rispondo con un errore
-    // tecnicamente questo non dovrebbe mai succedere perché il caso in cui la richiesta non ha token dovrebbe essere già controllato dal checker middleware
-    if(!utente){ 
-        const response: Errors ={
-            code: 401,
-            message: "Unauthorized",
-            details: "Utente non autenticato",
-        }
-        res.status(401).json(response)
-        return;
-    }
+    const user: Utenti.User = req.body.user;
 
     // ricavo l'id del sondaggio di cui voglio trovare i voti
-    const {idSondaggio} = req.query;
-
+    const idSondaggio = req.query.idSondaggio as string;
     // controllo che sie effettivamente stato passato un sondaggio come parametro, altrimenti rispondo con un errore
     if(!idSondaggio){
         const response: Errors ={
-            code: 404,
-            message: "Not Found",
+            code: 400,
+            message: RESPONSE_MESSAGES[400],
             details: "Parametro idSondaggio mancante",
         }
-        res.status(404).json(response)
+        res.status(400).json(response)
+        return;
+    }
+    if(!Types.ObjectId.isValid(idSondaggio)){
+        const response: Errors = {
+            code: 400,
+            message: RESPONSE_MESSAGES[400],
+            details: `Il parametro idSondaggio ${idSondaggio} non è un ObjectID valido`,
+        }
+        res.status(400).json(response);
         return;
     }
 
@@ -45,7 +42,7 @@ router.get('/', async (req,res)=>{
     if(!sondaggioDB){
         const response: Errors ={
             code: 404,
-            message: "Not Found",
+            message: RESPONSE_MESSAGES[404],
             details: `Sondaggio ${idSondaggio} non trovato`,
         }
         res.status(404).json(response)
@@ -53,14 +50,14 @@ router.get('/', async (req,res)=>{
     }
 
     //l'utente ha il diritto a visualizzare i voti presenti nel sondaggio se e solo se è un amministratore o il sondaggista che ha creato quel sondaggio
-    const puoVisualizzare = (utente.ruolo == 'Amministratore') || (utente.ruolo == 'Sondaggista' && utente._id == sondaggioDB.sondaggista);
+    const puoVisualizzare = (user.ruolo == 'Amministratore') || (user.ruolo == 'Sondaggista' && sondaggioDB.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())));
 
     //se l'utente non è autorizzato a vedere i dati del sondaggio richiesto rispondo con un errore
     if(!puoVisualizzare){
         const response: Errors ={
             code: 403,
-            message: "Forbidden",
-            details: `L'utente ${utente._id} non ha il permesso di accedere al sondaggio ${idSondaggio}`,
+            message: RESPONSE_MESSAGES[403],
+            details: `L'utente ${user.self.split("/").pop()} non ha il permesso di accedere al sondaggio ${idSondaggio}`,
         }
         res.status(403).json(response)
         return;
@@ -71,29 +68,15 @@ router.get('/', async (req,res)=>{
 
         //trovo nel database l'array di voti che appartengono al sondaggio che sto cercando
         const votiDB= await db.models.Voti.find({sondaggio: idSondaggio});
-
-        //trovo nel database l'array di tutti i quartieri perché mi servono i nomi
-        const quartieriDB=await db.models.Quartiere.find();
-
+        
         //combino i dati di votiDB con i nomi dei quartieri per creare una risposta di tipo Voti.Voto
-        const voti=await Promise.all(votiDB.map(async (votoDB)=>{
-            const quartiere=quartieriDB.find(async (quart)=>
-                votoDB.quartiere.equals(quart._id)
-            );
-
-            if (!quartiere) //do un errore in caso non riesca a trovare il quartiere indicato dal voto, tecnicamente questo non dovrebbe mai succedere
-                throw new Error(JSON.stringify({ code: 500, message: "Internal Server Error", details: `Quartiere ${votoDB.quartiere} non trovato nel database`}));
-
-            const votoRisultato: Voti.Voto={
+        const voti=votiDB.map((votoDB)=>({
                 self: `/api/v1/voti/${votoDB._id}`,
-                quartiere: `/api/v1/quartieri/${quartiere._id}`,
+                quartiere: `/api/v1/quartieri/${votoDB.quartiere}`,
                 eta: votoDB.eta,
                 voto: votoDB.voto,
                 dataOra: votoDB.dataOra
-            }
-
-            return votoRisultato;
-        }));
+            }));
 
         //invio in risposta i voti
         res.status(200).json(voti);
@@ -236,7 +219,7 @@ router.post('/',async(req,res)=>{
 
 
 //rotta per eliminare un voto specifico, un voto può essere eliminato solo dall'utente sondaggista che ha creato il sondaggio al quale il voto appartiene
-router.delete(':idVoto',async (req,res)=>{
+router.delete('/:idVoto',async (req,res)=>{
     // ricavo le informazioni sull'autenticazione dell'utente dal token decodificato dalla funzione checker in token.ts
     const utente = req.body.user;
 

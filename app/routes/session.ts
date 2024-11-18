@@ -1,15 +1,15 @@
 import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import { User } from '../db/models';
-import { Errors } from '../../types';
+import { Errors, Utenti } from '../../types';
 import { token } from '../utils';
 import { revoke } from '../utils/token';
 import { SignOptions } from 'jsonwebtoken';
-import { AVATAR_BASE, AVATAR_QUERY, JWT_SECRET, RANDOM_SECRET } from '../variables';
+import { AVATAR_BASE, AVATAR_QUERY, BASE_URL, JWT_SECRET, RANDOM_SECRET, RESPONSE_MESSAGES } from '../variables';
 
 const router = Router();
 
-router.post('', async (req, res) => {
+router.post('/', async (req, res) => {
     // Get email and password from request body
     const { email, password } = req.body;
 
@@ -28,31 +28,21 @@ router.post('', async (req, res) => {
     if(user.password !== password){
         const response: Errors = {
             code: 401,
-            message: 'Unauthorized',
+            message: RESPONSE_MESSAGES[401],
             details: 'Password is incorrect'
         }
         res.status(401).json(response);
         return;
     }
     // Set the payload for the JWT
-    const payload = {
-        _id: user._id,
+    const payload: Utenti.User = {
+        self: `${BASE_URL}/users/${user._id}`,
         email: user.email,
         nome: user.nome,
         cognome: user.cognome,
         ruolo: user.ruolo,
         imageUrl: AVATAR_BASE + user.imageUrl + '?' + AVATAR_QUERY
     };
-    if(!process.env.JWT_SECRET){
-        const response: Errors = {
-            code: 500,
-            message: 'Internal Server Error',
-            details: 'JWT secret not set'
-        }
-        res.status(500).json(response);
-        console.error('[ERROR] JWT secret not set');
-        process.exit(1);
-    }
     const secret = JWT_SECRET + RANDOM_SECRET;
     const options: SignOptions = {
         expiresIn: '6h',
@@ -73,7 +63,7 @@ router.post('', async (req, res) => {
         });
     });
 });
-router.get('', token.checker, async (req, res) => {
+router.get('/', token.checker, async (req, res) => {
     const { user } = req.body;
     res.status(200).json({
         email: user.email,
@@ -84,13 +74,13 @@ router.get('', token.checker, async (req, res) => {
     });
 });
 
-router.delete('', token.checker, async (req, res) => {
+router.delete('/', token.checker, async (req, res) => {
     // Invalida il token JWT
     const { authorization } = req.headers;
     if(!authorization){
         const response: Errors = {
             code: 401,
-            message: 'Unauthorized',
+            message: RESPONSE_MESSAGES[401],
             details: 'No authorization header'
         }
         res.status(401).json(response);

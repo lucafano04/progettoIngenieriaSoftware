@@ -4,7 +4,7 @@ import { Circoscrizioni, Errors, Quartieri } from '../../types';
 import { getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 import { Dati } from '../../types';
-import { BASE_URL } from '../variables';
+import { BASE_URL, RESPONSE_MESSAGES } from '../variables';
 
 const router = express.Router(); //creo un nuovo router
 
@@ -28,7 +28,7 @@ router.get('/', async (req,res)=>{
             if(!cirDB){//controllo se non ho trovato la circoscrizione nel database. tecnicamente questo non dovrebbe mai succedere
                 const errore: Errors = {
                     code: 500,
-                    message: "Errore nel server",
+                    message: RESPONSE_MESSAGES[500],
                     details: `Circoscrizione ${cirBase.self} non trovata nel database`,
                 };
                 throw new Error(JSON.stringify(errore));

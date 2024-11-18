@@ -3,7 +3,7 @@ import db from '../db'; // Import the database connection from the db file
 import { Circoscrizioni, Errors, Quartieri } from '../../types';
 import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
-import { BASE_URL } from '../variables';
+import { BASE_URL, RESPONSE_MESSAGES } from '../variables';
 
 const router = express.Router(); // Create a new router
 
@@ -108,13 +108,22 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     // Ottengo l'id del quartiere dalla richiesta
     const { id } = req.params;
+    if(!Types.ObjectId.isValid(id)){
+        const response: Errors = {
+            code: 400,
+            message: RESPONSE_MESSAGES[400],
+            details: `L'id ${id} non è valido`,
+        };
+        res.status(400).json(response);
+        return;
+    }
     // Cerco il quartiere nel DB
     const quartiereDB = await db.models.Quartiere.findById(id);
     // Se il quartiere non esiste, restituisco un errore
     if(!quartiereDB){
         const response: Errors = {
             code: 404,
-            message: "Quartiere non trovato",
+            message: RESPONSE_MESSAGES[404],
             details: `Quartiere con id ${id} non trovato`,
         };
         res.status(404).json(response);
@@ -127,7 +136,7 @@ router.get('/:id', async (req, res) => {
         const mediaVoti = await getMediaVoti(quartiereDB);
         // Creo l'oggetto da restituire
         const quartiere: Quartieri.Quartiere = {
-            self: `/api/v1/quartieri/${quartiereDB._id}`,
+            self: `${BASE_URL}/quartieri/${quartiereDB._id}`,
             nome: quartiereDB.nome,
             coordinate: quartiereDB.coordinate,
             circoscrizione: {

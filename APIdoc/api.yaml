@@ -148,6 +148,9 @@ components:
       description: Oggetto contenente le informazioni di un utente.
       type: object
       properties:
+        self:
+          type: string
+          description: Url della risorsa.
         email:
           type: string
           description: Email dell'utente.

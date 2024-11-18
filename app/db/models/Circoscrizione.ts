@@ -3,7 +3,6 @@ import schemas from '../schemas';
 import { Circoscrizioni } from '../../../types';
 
 const circoscrizioneSchema = new Schema<Circoscrizioni.DB>({
-    _id : { type : Schema.Types.ObjectId, required : true },
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },
     // soddisfazioneMedia : { type : Number, required : true }, // Questo campo deve essere calcolato tramite i voti dei sondaggi

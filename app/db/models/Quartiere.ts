@@ -3,7 +3,6 @@ import schemas from '../schemas';
 import { Quartieri } from '../../../types';
 
 const quartiereSchema = new Schema<Quartieri.DB>({
-    _id : { type : Schema.Types.ObjectId, required : true },
     nome : { type : String, required : true },
     coordinate : { type : [[Number]], required : true },
     circoscrizione : {type : Schema.Types.ObjectId, ref : 'Circoscrizione', required : true},

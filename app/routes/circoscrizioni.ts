@@ -3,7 +3,7 @@ import db from '../db'; // Import the database connection from the db file
 import { Circoscrizioni, Errors } from '../../types';
 import { getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
-import { BASE_URL } from '../variables';
+import { BASE_URL, RESPONSE_MESSAGES } from '../variables';
 
 const router = express.Router(); // Create a new router
 
@@ -71,13 +71,22 @@ router.get('/', async (req,res)=>{
 router.get('/:id',async (req,res) =>{
     //potrei fare tutto questo usando la funzione getCircoscrizioneWithSoddisfazioneMedia() ma quella mi restituisce dati di tipo CircoscrizioneBase e a me servono Circoscrizione, dunque sarei costretto a fare una seconda query per le circoscrizioni, quindi faccio tutte le query necessarie direttamente qui
     const { id } = req.params;
+    if(!Types.ObjectId.isValid(id)){
+        const errore: Errors = {
+            code: 400,
+            message: RESPONSE_MESSAGES[400],
+            details: `L'id ${id} non è valido`,
+        };
+        res.status(400).json(errore);
+        return;
+    }
     
     const circoscrizioneDB = await db.models.Circoscrizione.findById(id);
     
     if(!circoscrizioneDB){
         const errore: Errors = {
             code: 404,
-            message: "Circoscrizione non trovata",
+            message: RESPONSE_MESSAGES[404],
             details: `Circoscrizione con id ${id} non trovata`,
         };
         res.status(404).json(errore);

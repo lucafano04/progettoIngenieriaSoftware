@@ -3,7 +3,6 @@ import user from './User';
 import { Sondaggi } from '../../../types';
 
 const sondaggioSchema = new Schema<Sondaggi.DB>({
-    _id : { type : Schema.Types.ObjectId, required : true },
     titolo : { type : String, required : true },
     dataInizio : { type : Date, required : true },
     isAperto : {type : Boolean, required : true },

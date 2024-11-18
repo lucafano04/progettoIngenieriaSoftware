@@ -1,4 +1,3 @@
-import BasicOkResponse from "./BasicOkResponse";
 import Circoscrizioni from "./Circoscrizioni";
 import Dati from "./Dati";
 import Errors from "./Errors";
@@ -8,7 +7,6 @@ import Utenti from "./Utenti";
 import Voti from "./Voti";
 
 export {
-    BasicOkResponse,
     Circoscrizioni,
     Dati,
     Errors,

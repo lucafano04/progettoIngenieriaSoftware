@@ -191,18 +191,6 @@ components:
           type: string
           description: Dettagli dell'errore.
           nullable: true
-    BasicOkResponse:
-      description: Oggetto contenente le informazioni di una risposta di successo.
-      type: object
-      properties:
-        ok:
-          type: boolean
-          description: Indica se la richiesta è stata eseguita con successo.
-          default: true
-        message:
-          type: string
-          description: Messaggio di successo della richiesta.
-          nullable: true
     AddSondaggio:
       description: Oggetto contenente le informazioni per aggiungere un sondaggio.
       type: object

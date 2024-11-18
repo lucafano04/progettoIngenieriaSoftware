@@ -14,49 +14,90 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
     \end{itemize}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Utente_Anonimo.drawio.png}
+        \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Anonimo.drawio.png}
         \caption{Use Case Diagram dell'Utente anonimo}
     \end{figure}
 
-    \subsection{Use Case {RF1}: Mappa}
+    \subsection{Use Case \b{RF1}: Mappa}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà interagire con la mappa
         \subsubsection{Descrizione}
             \begin{itemize}
                 \item L'utente anonimo posiziona il cursone all'interno dello spazio dedicato alla mappa
                 \item L'utente utilizza la rotella del mouse oppure uno dei pulsanti prensenti in uno degli angoli della mappa
-                \item Il sistema ingrandisce o diminuisce la dimensione dello zoom
+                \item Il sistema ingrandisce o diminuisce la dimensione dello zoom (Eccezione 1)
                 \item L'utente preme e trascina il cursore
-                \item Il sistema sposta il focus centrale all'interno della mappa
+                \item Il sistema sposta il focus centrale all'interno della mappa (Eccezione 2)
             \end{itemize}
-        \subsubsection{Estensioni}
-            Estensioni del requisito uno    % Da discutere il concetto dell'estensione per quanto riguarda l'RF2
-
-    \subsection{Use Case {RF2}: Multi lingua}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui l'utente anonimo cercasse di aumentare o diminuire lo zoom oltre ai limiti imposti dalla mappa, il sistema deve bloccare la nuova modifica allo zoom
+                \item Nel caso in cui l'utente anonimo cercasse di spostare il focus centrale oltre ai limiti della città, il sistema deve bloccare la nuova modifica allo spostamento del focus centrale
+            \end{enumerate}
+            
+    \subsection{Use Case \b{RF2}: Multi lingua}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà cambiare la lingua dei vari testi presenti nel programma
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item L'utente preme su di una delle bandiere presenti nella header
-                \item La pagina si ricarica con i testi nella lingua selezionata e mette in evidenza la bandiera con la lingua corrente
+                \item L'utente preme su una delle bandiere presenti nella header
+                \item Il sistema ricarica la pagina selezionata con i testi nella lingua scelta e mette in evidenza la bandiera con la lingua corrente
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
-                \item Nel caso in cui l'utente anonimo selezionasse la lingua già selezionata, il sistema non deve fare nulla 
+                \item Nel caso in cui l'utente anonimo selezionasse la lingua già selezionata, il sistema non deve fare nulla
             \end{enumerate}
 
-    \subsection{Use Case {RF3}: Accesso dati zona selezionata}
+    \subsection{Use Case \b{RF3}: Accesso dati zona selezionata}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà selezionare la zona di preferenza all'interno della mappa
         \subsubsection{Descrizione}
-        \begin{itemize}
-            \item L'utente anonimo preme una delle zone all'interno della visuale della mappa
-            \item Il sistema 
-            \item Il sistema seleziona la zona cliccata portando l'utente alla visualizzazione della zona selezionata
-        \end{itemize}
+            \begin{enumerate}
+                \item L'utente anonimo preme una delle zone all'interno della visuale della mappa
+                \item Il sistema sposta la posizione della mappa sullo schermo a sinistra e ne modifica eventualmente le dimensioni (Eccezione 2)
+                \item Il sistema posiziona il focus centrale della mappa al centro della zona selezionata e ne modifica lo zoom in modo da poter vedere completamente la zona selezionata
+                \item Il sistema evidenzia il colore e i bordi della zona selezionata
+                \item Il sistema presenta a destra della mappa i dati generici della zona selezionata
+            \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
-                \item Se l'utente clicca su di un quartiere già selezionato questo riporterà alla visualizzazione della Homepage (RF1)
+                \item Se la mappa è già in posizione sinistra sullo schermo non viene modificata nè la posizione nè le varie dimensioni di questa
             \end{enumerate}
         \subsubsection{Estensioni}
-            Estensioni del requisito uno    % Da discutere il concetto dell'estensione per quanto riguarda l'RF2
+            \begin{enumerate}
+                \item Nel caso in cui l'utente cliccasse su di un quartiere già selezionato questo riporterebbe alla visualizzazione della Homepage
+            \end{enumerate}
+
+    \subsection{Use Case \b{RF4}: Accesso dati specifici zona selezionata}
+        \subsubsection{Riassunto}
+            Questo Use Case descrive come l'utente potrà accedere ai dati specifici della zona di preferenza
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente anonimo preme uno dei dati presenti a schermo
+                \item Il sistema presenta a schermo, dove prima erano presenti i vari dati riguardanti la zona selezionata, una tabella con titolo il nome del dato del quale si vuole ricevere un maggior numero di informazioni e contenente tutti gli elementi appartenenti alla specifica del dato scelto (Eccezione 1)
+                \item Il sistema deve successivamente segnare sulla mappa la posizione dei vari elementi appartenenti alla specifica del dato scelto con un numero identificativo per identificarne la posizione
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui per una tipologia di dato non fossero presenti dati specifici il sistema non deve fare nulla
+            \end{enumerate}
+        \subsubsection{Estensioni}
+            \begin{enumerate}
+                \item Nel caso in cui l'utente cliccasse il pulante per chiudere la tabella il sistema tornerà alla visualizzazione dei dati della zona selezionata in precedenza
+            \end{enumerate}
+
+    \subsection{Use Case \b{RF5}: Login}
+        \subsection{Riassunto}
+            Questo Use Case descrive come l'utente potrà fare il login
+        \subsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente anonimo preme il pulsante di login presente nella header
+                \item Il sistema reindirizza l'utente al sistema SSO
+                \item Il sistema SSO verifica l'identità dell'utente in questione e la ritorna al sistema (Eccezione 1)
+                \item Il sistema controlla che per l'identità certificata dal sistema SSO esista un'account collegato (Eccezione 1)
+                \item Il sistema assegna all'utente anonimo il ruolo posseduto dall'account al quale si è collegato
+            \end{enumerate}
+        \subsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui l'autenticazione fallisse o non vi fossero account collegati il sistema ritorna alla pagina dalla quale si ha provato a fare il login
+            \end{enumerate}

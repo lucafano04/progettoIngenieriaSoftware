@@ -11,6 +11,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \item \textbf{RF2}: Multi lingua
         \item \textbf{RF3}: Accesso dati zona selezionata
         \item \textbf{RF4}: Accesso dati specifici zona selezionata
+        \item \textbf{RF5}: Login
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -18,7 +19,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \caption{Use Case Diagram dell'Utente anonimo}
     \end{figure}
 
-    \subsection{Use Case \b{RF1}: Mappa}
+    \subsection{Use Case RF1: Mappa}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà interagire con la mappa
         \subsubsection{Descrizione}
@@ -35,7 +36,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente anonimo cercasse di spostare il focus centrale oltre ai limiti della città, il sistema deve bloccare la nuova modifica allo spostamento del focus centrale
             \end{enumerate}
             
-    \subsection{Use Case \b{RF2}: Multi lingua}
+    \subsection{Use Case RF2: Multi lingua}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà cambiare la lingua dei vari testi presenti nel programma
         \subsubsection{Descrizione}
@@ -48,7 +49,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente anonimo selezionasse la lingua già selezionata, il sistema non deve fare nulla
             \end{enumerate}
 
-    \subsection{Use Case \b{RF3}: Accesso dati zona selezionata}
+    \subsection{Use Case RF3: Accesso dati zona selezionata}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà selezionare la zona di preferenza all'interno della mappa
         \subsubsection{Descrizione}
@@ -68,7 +69,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente cliccasse su di un quartiere già selezionato questo riporterebbe alla visualizzazione della Homepage
             \end{enumerate}
 
-    \subsection{Use Case \b{RF4}: Accesso dati specifici zona selezionata}
+    \subsection{Use Case RF4: Accesso dati specifici zona selezionata}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà accedere ai dati specifici della zona di preferenza
         \subsubsection{Descrizione}
@@ -86,7 +87,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente cliccasse il pulante per chiudere la tabella il sistema tornerà alla visualizzazione dei dati della zona selezionata in precedenza
             \end{enumerate}
 
-    \subsection{Use Case \b{RF5}: Login}
+    \subsection{Use Case RF5: Login}
         \subsection{Riassunto}
             Questo Use Case descrive come l'utente potrà fare il login
         \subsection{Descrizione}
@@ -101,3 +102,18 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \begin{enumerate}
                 \item Nel caso in cui l'autenticazione fallisse o non vi fossero account collegati il sistema ritorna alla pagina dalla quale si ha provato a fare il login
             \end{enumerate}
+
+\section{\underline{Utente Sondaggista}}
+    Di seguito i requisiti associati all'Utente Sondaggista:
+    \begin{itemize}
+        \item \textbf{RF6}: Cambio icona login
+        \item \textbf{RF7}: Visualizzazione dati sondaggisti
+        \item \textbf{RF8}: Accesso come sondaggista
+        \item \textbf{RF9}: Creazione nuovi sondaggi
+        \item \textbf{RF10}: Svolgimento sondaggi
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Sondaggista.drawio.png}
+        \caption{Use Case Diagram dell'Utente sonaggista}
+    \end{figure}

@@ -121,9 +121,9 @@ components:
       description: Oggetto contenente le informazioni di base di un quartiere.
       type: object
       properties:
-        _id:
+        self:
           type: string
-          description: "Identificatore univoco del quartiere."
+          description: "Url della risorsa."
         nome:
           type: "string"
           description: "Nome del quartiere."
@@ -211,9 +211,9 @@ components:
       allOf:
         - $ref: "#/components/schemas/AddSondaggio"
       properties:
-        _id:
+        self:
           type: string
-          description: Identificatore univoco del sondaggio.
+          description: URL della risorsa.
         isAperto:
           type: boolean
           description: Indica se il sondaggio è aperto (in corso) o chiuso.
@@ -249,13 +249,13 @@ components:
           minimum: 1
           maximum: 5
         quartiere:
-          type: integer
+          type: string
           description: Identificatore univoco del quartiere.
     Voto:
       description: Oggetto contenente le informazioni di un voto.
       type: object
       properties:
-        _id:
+        self:
           type: string
           description: Identificatore univoco del voto.
         dataOra:
@@ -275,8 +275,8 @@ components:
           minimum: 1
           maximum: 5
         quartiere:
-          type: integer
-          description: Identificatore univoco del quartiere.
+          type: string
+          description: Identificatore univoco della risorsa del quartiere.
     Sondaggio:
       description: Oggetto contenente le informazioni di un sondaggio.
       allOf:
@@ -746,7 +746,7 @@ paths:
         description: "Identificatore univoco del sondaggio."
         required: true
         schema:
-          type: integer
+          type: string
     get: 
       summary: "Ottieni lista dei voti di un sondaggio"
       description: "Restituisce la lista dei voti assegnati al sondaggio."
@@ -836,7 +836,7 @@ paths:
         description: "Identificatore univoco del voto."
         required: true
         schema:
-          type: integer
+          type: string
     delete:
       summary: "Elimina un voto"
       description: "Elimina un voto. Solo l'utente che ha effettuato il voto può eliminarlo"

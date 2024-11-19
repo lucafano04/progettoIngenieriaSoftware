@@ -10,9 +10,10 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \item \textbf{RF1.1}: Visualizzazione Mappa e dati
         \item \textbf{RF1.2}: Interazione con la Mappa
         \item \textbf{RF2}: Multi lingua
-        \item \textbf{RF3}: Accesso dati zona selezionata
+        \item \textbf{RF3}: Selezione zona della città
         \item \textbf{RF4}: Accesso dati specifici zona selezionata
-        \item \textbf{RF5}: Login
+        \item \textbf{RF5.1}: Login
+        \item \textbf{RF5.2}: Cambio icona login
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -59,7 +60,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente anonimo selezionasse la lingua già selezionata, il sistema non deve fare nulla
             \end{enumerate}
 
-    \subsection{Use Case RF3: Accesso dati zona selezionata}
+    \subsection{Use Case RF3: Selezione zona della città}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà selezionare la zona di preferenza all'interno della mappa
         \subsubsection{Descrizione}
@@ -97,7 +98,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente cliccasse il pulante per chiudere la tabella il sistema tornerà alla visualizzazione dei dati della zona selezionata in precedenza
             \end{enumerate}
 
-    \subsection{Use Case RF5: Login}
+    \subsection{Use Case RF5.1: Login}
         \subsection{Riassunto}
             Questo Use Case descrive come l'utente potrà fare il login
         \subsection{Descrizione}
@@ -113,10 +114,18 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'autenticazione fallisse o non vi fossero account collegati il sistema ritorna alla pagina dalla quale si ha provato a fare il login
             \end{enumerate}
 
+    \subsection{Use Case RF5.2: Cambio icona login}
+        \subsection{Riassunto}
+            Questo Use Case descrive come cambia l'icona del login
+        \subsection{Descrizione}
+            \begin{enumerate}
+                \item Il sistema successivamente al login sostituisce l'icona del login con l'immagine profilo dell'account al quale si ha fatto l'accesso
+            \end{enumerate}
+
 \section{\underline{Utente Sondaggista}}
     Di seguito i requisiti associati all'Utente Sondaggista:
     \begin{itemize}
-        \item \textbf{RF6}: Cambio icona login
+        \item \textbf{RF6}: Logout
         \item \textbf{RF7}: Visualizzazione dati sondaggisti
         \item \textbf{RF8}: Accesso come sondaggista
         \item \textbf{RF9}: Creazione nuovi sondaggi
@@ -127,3 +136,17 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Sondaggista.drawio.png}
         \caption{Use Case Diagram dell'Utente sonaggista}
     \end{figure}
+    \subsection{Use Case RF6: Logout}
+        \subsubsection{Riassunto}
+            Questo Use Case descrive come l'utente può fare logout
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente sondaggista preme sull'icona contenente l'immagine profilo nella header
+                \item Il sistema apre un menù a tendina con la sezione 'Logout'
+                \item L'utente preme sulla sezione 'Logout'
+                \item Il sistema ricarica la pagina riportando l'utente alla 'visualizzazione mappa e dati', scollegandolo dall'account sondaggista al quale era collegato e riportando l'utente allo stato di Utente non loggato
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui fosse aperta il menù a tendina con la sezione logout e venisse premuto un qualsiasi altro punto sullo schermo il sistema deve chiudere il menù a tendina
+            \end{enumerate}

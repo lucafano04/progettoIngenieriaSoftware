@@ -1,5 +1,5 @@
-import { Schema, Types } from 'mongoose';
-import { Dati, Circoscrizioni } from '../../types';
+import { Schema } from 'mongoose';
+import { Dati } from '../../types';
 
 
 // Definizione degli schemi senza modello
@@ -7,6 +7,7 @@ const serviziGeneraliSchema = new Schema<Dati.ServiziGenerali>({
     areeVerdi : { type : Number, required : true },
     scuole : { type : Number, required : true },
     serviziRistorazione : { type : Number, required : true },
+    localiNotturni : { type : Number, required : true },
 });
 const sicurezzaSchema = new Schema<Dati.Sicurezza>({
     numeroInterventi : { type : Number, required : true },

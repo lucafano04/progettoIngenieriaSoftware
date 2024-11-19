@@ -11,7 +11,7 @@ const router = express.Router(); // Create a new router
 // Rotta per ottenere tutti i quartieri
 router.get('/', async (req, res) => {
     // Parametro deepData che indica se restituire tutti i dati del quartiere o solo quelli base
-    const { deepData } = req.query;
+    const deepData: boolean = req.query.deepData === 'true';
     // Ottengo tutti i quartieri dal DB
     let quartieriDB = await db.models.Quartiere.find();
     

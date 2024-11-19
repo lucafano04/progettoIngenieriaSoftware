@@ -11,7 +11,7 @@ const router = express.Router(); // Create a new router
 // rotta per ottenere un array delle circoscrizioni di Trento, in base ai parametri vengono restituiti dati base o dati completi
 router.get('/', async (req,res)=>{
     //ottengo il parametro deepData che indica se dovrò restituire i dati base o completi delle circoscrizioni
-    const { deepData } = req.query;
+    const deepData: boolean = req.query.deepData === 'true';
     //le circoscrizioni che restituirò, potrebbero essere di tipo Circoscrizione oppure CircoscrizioneBase
     let circoscrizioni: Circoscrizioni.Circoscrizione[] | Circoscrizioni.Minimal[];
     try{

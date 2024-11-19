@@ -37,45 +37,49 @@ router.get('/',async(req,res)=>{
         return;
     }
 
-
-    // prendo tutti i sondaggi dal database
-    let sondaggiDB = await db.models.Sondaggio.find();
-
-    //filtro sondaggiDB per selezionare solo i sondaggi che l'utente ha il permesso di vedere
-    sondaggiDB = sondaggiDB.filter(async (sondaggio) => {
-        return user.ruolo === 'Amministratore' || ( user.ruolo == 'Sondaggista' && sondaggio.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())));
-    })
-
-    //prendo il parametro deepData, che indica se dovrò restituire sondaggi completi o minimal
-    const {deepData} = req.query;
-
-
-    //la variabile che restituirò in risposta, potrebbe essere un array di sondaggi completi oppure di sondaggi minimal
-    let sondaggi: Sondaggi.Sondaggio[] | Sondaggi.Minimal[];
-
-    //per creare i tipi Sondaggio e Minimal mi servono anche le informazioni sul sondaggista, quindi prendo la lista di sondaggisti dal database e li mappo a tipi Utente.User
-    const utentiDB = await db.models.User.find({ruolo: 'Sondaggista'});
-    const utenti = utentiDB.map((udb)=> ({
-            self:`${BASE_URL}/utenti/${udb._id}`,
-            email: udb.email,
-            nome: udb.nome,
-            cognome: udb.cognome,
-            ruolo: udb.ruolo,
-            imageUrl: udb.imageUrl
-        }
-    ))
-
-
     try{
+        // prendo tutti i sondaggi dal database
+        let sondaggiDB = await db.models.Sondaggio.find();
+
+        //filtro sondaggiDB per selezionare solo i sondaggi che l'utente ha il permesso di vedere
+        sondaggiDB = sondaggiDB.filter(async (sondaggio) => {
+            return user.ruolo === 'Amministratore' || ( user.ruolo == 'Sondaggista' && sondaggio.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())));
+        })
+
+        //prendo il parametro deepData, che indica se dovrò restituire sondaggi completi o minimal
+        const deepData: boolean = req.query.deepData === 'true';
+
+        //la variabile che restituirò in risposta, potrebbe essere un array di sondaggi completi oppure di sondaggi minimal
+        let sondaggi: Sondaggi.Sondaggio[] | Sondaggi.Minimal[];
+
+        //per creare i tipi Sondaggio e Minimal mi servono anche le informazioni sul sondaggista, quindi prendo la lista di sondaggisti dal database e li mappo a tipi Utente.User
+        const utentiDB = await db.models.User.find({ruolo: 'Sondaggista'});
+        const utenti = utentiDB.map((udb)=> ({
+                self:`${BASE_URL}/utenti/${udb._id}`,
+                email: udb.email,
+                nome: udb.nome,
+                cognome: udb.cognome,
+                ruolo: udb.ruolo,
+                imageUrl: udb.imageUrl
+            }
+        ))
         //in base al valore di deepData, a sondaggi verrà assegnato un valore diverso 
-        if(!deepData){
+        if(deepData){
+            //se deepData è vero, devo restituire sondaggi completi, ovvero includendo tutte le proprietà di Minimal e anche l'array di voti e di mediaVoti
+            //prendo dal database l'array di voti
+            const votiDB = await db.models.Voti.find();
+            //mappo ogni sondaggioDB a un Sondaggi.Sondaggio 
+            sondaggi = sondaggiDB.map(
+                sondaggioDB=> getSondaggio(sondaggioDB,votiDB,utenti)
+            );
+        }else{
             //se deepData è falso, devo solo restituire un array di sondaggi minimal
             //questo si potrebbe fare facilmente usando la funzione getSondaggio() per ottenere un sondaggio completo e poi rimuovere campi per creare un sondaggio minimal, ma per usare quella funzione avrei bisogno di fare una query superflua al database e un sacco di calcolo extra inutile, quindi per risparmiare cre i sondaggi minimal manualmente 
 
             //mappo i sondaggiDB a sondaggi minimal
             sondaggi = sondaggiDB.map((sondaggioDB)=>{
                 //trovo in utenti il Sondaggista che ha creato il sondaggio
-                const creatore=utenti.find((u) => new Types.ObjectId(u.self.split('/').pop()).equals(sondaggioDB.sondaggista) );
+                const creatore=utenti.find((u) => new Types.ObjectId(u.self.split('/').pop()).equals(sondaggioDB.sondaggista));
 
                 if(!creatore){
                     const response: Errors = {
@@ -98,25 +102,15 @@ router.get('/',async(req,res)=>{
 
                 return sondaggioMinimal;
             });
-        }else{
-            //se deepData è vero, devo restituire sondaggi completi, ovvero includendo tutte le proprietà di Minimal e anche l'array di voti e di mediaVoti
-            //prendo dal database l'array di voti
-            const votiDB = await db.models.Voti.find();
-            //mappo ogni sondaggioDB a un Sondaggi.Sondaggio 
-            sondaggi = await Promise.all(sondaggiDB.map( async (sondaggioDB)=> getSondaggio(sondaggioDB,votiDB,utenti)));
         }
-
-
-
-        //mando la risposta con la lista dei sondaggi
+        //mando la risposta con la lista dei sondaggi completi o minimal
         res.status(200).json(sondaggi);
-
     }catch(err: any){
         console.error(err);
         if(err instanceof Error){
             res.status(500).json(JSON.parse(err.message));
         }else{
-            res.status(500).json({code: 500, message: "Errore nel server", details: err});
+            res.status(500).json({code: 500, message: RESPONSE_MESSAGES[500], details: err});
         }
     }
 });
@@ -126,7 +120,6 @@ router.get('/',async(req,res)=>{
 router.post('/',async(req,res)=>{
     // ricavo le informazioni sull'autenticazione dell'utente dal token decodificato dalla funzione checker in token.ts
     const user: Utenti.User = req.body.user;
-
     //mi assicuro che l'utente che sta facendo la richiesta sia un Amministratore o u sondaggista, altrimenti risponde con un errore
     if(user.ruolo !== 'Sondaggista'){
         const response: Errors ={
@@ -137,8 +130,6 @@ router.post('/',async(req,res)=>{
         res.status(403).json(response)
         return;
     }
-
-
     //prendo il titolo e la data di inizio del sondaggio, se questi non sono presenti nel corpo della richiesta rispondo con un errore
     const {titolo, dataInizio}= req.body;
     if(!titolo || !dataInizio){
@@ -169,8 +160,7 @@ router.post('/',async(req,res)=>{
         statoApprovazione: 'In attesa', //In attesa dovrebbe essere il valore di default??
         sondaggista: user.self.split('/').pop()
     });
-    nuovoSondaggio= await nuovoSondaggio.save();
-
+    nuovoSondaggio= await nuovoSondaggio.save(); // @Boss314 è davvero necessario fare nuovoSondaggio= ? non basta solo await nuovoSondaggio.save() ?
     //mando la risposta con l'url della nuova risorsa creata
     res.status(201).location(`${BASE_URL}/sondaggi/${nuovoSondaggio._id}`).send();
 });
@@ -218,7 +208,10 @@ router.get('/:id',async (req,res)=>{
 
 
     //mi assicuro che l'utente che sta facendo la richiesta sia un Amministratore o il sondaggista che ha creato il sondaggio, altrimenti rispondo con un errore
-    const puoVisualizzare = user.ruolo == 'Amministratore' || (user.ruolo == 'Sondaggista' && sondaggioDB._id.equals(user.self.split('/').pop()));
+    const puoVisualizzare = user.ruolo == 'Amministratore' || (
+        user.ruolo == 'Sondaggista' 
+        && sondaggioDB.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop()))
+    );
     if(!puoVisualizzare){
         const response: Errors ={
             code: 403,
@@ -244,19 +237,19 @@ router.get('/:id',async (req,res)=>{
 
 
     //prendo dal database l'array di voti
-    const votiDB=await db.models.Voti.find({sondaggio: sondaggioDB._id});
+    const votiDB = await db.models.Voti.find({sondaggio: sondaggioDB._id});
 
 
     // trasformo il sondaggioDB che ho preso dal database in un Sondaggi.Sondaggio da mandare in risposta
     try{
-        const sondaggio: Sondaggi.Sondaggio = await getSondaggio(sondaggioDB,votiDB,utenti);
+        const sondaggio: Sondaggi.Sondaggio = getSondaggio(sondaggioDB,votiDB,utenti);
         res.status(200).json(sondaggio);
     }catch(err: any){
         console.error(err);
         if(err instanceof Error){
             res.status(500).json(JSON.parse(err.message));
         }else{
-            res.status(500).json({code: 500, message: "Errore nel server", details: err});
+            res.status(500).json({code: 500, message: RESPONSE_MESSAGES[500], details: err});
         }
     }
 });
@@ -286,7 +279,7 @@ router.patch('/:id',async (req,res)=>{
         const response: Errors ={
             code: 400,
             message: RESPONSE_MESSAGES[400],
-            details: "Campi titolo, dataInizio, isAperto mancanti",
+            details: "Nessun campo da modificare specificato, inserire almeno uno tra titolo, dataInizio, isAperto",
         }
         res.status(400).json(response)
         return;
@@ -303,7 +296,10 @@ router.patch('/:id',async (req,res)=>{
     }
 
     //mi assicuro che l'utente che sta facendo la richiesta sia il sondaggista che ha creato il sondaggio, altrimenti rispondo con un errore
-    const puoModificare = (user.ruolo === 'Sondaggista' && sondaggioDB.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())) && sondaggioDB.isAperto);
+    const puoModificare = 
+        user.ruolo === 'Sondaggista' && 
+        sondaggioDB.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())) && sondaggioDB.isAperto;
+    
     if(!puoModificare){
         const response: Errors ={
             code: 403,
@@ -313,7 +309,6 @@ router.patch('/:id',async (req,res)=>{
         res.status(403).json(response)
         return;
     }
-
     // Imposto i nuovi valori del sondaggio solo se sono stati passati nel body della richiesta
     let modifiche: Partial<Sondaggi.DB> = {};
     if(titolo) modifiche.titolo = titolo;
@@ -387,7 +382,7 @@ router.delete('/:id',async (req,res)=>{
  * @param {Utenti.User[]} utenti array di utenti
  * @returns un oggetto contenente i dati completi di quel sondaggio, inclusi l'utente creatore del sondaggio, la lista di voti nel sondaggio, e la lista di medie per quartiere nel sondaggio
  */
-async function getSondaggio(sondaggioDB: Sondaggi.DB,votiDB: Voti.DB[],utenti: Utenti.User[]){
+function getSondaggio(sondaggioDB: Sondaggi.DB,votiDB: Voti.DB[],utenti: Utenti.User[]){
      //trovo in utenti il sondaggista che ha creato il sondaggio
     const creatore=utenti.find((u)=> new Types.ObjectId(u.self.split('/').pop()).equals(sondaggioDB.sondaggista) );
 
@@ -399,19 +394,32 @@ async function getSondaggio(sondaggioDB: Sondaggi.DB,votiDB: Voti.DB[],utenti: U
         };
         throw new Error(JSON.stringify(response));
     }
-    const votiSondaggio: Voti.DB[] = votiDB.filter((voto)=>voto.sondaggio.equals(sondaggioDB._id));
+    const votiSondaggio: Voti.DB[] = votiDB.filter(
+        (voto)=>voto.sondaggio.equals(sondaggioDB._id)
+    );
     //per ogni voto ne estraggo id del quartiere al quale si riferisce
     const idQuartieri = votiSondaggio.map((voto)=>voto.quartiere);
     //rimuovo i duplicati per ottenere una lista di id di ogni quartiere per il quale esiste almeno un voto nel sondaggio
-    const idQuartieriUnici = idQuartieri.filter((item, index) => idQuartieri.indexOf(item) === index);
+    const idQuartieriUnici: Types.ObjectId[] = [];
+    idQuartieri.forEach((idQuart)=>{
+        if(!idQuartieriUnici.find((idQu)=>idQu.equals(idQu))){
+            idQuartieriUnici.push(idQuart);
+        }
+    });
 
     //mappo ogni quartiere nel sondaggio a un oggetto di tipo Voti.Media
-    const medieVoti: Voti.Media[]=idQuartieriUnici.map((idQuart)=>{
+    const medieVoti: Voti.Media[] = idQuartieriUnici.map((idQuart)=>{
         //trovo i voti del sondaggio attuale che si riferiscono al quartiere attuale
-        const votiDelSondaggioDelQuartiere=votiSondaggio.filter(async (v)=>v.quartiere.equals(idQuart));
+        const votiDelSondaggioDelQuartiere = votiSondaggio.filter(
+            (v)=>v.quartiere.equals(idQuart)
+        );
 
         //trovo la media di tutti i voti del quartiere
-        const media=votiDelSondaggioDelQuartiere.length > 0 ? votiDelSondaggioDelQuartiere.reduce((acc, curr) => acc + curr.voto, 0) / votiDelSondaggioDelQuartiere.length : 0;
+        const media = votiDelSondaggioDelQuartiere.length > 0 ? 
+            votiDelSondaggioDelQuartiere.reduce(
+                (acc, curr) => acc + curr.voto, 0
+            ) / votiDelSondaggioDelQuartiere.length 
+            : 0;
 
         const mediaQuartiere: Voti.Media={
             media: media,

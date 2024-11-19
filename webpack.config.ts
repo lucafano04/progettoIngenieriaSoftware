@@ -1,8 +1,8 @@
-const nodeExternals = require("webpack-node-externals");
-const path = require("path");
+import nodeExternals from "webpack-node-externals";
+import path from "path"
 
-module.exports = {
-    entry: "./src/index.ts",
+export default {
+    entry: "index.ts",
     target: "node",
     externals: [nodeExternals()],
     mode: "production",
@@ -16,7 +16,7 @@ module.exports = {
         ]
     },
     resolve: {
-        modules: ["src"],
+        modules: ["app"],
         extensions: [".ts", ".js"]
     },
     output: {

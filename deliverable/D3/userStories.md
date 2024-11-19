@@ -1,7 +1,7 @@
 # Requisiti funzionali
 
 ### RF 1 Mappa
-Il sistema deve permettere a tutti gli utenti di visualizzare integralmente la mappa del comune di Trento divisa per quartieri non appena si apre la web-app. Ogni utente deve essere in grado di interagire con la mappa, in particolare deve essere possibile: ingrandire, rimpicciolire e spostarsi all'interno di essa tramite il mouse o i pulsanti a schermo.
+Il sistema deve permettere a tutti gli utenti di visualizzare integralmente i dati generici e la mappa del comune di Trento divisa per quartieri non appena si apre la web-app. Ogni utente deve essere in grado di interagire con la mappa, in particolare deve essere possibile: ingrandire, rimpicciolire e spostarsi all'interno di essa tramite il mouse o i pulsanti a schermo.
 - Come utente voglio visualizzare la mappa del comune di Trento divisa per quartieri, così da porter avere una migliore visione d'insieme della regione di spazio considerata
 - Come utente voglio poter ingrandire o rimpicciolire la mappa, così da poter avere una visuale migliore dell'area che voglio visualizzare
 - Come utente voglio poter spostare il focus della mappa, così da poter cambiare l'area che si sta visualizzando

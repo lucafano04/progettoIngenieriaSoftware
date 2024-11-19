@@ -3,6 +3,7 @@
         "DescrizionediProgetto",
         "loggati",
         "loggato",
+        "openapi",
         "pdfauthor",
         "pdfkeywords",
         "pdfsubject",
@@ -13,6 +14,7 @@
     "conventionalCommits.scopes": [
         "D1",
         "D2",
-        "D3"
+        "D3",
+        "backend"
     ]
 }

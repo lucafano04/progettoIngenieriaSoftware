@@ -15,5 +15,10 @@
         "experimentalDecorators": true
     },
     "include": ["**/*.ts"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "files": [],
+    "references": [
+      { "path": "./tsconfig.app.json" },
+      { "path": "./tsconfig.node.json" }
+    ]
 }

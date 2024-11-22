@@ -1,6 +1,7 @@
 import { Types } from 'mongoose';
 import db from '../db';
 import { Circoscrizioni } from '../../types';
+import { Circoscrizione } from '../../types/Circoscrizioni';
 
 /**
  * Funzione che restituisce un array di oggetti di tipo CircoscrizioneBase contenente i dati delle circoscrizioni con la relativa soddisfazione media
@@ -53,12 +54,57 @@ async function getCircoscrizioneWithSoddisfazioneMedia(id: Types.ObjectId): Prom
     return cirBase;
 }
 
+async function getCircoscrizioneCompletaFromMinimal(cirBase: Circoscrizioni.Minimal) : Promise<Circoscrizioni.Circoscrizione> {
+    const quartieriPerCir = await db.models.Quartiere.find({ circoscrizione: cirBase.self.split('/').pop() })
+    const areeVerdi = quartieriPerCir.reduce((acc, curr) => acc + curr.servizi.areeVerdi, 0);
+    const localiNotturni = quartieriPerCir.reduce((acc, curr) => acc + curr.servizi.localiNotturni, 0);
+    const scuole = quartieriPerCir.reduce((acc, curr) => acc + curr.servizi.scuole, 0);
+    const serviziRistorazione = quartieriPerCir.reduce((acc, curr) => acc + curr.servizi.serviziRistorazione, 0);
+
+    const incidenti = quartieriPerCir.reduce((acc, curr) => acc + curr.sicurezza.incidenti, 0);
+    const numeroInterventi = quartieriPerCir.reduce((acc, curr) => acc + curr.sicurezza.numeroInterventi, 0);
+    const tassoCriminalita = quartieriPerCir.length > 0 ? quartieriPerCir.reduce((acc, curr) => acc + curr.sicurezza.tassoCriminalita, 0) / quartieriPerCir.length : 0;
+
+    const popolazione = quartieriPerCir.reduce((acc, curr) => acc + curr.popolazione, 0);
+    const superficie = quartieriPerCir.reduce((acc, curr) => acc + curr.superficie, 0);
+    const serviziTotali = quartieriPerCir.reduce((acc, curr) => acc + curr.serviziTotali, 0);
+    const interventiPolizia = quartieriPerCir.reduce((acc, curr) => acc + curr.interventiPolizia, 0);
+
+    const etaMedia = quartieriPerCir.length > 0 ? quartieriPerCir.reduce((acc, curr) => acc + curr.etaMedia*(curr.popolazione/popolazione), 0) : 0;
+    //combino i dati dalla circoscrizioneBase e la circoscrizioneDB per creare la circoscrizione completa
+    const cirCompleta : Circoscrizioni.Circoscrizione = {
+        self: cirBase.self,
+        nome: cirBase.nome,
+        coordinate: cirBase.coordinate,
+        soddisfazioneMedia: cirBase.soddisfazioneMedia,
+        servizi: {
+            areeVerdi: areeVerdi,
+            localiNotturni: localiNotturni,
+            scuole: scuole,
+            serviziRistorazione: serviziRistorazione,
+        },
+        sicurezza: {
+            incidenti: incidenti,
+            numeroInterventi: numeroInterventi,
+            tassoCriminalita: tassoCriminalita,
+        },
+        popolazione: popolazione,
+        superficie: superficie,
+        serviziTotali: serviziTotali,
+        interventiPolizia: interventiPolizia,
+        etaMedia: etaMedia,
+    };
+    return cirCompleta;
+}
+
 const utilCircoscrizioni = {
     getCircoscrizioniWithSoddisfazioneMedia,
-    getCircoscrizioneWithSoddisfazioneMedia
+    getCircoscrizioneWithSoddisfazioneMedia,
+    getCircoscrizioneCompletaFromMinimal
 }
 export default utilCircoscrizioni;
 export {
     getCircoscrizioniWithSoddisfazioneMedia,
-    getCircoscrizioneWithSoddisfazioneMedia
+    getCircoscrizioneWithSoddisfazioneMedia,
+    getCircoscrizioneCompletaFromMinimal
 }

@@ -1,7 +1,7 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
-import { Circoscrizioni, Errors } from '../../types';
-import { getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
+import { Circoscrizioni, Dati, Errors } from '../../types';
+import { getCircoscrizioneCompletaFromMinimal, getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 import { BASE_URL, RESPONSE_MESSAGES } from '../variables';
 
@@ -23,7 +23,7 @@ router.get('/', async (req,res)=>{
             //mappo ogni circoscrizione base alla corrispondente circoscrizione completa usando i dati ottenuti dalla query
             circoscrizioni= await Promise.all(circoscrizioniBase.map( async (cirBase)=>{
                 //trovo la circoscrizioneDB corrispondente (dove il self di quella base è uguale al _id di quella DB)
-                const cirDB=circoscrizioniDB.find(async (cir)=>(
+                const cirDB=circoscrizioniDB.find((cir)=>(
                     new Types.ObjectId(cirBase.self.split('/').pop()).equals(cir._id)
                 ));
                 if(!cirDB){
@@ -34,21 +34,8 @@ router.get('/', async (req,res)=>{
                     };
                     throw new Error(JSON.stringify(errore));
                 }
-                //combino i dati dalla circoscrizioneBase e la circoscrizioneDB per creare la circoscrizione completa
-                const cirCompleta : Circoscrizioni.Circoscrizione = {
-                    self: cirBase.self,
-                    nome: cirBase.nome,
-                    coordinate: cirBase.coordinate,
-                    soddisfazioneMedia: cirBase.soddisfazioneMedia,
-                    servizi: cirDB.servizi,
-                    sicurezza: cirDB.sicurezza,
-                    popolazione: cirDB.popolazione,
-                    superficie: cirDB.superficie,
-                    serviziTotali: cirDB.serviziTotali,
-                    interventiPolizia: cirDB.interventiPolizia,
-                    etaMedia: cirDB.etaMedia,
-                };
-                return cirCompleta;
+                
+                return await getCircoscrizioneCompletaFromMinimal(cirBase);
             }));
         }else{
             //devo restituire solo i dati base, mi basta mandare l'array circoscrizioniBase che ho già
@@ -93,28 +80,9 @@ router.get('/:id',async (req,res) =>{
         return;
     }
     try{
-        // trovo gli _id dei quartieri che appartengono alla circoscrizione che sto cercando
-        const quartieriPerCir = await db.models.Quartiere.find({ circoscrizione: circoscrizioneDB._id }).select('_id');
-        // Ottengo gli _id dei sondaggi approvati
-        const sondaggi = await db.models.Sondaggio.find({ statoApprovazione: 'Approvato' }).select('_id');
-        // Ottengo i voti dei sondaggi approvati relativi ai quartieri della circoscrizione
-        const voti = await db.models.Voti.find({ sondaggio: { $in: sondaggi }, quartiere: { $in: quartieriPerCir } }).select('voto');
-        // Calcolo la media dei voti della circoscrizione
-        const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
+        const cirBase: Circoscrizioni.Minimal = await getCircoscrizioneWithSoddisfazioneMedia(circoscrizioneDB._id);
         // uso i dati che ho raccolto per creare la risposta di tipo Circoscrizione
-        const circoscrizione: Circoscrizioni.Circoscrizione = {
-            self: `${BASE_URL}/circoscrizioni/${circoscrizioneDB._id}`,
-            nome: circoscrizioneDB.nome,
-            coordinate: circoscrizioneDB.coordinate,
-            soddisfazioneMedia: mediaVoti,
-            popolazione:circoscrizioneDB.popolazione,
-            serviziTotali: circoscrizioneDB.serviziTotali,
-            interventiPolizia: circoscrizioneDB.interventiPolizia,
-            etaMedia: circoscrizioneDB.etaMedia,
-            servizi: circoscrizioneDB.servizi,
-            sicurezza: circoscrizioneDB.sicurezza,
-            superficie: circoscrizioneDB.superficie,
-        };
+        const circoscrizione: Circoscrizioni.Circoscrizione = await getCircoscrizioneCompletaFromMinimal(cirBase);
         //rispondo alla richiesta mandando la circoscrizione
         res.status(200).json(circoscrizione);
     }catch(err){

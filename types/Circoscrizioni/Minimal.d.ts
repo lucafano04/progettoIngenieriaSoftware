@@ -1,7 +1,7 @@
-type Minimal = {
+import Base from "./Base";
+
+type Minimal = Base & {
     self: string,
-    nome: String,
-    coordinate: [[number]],
     soddisfazioneMedia: number,
 }
 

@@ -1,7 +1,7 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
 import { Circoscrizioni, Errors, Quartieri } from '../../types';
-import { getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
+import { getCircoscrizioneCompletaFromMinimal, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 import { Dati } from '../../types';
 import { BASE_URL, RESPONSE_MESSAGES } from '../variables';
@@ -14,31 +14,20 @@ router.get('/', async (req,res)=>{
     //uso la funzione getCircoscrizioniWithSoddisfazioneMedia per ricavare la soddisfazione media di ogni circoscrizione
     const circoscrizioniConMedia=await getCircoscrizioniWithSoddisfazioneMedia();
     //interrogo il database per ottenere le circoscrizioni perché mi servono i dati su popolazione, superficie, ed età
-    const circoscrizioniDB=await db.models.Circoscrizione.find();
 
 
     try{
         //combino i dati delle circoscrizioni e creo un array di oggetti che contengono i dati generali per ogni circoscrizione
         const datiGeneraliCircoscrizioni= await Promise.all(circoscrizioniConMedia.map(async (cirBase)=>{
             //per ogni circoscrizione con media trovo la circoscrizioneDB corrispondente
-            const cirDB: Circoscrizioni.DB | undefined =circoscrizioniDB.find((cir)=>
-                new Types.ObjectId(cirBase.self.split('/').pop()).equals(cir._id)
-            ); 
+            const circoscrizioneCompleta = await getCircoscrizioneCompletaFromMinimal(cirBase);
 
-            if(!cirDB){//controllo se non ho trovato la circoscrizione nel database. tecnicamente questo non dovrebbe mai succedere
-                const errore: Errors = {
-                    code: 500,
-                    message: RESPONSE_MESSAGES[500],
-                    details: `Circoscrizione ${cirBase.self} non trovata nel database`,
-                };
-                throw new Error(JSON.stringify(errore));
-            }
 
             //prendo i dati che mi interessano (popolazione, superficie, età, soddisfazione) da cirDB e cirBase e li metto in un oggetto apposito
             const dati: Dati.DatiGenerici = {
-                popolazione: cirDB.popolazione,
-                superficie: cirDB.superficie,
-                etaMedia: cirDB.etaMedia,
+                popolazione: circoscrizioneCompleta.popolazione,
+                superficie: circoscrizioneCompleta.superficie,
+                etaMedia: circoscrizioneCompleta.etaMedia,
                 soddisfazioneMedia: cirBase.soddisfazioneMedia,
             };
             return dati;

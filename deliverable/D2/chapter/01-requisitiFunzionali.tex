@@ -8,7 +8,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
     Di seguito i requisiti associati all'Utente Anonimo:
     \begin{itemize}
         \item \textbf{RF1.1}: Visualizzare città
-        \item \textbf{RF1.2},\textbf{RF3.1}: Interagire con la Mappa
+        \item \textbf{RF1.2, RF3.1}: Interagire con la Mappa
         \item \textbf{RF2}: Multi lingua
         \item \textbf{RF3.2}: Visualizzare zona
         \item \textbf{RF4}: Accesso dati specifici zona selezionata
@@ -96,9 +96,9 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \end{enumerate}
 
     \subsection{Login}
-        \subsection{Riassunto}
+        \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà fare il login
-        \subsection{Descrizione}
+        \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente anonimo preme il pulsante di login presente nella header
                 \item Il sistema reindirizza l'utente al sistema SSO
@@ -107,7 +107,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Il sistema assegna all'utente anonimo il ruolo posseduto dall'account al quale si è collegato
                 \item Il sistema successivamente al login sostituisce l'icona del login con l'immagine profilo dell'account al quale si ha fatto l'accesso
             \end{enumerate}
-        \subsection{Eccezioni}
+        \subsubsection{Eccezioni}
             \begin{enumerate}
                 \item Nel caso in cui l'autenticazione fallisse o non vi fossero account collegati il sistema ritorna alla pagina dalla quale si ha provato a fare il login
             \end{enumerate}
@@ -125,10 +125,10 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Sondaggista.drawio.png}
-        \caption{Use Case Diagram dell'Utente sonaggista}
+        \caption{Use Case Diagram dell'Utente sondaggista}
     \end{figure}
 
-    \subsection{Use Case RF6: Logout}
+    \subsection{Logout}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente può fare logout
         \subsubsection{Descrizione}
@@ -136,19 +136,33 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item L'utente sondaggista preme sull'icona contenente l'immagine profilo nella header
                 \item Il sistema apre un menù a tendina con la sezione 'Logout'
                 \item L'utente preme sulla sezione 'Logout'
-                \item Il sistema ricarica la pagina riportando l'utente alla 'visualizzazione mappa e dati', scollegandolo dall'account sondaggista al quale era collegato e riportando l'utente allo stato di Utente non loggato
+                \item Il sistema ricarica la pagina riportando l'utente alla 'visualizzazione città', scollegandolo dall'account sondaggista al quale era collegato e riportando l'utente allo stato di Utente non loggato
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
-                \item Nel caso in cui fosse aperta il menù a tendina con la sezione logout e venisse premuto un qualsiasi altro punto sullo schermo il sistema deve chiudere il menù a tendina
+                \item Nel caso in cui fosse aperta il menù a tendina con la sezione logout e venisse successivamente premuto un qualsiasi altro punto sullo schermo il sistema deve chiudere il menù a tendina
             \end{enumerate}
-    \subsection{Use Case RF7: Visualizzazione dati sondaggisti}
-        \subsection{Titolo}
+
+    \subsection{Visualizzazione dati sondaggisti}
+        \subsubsection{Titolo}
             Questo Use Case descrive come l'utente sondaggista visualizzerà l'interfaccia per gestire i sondaggi
-        \subsection{Descrizione}
+        \subsubsection{Descrizione}
             \begin{enumerate}
-                \item Il sistema successivamente al login reindirizza l'utente sondaggista alla pagina di gestione dei sondaggi
-                \item Il
+                \item Il sistema mostra nel riquadro in alto a sinistra dello schermo l'interfaccia per la creazione di nuovi sondaggi con relative caselle di testo e pulsante per la creazione
+                \item Il sistema mostra nel riquadro in basso a sinistra dello schermo l'interfaccia per il caricamento dei sondaggi attraverso pulsante o "drag and drop"
+                \item Il sistema mostra nel riquadro in alto a destra dello schermo l'elenco dei sondaggi non ancora caricati, o in fase di caricamento, a sistema (Eccezione 1)
+                \item Il sistema mostra nel riquadro in basso a destra dello schermo l'elenco dei sondaggi già caricati a sistema con relativo stato di accettazione (Eccezione 1)
             \end{enumerate}
-        \subsection{Eccezioni}
-        \subsection{Estensioni}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui non fossero presenti sondaggi all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
+            \end{enumerate}
+
+    \subsection{Accesso come sondaggista}
+        \subsubsection{Titolo}
+            Questo Use Case descrive cosa succederà all'l'utente sondaggista successivamente al processo di login
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item Successivamente al login il sistema reindirizza l'utente sondaggista alla pagina di gestione dei sondaggi
+            \end{enumerate}
+        \subsubsection{Estensioni}

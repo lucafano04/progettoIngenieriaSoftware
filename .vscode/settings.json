@@ -1,14 +1,20 @@
 {
     "cSpell.words": [
+        "abit",
         "DescrizionediProgetto",
+        "lngs",
         "loggati",
         "loggato",
         "openapi",
         "pdfauthor",
         "pdfkeywords",
         "pdfsubject",
+        "primeicons",
+        "primeui",
+        "primevue",
         "SatisTrento",
-        "SPID"
+        "SPID",
+        "toastservice"
     ],
     "editor.wordWrap": "on",
     "conventionalCommits.scopes": [

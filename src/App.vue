@@ -5,7 +5,7 @@
     import { Utenti } from '../types'
     import Avatar from 'primevue/avatar';
     import { logout } from './utils/utenti';
-import { useRouter } from 'vue-router';
+    import { useRouter } from 'vue-router';
     
     const { user } = defineProps({
         user: { type: Object as () => Ref<Utenti.User | null>, required: true }

@@ -5,9 +5,9 @@
     import { getInfoGenerali } from '../utils/misc';
     import { Skeleton } from 'primevue';
     import { getQuartiere } from '../utils/quartieri';
-    import { useToast } from 'primevue';
+    import { useToast, Dialog, Select, FloatLabel } from 'primevue';
     import { getCircoscrizione } from '../utils/circoscrizioni';
-import InfoZona from './InfoZona.vue'
+    import InfoZona from './InfoZona.vue'
     const toast = useToast();
 
     const quartCirc = ref<boolean>(false);
@@ -15,6 +15,8 @@ import InfoZona from './InfoZona.vue'
     const datiZona = ref<Circoscrizioni.Circoscrizione | Quartieri.Quartiere | null>(null);
 
     const infoGenerali = ref<Dati.DatiGenericiCitta | null>(null);
+
+    const optionsOpen = ref<boolean>(false);
     onMounted(async () => {
         try{
             infoGenerali.value = await getInfoGenerali();
@@ -32,25 +34,40 @@ import InfoZona from './InfoZona.vue'
         const idQuart = arr.pop();
         const tipo = arr.pop();
         
-        if(tipo === 'quartieri'){
-            labQuartCirc.value = 'Quartiere';
-            if(idQuart !== undefined)
-                datiZona.value = await getQuartiere(idQuart);
+        try{
+            if(tipo === 'quartieri'){
+                labQuartCirc.value = 'Quartiere';
+                if(idQuart !== undefined)
+                    datiZona.value = await getQuartiere(idQuart);
+                else
+                    toast.add({severity: 'error', summary: 'Errore', detail: 'Errore durante il recupero dei dati della zona', life: 5000});
+            }else if (tipo === 'circoscrizioni'){
+                labQuartCirc.value = 'Circoscrizione';
+                if(idQuart !== undefined)
+                    datiZona.value = await getCircoscrizione(idQuart);
+                else
+                    toast.add({severity: 'error', summary: 'Errore', detail: 'Errore durante il recupero dei dati della zona', life: 5000});
+            }
+        }catch(e: any){
+            if(e instanceof Error)
+                toast.add({severity: 'error', summary: 'Errore', detail: e.message, life: 5000});
             else
-                toast.add({severity: 'error', summary: 'Errore', detail: 'Errore durante il recupero dei dati della zona', life: 5000});
-        }else if (tipo === 'circoscrizioni'){
-            labQuartCirc.value = 'Circoscrizione';
-            if(idQuart !== undefined)
-                datiZona.value = await getCircoscrizione(idQuart);
-            else
-                toast.add({severity: 'error', summary: 'Errore', detail: 'Errore durante il recupero dei dati della zona', life: 5000});
+                toast.add({severity: 'error', summary: 'Errore', detail: 'Errore sconosciuto', life: 5000});
         }
     }
+    function openSettings(){optionsOpen.value = true;}
+
 </script>
 <template>
-    <div class="tw-grid tw-cols-1 lg:tw-grid-cols-12 tw-mt-6 tw-gap-4">
-        <div v-if="zonaSel === ''" class="tw-rounded tw-p-5 tw-width-full lg:tw-col-span-5 tw-col-span-1">
-            <div class="tw-grid tw-grid-cols-12 tw-gap-4">
+    <Dialog modal :close-on-escape=true v-model:visible="optionsOpen" :show-header=true header="Opzioni Visualizzazione" :draggable="false">
+        <FloatLabel variant="in">
+            <Select v-model:model-value="quartCirc" :options="[{name: 'Quartieri', value: false}, {name: 'Circoscrizioni', value: true}]" optionLabel="name" optionValue="value" inputId="quartCirc" class="tw-w-full"/>
+            <label for="quartCirc">Visualizza:</label>
+        </FloatLabel>
+    </Dialog> 
+    <div class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-evenly tw-items-center tw-w-full tw-p-5">
+        <div v-if="zonaSel === ''" class="tw-rounded tw-p-5 tw-w-full lg:tw-w-6/12">
+            <div class="tw-grid tw-gap-4 tw-w-9/12 tw-mx-auto">
                 <h1 class="tw-text-2xl tw-font-bold tw-text-center tw-col-span-12 tw-text-bold">Trento</h1>
                 <div class="tw-flex tw-justify-center tw-col-span-2"> <span class="pi pi-users tw-text-3xl tw-mr-2"></span></div>
                 <div class="tw-flex tw-justify-center tw-col-span-4"> Popolazione </div>
@@ -74,9 +91,9 @@ import InfoZona from './InfoZona.vue'
                 <div class="tw-col-span-2">%</div>
             </div>
         </div>
-        <InfoZona :labQuartCirc="labQuartCirc" :zonaSel="zonaSel" :datiZona="datiZona" class="lg:tw-hidden" />
-        <Mappa :quartCirc="quartCirc" :zonaSel="zonaSel" @setZonaSel="updateZona" class="lg:tw-col-span-7"/>
-        <InfoZona :labQuartCirc="labQuartCirc" :zonaSel="zonaSel" :datiZona="datiZona" class="tw-hidden lg:tw-grid lg:tw-col-span-5 " />
+        <InfoZona :labQuartCirc="labQuartCirc" :datiZona="datiZona" :zona-sel="zonaSel" class="lg:tw-hidden" />
+        <Mappa :quartCirc="quartCirc" :zonaSel="zonaSel" @setZonaSel="updateZona" @openSettings="openSettings" :class="{ 'tw-w-full':true,'lg:tw-w-6/12':true}" />
+        <InfoZona :labQuartCirc="labQuartCirc" :datiZona="datiZona" :zona-sel="zonaSel" class="tw-hidden lg:tw-grid lg:tw-w-6/12" />
     </div>
 </template>
 <style>

@@ -12,7 +12,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \item \textbf{RF2}: Multi lingua
         \item \textbf{RF3.2}: Visualizzare zona
         \item \textbf{RF4}: Accesso dati specifici zona selezionata
-        \item \textbf{RF5}: Login
+        \item \textbf{RF5, RF8, RF12}: Login
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -95,7 +95,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente cliccasse il pulante per chiudere la tabella il sistema tornerà alla visualizzazione dei dati della zona selezionata in precedenza
             \end{enumerate}
 
-    \subsection{Login}
+    \subsection{Login} % da fare un diagram
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente potrà fare il login
         \subsubsection{Descrizione}
@@ -118,9 +118,9 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
     \begin{itemize}
         \item \textbf{RF6}: Logout
         \item \textbf{RF7}: Visualizzazione dati sondaggisti
-        \item \textbf{RF8}: Accesso come sondaggista
         \item \textbf{RF9}: Creazione nuovi sondaggi
-        \item \textbf{RF10}: Svolgimento sondaggi
+        \item \textbf{RF10.1}: Aggiungere voti ai sondaggi
+        \item \textbf{RF10.2}: Rimuovere voti ai sondaggi
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -157,12 +157,29 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \begin{enumerate}
                 \item Nel caso in cui non fossero presenti sondaggi all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
-
-    \subsection{Accesso come sondaggista}
+    
+    \subsection{Creazione nuovi sondaggi} %to do: da discutere se ha senso fare un activity diagram di ciò, ci sono tanti se e tanti include
         \subsubsection{Titolo}
-            Questo Use Case descrive cosa succederà all'l'utente sondaggista successivamente al processo di login
+            Questo Use Case descrive come l'utente sondaggista può aggiungere nuovi sondaggi
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item Successivamente al login il sistema reindirizza l'utente sondaggista alla pagina di gestione dei sondaggi
+                \item 
             \end{enumerate}
+        \subsubsection{Eccezioni}
         \subsubsection{Estensioni}
+    
+    \subsection{Aggiungere voti ai sondaggi}
+        \subsubsection{Titolo}
+            Questo Use Case descrive come l'utente sondaggista può aggiungere nuovi voti ai sondaggi
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item Il sondaggista inserisce la circoscrizione di appartenenza del cittadino (Estensione 1)
+                \item Il sistema fornisce l'interfaccia utilie per votare
+                \item Il cittadino inserisce il proprio voto e clicca il pulsante di conferma
+                \item Il sistema torna all'interfaccia 
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+        \subsubsection{Estensioni}
+            \begin{enumerate}
+                \item Nel caso in cui il cittadino fosse d'accordo l'utente sondaggista potrà inserire anche la fascia d'età del cittadino 
+            \end{enumerate}

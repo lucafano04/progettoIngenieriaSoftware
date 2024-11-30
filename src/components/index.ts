@@ -1,13 +1,13 @@
-import MappaDefault from "./MappaDefault.vue";
-import Home from "./Home.vue";
+import Home from "./HomePage";
+import Login from "./LoginPage";
 
 const components = {
-    MappaDefault,
-    Home
+    Home,
+    Login
 };
 
 export default components;
 export {
-    MappaDefault,
-    Home
+    Home,
+    Login
 }

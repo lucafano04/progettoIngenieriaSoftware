@@ -4,7 +4,7 @@ import tailwindcssPrimeui from 'tailwindcss-primeui';
 const toExport  = {
   mode: 'jit',
   content: ['./src/**/*.{js,ts,jsx,tsx,html,vue}'],
-  darkMode: 'media', // or 'media' or 'class'
+  darkMode: 'selector',
   theme: {
       extend: {},
   },
@@ -12,7 +12,7 @@ const toExport  = {
       extend: {},
   },
   plugins: [tailwindcssPrimeui],
-  prefix: 'tw-',
+  prefix: 'tw-'
 }
 
 export default toExport;

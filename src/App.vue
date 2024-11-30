@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import { MegaMenu, SplitButton, useToast, Toast, Button } from 'primevue';
+    import { MegaMenu, SplitButton, useToast, Toast } from 'primevue';
     import { MenuItem } from 'primevue/menuitem';
-    import { Ref, ref } from 'vue';
+    import { Ref, ref, watch } from 'vue';
     import { Utenti } from '../types'
     import Avatar from 'primevue/avatar';
     import { logout } from './utils/utenti';
@@ -19,6 +19,12 @@
             command: () => history.push('/')
         }
     ]);
+    const dropDownItems = ref<MenuItem[]>([
+        {
+            label: 'Cambio Lingua',
+            icon: 'pi pi-fw pi-flag'
+        }
+    ]);
     const toast = useToast();
 
     async function logoutToast(){
@@ -28,6 +34,7 @@
             if(result){
                 toast.add({severity: 'success', summary: 'Logout', detail: 'Logout effettuato con successo!', life: 5000});
                 user.value = null;
+                history.push('/');
             } else {
                 toast.add({severity: 'error', summary: 'Logout', detail: 'Errore durante il logout!', life: 5000});
             }
@@ -38,6 +45,61 @@
                 toast.add({severity: 'error', summary: 'Logout', detail: 'Errore sconosciuto', life: 5000});
         }
     }
+    if(user.value !== null){
+        console.log(user.value);
+        dropDownItems.value.push({
+            divider: true
+        });
+        if(user.value.ruolo === "Analista"){
+            dropDownItems.value.push({
+                label: 'Analisi',
+                icon: 'pi pi-fw pi-chart-line',
+                to: '/analisi',
+                command: () => history.push('/analisi')
+            });
+        }
+        if(user.value.ruolo === "Sondaggista"){
+            dropDownItems.value.push({
+                label: 'Sondaggi',
+                icon: 'pi pi-fw pi-chart-bar',
+                to: '/sondaggi',
+                command: () => history.push('/sondaggi')
+            });
+        }
+        dropDownItems.value.push({
+            label: 'Logout',
+            icon: 'pi pi-fw pi-sign-out',
+            command: logoutToast
+        });
+    }
+    watch(()=>user.value, (newValue) => {
+        if(newValue !== null && !dropDownItems.value.find((item) => item.label === 'Logout')){
+            dropDownItems.value.push({
+                divider: true
+            });
+            if(newValue.ruolo === "Analista"){
+                dropDownItems.value.push({
+                    label: 'Analisi',
+                    icon: 'pi pi-fw pi-chart-line',
+                    to: '/analisi',
+                    command: () => history.push('/analisi')
+                });
+            }
+            if(newValue.ruolo === "Sondaggista"){
+                dropDownItems.value.push({
+                    label: 'Sondaggi',
+                    icon: 'pi pi-fw pi-chart-bar',
+                    to: '/sondaggi',
+                    command: () => history.push('/sondaggi')
+                });
+            }
+            dropDownItems.value.push({
+                label: 'Logout',
+                icon: 'pi pi-fw pi-sign-out',
+                command: logoutToast
+            });
+        }
+    });
 </script>
 
 <template>
@@ -46,25 +108,24 @@
         <MegaMenu :model="menuItems" breakpoint="600px">
             <template #start>
                 <div class="tw-flex tw-items-center tw-justify-center">
-                    <img src="./assets/iconaNome.png" alt="icona" class="tw-mr-2 tw-h-10" />
-                </div>
+                    <RouterLink to="/">
+                        <img src="./assets/iconaNome.png" alt="icona" class="tw-mr-2 tw-h-10" />
+                    </RouterLink>
+                    </div>
             </template>
             <template #end>
-                <div v-if="user.value !== null">
-                    <SplitButton :model="[{label: 'Logout', icon: 'pi pi-sign-out', command: logoutToast}]" class="tw-mr-2" text severity="contrast" size="small">
-                        <span class="tw-flex tw-items-center tw-font-bold">
-                            <Avatar :image="user.value.imageUrl.toString()" class="tw-mr-2" shape="circle" size="normal" />
-                            <span>Ciao: {{ user.value.nome }}!</span>
-                        </span>
-                    </SplitButton>
-                </div>
-                <div v-else>
-                    <Button label="Login" icon="pi pi-sign-in" icon-pos="left" class="tw-mr-2" text size="small" severity="contrast">
+                <SplitButton :model="dropDownItems" class="tw-mr-2" text severity="contrast" size="small">
+                    <span v-if="user.value !== null" class="tw-flex tw-items-center tw-font-bold">
+                        <Avatar :image="user.value.imageUrl.toString()" class="tw-mr-2" shape="circle" size="normal" />
+                        <span>Ciao: {{ user.value.nome }}!</span>
+                    </span>
+                    <span v-else class="tw-flex tw-items-center tw-font-bold tw-mr-5">
                         <RouterLink to="/login">
+                            <Avatar icon="pi pi-user" class="tw-mr-2" shape="circle" size="normal" />
                             <span>Login</span>
                         </RouterLink>
-                    </Button>
-                </div>
+                    </span>
+                </SplitButton>
             </template>
         </MegaMenu>
         <div class="tw-m-5 tw-mt-1 tw-container tw-mx-auto">

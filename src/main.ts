@@ -15,7 +15,7 @@ import './index.css'
 
 import { getSession } from './utils/utenti';
 import { Utenti } from '../types';
-import Home from './components/Home.vue';
+import { Home, Login } from './components';
 
 
 const user = ref<Utenti.User | null>(null);
@@ -25,7 +25,8 @@ const app = createApp(App,{user});
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component: Home }
+        { path: '/', component: Home },
+        { path: '/login', component: Login , props: { user } }
     ]
 });
 
@@ -35,7 +36,7 @@ app.use(PrimeVue, {
         preset: Aura,
         options: {
             prefix: 'p',
-            darkModeSelector: '.dark',
+            darkModeSelector: '.tw-dark',
             cssLayer: {
                 name: 'primevue',
                 order: 'tailwind-base, primevue, tailwind-utilities'

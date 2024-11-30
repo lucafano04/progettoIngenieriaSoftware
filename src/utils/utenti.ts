@@ -31,33 +31,45 @@ async function logout() {
         sessionStorage.removeItem('token');
         return true;
     }
-    return false;
+    throw new Error('Errore nel logout ' + await response.text());
 }
-async function login(username: string, password: string) {
+async function postSession(email: string, password: string) {
+    const hashPassword = await hash(password);
     const response = await fetch('/api/v1/session', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({email, password: hashPassword})
     });
     if(response.status === 201) {
         const data:{token:string, user: Utenti.User} = await response.json();
         sessionStorage.setItem('token', data.token);
-        return true;
+        return data.user;
     }
+    if(response.status !== 401)
+        throw new Error('Errore nella creazione della sessione ' + await response.text());
     return false;
+}
+async function hash(string: string) {
+    const utf8 = new TextEncoder().encode(string);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", utf8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+        .map((bytes) => bytes.toString(16).padStart(2, "0"))
+        .join("");
+    return hashHex;
 }
 
 const utenti = {
     getSession,
     logout,
-    login
+    postSession
 };
 
 export default utenti;
 export { 
     getSession,
     logout,
-    login
+    postSession
 };

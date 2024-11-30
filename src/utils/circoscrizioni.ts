@@ -8,7 +8,7 @@ async function getCircoscrizioni(deepData: boolean): Promise<Circoscrizioni.Circ
         },
     });
     if(circoscrizioni.status !== 200)
-        throw new Error('Errore nel recupero delle circoscrizioni');
+        throw new Error(`Errore nel recupero delle circoscrizioni ${await circoscrizioni.text()}`);
     const data = await circoscrizioni.json();
     if(deepData)
         return data as Circoscrizioni.Circoscrizione[];
@@ -24,7 +24,7 @@ async function getCircoscrizione(id: string): Promise<Circoscrizioni.Circoscrizi
         },
     });
     if(circoscrizione.status !== 200)
-        throw new Error(`Errore nel recupero della circoscrizione ${id}`);
+        throw new Error(`Errore nel recupero della circoscrizione ${id} ${await circoscrizione.text()}`);
     const data = await circoscrizione.json();
     return data as Circoscrizioni.Circoscrizione;
 }

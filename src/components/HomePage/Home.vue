@@ -1,12 +1,12 @@
 <script lang="ts" setup>
     import { onMounted, ref } from 'vue';
     import Mappa from './Mappa.vue';
-    import { Circoscrizioni, Dati, Quartieri } from '../../types';
-    import { getInfoGenerali } from '../utils/misc';
+    import { Circoscrizioni, Dati, Quartieri } from '../../../types';
+    import { getInfoGenerali } from '../../utils/misc';
     import { Skeleton } from 'primevue';
-    import { getQuartiere } from '../utils/quartieri';
+    import { getQuartiere } from '../../utils/quartieri';
     import { useToast, Dialog, Select, FloatLabel } from 'primevue';
-    import { getCircoscrizione } from '../utils/circoscrizioni';
+    import { getCircoscrizione } from '../../utils/circoscrizioni';
     import InfoZona from './InfoZona.vue'
     const toast = useToast();
 

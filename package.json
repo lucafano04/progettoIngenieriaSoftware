@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "start:server": "nodemon",
-    "start:client": "vite",
+    "start:client": "vite --host",
     "build": "concurrently \"npm run build:server\" \"npm run build:client\"",
     "build:server": "npx webpack",
     "build:client": "vue-tsc -b && vite build",

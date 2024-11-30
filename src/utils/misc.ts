@@ -8,7 +8,7 @@ async function getInfoGenerali(): Promise<Dati.DatiGenericiCitta>{
         },
     });
     if(info.status !== 200)
-        throw new Error('Errore nel recupero dei dati generali della città');
+        throw new Error(`Errore nel recupero dei dati generali della città ${await info.text()}`);
     const data = await info.json();
     return data as Dati.DatiGenericiCitta;
 }

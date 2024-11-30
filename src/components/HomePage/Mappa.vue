@@ -2,11 +2,11 @@
     import "leaflet/dist/leaflet.css";
     import { LMap, LPolygon, LTileLayer, LControlZoom, LControl } from "@vue-leaflet/vue-leaflet";
     import { nextTick, onMounted, ref, useTemplateRef, watch } from "vue";
-    import { Circoscrizioni, Quartieri } from "../../types";
-    import { getQuartieri } from "../utils/quartieri";
-    import { getColorFromSoddisfazione } from "../utils/misc";
+    import { Circoscrizioni, Quartieri } from "../../../types";
+    import { getQuartieri } from "../../utils/quartieri";
+    import { getColorFromSoddisfazione } from "../../utils/misc";
     import { useToast, Button, Skeleton } from "primevue";
-    import { getCircoscrizioni } from "../utils/circoscrizioni";
+    import { getCircoscrizioni } from "../../utils/circoscrizioni";
 
     const quartieri = ref<Quartieri.Minimal[] | Circoscrizioni.Minimal[]>([]);
     const mapProp = ref({center: [46.06736507521368, 11.12139794405234], zoom: 12});

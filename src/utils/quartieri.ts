@@ -8,7 +8,7 @@ async function getQuartieri(deepData:boolean): Promise<Quartieri.Quartiere[] | Q
         },
     });
     if(quartieri.status !== 200)
-        throw new Error('Errore nel recupero dei quartieri');
+        throw new Error(`Errore nel recupero dei quartieri ${await quartieri.text()}`);
     const data = await quartieri.json();
     if(deepData)
         return data as Quartieri.Quartiere[];
@@ -24,7 +24,7 @@ async function getQuartiere(id: string): Promise<Quartieri.Quartiere>{
         },
     });
     if(quartiere.status !== 200)
-        throw new Error(`Errore nel recupero del quartiere ${id}`);
+        throw new Error(`Errore nel recupero del quartiere ${id} ${await quartiere.text()}`);
     const data = await quartiere.json();
     return data as Quartieri.Quartiere;
 }

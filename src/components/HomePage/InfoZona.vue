@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import { Circoscrizioni, Quartieri } from '../../types';
-    import areeVerdi from '../assets/tree.svg?raw';
-    import scuole from '../assets/school.svg?raw';
-    import ristoranti from '../assets/restaurant.svg?raw';
+    import { Circoscrizioni, Quartieri } from '../../../types';
+    import areeVerdi from '../../assets/tree.svg?raw';
+    import scuole from '../../assets/school.svg?raw';
+    import ristoranti from '../../assets/restaurant.svg?raw';
     import { Skeleton } from 'primevue';
     defineProps<{
         labQuartCirc: string;

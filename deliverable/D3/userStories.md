@@ -1,17 +1,17 @@
 # Requisiti funzionali
 
 ### RF 1 Visualizzazione città
-Il sistema deve permettere a tutti gli utenti di poter visualizzare gli attributi demografici e riguardanti la soddisfazione della città. A fianco degli attributi sarà inoltre presente la mappa con focus sulla città divisa per zone colorate in base al relativo grado di soddisfazione media e i relativi pulsanti per modificarne le impostazioni.
+Il sistema deve permettere a tutti gli utenti di poter visualizzare gli attributi demografici e riguardanti la soddisfazione della città. A fianco degli attributi sarà inoltre presente la mappa con focus sulla città divisa per zone colorate in base al relativo grado di soddisfazione media e i relativi pulsanti per modificarne le impostazioni, nel caso in cui l'utente fosse autenticato come utente analista sarà possibile sostituire alla mappa una tabella contenente le zone nelle quali è divisa la città.
 - Come utente voglio poter visualizzare gli attributi demografici e riguardanti la soddisfazione della città, così da poter avere delle informazioni dettagliate della città che sto visualizzando
 - Come utente voglio visualizzare la mappa del comune di Trento divisa per zone, così da porter distinguere la divisione delle varie aree della città e il grado di soddisfazione medio che vi è in esse
 
 ### RF 2 Interazione con la mappa
- Il sistema deve permettere a tutti gli utenti di poter muovere, interagire e modificare la visualizzazione della mappa. In particolare deve essere possibile modificare il focus centrale della mappa trascinando il cursore, deve essere possibile modificare lo zoom attraverso la rotella del mouse oppure attraverso i pulsanti presenti nell'angolo della mappa, deve essere possibile interagire con le varie zone cliccando sulle stesse e infine deve essere possibile, quando si è all'interno della visualizzazione della città, modificare la tipologia di zona con la quale si può interagire sulla mappa oppure, nel caso in cui si avesse i permessi necessari, si può cambiare la visualizzazione da mappa a tabella e viceversa.
-- Come utente voglio poter spostare il focus della mappa, così da poter cambiare l'area geografica che si sto visualizzando
+ Il sistema deve permettere a tutti gli utenti di poter muovere, interagire e modificare la visualizzazione della mappa. In particolare deve essere possibile modificare il focus centrale della mappa trascinando il cursore, deve essere possibile modificare lo zoom attraverso la rotella del mouse oppure attraverso i pulsanti presenti nell'angolo della mappa, deve essere possibile interagire con le varie zone cliccando sulle stesse e infine deve essere possibile, quando si è all'interno della "visualizzazione città", modificare la tipologia di zona con la quale si può interagire sulla mappa oppure, nel caso in cui si avesse i permessi da analista, si può cambiare la visualizzazione da mappa a tabella.
+- Come utente voglio poter spostare il focus della mappa, così da poter cambiare l'area geografica che si sta visualizzando
 - Come utente voglio poter ingrandire o rimpicciolire la mappa, così da poter avere una visione più chiara dell'area geografica che sto visualizzando
 - Come utente voglio poter selezionare una zona della città, così da poter ricevere informazioni più dettagliate riguardanti tale zona
 - Come utente voglio poter cambiare la tipologia di zona con la quale si può interagire sulla mappa, così da poter ricevere informazioni riguardanti l'area geografica di preferenza senza complicare l'utlizzo della mappa
-- Come utente analista, amministratore e circoscrizione voglio poter visualizzare le zone della città attraverso una tabella, così da poter navigare più velocemente attraverso le varie zone geografiche e così da poter ordinare secondo attributi specifici le varie zone geografiche
+- Come utente analista voglio poter visualizzare le zone della città attraverso una tabella, così da poter visualizzare le zone geografiche attraverso l'ordinamento di preferenza
 
 ### RF 3 Visualizzazione zona
 Il sistema deve permettere a tutti gli utenti di poter visualizzare gli attributi, demografici e riguardanti la soddisfazione, oltre ai servizi forniti della zona selezionata (circoscrizione o quartiere). A fianco degli attributi sarà inoltre presente la mappa, con focus sulla zona di selezione, divisa per zone colorate in base al relativo grado di soddisfazione e al focus centrale della mappa, saranno inoltre visualizzati ai vari angoli della mappa i relativi pulsanti per modificarne le impostazioni.
@@ -23,7 +23,7 @@ Il sistema deve permettere a tutti gli utenti loggati di accedere al loro accoun
 - Come utente non loggato voglio poter accedere tramite Nome Utente e Password, così da poter avere accesso alle funzionalità fornite dall'account al quale voglio fare l'accesso
 
 ### RF 7 Logout
-Il sistema deve permettere a tutti gli utenti loggati di potersi scollegare dall'account al quale sono attualmente collegati, riportando così l'utente allo stato di utente non loggato e reindirizzandolo alla visualizzazione della città. Sarà possibile eseguire il logout attraverso il menù a tendina presente nella header.
+Il sistema deve permettere a tutti gli utenti loggati di potersi scollegare dall'account al quale sono attualmente collegati, riportando così l'utente allo stato di utente non loggato e reindirizzandolo alla "visualizzazione città". Sarà possibile eseguire il logout attraverso il menù a tendina presente nella header.
 - Come utente loggato voglio poter scollegare l'account al quale sono attualmente collegato, così da non permettere ad altre persone di accedere al mio account o così da potermi collegare con un'altro account
 
 ### RF 8 Visualizzazione sondaggi
@@ -31,7 +31,7 @@ Il sistema deve permettere agli utenti sondaggisti di poter visualizzare in sezi
 - Come sondaggista voglio poter visualizzare i vari sondaggi con la descrizione ed il relativo stato di completamento, così da poter distinguere lo stato dei vari sondaggi e così da definire quali di questi sono stati completati, quali sono da finire, quali da modificare e quali da eliminare
 
 ### RF 9 Gestione sondaggi
-Il sistema deve permettere agli utenti sondaggisti di poter aggiungere, continuare, eliminare, salvare e completare i sondaggi non ancora caricati a sistema.In particolare deve essere possibile aggiungere un sondaggio creandone uno nuovo oppure caricandone uno, deve essere possibile continuare a modificare un sondaggio selezionandone uno dall'apposita visualizzazione sondaggi e infine deve essere possibile eliminare, salvare e inviare un sondaggio, con tutti i voti annessi ad esso, premendo gli appositi pulsanti presenti all'interno dell'interfaccia.
+Il sistema deve permettere agli utenti sondaggisti di poter aggiungere, continuare, eliminare, salvare e completare i sondaggi non ancora caricati a sistema. In particolare deve essere possibile aggiungere un sondaggio creandone uno nuovo oppure caricandone uno, deve essere possibile continuare a modificare un sondaggio selezionandone uno dall'apposita visualizzazione sondaggi e infine deve essere possibile eliminare, salvare e inviare un sondaggio, con tutti i voti annessi ad esso, premendo gli appositi pulsanti presenti all'interno dell'interfaccia.
 - Come sondaggista voglio poter aggiungere i sondaggi, così da poter cominciare un sondaggo
 - Come sondaggista voglio poter continuare i sondaggi non ancora completati, così da poter continuare ad aggiungere nuovi voti oppure per poter modificare degli errori
 - Come sondaggista voglio poter eliminare i sondaggi, così da poter rimuovere sondaggi sbagliati o creati per errore
@@ -44,24 +44,17 @@ Il sistema deve permettere agli utenti sondaggisti di poter visualizzare in sezi
 - Come sondaggista voglio poter visualizzare le interfacce per la gestione dei voti, così da poter controllare il corretto andamento delle votazioni
 
 ### RF 11 Gestione voti
-Il sistema deve permettere agli utenti sondaggisti di aggiungere o rimuovere i voti ai sondaggi in sospeso, ciò sarà possibile attraverso due apposite interfacce. Per aggiungere i voti sarà necessario inserire la circoscrizione di residenza del cittadino e a scelta volontaria dello stesso la propria fascia d'età, premendo il pulsante apposito il sistema caricherà dunque l'interfaccia necessaria per il voto, completando e inviando il voto il processo di aggiunta voto sarà dunque finito. Per eliminare i voti basterà invece premere il pulsante apposito sul voto presente nella apposita lista.
+Il sistema deve permettere agli utenti sondaggisti di poter aggiungere o rimuovere i voti ai sondaggi in sospeso, ciò sarà possibile attraverso due apposite interfacce. Per aggiungere i voti sarà necessario inserire il quartiere di residenza del cittadino e a scelta volontaria dello stesso la propria fascia d'età, premendo il pulsante apposito il sistema caricherà dunque l'interfaccia necessaria per il voto, completando e inviando il voto il processo di aggiunta voto sarà dunque finito. Per eliminare i voti basterà invece premere il pulsante apposito sul voto presente nella apposita lista.
 - Come sondaggista voglio poter aggiungere un voto al sondaggio in corso, così da permettere al cittadino di espriere il proprio grado di soddisfazione rispetto alle attività del comune per la zona nella quale abita e per la sua città
 - Come sondaggista voglio poter eliminare i voti di un sondaggio, così da poter correggere eventuali voti errati
 
+### RF 12 Interazione con la tabella
+Il sistema deve permettere agli utenti analisti di poter muovere, interagire e modificare la visualizzazione della tabella. In particolare deve essere possibile modificare il focus principale della tabella attraverso la rotella del mouse oppure attraverso la barra presente a lato della tabella, deve essere possibile interagire con le varie zone cliccando sul nome delle stesse e deve infine essere possibile, quando si è all'interno della "visualizzazione città", cambiare la visualizzazione da tabella a mappa.
+- Come analista voglio poter modificare il focus principale della tabella, così da poter visualizzare i dati appartenenti a zone non visibili in tabella
+- Come analista voglio poter interagire con la tabella, così da poter selezionare la zona di interesse
+- Come analista voglio passare dalla visualizzazione tramite tabella a quella tramite mappa, così da avere una migliore visione di insieme della distribuzione della soddisfazione all'interno della città
 
-### Da qua in poi bisogna rivederli
-
-
-### RF 11 Modifica Homepage
-Per gli utenti: analista, circoscrizione e amministratore, all'interno della Homepage verrà fornita la possibilità di visualizzare una tabella contenente le informazioni più importanti delle varie zone della città (Nome, percentuale di soddisfazione, numero di abitanti) al posto della mappa, sarà inoltre possibile passare dalla visualizzazione della mappa a quella della tabella (o viceversa) attraverso l'utilizzo di un pulsante di selezione.
-- Come analista, circoscrizione o amministratore voglio visualizzare le zone cittadine sotto forma di tabella, così da avere una visualizzazione ordinata secondo i propri criteri delle varie zone
-- Come analista, circoscrizione o amministratore voglio passare dalla visualizzazione tramite tabella a quella tramite mappa, così da avere una migliore visione di insieme della soddisfazione cittadina
-
-### RF 12 Accesso come analista, circoscrizione o amministratore
-Successivamente al processo di autenticazione per gli utenti: analista, circoscrizione e amministratore, verranno reindirizzati alla Homepage modificata con la visualizzazione della città sotto forma di tabella.
-- Come analista, circoscrizione o amministratore voglio visualizzare subito la Homepage modificata con la visualizzazione tramite tabella, così da poter avere fin da subito la visione della situazione cittadina senza dover cambiare pagina
-
-### RF 13 Visualizzazione dati analista
-Il sistema deve permettere agli analisti di visualizzare, quando si accede alle singole zone, una visione più specifica dei dati. Per semplificare il più possibile l'interfaccia verrà fornito un raggruppamento dei dati per tipologia. Dovrà inoltre essere possibile selezionare la tipologia di informazioni permettendo una visualizzazione settoriale e specifica del quartiere in questione.
-- Come analista voglio accedere ad una quantità maggiore di dati, così da poter avere una migliore idea delle cause dell'insoddisfazione del quartiere analizzato
-- Come analista voglio cambiare settore di visualizzazione delle informazioni, così da visualizzare i dati di interesse dell'utente
+### RF 13 Accesso completo agli attributi
+Il sistema deve permettere agli utenti analisti di poter avere accesso ad un maggior numero di attributi e ad una categorizzazione di essi in base all'area tematica degli stessi. In particolare deve essere possibile, ogni tal volta che un'utente analista si trova all'interno della "visualizzazione zona", visualizzare tutte le diverse categorie di attributi relativi a tale zona. Deve infine essere possibile selezionare la categoria della quale si vuole visualizzare gli attributi permettendo una visualizzazione settoriale e specifica del quartiere in questione.
+- Come analista voglio poter visualizzare un maggior numero di attributi appartenenti ad una data zona geografica, così da poter comprendere a fondo le motivazione di un corrispettivo livello di soddisfazione
+- Come analista voglio poter categorizzare gli attributi appartenenti alla singola zona, così da poter confrontare assieme dati che hanno una correlanza tra gli stessi

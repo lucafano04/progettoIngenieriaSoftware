@@ -131,21 +131,12 @@ router.post('/',async(req,res)=>{
         return;
     }
     //prendo il titolo e la data di inizio del sondaggio, se questi non sono presenti nel corpo della richiesta rispondo con un errore
-    const {titolo, dataInizio}= req.body;
-    if(!titolo || !dataInizio){
+    const {titolo}= req.body;
+    if(!titolo){
         const response: Errors ={
             code: 400,
             message: RESPONSE_MESSAGES[400],
-            details: "Campi titolo, dataInizio mancanti",
-        }
-        res.status(400).json(response)
-        return;
-    }
-    if(!dataInizio.match(/^\d{4}-\d{2}-\d{2}$/)){
-        const response: Errors ={
-            code: 400,
-            message: RESPONSE_MESSAGES[400],
-            details: "Data di inizio non valida, deve essere nel formato 'YYYY-MM-DD'",
+            details: "Campi titolo mancanti",
         }
         res.status(400).json(response)
         return;
@@ -155,7 +146,7 @@ router.post('/',async(req,res)=>{
     //creo un nuovo sondaggio e lo salvo nel database
     let nuovoSondaggio= new db.models.Sondaggio({
         titolo: titolo,
-        dataInizio: new Date(dataInizio),
+        dataInizio: new Date(),
         isAperto: true,
         statoApprovazione: 'In attesa', //In attesa dovrebbe essere il valore di default??
         sondaggista: user.self.split('/').pop()

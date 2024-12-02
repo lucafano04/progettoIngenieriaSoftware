@@ -201,10 +201,6 @@ components:
         titolo:
           type: string
           description: Titolo del sondaggio.
-        dataInizio:
-          type: string
-          description: Data di inizio del sondaggio.
-          format: date
     SondaggioBase: 
       description: Oggetto contenente le informazioni di base di un sondaggio.
       type: object
@@ -214,6 +210,10 @@ components:
         self:
           type: string
           description: URL della risorsa.
+        dataInizio:
+          type: string
+          description: Data di inizio del sondaggio.
+          format: date
         isAperto:
           type: boolean
           description: Indica se il sondaggio è aperto (in corso) o chiuso.
@@ -667,8 +667,6 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - "$ref": "#/components/schemas/AddSondaggio"
               type: object
               properties:
                 isAperto:

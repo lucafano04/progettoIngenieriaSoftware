@@ -39,13 +39,12 @@ app.use(BASE_URL + '/generalInfo', generalInfo);
 
 
 // Imposto l'uso del middleware checker per controllare i token di autenticazione, tutte le route dopo questa riga eseguiranno il controllo del token per assicurarsi che gli utenti siano autenticati
-app.use(checker);
 
 // Imposto il router per i voti
-app.use(BASE_URL + '/voti', voti);
+app.use(BASE_URL + '/voti', checker, voti);
 
 // Imposto il router per i sondaggi
-app.use(BASE_URL + '/sondaggi', sondaggi);
+app.use(BASE_URL + '/sondaggi', checker, sondaggi);
 
 
 export default app; // Export the app object

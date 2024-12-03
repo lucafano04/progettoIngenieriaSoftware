@@ -8,7 +8,7 @@ const BASE_URL = process.env.BASE_API || '/api/v1'; // Define the base URL for t
 const AVATAR_BASE = process.env.AVATAR_BASE || 'https://gravatar.com/avatar/'
 const AVATAR_QUERY = process.env.AVATAR_QUERY || 's=400&d=identicon&r=x'; // Define the query string for the avatar image
 const JWT_SECRET = process.env.JWT_SECRET || '';
-const RANDOM_SECRET = /*process.env.RANDOM_SECRET ||*/  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+const RANDOM_SECRET = process.env.RANDOM_SECRET ||  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
 const RESPONSE_MESSAGES = {
     400: 'Richiesta non valida',

@@ -5,7 +5,7 @@ import ToastService from 'primevue/toastservice';
 
 import Aura from '@primevue/themes/aura'
 
-import { MegaMenu,Panel } from 'primevue';
+import { Divider, MegaMenu,Panel } from 'primevue';
 
 import App from './App.vue'
 
@@ -15,20 +15,23 @@ import './index.css'
 
 import { getSession } from './utils/utenti';
 import { Utenti } from '../types';
-import { Home, Login } from './components';
+import { Home, Login, Sondaggi } from './components';
 
 
 const user = ref<Utenti.User | null>(null);
-
+const mounted = ref(false);
 const app = createApp(App,{user});
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', component: Home },
-        { path: '/login', component: Login , props: { user } }
+        { path: '/login', component: Login , props: { user } },
+        { path: '/sondaggi', component: Sondaggi, props: { user } }
     ]
 });
+
+const notAuthRoutes = ['/login', '/'];
 
 
 app.use(PrimeVue, {
@@ -41,6 +44,7 @@ app.use(PrimeVue, {
                 name: 'primevue',
                 order: 'tailwind-base, primevue, tailwind-utilities'
             },
+            ripple: true,
         }
     }
 });
@@ -49,9 +53,36 @@ app.use(ToastService)
 
 app.component('MegaMenu', MegaMenu)
 app.component('Panel', Panel)
+app.component('Divider', Divider)
 
-app.mount('#app')
+app.mount('#app');
 
-getSession().then((data) => {
-    user.value = data;
+asyncFun();
+async function asyncFun(){
+    const old = mounted.value;
+    user.value = await getSession();
+    mounted.value = true;
+
+    if(!old)
+        router.push(router.currentRoute.value.path);
+};
+router.afterEach((to, from) => {
+    if(user.value === null && !notAuthRoutes.includes(to.path) && mounted.value){
+        router.push('/login');
+    }else {
+        if(user.value !== null){
+            console.log(user.value.ruolo);
+            switch (to.path) {
+                case '/sondaggi':
+                    if(user.value.ruolo !== 'Amministratore' && user.value.ruolo !== 'Sondaggista')
+                        router.push('/');
+                    break;
+                case '/login':
+                    router.push('/');
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 });

@@ -103,7 +103,7 @@
 </script>
 
 <template>
-    <div class="tw-p-2">
+    <div class="tw-p-2 tw-flex tw-flex-col tw-h-dvh">
         <Toast />
         <MegaMenu :model="menuItems" breakpoint="600px">
             <template #start>
@@ -128,7 +128,7 @@
                 </SplitButton>
             </template>
         </MegaMenu>
-        <div class="tw-m-5 tw-mt-1 tw-container tw-mx-auto">
+        <div class="tw-m-5 tw-container tw-mx-auto tw-grow">
             <RouterView />
         </div>
     </div>

@@ -60,7 +60,7 @@
 </script>
 <template>
     <Dialog modal :close-on-escape=true v-model:visible="optionsOpen" :show-header=true header="Opzioni Visualizzazione" :draggable="false">
-        <FloatLabel variant="in">
+        <FloatLabel variant="on">
             <Select v-model:model-value="quartCirc" :options="[{name: 'Quartieri', value: false}, {name: 'Circoscrizioni', value: true}]" optionLabel="name" optionValue="value" inputId="quartCirc" class="tw-w-full"/>
             <label for="quartCirc">Visualizza:</label>
         </FloatLabel>

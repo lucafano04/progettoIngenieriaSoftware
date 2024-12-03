@@ -12,7 +12,17 @@ const router = Router();
 router.post('/', async (req, res) => {
     // Get email and password from request body
     const { email, password } = req.body;
-
+    
+    // Check if the email and password are present
+    if(!email || !password){
+        const response: Errors = {
+            code: 400,
+            message: RESPONSE_MESSAGES[400],
+            details: 'Email and password are required'
+        }
+        res.status(400).json(response);
+        return;
+    }
     // Find user with email
     const user = await User.findOne({ email });
     if(!user){

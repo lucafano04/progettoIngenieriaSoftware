@@ -1,6 +1,5 @@
 type Add = {
-    titolo: String,
-    dataInizio: Date
+    titolo: string,
 };
 
 export default Add;

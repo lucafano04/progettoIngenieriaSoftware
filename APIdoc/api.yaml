@@ -241,8 +241,9 @@ components:
       properties:
         eta:
           type: integer
-          description: Età dell'utente che ha effettuato il voto.
+          description: Età dell'utente che ha effettuato il voto. Può essere null se non specificata.
           minimum: 0
+          nullable: true
         voto:
           type: integer
           description: Voto assegnato al quartiere.

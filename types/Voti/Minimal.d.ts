@@ -1,5 +1,5 @@
 type Minimal = {
-    eta: number,
+    eta: number | undefined,
     voto: number,
     dataOra: Date
 }

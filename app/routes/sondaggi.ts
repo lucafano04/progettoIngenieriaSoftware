@@ -357,6 +357,8 @@ router.delete('/:id',async (req,res)=>{
 
     //elimino il sondaggio dal database
     await db.models.Sondaggio.findByIdAndDelete(sondaggioDB._id);
+    // elimino tutti i voti relativi al sondaggio appena eliminato
+    await db.models.Voti.deleteMany({sondaggio: sondaggioDB._id});
 
     //invio la risposta di successo
     res.status(204).send();

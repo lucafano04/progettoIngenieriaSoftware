@@ -1,5 +1,5 @@
 {
     "watch": ["app"],
     "ext": "ts,json",
-    "exec": "ts-node -r dotenv/config ./index.ts"
+    "exec": "tsx -r dotenv/config ./index.ts"
 }

@@ -1,7 +1,7 @@
 import nodeExternals from "webpack-node-externals";
 import path from "path"
 
-module.exports = {
+export default {
     entry: "./index.ts",
     target: "node",
     externals: [nodeExternals()],

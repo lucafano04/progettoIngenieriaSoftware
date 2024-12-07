@@ -1,6 +1,6 @@
 import { Quartieri } from "../../types";
 
-async function getQuartieri(deepData:boolean): Promise<Quartieri.Quartiere[] | Quartieri.Minimal[]>{
+async function getQuartieri(deepData:boolean = false): Promise<Quartieri.Quartiere[] | Quartieri.Minimal[]>{
     const quartieri = await fetch(`/api/v1/quartieri?deepData=${deepData}`, {
         method: 'GET',
         headers: {

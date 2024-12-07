@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { onMounted, ref } from 'vue';
-    import { Card, useToast, InputText, FloatLabel, Button } from 'primevue';
+    import { Card, useToast, InputText, FloatLabel, Button, Skeleton } from 'primevue';
     import ListaSondaggi from './ListaSondaggi.vue';
     import { User } from '../../../types/Utenti';
     import { Sondaggi } from '../../../types';
@@ -16,9 +16,11 @@
     const over = ref<boolean>(false);
     const sondaggioAdd = ref<Sondaggi.Add>({titolo: '',})
     const loadingAdd = ref<boolean>(false);
+    const preLoading = ref<boolean>(false);
     onMounted(async () => {
         try{
             sondaggi.value = await getSondaggi();
+            preLoading.value = true;
         } catch(e: any){
             if(e instanceof Error)
                 toast.add({severity: 'error', summary: 'Errore caricamento sondaggi', detail: e.message, life: 5000});
@@ -31,7 +33,6 @@
         if (target.files) {
             file.value = target.files[0];
         }
-        console.log(file.value);
     }
     function dropAction(event: DragEvent) {
         event.preventDefault();
@@ -41,7 +42,6 @@
         if (event.dataTransfer) {
             file.value = event.dataTransfer.files[0];
         }
-        console.log(file.value);
     }
     function preventDefaults(event: DragEvent) {
         event.preventDefault();
@@ -135,6 +135,7 @@
             <div class="tw-grid tw-gap-6 tw-grid-cols-1 tw-my-4">
                 <h1 class="tw-text-2xl">Sessioni in lavorazione</h1>
                 <ListaSondaggi :sondaggi="sondaggi.filter(sondaggio=>sondaggio.isAperto)" />
+                <Skeleton v-if="!preLoading" height="66px" />
             </div>
             <div class="tw-my-4">
                 <Divider />
@@ -142,6 +143,7 @@
             <div class="tw-grid tw-gap-6 tw-grid-cols-1 tw-my-4">
                 <h1 class="tw-text-2xl">Sessioni caricate</h1>
                 <ListaSondaggi :sondaggi="sondaggi.filter(sondaggio=>!sondaggio.isAperto)" />
+                <Skeleton v-if="!preLoading" v-for="i in 5" :key="i" height="66px" />
             </div>
         </div>
     </div>

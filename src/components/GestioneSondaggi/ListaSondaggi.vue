@@ -1,6 +1,5 @@
 <script setup lang="ts">
     import { Sondaggi } from '../../../types';
-    import { Button } from 'primevue';
     import { useRouter } from 'vue-router';
 
     const props = defineProps<{
@@ -26,10 +25,9 @@
                 <p>Stato sessione: </p>
                 <p :class="{'dark:tw-text-green-300 tw-text-green-800': !sondaggio.isAperto, 'tw-text-red-700 dark:tw-text-red-200': sondaggio.isAperto, 'tw-ml-2': true}">{{ sondaggio.isAperto ? 'Non' : '' }} Completata </p>
             </div>
-            <div :class="{'tw-flex tw-items-center':true, 'tw-justify-end':sondaggio.isAperto, 'tw-justify-start': !sondaggio.isAperto}">
-                <Button label="Modifica" icon="pi pi-pencil" :class="{'tw-mx-2 tw-text-black dark:tw-text-white':true, 'tw-hidden': !sondaggio.isAperto}" variant="text" @click="onClickSondaggio(sondaggio, $event)" />
-                <p :class="{'tw-hidden': sondaggio.isAperto, 'tw-mx-2': !sondaggio.isAperto}">Verifica dati: </p>
-                <p :class="{'tw-hidden': sondaggio.isAperto,'dark:tw-text-green-300 tw-text-green-800': sondaggio.statoApprovazione === 'Approvato', 'tw-text-red-800 dark:tw-text-red-200': sondaggio.statoApprovazione === 'Rifiutato', 'tw-text-yellow-800 dark:tw-text-yellow-200': sondaggio.statoApprovazione === 'In attesa'}">{{ sondaggio.statoApprovazione }}</p>
+            <div v-if="!sondaggio.isAperto" class="tw-flex tw-items-center tw-justify-start">
+                <p class="tw-mx-2">Verifica dati: </p>
+                <p :class="{'dark:tw-text-green-300 tw-text-green-800': sondaggio.statoApprovazione === 'Approvato', 'tw-text-red-800 dark:tw-text-red-200': sondaggio.statoApprovazione === 'Rifiutato', 'tw-text-yellow-800 dark:tw-text-yellow-200': sondaggio.statoApprovazione === 'In attesa'}">{{ sondaggio.statoApprovazione }}</p>
             </div>
         </div>
     </div>

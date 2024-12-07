@@ -1,6 +1,6 @@
 import { Circoscrizioni } from "../../types";
 
-async function getCircoscrizioni(deepData: boolean): Promise<Circoscrizioni.Circoscrizione[] | Circoscrizioni.Minimal[]>{
+async function getCircoscrizioni(deepData: boolean = false): Promise<Circoscrizioni.Circoscrizione[] | Circoscrizioni.Minimal[]>{
     const circoscrizioni = await fetch(`/api/v1/circoscrizioni?deepData=${deepData}`, {
         method: 'GET',
         headers: {

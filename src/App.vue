@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { MegaMenu, SplitButton, useToast, Toast } from 'primevue';
+    import { MegaMenu, SplitButton, useToast, Toast, ConfirmDialog } from 'primevue';
     import { MenuItem } from 'primevue/menuitem';
     import { Ref, ref, watch } from 'vue';
     import { Utenti } from '../types'
@@ -105,6 +105,7 @@
 <template>
     <div class="tw-p-2 tw-flex tw-flex-col tw-h-dvh">
         <Toast />
+        <ConfirmDialog />
         <MegaMenu :model="menuItems" breakpoint="600px">
             <template #start>
                 <div class="tw-flex tw-items-center tw-justify-center">

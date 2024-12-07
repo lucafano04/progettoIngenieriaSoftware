@@ -2,6 +2,7 @@ import { createApp, ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
 
 import Aura from '@primevue/themes/aura'
 
@@ -15,7 +16,7 @@ import './index.css'
 
 import { getSession } from './utils/utenti';
 import { Utenti } from '../types';
-import { Home, Login, Sondaggi } from './components';
+import { Home, Login, ModificaSondaggio, Sondaggi } from './components';
 
 
 const user = ref<Utenti.User | null>(null);
@@ -27,7 +28,8 @@ const router = createRouter({
     routes: [
         { path: '/', component: Home },
         { path: '/login', component: Login , props: { user } },
-        { path: '/sondaggi', component: Sondaggi, props: { user } }
+        { path: '/sondaggi', component: Sondaggi, props: { user } },
+        { path: '/sondaggi/:id', component: ModificaSondaggio, props: { user } },
     ]
 });
 
@@ -50,6 +52,7 @@ app.use(PrimeVue, {
 });
 app.use(router)
 app.use(ToastService)
+app.use(ConfirmationService)
 
 app.component('MegaMenu', MegaMenu)
 app.component('Panel', Panel)

@@ -35,12 +35,14 @@ router.get('/', async (req,res)=>{
 
         //trovo la popolazione totale di Trento sommando la popolazione di ogni circoscrizione
         const popolazioneTotale = datiGeneraliCircoscrizioni.reduce((acc,curr)=>acc+curr.popolazione,0);
+        // trovo la popolazione dove sono stati fatti dei sondaggi
+        const popolazioneSondaggi = datiGeneraliCircoscrizioni.reduce((acc,curr)=>acc+curr.soddisfazioneMedia!==0?curr.popolazione:0,0);
         //trovo la superficie totale di Trento sommando la superficie di ogni circoscrizione
         const superficieTotale = datiGeneraliCircoscrizioni.reduce((acc,curr)=>acc+curr.superficie,0);
         //trovo l'età media di Trento facendo una media dell'età nelle circoscrizioni pesata in base alla popolazione
         const etaMediaTotale = datiGeneraliCircoscrizioni.reduce((acc,curr)=>acc+curr.etaMedia*(curr.popolazione/popolazioneTotale),0);
         //trovo la soddisfazione media di Trento facendo una media della soddisfazione nelle circoscrizioni pesata in base alla popolazione
-        const soddisfazioneTotale = datiGeneraliCircoscrizioni.reduce((acc,curr)=>acc+curr.soddisfazioneMedia*(curr.popolazione/popolazioneTotale),0);
+        const soddisfazioneTotale = datiGeneraliCircoscrizioni.reduce((acc,curr)=>acc+curr.soddisfazioneMedia*(curr.popolazione/popolazioneSondaggi),0);
         
         //creo un oggetto contenente i quattro dati da mandare in risposta
         const datiGeneraliCitta={

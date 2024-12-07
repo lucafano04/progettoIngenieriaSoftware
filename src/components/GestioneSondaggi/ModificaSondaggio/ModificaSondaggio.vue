@@ -2,7 +2,7 @@
     import { onMounted, ref } from 'vue';
     import { useRoute, useRouter } from 'vue-router';
     import { useToast, Card, Skeleton, DataTable, Column, Button, Select, FloatLabel, VirtualScroller, useConfirm} from 'primevue';
-    import { addVoto, deleteVoto, getSondaggio } from '../../../utils/sondaggi';
+    import { addVoto, deleteSondaggio, deleteVoto, getSondaggio, getVoti, modificaSondaggio } from '../../../utils/sondaggi';
     import { Circoscrizioni, Sondaggi, Utenti, Voti } from '../../../../types';
     import { getQuartieri } from '../../../utils/quartieri';
     import { getCircoscrizioni } from '../../../utils/circoscrizioni';
@@ -86,16 +86,17 @@
     */
     function updateSondaggio(newSondaggio: Sondaggi.Sondaggio){
         sondaggio.value = newSondaggio;
-        sondaggio.value.voti = newSondaggio.voti.sort((a,b) => new Date(b.dataOra).getTime() - new Date(a.dataOra).getTime());
-        // Calcolo età media
-        etaMedia.value = newSondaggio.voti.length > 0 ?Math.round(newSondaggio.voti.reduce((acc, curr) => curr.eta ? acc + curr.eta: acc, 0) / newSondaggio.voti.filter(v => v.eta).length) : null;
-        updateTable(newSondaggio.voti);
+        updateVoti(newSondaggio.voti);
     }
     /**
      * Funzione per aggiornare la tabella dei voti per quartiere
      * @param {Voti.Voto[]} voti il vettore di voti sul quale basare la tabella
      */
-    function updateTable(voti: Voti.Voto[]){
+    function updateVoti(voti: Voti.Voto[]){
+        if(sondaggio.value !== null)
+            sondaggio.value.voti =voti.sort((a,b) => new Date(b.dataOra).getTime() - new Date(a.dataOra).getTime());
+        // Calcolo età media
+        etaMedia.value = voti.length > 0 ?Math.round(voti.reduce((acc, curr) => curr.eta ? acc + curr.eta: acc, 0) / voti.filter(v => v.eta).length) : null;
         // Imposto la referenza al risultato della funzione interna
         votiPerQuartiere.value = voti.reduce((acc: {quartiere: {self: string, nome: string}, numeroVoti: number}[], curr) => {
             // Verifico se per il voto che sto considerando esiste già una riga corrispondente
@@ -116,7 +117,7 @@
             // Chiamo la funzione per rimuovere il voto
             await deleteVoto(voto);
             // Aggiorno il sondaggio
-            updateSondaggio(await getSondaggio(param.id.toString()));
+            updateVoti(await getVoti(param.id.toString()));
             // Notifico l'utente del successo
             toast.add({severity: 'success', summary: 'Successo', detail: 'Voto rimosso con successo', life: 3000});
         }catch(e){
@@ -196,8 +197,8 @@
             // Imposto il caricamento a false
             loadingSend.value = false;
             try{
-                // Mentre è visualizzata la schemata 2 ricarico il sondaggio, in modo da aggiornare i dati (tabella/media, ecc...)
-                updateSondaggio(await getSondaggio(param.id.toString()));
+                // Mentre è visualizzata la schemata 2 ricarico i voti, in modo da aggiornare i dati (tabella/media, ecc...)
+                updateVoti(await getVoti(param.id.toString()));
             }catch (e){
                 // Eseguo il catch di eventuali errori - in ogni caso notifico l'utente, se l'errore è conosciuto allora con il messaggio altrimenti errore generico
                 if(e instanceof Error)
@@ -215,8 +216,8 @@
             loadingSend.value = false;
         }
     }
-    async function handlerDelete(){
-        await confirm.require({
+    function handlerDelete(){
+        confirm.require({
             header: 'Conferma eliminazione',
             icon: 'pi pi-exclamation-triangle',
             acceptIcon: 'pi pi-trash',
@@ -227,16 +228,24 @@
             rejectLabel: 'Annulla',
             message: 'Sei sicuro di voler cancellare definitivamente il sondaggio?',
             accept: async () => {
-                
+                try{
+                    await deleteSondaggio(param.id.toString());
+                    toast.add({severity: 'success', summary: 'Successo', detail: 'Sondaggio eliminato con successo', life: 3000});
+                    router.push('/sondaggi');
+                }catch(e){
+                    if(e instanceof Error)
+                        toast.add({severity: 'error', summary: 'Errore', detail: e.message, life: 5000});
+                    else
+                        toast.add({severity: 'error', summary: 'Errore', detail: 'Errore sconosciuto', life: 5000});
+                }
             },
             reject: () => {
                 toast.add({severity: 'info', summary: 'Info', detail: 'Operazione annullata', life: 3000});
             },
-        
         });
     }
-    async function handlerClose(){
-        await confirm.require({
+    function handlerClose(){
+        confirm.require({
             header: 'Conferma chiusura',
             icon: 'pi pi-exclamation-triangle',
             acceptIcon: 'pi pi-check',
@@ -247,7 +256,16 @@
             rejectLabel: 'Annulla',
             message: 'Sei sicuro di voler chiudere il sondaggio?',
             accept: async () => {
-                
+                try{
+                    await modificaSondaggio(param.id.toString(), false);
+                    toast.add({severity: 'success', summary: 'Successo', detail: 'Sondaggio chiuso con successo', life: 3000});
+                    router.push('/sondaggi');
+                }catch(e){
+                    if(e instanceof Error)
+                        toast.add({severity: 'error', summary: 'Errore', detail: e.message, life: 5000});
+                    else
+                        toast.add({severity: 'error', summary: 'Errore', detail: 'Errore sconosciuto', life: 5000});
+                }
             },
             reject: () => {
                 toast.add({severity: 'info', summary: 'Info', detail: 'Operazione annullata', life: 3000});
@@ -318,7 +336,7 @@
             </template>
             <template #content>
                 <div class="tw-h-full">
-                    <VirtualScroller v-if="sondaggio" :items="sondaggio.voti" :itemSize="50" class="tw-h-full">
+                    <VirtualScroller v-if="sondaggio&&sondaggio.voti.length>0" :items="sondaggio.voti" :itemSize="50" class="tw-h-full">
                         <template v-slot:item="{item}">
                             <div class="tw-bg-gray-700 tw-my-2 tw-w-full tw-text-center tw-text-white tw-rounded-xl tw-text-sm tw-flex tw-justify-between tw-align-center" style="height: 50px;">
                                 <span class="tw-mx-2 tw-my-auto">
@@ -328,8 +346,8 @@
                             </div>
                         </template>
                     </VirtualScroller>  
-                    <div v-else><Skeleton height="2rem" v-for="i in 5" :key="i" class="tw-my-2"/></div>
-                    <div v-if="sondaggio?.voti.length === 0" class="tw-text-center tw-text-gray-500 tw-mt-2">Nessun voto presente</div>
+                    <div v-else-if="!sondaggio"><Skeleton height="2rem" v-for="i in 5" :key="i" class="tw-my-2"/></div>
+                    <div v-else class="tw-text-center tw-text-gray-500 tw-mt-2">Nessun voto presente</div>
                 </div>
             </template>
         </Card>

@@ -60,6 +60,61 @@ async function getSondaggio(id:string): Promise<Sondaggi.Sondaggio>{
     throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
 }
 
+async function modificaSondaggio(id: string, isAperto: boolean): Promise<string> {
+    const token = sessionStorage.getItem('token');
+    if(!token)
+        throw new Error('Non sei autenticato');
+    const response = await fetch(`/api/v1/sondaggi/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({isAperto})
+    });
+    if(response.status === 200)
+        return response.headers.get('Location') || '';
+    if(response.status)
+        throw new Error(await response.text());
+    throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
+}
+
+async function deleteSondaggio(sondaggio: string) {
+    const token = sessionStorage.getItem('token');
+    if(!token)
+        throw new Error('Non sei autenticato');
+    const response = await fetch(`/api/v1/sondaggi/${sondaggio}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    });
+    if(response.status === 204)
+        return;
+    if(response.status)
+        throw new Error(await response.text());
+    throw new Error('Errore sconosciuto nell\'eliminazione del sondaggio');
+}
+
+async function getVoti(sondaggio: string): Promise<Voti.Voto[]>{
+    const token = sessionStorage.getItem('token');
+    if(!token)
+        throw new Error('Non sei autenticato');
+    const response = await fetch(`/api/v1/voti?idSondaggio=${sondaggio}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    });
+    if(response.status === 200)
+        return await response.json() as Voti.Voto[];
+    if(response.status)
+        throw new Error(await response.text());
+    throw new Error('Errore sconosciuto nel caricamento dei voti');
+}
+
 /**
  * Funzione per aggiungere un voto ad un sondaggio esistente
  * 
@@ -83,7 +138,7 @@ async function addVoto(sondaggio: string, voto: Voti.Add): Promise<string> {
         return response.headers.get('Location') || '';
     if(response.status)
         throw new Error(await response.text());
-    throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
+    throw new Error('Errore sconosciuto nell\'aggiunta del voto');
 }
 
 async function deleteVoto(voto: Voti.Voto) {
@@ -101,13 +156,16 @@ async function deleteVoto(voto: Voti.Voto) {
         return;
     if(response.status)
         throw new Error(await response.text());
-    throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
+    throw new Error('Errore sconosciuto nell\'eliminazione del voto');
 }
 
 const sondaggi = {
     getSondaggi,
     aggiungiSondaggio,
     getSondaggio,
+    modificaSondaggio,
+    deleteSondaggio,
+    getVoti,
     addVoto,
     deleteVoto
 };
@@ -118,6 +176,9 @@ export {
     getSondaggi,
     aggiungiSondaggio,
     getSondaggio,
+    modificaSondaggio,
+    deleteSondaggio,
+    getVoti,
     addVoto,
     deleteVoto
 };

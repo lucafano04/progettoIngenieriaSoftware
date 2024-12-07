@@ -92,8 +92,9 @@
                 <LPolygon 
                     :key="quartiere.self" 
                     :lat-lngs="quartiere.coordinate.map(c => [c[1], c[0]])" 
-                    :color="getColorFromSoddisfazione(quartiere.soddisfazioneMedia,zonaSel!==quartiere.self&&zonaSel!=='')" :fill-opacity="0.3" :name="quartiere.nome.toString()" :interactive="true"
+                    :fillColor="getColorFromSoddisfazione(quartiere.soddisfazioneMedia,zonaSel!==quartiere.self&&zonaSel!=='')" :fill-opacity="0.3" :name="quartiere.nome.toString()" :interactive="true"
                     @click="handlerZona(quartiere)"
+                    :color="zonaSel!==quartiere.self&&zonaSel!==''?'#A0A0A0':'#000000'"
                     />
                     <!-- <LMarker
                         :key="quartiere.self"

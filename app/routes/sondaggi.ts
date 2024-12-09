@@ -42,9 +42,9 @@ router.get('/',async(req,res)=>{
         let sondaggiDB = await db.models.Sondaggio.find();
 
         //filtro sondaggiDB per selezionare solo i sondaggi che l'utente ha il permesso di vedere
-        sondaggiDB = sondaggiDB.filter(async (sondaggio) => {
-            return user.ruolo === 'Amministratore' || ( user.ruolo == 'Sondaggista' && sondaggio.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())));
-        })
+        sondaggiDB = sondaggiDB.filter(sondaggio =>
+            user.ruolo === 'Amministratore' || ( user.ruolo === 'Sondaggista' && sondaggio.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())))
+        )
 
         //prendo il parametro deepData, che indica se dovrò restituire sondaggi completi o minimal
         const deepData: boolean = req.query.deepData === 'true';
@@ -357,6 +357,8 @@ router.delete('/:id',async (req,res)=>{
 
     //elimino il sondaggio dal database
     await db.models.Sondaggio.findByIdAndDelete(sondaggioDB._id);
+    // elimino tutti i voti relativi al sondaggio appena eliminato
+    await db.models.Voti.deleteMany({sondaggio: sondaggioDB._id});
 
     //invio la risposta di successo
     res.status(204).send();

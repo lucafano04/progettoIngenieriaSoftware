@@ -1,7 +1,7 @@
 import express from 'express';                                           
 import db from '../db'; // Import the database connection from the db file
 import { Circoscrizioni, Errors, Quartieri } from '../../types';
-import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMedia } from '../utils/circoscrizioni';
+import { getCircoscrizioneWithSoddisfazioneMedia, getCircoscrizioneWithSoddisfazioneMediaNoC, getCircoscrizioniWithSoddisfazioneMedia, getCircoscrizioniWithSoddisfazioneMediaNoC } from '../utils/circoscrizioni';
 import {Types} from "mongoose";
 import { BASE_URL, RESPONSE_MESSAGES } from '../variables';
 
@@ -12,23 +12,27 @@ const router = express.Router(); // Create a new router
 router.get('/', async (req, res) => {
     // Parametro deepData che indica se restituire tutti i dati del quartiere o solo quelli base
     const deepData: boolean = req.query.deepData === 'true';
+    // Parametro coordinate che indica se restituire le coordinate del quartiere (true di default, false per non restituire le coordinate)
+    const coordinate: boolean = req.query.coordinate !== 'false';
     // Ottengo tutti i quartieri dal DB
-    let quartieriDB = await db.models.Quartiere.find();
+    // Se coordinate è false, non restituisco le coordinate
+    let quartieriDB = await db.models.Quartiere.find({}, coordinate ? {} : { coordinate: 0 });
     
     // Tanti calcoli per trasformare QuartiereDB in Quartiere
     // Es. calcolare la soddisfazione media
     try{
-        // Oggetto da restituire che può essere di due tipi: Quartiere[] o QuartiereBase[] a seconda del valore di deepData
-        // Questo oggetto non conterrà mai tipi misti di Quartiere e QuartiereBase (o tutti Quartiere o tutti QuartiereBase)
-        let quartieri: Quartieri.Quartiere[] | Quartieri.Minimal[];
-        const circoscrizioniBase: Circoscrizioni.Minimal[] = await getCircoscrizioniWithSoddisfazioneMedia();
+        // Oggetto da restituire che può essere di quattro tipi: Quartiere[], Minimal[], QuartiereNoC[], MinimalBase[] a seconda dei parametri deepData e coordinate
+        // Questo oggetto non conterrà mai tipi misti di Quartiere, Minimal, QuartiereNoC e MinimalBase sono o tutti Quartiere o tutti Minimal, ecc...
+        let quartieri: Quartieri.Quartiere[] | Quartieri.Minimal[] | Quartieri.QuartiereNoC[] | Quartieri.MinimalBase[];
+        // Ottengo le circoscrizioni con la soddisfazione media (con o senza coordinate)
+        const circoscrizioniBase: Circoscrizioni.Minimal[] | Circoscrizioni.MinimalBase[] = coordinate ? await getCircoscrizioniWithSoddisfazioneMedia() : await getCircoscrizioniWithSoddisfazioneMediaNoC();
         // Se deepData è true, restituisco tutti i dati altrimenti solo i dati base (come definito nell'API doc)
         // Se deepData è assente/`undefined`/`null` lo tratto come `false`
         if(deepData){
             // Caso deepData = true quindi voglio tutti i dati del quartiere non solo quelli base
             quartieri = await Promise.all(quartieriDB.map(async (quartiere) => {
                 // Cerco la circoscrizione associata al quartiere
-                const cirBase : Circoscrizioni.Minimal | undefined = circoscrizioniBase.find(
+                const cirBase : Circoscrizioni.Minimal | Circoscrizioni.MinimalBase | undefined = circoscrizioniBase.find(
                     (cir) => 
                         new Types.ObjectId(cir.self.split('/').pop()).equals(quartiere.circoscrizione) // creo un oggetto ObjectId con l'id della circoscrizione estratto dalla stringa self e controllo se è uguale all'id della circoscrizione del quartiere 
                 );
@@ -44,10 +48,10 @@ router.get('/', async (req, res) => {
                 // Calcolo la media dei voti del quartiere
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
-                const quartiereRet: Quartieri.Quartiere = {
+                const quartiereRet: Quartieri.Quartiere | Quartieri.QuartiereNoC = {
                     self: `${BASE_URL}/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
-                    coordinate: quartiere.coordinate,
+                    ...coordinate ? { coordinate: quartiere.coordinate } : {},
                     circoscrizione: cirBase,
                     etaMedia: quartiere.etaMedia,
                     interventiPolizia: quartiere.interventiPolizia,
@@ -64,7 +68,7 @@ router.get('/', async (req, res) => {
             // Caso deepData = false quindi voglio solo i dati base del quartiere
             quartieri = await Promise.all(quartieriDB.map(async (quartiere) => {
                 // Cerco la circoscrizione associata al quartiere
-                const cirBase : Circoscrizioni.Minimal | undefined = circoscrizioniBase.find(
+                const cirBase : Circoscrizioni.Minimal  | Circoscrizioni.MinimalBase | undefined = circoscrizioniBase.find(
                     (cir) => 
                         new Types.ObjectId(cir.self.split('/').pop()).equals(quartiere.circoscrizione) // creo un oggetto ObjectId con l'id della circoscrizione estratto dalla stringa self e controllo se è uguale all'id della circoscrizione del quartiere 
                 );
@@ -83,7 +87,7 @@ router.get('/', async (req, res) => {
                 const quartiereRet: Quartieri.Minimal = {
                     self: `${BASE_URL}/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
-                    coordinate: quartiere.coordinate,
+                    ...coordinate ? { coordinate: quartiere.coordinate } : {},
                     circoscrizione: cirBase,
                     soddisfazioneMedia: mediaVoti,
                 };
@@ -117,8 +121,9 @@ router.get('/:id', async (req, res) => {
         res.status(400).json(response);
         return;
     }
+    const coordinate = req.query.coordinate !== 'false';
     // Cerco il quartiere nel DB
-    const quartiereDB = await db.models.Quartiere.findById(id);
+    const quartiereDB = await db.models.Quartiere.findById(id, coordinate ? {} : { coordinate: 0 });
     // Se il quartiere non esiste, restituisco un errore
     if(!quartiereDB){
         const response: Errors = {
@@ -131,7 +136,11 @@ router.get('/:id', async (req, res) => {
     }
     try{
         // Cerco la circoscrizione associata al quartiere
-        const circoscrizione = await getCircoscrizioneWithSoddisfazioneMedia(quartiereDB.circoscrizione);
+        let circoscrizione: Circoscrizioni.Minimal | Circoscrizioni.MinimalBase;
+        if(coordinate)
+            circoscrizione = await getCircoscrizioneWithSoddisfazioneMedia(quartiereDB.circoscrizione);
+        else
+            circoscrizione = await getCircoscrizioneWithSoddisfazioneMediaNoC(quartiereDB.circoscrizione);
         // Calcolo la media dei voti del quartiere
         const mediaVoti = await getMediaVoti(quartiereDB);
         // Creo l'oggetto da restituire
@@ -142,7 +151,7 @@ router.get('/:id', async (req, res) => {
             circoscrizione: {
                 self: circoscrizione.self,
                 nome: circoscrizione.nome,
-                coordinate: circoscrizione.coordinate,
+                ...'coordinate' in circoscrizione ? { coordinate: circoscrizione.coordinate } : {},
                 soddisfazioneMedia: circoscrizione.soddisfazioneMedia,
             },
             etaMedia: quartiereDB.etaMedia,

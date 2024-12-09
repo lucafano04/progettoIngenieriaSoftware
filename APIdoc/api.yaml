@@ -92,20 +92,26 @@ components:
         format: "double"
         minimum: 0
         maximum: 100
-    CircoscrizioneBase: 
-      description: Oggetto contenente le informazioni di Base di una circoscrizione.
+    CircoscrizioneBaseNC: 
+      description: Oggetto contenente le informazioni di Base di una circoscrizione. (Senza coordinate)
       type: object
       properties:
-        _id:
+        self:
           type: string
           description: Identificatore univoco della circoscrizione.
         nome:
           type: string
           description: Nome della circoscrizione.
-        coordinate:
-          "$ref": "#/components/schemas/Coordinate"
         soddisfazioneMedia:
           "$ref": "#/components/schemas/Soddisfazione"
+    CircoscrizioneBase: 
+      description: Oggetto contenente le informazioni di Base di una circoscrizione.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/CircoscrizioneBaseNC"
+      properties:
+        coordinate:
+          "$ref": "#/components/schemas/Coordinate"
     Circoscrizione:
       description: Oggetto contenente le informazioni di una circoscrizione.
       allOf:
@@ -117,8 +123,19 @@ components:
           "$ref": "#/components/schemas/ServiziGenerali"
         sicurezza:
           "$ref": "#/components/schemas/Sicurezza"
-    QuartiereBase: 
-      description: Oggetto contenente le informazioni di base di un quartiere.
+    CircoscrizioneNC:
+      description: Oggetto contenente le informazioni di una circoscrizione. (Senza coordinate)
+      allOf:
+        - "$ref": "#/components/schemas/CircoscrizioneBaseNC"
+        - "$ref": "#/components/schemas/DatiBase"
+      type: object
+      properties:
+        servizi:
+          "$ref": "#/components/schemas/ServiziGenerali"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
+    QuartiereBaseNC:
+      description: Oggetto contenente le informazioni di base di un quartiere. (Senza coordinate)
       type: object
       properties:
         self:
@@ -127,16 +144,35 @@ components:
         nome:
           type: "string"
           description: "Nome del quartiere."
-        coordinate:
-          "$ref": "#/components/schemas/Coordinate"
         circoscrizione:
-          "$ref": "#/components/schemas/CircoscrizioneBase"
+          "$ref": "#/components/schemas/CircoscrizioneBaseNC"
         soddisfazioneMedia:
           "$ref": "#/components/schemas/Soddisfazione"
+    QuartiereBase: 
+      description: Oggetto contenente le informazioni di base di un quartiere.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/QuartiereBaseNC"
+      properties:
+        circoscrizione:
+          "$ref": "#/components/schemas/CircoscrizioneBase"
+        coordinate:
+          "$ref": "#/components/schemas/Coordinate"
     Quartiere: 
       description: Oggetto contenente le informazioni di un quartiere.
       allOf:
         - "$ref": "#/components/schemas/QuartiereBase"
+        - "$ref": "#/components/schemas/DatiBase"
+      type: object
+      properties:
+        servizi:
+          "$ref": "#/components/schemas/ServiziGenerali"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
+    QuartiereNC:
+      description: Oggetto contenente le informazioni di un quartiere.
+      allOf:
+        - "$ref": "#/components/schemas/QuartiereBaseNC"
         - "$ref": "#/components/schemas/DatiBase"
       type: object
       properties:
@@ -316,6 +352,14 @@ paths:
             type: boolean
             default: false
           allowEmptyValue: true
+        - name: coordinate
+          in: query
+          description: "Se impostato non impostato o impostato a true restituisce le coordinate di ogni quartiere, altrimenti no."
+          required: false
+          schema:
+            type: boolean
+            default: true
+          allowEmptyValue: true
       responses: 
         200: 
           description: "Risposta con la lista dei quartieri."
@@ -329,6 +373,12 @@ paths:
                   - type: array
                     items: 
                       "$ref": "#/components/schemas/Quartiere"
+                  - type: array
+                    items: 
+                      "$ref": "#/components/schemas/QuartiereNC"
+                  - type: array
+                    items: 
+                      "$ref": "#/components/schemas/QuartiereBaseNC"
       tags:
         - Quartieri
         - Dati Statici
@@ -341,6 +391,14 @@ paths:
         required: true
         schema:
           type: string
+      - name: coordinate
+        in: query
+        description: "Se impostato a true, restituisce le coordinate del quartiere, altrimenti no. Impostato di default a true."
+        required: false
+        schema:
+          type: boolean
+          default: true
+        allowEmptyValue: true
     get: 
       summary: "Ottieni informazioni di un quartiere"
       responses: 
@@ -348,8 +406,10 @@ paths:
           description: "Risposta con le informazioni del quartiere."
           content:
             application/json: 
-              schema: 
-                $ref: "#/components/schemas/Quartiere"
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Quartiere"
+                  - $ref: "#/components/schemas/QuartiereNC"
         404: 
           description: "Quartiere non trovato."
           content: 
@@ -373,6 +433,14 @@ paths:
             type: boolean
             default: false
           allowEmptyValue: true
+        - name: coordinate
+          in: query
+          description: "Se impostato non impostato o impostato a true restituisce le coordinate di ogni circoscrizione, altrimenti no."
+          required: false
+          schema:
+            type: boolean
+            default: true
+          allowEmptyValue: true
       responses:
         200 :
           description: "Successful response"
@@ -386,6 +454,12 @@ paths:
                   - type: "array"
                     items: 
                       "$ref": "#/components/schemas/Circoscrizione"
+                  - type: "array"
+                    items: 
+                      "$ref": "#/components/schemas/CircoscrizioneBaseNC"
+                  - type: "array"
+                    items: 
+                      "$ref": "#/components/schemas/CircoscrizioneNC"
       tags:
         - Circoscrizioni
         - Dati Statici
@@ -398,6 +472,14 @@ paths:
         required: true
         schema:
           type: string
+      - name: coordinate
+        in: query
+        description: "Se impostato a true, restituisce le coordinate della circoscrizione, altrimenti no. Impostato di default a true."
+        required: false
+        schema:
+          type: boolean
+          default: true
+        allowEmptyValue: true
     get: 
       summary: "Ottieni informazioni di una circoscrizione"
       responses: 
@@ -406,7 +488,9 @@ paths:
           content:
             application/json: 
               schema: 
-                $ref: "#/components/schemas/Circoscrizione"
+                oneOf:
+                  - $ref: "#/components/schemas/Circoscrizione"
+                  - $ref: "#/components/schemas/CircoscrizioneNC"
         404: 
           description: "Circoscrizione non trovata."
           content: 

@@ -30,11 +30,11 @@
     async function logoutToast(){
         try{
             const result = await logout();
-            console.log(result);
             if(result){
                 toast.add({severity: 'success', summary: 'Logout', detail: 'Logout effettuato con successo!', life: 5000});
                 user.value = null;
                 history.push('/');
+                dropDownItems.value = dropDownItems.value.filter((item) => ['Home', 'Cambio Lingua'].includes(item.label));
             } else {
                 toast.add({severity: 'error', summary: 'Logout', detail: 'Errore durante il logout!', life: 5000});
             }
@@ -46,7 +46,6 @@
         }
     }
     if(user.value !== null){
-        console.log(user.value);
         dropDownItems.value.push({
             divider: true
         });

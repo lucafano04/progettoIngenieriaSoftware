@@ -5,28 +5,38 @@ import { Circoscrizione } from '../../types/Circoscrizioni';
 
 /**
  * Funzione che restituisce un array di oggetti di tipo CircoscrizioneBase contenente i dati delle circoscrizioni con la relativa soddisfazione media
- * @returns {Promise<Circoscrizioni.Minimal>[]} Un array di oggetti di tipo CircoscrizioneBase contenente i dati delle circoscrizioni con la relativa soddisfazione media
+ * @returns {Promise<Circoscrizioni.Minimal>[]} Un array di oggetti di tipo CircoscrizioneBase o CircoscrizioneBaseNoC contenente i dati delle circoscrizioni con la relativa soddisfazione media (se coordinate è true, altrimenti senza coordinate)
  */
 async function getCircoscrizioniWithSoddisfazioneMedia(): Promise<Circoscrizioni.Minimal[]> {
-    const circoscrizioniDB = await db.models.Circoscrizione.find();
-    const circoscrizioniBase: Circoscrizioni.Minimal[] = await Promise.all(circoscrizioniDB.map(async (circoscrizione) => {
-        const quartieriPerCir = await db.models.Quartiere.find({circoscrizione: circoscrizione._id}).select('_id');
-        // Ottengo gli _id dei sondaggi approvati
-        const sondaggi = await db.models.Sondaggio.find({statoApprovazione: 'Approvato'}).select('_id');
-        // Ottengo i voti dei sondaggi approvati relativi ai quartieri della circoscrizione
-        const voti = await db.models.Voti.find({sondaggio: {$in: sondaggi}, quartiere: {$in: quartieriPerCir}}).select('voto');
-        // Calcolo la media dei voti della circoscrizione
-        const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
-        const cirBase: Circoscrizioni.Minimal = {
+    const circoscrizioniNoC = await getCircoscrizioniWithSoddisfazioneMediaNoC();
+    const circoscrizioni: Circoscrizioni.Minimal[] = await Promise.all(circoscrizioniNoC.map(async (cirBase) => {
+        const coordinate = await db.models.Circoscrizione.findById(cirBase.self.split('/').pop(), {coordinate: 1});
+        if(!coordinate)
+            throw new Error(JSON.stringify({ code: 500, message: "Errore nel server", details: `Coordinate della circoscrizione ${cirBase.nome} non trovate`}));
+        return {
+            ...cirBase,
+            coordinate: coordinate.coordinate
+        }
+    }));
+    return circoscrizioni;
+}
+
+/**
+ * Funzione che restituisce un array di oggetti di tipo CircoscrizioneMinimalBase ovvero contenente i dati delle circoscrizioni con la relativa soddisfazione media senza coordinate
+ * @returns {Promise<Circoscrizioni.MinimalBase[]>} Un array di oggetti di tipo CircoscrizioneMinimalBase contenente i dati delle circoscrizioni con la relativa soddisfazione media senza coordinate
+ */
+async function getCircoscrizioniWithSoddisfazioneMediaNoC(): Promise<Circoscrizioni.MinimalBase[]> {
+    const circoscrizioniDB = await db.models.Circoscrizione.find({}, {coordinate: 0})
+    const circoscrizioniBase: Circoscrizioni.MinimalBase[] = await Promise.all(circoscrizioniDB.map(async (circoscrizione) => {
+        const mediaVoti = await getMediaVotiCircoscrizione(circoscrizione._id);
+        const cirBase: Circoscrizioni.Minimal | Circoscrizioni.MinimalBase = {
             self: `/api/v1/circoscrizioni/${circoscrizione._id}`,
             nome: circoscrizione.nome,
-            coordinate: circoscrizione.coordinate,
             soddisfazioneMedia: mediaVoti,
         };
         return cirBase;
     }));
     return circoscrizioniBase;
-
 }
 
 /**
@@ -38,13 +48,7 @@ async function getCircoscrizioneWithSoddisfazioneMedia(id: Types.ObjectId): Prom
     const circoscrizioneDB = await db.models.Circoscrizione.findById(id);
     if (!circoscrizioneDB)
         throw new Error(JSON.stringify({ code: 404, message: "Circoscrizione non trovata", details: `Circoscrizione con id ${id} non trovata`}));
-    const quartieriPerCir = await db.models.Quartiere.find({ circoscrizione: circoscrizioneDB._id }).select('_id');
-    // Ottengo gli _id dei sondaggi approvati
-    const sondaggi = await db.models.Sondaggio.find({ statoApprovazione: 'Approvato' }).select('_id');
-    // Ottengo i voti dei sondaggi approvati relativi ai quartieri della circoscrizione
-    const voti = await db.models.Voti.find({ sondaggio: { $in: sondaggi }, quartiere: { $in: quartieriPerCir } }).select('voto');
-    // Calcolo la media dei voti della circoscrizione
-    const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
+    const mediaVoti = await getMediaVotiCircoscrizione(id);
     const cirBase: Circoscrizioni.Minimal = {
         self: `/api/v1/circoscrizioni/${circoscrizioneDB._id}`,
         nome: circoscrizioneDB.nome,
@@ -54,7 +58,44 @@ async function getCircoscrizioneWithSoddisfazioneMedia(id: Types.ObjectId): Prom
     return cirBase;
 }
 
+async function getCircoscrizioneWithSoddisfazioneMediaNoC(id: Types.ObjectId): Promise<Circoscrizioni.MinimalBase> {
+    const circoscrizioneDB = await db.models.Circoscrizione.findById(id, { coordinate: 0 });
+    if (!circoscrizioneDB)
+        throw new Error(JSON.stringify({ code: 404, message: "Circoscrizione non trovata", details: `Circoscrizione con id ${id} non trovata`}));
+    const mediaVoti = await getMediaVotiCircoscrizione(id);
+    const cirBase: Circoscrizioni.MinimalBase = {
+        self: `/api/v1/circoscrizioni/${circoscrizioneDB._id}`,
+        nome: circoscrizioneDB.nome,
+        soddisfazioneMedia: mediaVoti
+    };
+    return cirBase;
+}
+
+/**
+ * Funzione che restituisce la media dei voti di una circoscrizione
+ * @param {Types.ObjectId} id Id della circoscrizione di cui si vuole ottenere la media dei voti
+ * @returns {Promise<number>} La media dei voti della circoscrizione
+ */
+async function getMediaVotiCircoscrizione(id: Types.ObjectId): Promise<number> {
+    const quartieriPerCir = await db.models.Quartiere.find({ circoscrizione: id }).select('_id');
+    // Ottengo gli _id dei sondaggi approvati
+    const sondaggi = await db.models.Sondaggio.find({ statoApprovazione: 'Approvato' }, { _id: 1 });
+    // Ottengo i voti dei sondaggi approvati relativi ai quartieri della circoscrizione
+    const voti = await db.models.Voti.find({ sondaggio: { $in: sondaggi }, quartiere: { $in: quartieriPerCir } }, { voto: 1 });
+    // Calcolo la media dei voti della circoscrizione
+    const mediaVoti = voti.length > 0 ? voti.reduce((acc, curr) => acc + curr.voto, 0) / voti.length : 0;
+    return mediaVoti;
+}
+
 async function getCircoscrizioneCompletaFromMinimal(cirBase: Circoscrizioni.Minimal) : Promise<Circoscrizioni.Circoscrizione> {
+    const cirCompleta = await getCircoscrizioneCompletaFromMinimalBase(cirBase);
+    return {
+        ...cirCompleta,
+        coordinate: cirBase.coordinate
+    }
+}
+
+async function getCircoscrizioneCompletaFromMinimalBase(cirBase: Circoscrizioni.MinimalBase) : Promise<Circoscrizioni.CircoscrizioneNoC> {
     const quartieriPerCir = await db.models.Quartiere.find({ circoscrizione: cirBase.self.split('/').pop() })
     const areeVerdi = quartieriPerCir.reduce((acc, curr) => acc + curr.servizi.areeVerdi, 0);
     const localiNotturni = quartieriPerCir.reduce((acc, curr) => acc + curr.servizi.localiNotturni, 0);
@@ -72,10 +113,9 @@ async function getCircoscrizioneCompletaFromMinimal(cirBase: Circoscrizioni.Mini
 
     const etaMedia = quartieriPerCir.length > 0 ? quartieriPerCir.reduce((acc, curr) => acc + curr.etaMedia*(curr.popolazione/popolazione), 0) : 0;
     //combino i dati dalla circoscrizioneBase e la circoscrizioneDB per creare la circoscrizione completa
-    const cirCompleta : Circoscrizioni.Circoscrizione = {
+    const cirCompleta : Circoscrizioni.CircoscrizioneNoC = {
         self: cirBase.self,
         nome: cirBase.nome,
-        coordinate: cirBase.coordinate,
         soddisfazioneMedia: cirBase.soddisfazioneMedia,
         servizi: {
             areeVerdi: areeVerdi,
@@ -100,11 +140,16 @@ async function getCircoscrizioneCompletaFromMinimal(cirBase: Circoscrizioni.Mini
 const utilCircoscrizioni = {
     getCircoscrizioniWithSoddisfazioneMedia,
     getCircoscrizioneWithSoddisfazioneMedia,
-    getCircoscrizioneCompletaFromMinimal
+    getCircoscrizioneWithSoddisfazioneMediaNoC,
+    getCircoscrizioneCompletaFromMinimal,
+    getCircoscrizioneCompletaFromMinimalBase
 }
 export default utilCircoscrizioni;
 export {
     getCircoscrizioniWithSoddisfazioneMedia,
+    getCircoscrizioniWithSoddisfazioneMediaNoC,
     getCircoscrizioneWithSoddisfazioneMedia,
-    getCircoscrizioneCompletaFromMinimal
+    getCircoscrizioneWithSoddisfazioneMediaNoC,
+    getCircoscrizioneCompletaFromMinimal,
+    getCircoscrizioneCompletaFromMinimalBase
 }

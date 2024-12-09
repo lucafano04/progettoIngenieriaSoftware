@@ -1,8 +1,6 @@
-import Base from "./Base";
+import MinimalBase from "./MinimalBase";
+import Coordinate from "../Coordinate";
 
-type Minimal = Base & {
-    self: string,
-    soddisfazioneMedia: number,
-}
+type Minimal = MinimalBase & Coordinate;
 
 export default Minimal;

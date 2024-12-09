@@ -1,10 +1,6 @@
-import Base from "./Base";
-import Circoscrizioni from "../Circoscrizioni";
+import MinimalBase from "MinimalBase";
+import {Coordinate} from "..";
 
-type Minimal = Base & {
-    self: string,
-    circoscrizione: Circoscrizioni.Minimal,
-    soddisfazioneMedia: number
-};
+type Minimal = MinimalBase & Coordinate;
 
 export default Minimal;

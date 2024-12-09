@@ -1,8 +1,8 @@
 import Base from './Base';
-import Minimal from './Minimal';
+import Coordinate from '../Coordinate';
 import {Types} from "mongoose";
 
-type DB = Base & {
+type DB = Base & Coordinate & {
     _id: Types.ObjectId,
 }
 

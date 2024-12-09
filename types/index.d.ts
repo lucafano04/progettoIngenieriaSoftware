@@ -1,4 +1,5 @@
 import Circoscrizioni from "./Circoscrizioni";
+import Coordinate from "./Coordinate";
 import Dati from "./Dati";
 import Errors from "./Errors";
 import Quartieri from "./Quartieri";
@@ -8,6 +9,7 @@ import Voti from "./Voti";
 
 export {
     Circoscrizioni,
+    Coordinate,
     Dati,
     Errors,
     Quartieri,

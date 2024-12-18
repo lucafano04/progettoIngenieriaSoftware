@@ -7,11 +7,11 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 \section{\underline{Utente non loggato}}
     Di seguito i requisiti associati all'Utente non loggato:
     \begin{itemize}
-        \item \textbf{RF1}: Visualizzare città
-        \item \textbf{RF2}: Interagire con la Mappa
-        \item \textbf{RF3}: Visualizzare zona
-        \item \textbf{RF4}: Visualizzare elenco strutture
-        \item \textbf{RF5}: Cambiare lingua
+        \item \textbf{RF1}: Visualizzazione città
+        \item \textbf{RF2}: Interazione con la mappa
+        \item \textbf{RF3}: Visualizzazione zona
+        \item \textbf{RF4}: Elenco strutture
+        \item \textbf{RF5}: Multi lingua
         \item \textbf{RF6}: Login
     \end{itemize}
     \begin{figure}[H]
@@ -33,7 +33,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item La tipologia di zona selezionata di default è quella dei quartieri
             \end{itemize}
     
-    \subsection{Interagire con la Mappa}
+    \subsection{Interagire con la mappa}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente può interagire con la mappa
         \subsubsection{Descrizione}
@@ -101,7 +101,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente non loggato selezionasse e confermasse la lingua già selezionata, il sistema deve chiudere il pop-up senza apportare alcuna modifica
             \end{enumerate}
 
-    \subsection{Login}
+    \subsection{Eseguire login}
         \subsubsection{Riassunto}
             Questo Use Case descrive come l'utente non loggato può eseguire il login
         \subsubsection{Descrizione}
@@ -122,11 +122,11 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 \section{\underline{Utente Sondaggista}}
     Di seguito i requisiti associati all'Utente Sondaggista:
     \begin{itemize}
-        \item \textbf{RF6}: Logout
-        \item \textbf{RF7}: Visualizzazione dati sondaggisti
-        \item \textbf{RF9}: Creazione nuovi sondaggi
-        \item \textbf{RF10.1}: Aggiungere voti ai sondaggi
-        \item \textbf{RF10.2}: Rimuovere voti ai sondaggi
+        \item \textbf{RF7}: Logout
+        \item \textbf{RF8}: Visualizzazione sondaggi
+        \item \textbf{RF9}: Gestione sondaggi
+        \item \textbf{RF10}: Visualizzazione voti
+        \item \textbf{RF11}: Gestione voti
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -139,53 +139,41 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo Use Case descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item L'utente sondaggista preme sull'icona contenente l'immagine profilo nella header
-                \item Il sistema apre un menù a tendina con la sezione 'Logout'
-                \item L'utente preme sulla sezione 'Logout'
-                \item Il sistema ricarica la pagina riportando l'utente alla 'visualizzazione città', scollegandolo dall'account sondaggista al quale era collegato e riportando l'utente allo stato di Utente non loggato
-            \end{enumerate}
-        \subsubsection{Eccezioni}
-            \begin{enumerate}
-                \item Nel caso in cui fosse aperta il menù a tendina con la sezione logout e venisse successivamente premuto un qualsiasi altro punto sullo schermo il sistema deve chiudere il menù a tendina
+                \item L'utente sondaggista preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
+                \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
+                ricarica la pagina riportando l'utente alla 'visualizzazione città'
             \end{enumerate}
 
-    \subsection{Visualizzazione dati sondaggisti}
+    \subsection{Visualizzare i sondaggisti}
         \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente sondaggista visualizzerà l'interfaccia per gestire i sondaggi
+            Questo Use Case descrive come l'utente sondaggista visualizzerà i sondaggi e le interfacce per gestirli
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item Il sistema mostra nel riquadro in alto a sinistra dello schermo l'interfaccia per la creazione di nuovi sondaggi con relative caselle di testo e pulsante per la creazione
                 \item Il sistema mostra nel riquadro in basso a sinistra dello schermo l'interfaccia per il caricamento dei sondaggi attraverso pulsante o "drag and drop"
-                \item Il sistema mostra nel riquadro in alto a destra dello schermo l'elenco dei sondaggi non ancora caricati, o in fase di caricamento, a sistema (Eccezione 1)
-                \item Il sistema mostra nel riquadro in basso a destra dello schermo l'elenco dei sondaggi già caricati a sistema con relativo stato di accettazione (Eccezione 1)
+                \item Il sistema mostra nel riquadro in alto a destra dello schermo l'elenco dei sondaggi non ancora caricati, o in fase di caricamento, a sistema con relativo stato della sessione (Eccezione 1)
+                \item Il sistema mostra nel riquadro in basso a destra dello schermo l'elenco dei sondaggi già caricati a sistema con relativo stato di caricamento e stato di verifica dei dati inseriti (Eccezione 1)
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
                 \item Nel caso in cui non fossero presenti sondaggi all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
-    
-    \subsection{Creazione nuovi sondaggi} %to do: da discutere se ha senso fare un activity diagram di ciò, ci sono tanti se e tanti include
+
+    \subsection{Gestione sonaggi}
+
+    \subsection{Visualizzare i voti}
         \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente sondaggista può aggiungere nuovi sondaggi
+            Questo Use Case descrive come l'utente sondaggista visualizzerà i voti e le interfacce per gestirli
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item 
+                \item Il sistema mostra nella parte sinistra dello schermo un riassunto del numero di voti presenti all'interno del sondaggio e in basso una tabella riassuntiva riguardante il numero di voti ricevuti per quartiere
+                \item Il sistema mostra nel riquadro in alto a destra dello schermo l'interfaccia per il caricamento dei voti con le corrispettive caselle di testo
+                \item Il sistema mostra nel riquadro in basso a destra dello schermo l'interfaccia per la gestione dei sondaggi
+                \item Il sistema mostra nel riquadro in basso al centro dello schermo l'elenco dei voti caricati in precedenza, su ogni voto è inoltre presente l'id, l'ora al quale è stato caricato il voto e infine il pulsante per eliminarlo (Eccezione 1)
             \end{enumerate}
         \subsubsection{Eccezioni}
-        \subsubsection{Estensioni}
-    
-    \subsection{Aggiungere voti ai sondaggi}
-        \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente sondaggista può aggiungere nuovi voti ai sondaggi
-        \subsubsection{Descrizione}
             \begin{enumerate}
-                \item Il sondaggista inserisce la circoscrizione di appartenenza del cittadino (Estensione 1)
-                \item Il sistema fornisce l'interfaccia utilie per votare
-                \item Il cittadino inserisce il proprio voto e clicca il pulsante di conferma
-                \item Il sistema torna all'interfaccia 
+                \item Nel caso in cui non fossero presenti voti all'interno della lista il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
-        \subsubsection{Eccezioni}
-        \subsubsection{Estensioni}
-            \begin{enumerate}
-                \item Nel caso in cui il cittadino fosse d'accordo l'utente sondaggista potrà inserire anche la fascia d'età del cittadino 
-            \end{enumerate}
+
+    \subsection{Gestione voti}

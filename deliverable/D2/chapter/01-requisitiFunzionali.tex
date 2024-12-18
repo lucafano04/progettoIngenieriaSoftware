@@ -4,108 +4,114 @@
 Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma "SatisTrento" tramite \textit{Use Case Diagram} (\texttt{UCD}) progettati usando il linguaggio \texttt{UML}.
 
 % Esempio di markup
-\section{\underline{Utente Anonimo}}
-    Di seguito i requisiti associati all'Utente Anonimo:
+\section{\underline{Utente non loggato}}
+    Di seguito i requisiti associati all'Utente non loggato:
     \begin{itemize}
-        \item \textbf{RF1.1}: Visualizzare città
-        \item \textbf{RF1.2, RF3.1}: Interagire con la Mappa
-        \item \textbf{RF2}: Multi lingua
-        \item \textbf{RF3.2}: Visualizzare zona
-        \item \textbf{RF4}: Accesso dati specifici zona selezionata
-        \item \textbf{RF5, RF8, RF12}: Login
+        \item \textbf{RF1}: Visualizzare città
+        \item \textbf{RF2}: Interagire con la Mappa
+        \item \textbf{RF3}: Visualizzare zona
+        \item \textbf{RF4}: Visualizzare elenco strutture
+        \item \textbf{RF5}: Cambiare lingua
+        \item \textbf{RF6}: Login
     \end{itemize}
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{UseCase_diagrams/NonLoggato.drawio.png}
-        \caption{Use Case Diagram dell'Utente anonimo}
+        \caption{Use Case Diagram dell'Utente non loggato}
     \end{figure}
 
     \subsection{Visualizzare città}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente potrà visualizzare i dati e la mappa della città
+            Questo Use Case descrive come l'utente può visualizzare gli attributi e la mappa della città
         \subsubsection{Descrizione}
             \begin{itemize}
-                \item Il sistema mostra nella parte sinistra dello schermo i dati generici della città
-                \item Il sistema mostra nella parte destra dello schermo la mappa della città divisa in quartieri
+                \item Il sistema mostra nella parte sinistra dello schermo gli attributi demografici e riguardanti la soddisfazione della città
+                \item Il sistema mostra nella parte destra dello schermo la mappa della città suddivisa nella zona selezionata (Estensione 1)
+            \end{itemize}
+        \subsubsection{Estensioni}
+            \begin{itemize}
+                \item La tipologia di zona selezionata di default è quella dei quartieri
             \end{itemize}
     
     \subsection{Interagire con la Mappa}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente potrà interagire con la mappa
+            Questo Use Case descrive come l'utente può interagire con la mappa
         \subsubsection{Descrizione}
-            \begin{itemize} 
-                \item L'utente anonimo posiziona il cursone all'interno dello spazio dedicato alla mappa
-                \item Se l'utente utilizza la rotella del mouse oppure uno dei pulsanti prensenti in uno degli angoli della mappa
-                \item Il sistema ingrandisce o diminuisce la dimensione dello zoom (Eccezione 1)
+            \begin{itemize}
+                \item L'utente non loggato posiziona il cursone all'interno dello spazio dedicato alla mappa
+                \item Se l'utente utilizza la rotella del mouse oppure uno dei pulsanti presenti in uno degli angoli della mappa
+                \item Attraverso le funzionalità fornite da OpenStreetMap la mappa ingrandisce o diminuisce la dimensione dello zoom (Eccezione 1)
                 \item Se l'utente preme e trascina il cursore
-                \item Il sistema sposta il focus centrale all'interno della mappa (Eccezione 2)
-                \item Se l'utente anonimo preme una delle zone all'interno della visuale della mappa
-                \item Il sistema posiziona il focus centrale della mappa al centro della zona selezionata e ne modifica lo zoom in modo da poter vedere completamente la zona selezionata
-                \item Il sistema evidenzia il colore e i bordi della zona selezionata
-                \item Il sistema passa allo UseCase "Visualizzazione zona"
+                \item Attraverso le funzionalità fornite da OpenStreetMap la mappa sposta il focus centrale in funzione del cursore (Eccezione 2)
+                \item Se l'utente non loggato seleziona una delle zone all'interno della visuale della mappa (Estensione 1)
+                \item Il sistema posiziona il focus centrale della mappa al centro della zona selezionata e ne modifica successivamente lo zoom, il colore e lo spessore dei bordi
+                \item Il sistema passa successivamente allo UseCase "Visualizzare zona" della sezione scelta
             \end{itemize}
         \subsubsection{Eccezioni}
             \begin{enumerate}
-                \item Nel caso in cui l'utente anonimo cercasse di aumentare o diminuire lo zoom oltre ai limiti imposti dalla mappa, il sistema deve bloccare la nuova modifica allo zoom
-                \item Nel caso in cui l'utente anonimo cercasse di spostare il focus centrale oltre ai limiti della città, il sistema deve bloccare la nuova modifica allo spostamento del focus centrale
+                \item Nel caso in cui l'utente non loggato cercasse di aumentare o diminuire lo zoom oltre ai limiti imposti, il sistema deve bloccare la nuova modifica allo zoom
+                \item Nel caso in cui l'utente non loggato cercasse di spostare il focus centrale oltre ai limiti della città, il sistema deve bloccare la nuova modifica allo spostamento del focus centrale
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
-                \item Nel caso in cui l'utente cliccasse su di un quartiere già selezionato questo riporterebbe allo UseCase "Visualizzare città"
+                \item Nel caso in cui l'utente cliccasse su di una zona già selezionata questa riporterebbe allo UseCase "Visualizzare città"
+                \item L'utente, selezionando il pulsante presente nell'angolo della mappa, potrà visualizzare un menù a pop-up e successivamente modificare la tipologia di divisione presente all'interno della mappa
             \end{enumerate}
-            
-    \subsection{Multi lingua}
-        \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente potrà cambiare la lingua dei vari testi presenti nel programma
-        \subsubsection{Descrizione}
-            \begin{enumerate}
-                \item L'utente preme su una delle bandiere presenti nella header
-                \item Il sistema ricarica la pagina selezionata con i testi nella lingua scelta e mette in evidenza la bandiera con la lingua corrente
-            \end{enumerate}
-        \subsubsection{Eccezioni}
-            \begin{enumerate}
-                \item Nel caso in cui l'utente anonimo selezionasse la lingua già selezionata, il sistema non deve fare nulla
-            \end{enumerate}
-
+    
     \subsection{Visualizzare zona}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente potrà visualizzare la zona selezionata della città
+            Questo Use Case descrive come l'utente può visualizzare la zona selezionata della città
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item Dopo aver interagito con la mappa ed aver selezionato una zona
-                \item Il sistema mostra nella parte sinistra dello schermo la mappa
-                \item Il sistema mostra nella parte destra dello schermo i dati generici della zona della città selezionata
+                \item Il sistema mostra nella parte sinistra dello schermo la mappa centrata sul centro della zona selezionata
+                \item Il sistema mostra nella parte destra dello schermo gli attributi demografici e riguardanti la soddisfazione della zona della città selezionata
             \end{enumerate}
 
-    \subsection{Accesso dati specifici zona selezionata}
+    \subsection{Visualizzare elenco strutture}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente potrà accedere ai dati specifici della zona di preferenza
+            Questo Use Case descrive come l'utente può accedere e visualizzare l'elenco delle strutture che forniscono un servizio al cittadino
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item L'utente anonimo preme uno dei dati presenti a schermo
-                \item Il sistema presenta a schermo, dove prima erano presenti i vari dati riguardanti la zona selezionata, una tabella con titolo il nome del dato del quale si vuole ricevere un maggior numero di informazioni e contenente tutti gli elementi appartenenti alla specifica del dato scelto (Eccezione 1)
-                \item Il sistema deve successivamente segnare sulla mappa la posizione dei vari elementi appartenenti alla specifica del dato scelto con un numero identificativo per identificarne la posizione
+                \item L'utente non loggato preme uno degli attributi presenti a schermo (Eccezione 1)
+                \item Il sistema presenta a schermo, ove prima erano presenti gli attributi riguardanti la zona selezionata, una tabella contenente una lista numerata di strutture che offrono il servizio selezionato in precedenza
+                \item Il sistema deve successivamente segnalare sulla mappa la posizione delle varie strutture, attraverso un segnalino contenente il numero identificativo presente in tabella della struttura
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
-                \item Nel caso in cui per una tipologia di dato non fossero presenti dati specifici il sistema non deve fare nulla
+                \item Nel caso in cui per una tipologia di dato non fossero presenti strutture il sistema non deve fare nulla
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
-                \item Nel caso in cui l'utente cliccasse il pulante per chiudere la tabella il sistema tornerà alla visualizzazione dei dati della zona selezionata in precedenza
+                \item Nel caso in cui l'utente cliccasse il pulante per chiudere la tabella il sistema tornerà alla visualizzazione della zona selezionata in precedenza
             \end{enumerate}
 
-    \subsection{Login} % da fare un diagram
+    \subsection{Cambiare lingua}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente potrà fare il login
+            Questo Use Case descrive come l'utente può cambiare la lingua dei vari testi presenti nel programma
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item L'utente anonimo preme il pulsante di login presente nella header
-                \item Il sistema reindirizza l'utente al sistema SSO
+                \item L'utente preme sul menù a tendina presente nella header e seleziona la sezione riguardante la modifica della lingua
+                \item Il sistema presenterà a schermo un menù pop-up contenente la lista di lingue per le quali è disponibile la traduzione
+                \item Se l'utente seleziona la lingua e clicca il pulsante di conferma (Eccezione 1 e 2)
+                \item Il sistema ricarica la pagina selezionata con i testi nella lingua selezionata
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui l'utente non loggato selezionasse e confermasse la lingua già selezionata, il sistema deve chiudere il pop-up senza apportare alcuna modifica
+            \end{enumerate}
+
+    \subsection{Login}
+        \subsubsection{Riassunto}
+            Questo Use Case descrive come l'utente non loggato può eseguire il login
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il login
+                \item Il sistema reindirizza l'utente alla pagina del service provider della provincia di Trento dal quale potrà accedere al login tramite sistema SSO
                 \item Il sistema SSO verifica l'identità dell'utente in questione e la ritorna al sistema (Eccezione 1)
                 \item Il sistema controlla che per l'identità certificata dal sistema SSO esista un'account collegato (Eccezione 1)
-                \item Il sistema assegna all'utente anonimo il ruolo posseduto dall'account al quale si è collegato
-                \item Il sistema successivamente al login sostituisce l'icona del login con l'immagine profilo dell'account al quale si ha fatto l'accesso
+                \item Il sistema assegna dunque un'identità all'utente assegnandogli il ruolo di proprietà
+                \item Il sistema successivamente al login sostituisce l'icona del login con l'immagine profilo dell'account al quale si ha fatto l'accesso e reindirizza l'utente allo UseCase "visualizzare città"
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}

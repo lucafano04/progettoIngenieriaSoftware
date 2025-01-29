@@ -3,18 +3,14 @@
     import { useRoute, useRouter } from 'vue-router';
     import { useToast, Card, Skeleton, DataTable, Column, Button, Select, FloatLabel, VirtualScroller, useConfirm} from 'primevue';
     import { addVoto, deleteSondaggio, deleteVoto, getSondaggio, getVoti, modificaSondaggio } from '../../../utils/sondaggi';
-    import { Circoscrizioni, Sondaggi, Utenti, Voti } from '../../../../types';
-    import { getQuartieri } from '../../../utils/quartieri';
-    import { getCircoscrizioni } from '../../../utils/circoscrizioni';
+    import { Sondaggi, Voti } from '../../../../types';
+    import { getQuartieriNoCoordinate } from '../../../utils/quartieri';
     import voto1 from "../../../assets/voti/voto1.svg?raw";
     import voto2 from "../../../assets/voti/voto2.svg?raw";
     import voto3 from "../../../assets/voti/voto3.svg?raw";
     import voto4 from "../../../assets/voti/voto4.svg?raw";
     import voto5 from "../../../assets/voti/voto5.svg?raw";
 
-    const props = defineProps<{
-        user: Utenti.User | null;
-    }>();
     // Rotta e router usati per gestire redirect vari
     const route = useRoute();
     const router = useRouter();
@@ -28,9 +24,6 @@
     const sondaggio = ref<Sondaggi.Sondaggio | null>(null);
     // Riferimento all'elenco dei quartieri
     const quartieri = ref<{self: string, nome: string}[]>([]);
-    // Riferimento all'elenco delle circoscrizioni - 
-    // TODO: figure out why am i using this 
-    const circoscrizioni = ref<Circoscrizioni.Minimal[]>([]);
     // Riferimento al dato de-normalizzato dell'età media - null se non disponibile o non caricato
     const etaMedia = ref<number | null>(null);
     // Riferimento delle righe per la tabella voti per quartiere
@@ -57,11 +50,10 @@
     onMounted(async () => {
         try{
             // Creo una serie di promesse per ottenere i quartieri, le circoscrizioni e il sondaggio
-            const promises = {quartieri: getQuartieri(), circoscrizioni: getCircoscrizioni(), sondaggio: getSondaggio(param.id.toString()) };
+            const promises = {quartieri: getQuartieriNoCoordinate(), sondaggio: getSondaggio(param.id.toString()) };
             // Faccio partire tutte le richieste in parallelo in modo da ridurre il tempo di attesa
-            const [p1,p2,p3] = await Promise.all([promises.quartieri, promises.circoscrizioni, promises.sondaggio]);
+            const [p1,p3] = await Promise.all([promises.quartieri, promises.sondaggio]);
             quartieri.value = p1.map(q => ({self: q.self, nome: q.nome})).sort((a,b) => a.nome.localeCompare(b.nome));
-            circoscrizioni.value = p2;
             updateSondaggio(p3);            // Funzione per caricare tutti i dati del sondaggio
         }catch(e){
             // Eseguo il catch di eventuali errori dovuti a non autenticazione e/o altro
@@ -397,10 +389,10 @@
             <Button variant="text" label="Annulla" @click="()=>selezione.isVoting = 0"/>
         </div>
     </div>
-    <div v-else-if="selezione.isVoting === 2" class="tw-w-full tw-h-full tw-flex tw-align-center tw-justify-center tw-flex-col">
-        <h1 class="tw-text-6xl tw-mb-8 tw-text-center">Grazie per aver votato!</h1>
-        <p> La tua preferenza è stata registrata, restituisci il dispositivo all'operatore</p>
-        <p class="tw-self-end"> <Button label="Chiudi" variant="text" @click="()=>selezione.isVoting = 0" /></p>
+    <div v-else-if="selezione.isVoting === 2" class="tw-w-full tw-h-full tw-grid tw-grid-cols-1 tw-justify-items-center gridPostVoto">
+        <h1 class="tw-text-6xl tw-mb-8 tw-text-center tw-w-full">Grazie per aver votato!</h1>
+        <p class="tw-content-end"> La tua preferenza è stata registrata, restituisci il dispositivo all'operatore</p>
+        <p class="tw-justify-self-end"> <Button label="Chiudi" severity="danger" @click="()=>selezione.isVoting = 0" /></p>
     </div>
 </template>
 
@@ -442,5 +434,8 @@
     }
     .selected-face#face-5{
         color: #00FF00;
+    }
+    .gridPostVoto {
+        grid-template-rows: 50% 10% 40%;
     }
 </style>

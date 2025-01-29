@@ -9,7 +9,7 @@
     "start:server": "nodemon",
     "start:client": "vite --host",
     "build": "concurrently \"npm run build:server\" \"npm run build:client\"",
-    "build:server": "npx webpack",
+    "build:server": "tsx ./node_modules/webpack/bin/webpack.js --config ./webpack.config.ts",
     "build:client": "vue-tsc -b && vite build",
     "preview:client": "vite preview"
   },

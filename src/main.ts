@@ -16,7 +16,7 @@ import './index.css'
 
 import { getSession } from './utils/utenti';
 import { Utenti } from '../types';
-import { Home, Login, ModificaSondaggio, Sondaggi } from './components';
+import { Home, Login, ModificaSondaggio, Sondaggi, Analisi } from './components';
 
 
 const user = ref<Utenti.User | null>(null);
@@ -26,10 +26,12 @@ const app = createApp(App,{user});
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component: Home },
+        { path: '/', component: Home, props: { user } },
         { path: '/login', component: Login , props: { user } },
         { path: '/sondaggi', component: Sondaggi, props: { user } },
-        { path: '/sondaggi/:id', component: ModificaSondaggio, props: { user } },
+        { path: '/sondaggi/:id', component: ModificaSondaggio },
+        { path: '/analisi', component: Analisi },
+        { path: '/analisi/:tipo/:id', component: Analisi },
     ]
 });
 
@@ -69,12 +71,11 @@ async function asyncFun(){
     if(!old)
         router.push(router.currentRoute.value.path);
 };
-router.afterEach((to, from) => {
+router.afterEach((to,) => {
     if(user.value === null && !notAuthRoutes.includes(to.path) && mounted.value){
         router.push('/login');
     }else {
         if(user.value !== null){
-            console.log(user.value.ruolo);
             switch (to.path) {
                 case '/sondaggi':
                     if(user.value.ruolo !== 'Amministratore' && user.value.ruolo !== 'Sondaggista')
@@ -82,6 +83,10 @@ router.afterEach((to, from) => {
                     break;
                 case '/login':
                     router.push('/');
+                    break;
+                case '/analisi':
+                    if(user.value.ruolo !== 'Analista')
+                        router.push('/')
                     break;
                 default:
                     break;

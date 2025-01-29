@@ -25,15 +25,15 @@ function getColorFromSoddisfazione(soddisfazione: number, toGrey: boolean = fals
             return '#a0a0a0';
         return '#000000';
     }
+    let red, green;
     if(soddisfazione < 2.5){
-        const red = Math.round(255*(1-soddisfazione/2.5));
-        const green = 255;
-        return toGrey ? `rgb(${red*0.8},${green*0.8},${0})` : `rgb(${red},${green},0)`;
+        red = Math.round(255*(1-soddisfazione/2.5));
+        green = 255;
     }else{
-        const red = 0;
-        const green = Math.round(255*(1-(soddisfazione-2.5)/2.5));
-        return toGrey ? `rgb(${red*0.8},${green*0.8},${0})` : `rgb(${red},${green},0)`;
+        red = 0;
+        green = Math.round(255*((soddisfazione-2.5)/2.5));
     }
+    return toGrey ? `rgb(${red*0.8},${green*0.8},${0})` : `rgb(${red},${green},0)`;
 }
 
 const misc = {

@@ -51,14 +51,13 @@
         event.preventDefault();
         event.stopPropagation();
 
-        console.log(event.type);
         if(event.type === 'dragenter'){
             over.value = true;
         } else {
             over.value = false;
         }
     }
-    async function aggiungiSondaggino(){
+    async function wrapperAggiungiSondaggio(){
         loadingAdd.value = true;
         try{
             await aggiungiSondaggio(sondaggioAdd.value);
@@ -91,7 +90,7 @@
                             </FloatLabel>
                         </div>
                         <div class="tw-w-full tw-py-4 tw-flex tw-justify-center">
-                            <Button label="Apri Sessione" class="tw-mx-auto" icon="pi pi-play" :loading="loadingAdd" @click="aggiungiSondaggino"/>
+                            <Button label="Apri Sessione" class="tw-mx-auto" icon="pi pi-play" :loading="loadingAdd" @click="wrapperAggiungiSondaggio"/>
                         </div>
                     </div>
                 </template>

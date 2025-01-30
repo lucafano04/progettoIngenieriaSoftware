@@ -3,7 +3,6 @@
 
 Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma "SatisTrento" tramite \textit{Use Case Diagram} (\texttt{UCD}) progettati usando il linguaggio \texttt{UML}.
 
-% Esempio di markup
 \section{\underline{Utente non loggato}}
     Di seguito i requisiti associati all'Utente non loggato:
     \begin{itemize}
@@ -63,7 +62,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo Use Case descrive come l'utente può visualizzare la zona selezionata della città
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item Dopo aver interagito con la mappa ed aver selezionato una zona
+                \item L'utente seleziona una zona geografica per la quale ricevere maggiori informazioni
                 \item Il sistema mostra nella parte sinistra dello schermo la mappa centrata sul centro della zona selezionata
                 \item Il sistema mostra nella parte destra dello schermo gli attributi demografici e riguardanti la soddisfazione della zona della città selezionata
             \end{enumerate}
@@ -73,7 +72,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo Use Case descrive come l'utente può accedere e visualizzare l'elenco delle strutture che forniscono un servizio al cittadino
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item L'utente non loggato preme uno degli attributi presenti a schermo (Eccezione 1)
+                \item L'utente seleziona uno degli attributi presenti a schermo (Eccezione 1)
                 \item Il sistema presenta a schermo, ove prima erano presenti gli attributi riguardanti la zona selezionata, una tabella contenente una lista numerata di strutture che offrono il servizio selezionato in precedenza
                 \item Il sistema deve successivamente segnalare sulla mappa la posizione delle varie strutture, attraverso un segnalino contenente il numero identificativo presente in tabella della struttura
             \end{enumerate}
@@ -226,8 +225,8 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo Use Case descrive come l'utente analista può visualizzare, accedere e navigare agli attributi completi riguardanti ogni zona
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item Dopo aver selezionato una zona geografica per la quale ricevere maggiori informazioni
-                \item Il sistema mostra nella parte destra dello schermo la categoria di attributi riguardanti la zona selezionata con al di sopra le icone delle varie categoria di attributi selezionabili (Estensione 2)
+                \item L'utente seleziona una zona geografica per la quale ricevere maggiori informazioni
+                \item Il sistema mostra nella parte destra dello schermo la categoria di attributi riguardanti la zona selezionata con al di sopra le icone ed il titolo delle varie categorie di attributi selezionabili (Estensione 2)
                 \item L'utente seleziona la categoria di attributi che vuole visualizzare (Eccezione 1)
                 \item Il sistema mostra, ove prima erano presenti gli attributi della precedente categoria, gli attributi appartenenti alla nuova categori selezionata
             \end{enumerate}

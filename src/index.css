@@ -8,3 +8,11 @@
     @tailwind components;
     @tailwind utilities;
 }
+
+.dark > ** > svg, path {
+    fill: white;
+}
+.svg-image > svg {
+    width: 30px;
+    height: 30px;
+}

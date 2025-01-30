@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-    import { onMounted, Ref, ref } from 'vue';
-    import Mappa from './Mappa.vue';
+    import { onMounted, Ref, ref, watch } from 'vue';
+    import { useRoute } from 'vue-router';
+    import Mappa from '../common/Mappa.vue';
     import Tabella from './Tabella.vue';
     import { Circoscrizioni, Dati, Quartieri, Utenti } from '../../../types';
     import { getInfoGenerali } from '../../utils/misc';
@@ -14,6 +15,15 @@
     const quartCirc = ref<boolean>(false);
     const zonaSel = ref<string>('');
     const mappaTabella = ref<'mappa' | 'tabella'>('mappa');
+    
+    const route = useRoute();
+
+    if(route.hash === '#tabella')
+        mappaTabella.value = 'tabella';
+
+    watch(() => mappaTabella.value, (newVal) => {
+        location.replace(`#${newVal}`);
+    });
     const datiZona = ref<Circoscrizioni.Circoscrizione | Quartieri.Quartiere | null>(null);
 
     const infoGenerali = ref<Dati.DatiGenericiCitta | null>(null);
@@ -105,7 +115,7 @@
         </FloatLabel>
     </Dialog> 
     <div class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-evenly tw-items-center tw-w-full tw-p-5">
-        <div v-if="zonaSel === ''" class="tw-rounded tw-p-5 tw-w-full lg:tw-w-6/12">
+        <div v-if="zonaSel === ''" :class="{'tw-rounded tw-p-5 tw-w-full':true, 'lg:tw-w-1/2':mappaTabella === 'mappa', 'lg:tw-w-1/3':mappaTabella === 'tabella'}">
             <div class="tw-grid tw-gap-4 tw-w-9/12 tw-mx-auto">
                 <h1 class="tw-text-2xl tw-font-bold tw-text-center tw-col-span-12 tw-text-bold">Trento</h1>
                 <div class="tw-flex tw-justify-center tw-col-span-2"> <span class="pi pi-users tw-text-3xl tw-mr-2"></span></div>
@@ -132,16 +142,7 @@
         </div>
         <InfoZona :labQuartCirc="labQuartCirc" :datiZona="datiZona" :zona-sel="zonaSel" class="lg:tw-hidden" />
         <Mappa :quartCirc="quartCirc" :zonaSel="zonaSel" @setZonaSel="updateZona" @openSettings="openSettings" :class="{ 'tw-w-full':true,'lg:tw-w-6/12':true}" v-if="mappaTabella === 'mappa'" :quartieri="quartieri" :circoscrizioni="circoscrizioni" />
-        <Tabella v-else :class="{ 'tw-w-full':true,'lg:tw-w-6/12':true}" :quartieri="fullQuartieri" :circoscrizioni="fullCircoscrizioni"  @openSettings="openSettings" :quartCirc="quartCirc" />
+        <Tabella v-else :class="{ 'tw-w-full':true,'lg:tw-w-2/3':true}" :quartieri="fullQuartieri" :circoscrizioni="fullCircoscrizioni"  @openSettings="openSettings" :quartCirc="quartCirc" />
         <InfoZona :labQuartCirc="labQuartCirc" :datiZona="datiZona" :zona-sel="zonaSel" class="tw-hidden lg:tw-grid lg:tw-w-6/12" />
     </div>
 </template>
-<style>
-    .dark > ** > svg, path {
-        fill: white;
-    }
-    .svg-image > svg {
-        width: 30px;
-        height: 30px;
-    }
-</style>

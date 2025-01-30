@@ -34,7 +34,7 @@
                 toast.add({severity: 'success', summary: 'Logout', detail: 'Logout effettuato con successo!', life: 5000});
                 user.value = null;
                 history.push('/');
-                dropDownItems.value = dropDownItems.value.filter((item) => ['Home', 'Cambio Lingua'].includes(item.label));
+                dropDownItems.value = dropDownItems.value.filter((item) => ['Home', 'Cambio Lingua'].includes(item.label as string));
             } else {
                 toast.add({severity: 'error', summary: 'Logout', detail: 'Errore durante il logout!', life: 5000});
             }
@@ -45,11 +45,18 @@
                 toast.add({severity: 'error', summary: 'Logout', detail: 'Errore sconosciuto', life: 5000});
         }
     }
-    if(user.value !== null){
+    if(user.value !== null)
+        addElements(user.value);
+    
+    watch(()=>user.value, (newValue) => {
+        if(newValue !== null && !dropDownItems.value.find((item) => item.label === 'Logout'))
+            addElements(newValue);
+    });
+    function addElements(user: Utenti.User){
         dropDownItems.value.push({
             divider: true
         });
-        if(user.value.ruolo === "Analista"){
+        if(user.ruolo === "Analista"){
             dropDownItems.value.push({
                 label: 'Analisi',
                 icon: 'pi pi-fw pi-chart-line',
@@ -57,7 +64,7 @@
                 command: () => history.push('/analisi')
             });
         }
-        if(user.value.ruolo === "Sondaggista"){
+        if(user.ruolo === "Sondaggista"){
             dropDownItems.value.push({
                 label: 'Sondaggi',
                 icon: 'pi pi-fw pi-chart-bar',
@@ -71,34 +78,6 @@
             command: logoutToast
         });
     }
-    watch(()=>user.value, (newValue) => {
-        if(newValue !== null && !dropDownItems.value.find((item) => item.label === 'Logout')){
-            dropDownItems.value.push({
-                divider: true
-            });
-            if(newValue.ruolo === "Analista"){
-                dropDownItems.value.push({
-                    label: 'Analisi',
-                    icon: 'pi pi-fw pi-chart-line',
-                    to: '/analisi',
-                    command: () => history.push('/analisi')
-                });
-            }
-            if(newValue.ruolo === "Sondaggista"){
-                dropDownItems.value.push({
-                    label: 'Sondaggi',
-                    icon: 'pi pi-fw pi-chart-bar',
-                    to: '/sondaggi',
-                    command: () => history.push('/sondaggi')
-                });
-            }
-            dropDownItems.value.push({
-                label: 'Logout',
-                icon: 'pi pi-fw pi-sign-out',
-                command: logoutToast
-            });
-        }
-    });
 </script>
 
 <template>

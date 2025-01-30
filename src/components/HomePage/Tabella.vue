@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { DataTable, Column, Button } from 'primevue';
+    import { DataTable, Column, Button, Skeleton } from 'primevue';
     import { Circoscrizioni, Quartieri } from '../../../types';
     import { ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
@@ -42,19 +42,21 @@ import { RouterLink } from 'vue-router';
 
     watch(() => props.quartieri, (newVal) => {
         quartieri = newVal;
-        console.log(quartieri);
+        if(!props.quartCirc)
+            selData.value = newVal;
     });
     watch(() => props.circoscrizioni, (newVal) => {
         circoscrizioni = newVal;
-        console.log(circoscrizioni);
+        if(props.quartCirc)
+            selData.value = newVal;
     });
 </script>
 <template>
     <div class="tw-rounded" style="height: max(500px, 85vh)">
         <DataTable :value="selData" scrollable scrollHeight="75vh" stripedRows dataKey="self">
             <template #header>
-                <div class="tw-flex tw-justify-between">
-                    <span class="tw-font-bold">Quartieri</span>
+                <div class="tw-flex tw-justify-between tw-items-center tw-p-2">
+                    <span class="tw-font-bold">Elenco {{ props.quartCirc ? 'circoscrizioni' : 'quartieri' }}</span>
                     <Button icon="pi pi-cog" class="tw-p-button-rounded tw-p-button-text" severity="contrast" @click="emit('openSettings')"/>
                 </div>
             </template>
@@ -72,6 +74,9 @@ import { RouterLink } from 'vue-router';
                     }}
                 </template>
             </Column>
+            <template #empty>
+                <Skeleton v-for="i in 10" :key="i" width="100%" height="50px" class="tw-my-3"/>
+            </template>
         </DataTable>
     </div>
 </template>

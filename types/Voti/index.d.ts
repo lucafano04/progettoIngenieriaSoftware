@@ -4,7 +4,7 @@ import Media from "./Media";
 import Minimal from "./Minimal";
 import Voto from "./Voto";
 
-export {
+export type {
     Add,
     DB,
     Media,

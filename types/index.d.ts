@@ -7,7 +7,7 @@ import Sondaggi from "./Sondaggi";
 import Utenti from "./Utenti";
 import Voti from "./Voti";
 
-export {
+export type {
     Circoscrizioni,
     Coordinate,
     Dati,

@@ -6,7 +6,7 @@ import DatiSpecifici from "./DatiSpecifici";
 import ServiziGenerali from "./ServiziGenerali";
 import Sicurezza from "./Sicurezza";
 
-export {
+export type {
     DatiBase,
     DatiBaseDB,
     DatiGenerici,

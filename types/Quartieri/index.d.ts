@@ -5,7 +5,7 @@ import MinimalBase from "./MinimalBase";
 import Quartiere from "./Quartiere";
 import QuartiereNoC from "./QuartiereNoC";
 
-export {
+export type {
     Base,
     DB,
     Minimal,

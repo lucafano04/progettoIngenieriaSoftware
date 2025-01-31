@@ -1,7 +1,7 @@
 \chapter{Requisiti Funzionali}
 \label{ch:requisitiFunzionali}
 
-Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma "SatisTrento" tramite \textit{Use Case Diagram} (\texttt{UCD}) progettati usando il linguaggio \texttt{UML}.
+Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma ``SatisTrento'' tramite \textit{Use Case Diagram} (\texttt{UCD}) progettati usando il linguaggio \texttt{UML}.
 
 \section{\underline{Utente non loggato}}
     Di seguito i requisiti associati all'Utente non loggato:
@@ -16,12 +16,12 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{UseCase_diagrams/NonLoggato.drawio.png}
-        \caption{Use Case Diagram dell'Utente non loggato}
+        \caption{\textit{Use Case Diagram} dell'Utente non loggato}
     \end{figure}
 
-    \subsection{Use Case RF1: Visualizzare città}
+    \subsection{\textit{Use Case} RF1: Visualizzare città}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente può visualizzare gli attributi e la mappa della città
+            Questo \textit{Use Case} descrive come l'utente può visualizzare gli attributi e la mappa della città
         \subsubsection{Descrizione}
             \begin{itemize}
                 \item Il sistema mostra nella parte sinistra dello schermo gli attributi demografici e riguardanti la soddisfazione della città
@@ -32,19 +32,19 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item La tipologia di zona selezionata di default è quella dei quartieri
             \end{itemize}
     
-    \subsection{Use Case RF2: Interagire con la mappa}
+    \subsection{\textit{Use Case} RF2: Interagire con la mappa}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente può interagire con la mappa
+            Questo \textit{Use Case} descrive come l'utente può interagire con la mappa
         \subsubsection{Descrizione}
             \begin{itemize}
-                \item L'utente non loggato posiziona il cursone all'interno dello spazio dedicato alla mappa
+                \item L'utente non loggato posiziona il cursore all'interno dello spazio dedicato alla mappa
                 \item Se l'utente utilizza la rotella del mouse oppure uno dei pulsanti presenti in uno degli angoli della mappa
                 \item Attraverso le funzionalità fornite da OpenStreetMap la mappa ingrandisce o diminuisce la dimensione dello zoom (Eccezione 1)
                 \item Se l'utente preme e trascina il cursore
                 \item Attraverso le funzionalità fornite da OpenStreetMap la mappa sposta il focus centrale in funzione del cursore (Eccezione 2)
                 \item Se l'utente non loggato seleziona una delle zone all'interno della visuale della mappa (Estensione 1)
                 \item Il sistema posiziona il focus centrale della mappa al centro della zona selezionata e ne modifica successivamente lo zoom, il colore e lo spessore dei bordi
-                \item Il sistema passa successivamente allo UseCase "Visualizzare zona" della sezione scelta
+                \item Il sistema passa successivamente allo \textit{Use Case} ``Visualizzare zona'' della sezione scelta
             \end{itemize}
         \subsubsection{Eccezioni}
             \begin{enumerate}
@@ -53,13 +53,13 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
-                \item Nel caso in cui l'utente cliccasse su di una zona già selezionata questa riporterebbe allo UseCase "Visualizzare città"
+                \item Nel caso in cui l'utente cliccasse su di una zona già selezionata questa riporterebbe allo \textit{Use Case} ``Visualizzare città''
                 \item L'utente, selezionando il pulsante presente nell'angolo della mappa, potrà visualizzare un menù a pop-up e successivamente modificare la tipologia di divisione presente all'interno della mappa
             \end{enumerate}
     
-    \subsection{Use Case RF3: Visualizzare zona}
+    \subsection{\textit{Use Case} RF3: Visualizzare zona}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente può visualizzare la zona selezionata della città
+            Questo \textit{Use Case} descrive come l'utente può visualizzare la zona selezionata della città
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente seleziona una zona geografica per la quale ricevere maggiori informazioni
@@ -67,9 +67,9 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Il sistema mostra nella parte destra dello schermo gli attributi demografici e riguardanti la soddisfazione della zona della città selezionata
             \end{enumerate}
 
-    \subsection{Use Case RF4: Visualizzare elenco strutture}
+    \subsection{\textit{Use Case} RF4: Visualizzare elenco strutture}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente può accedere e visualizzare l'elenco delle strutture che forniscono un servizio al cittadino
+            Questo \textit{Use Case} descrive come l'utente può accedere e visualizzare l'elenco delle strutture che forniscono un servizio al cittadino
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente seleziona uno degli attributi presenti a schermo (Eccezione 1)
@@ -82,12 +82,12 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
-                \item Nel caso in cui l'utente cliccasse il pulante per chiudere la tabella il sistema tornerà alla visualizzazione della zona selezionata in precedenza
+                \item Nel caso in cui l'utente cliccasse il pulsante per chiudere la tabella il sistema tornerà alla visualizzazione della zona selezionata in precedenza
             \end{enumerate}
 
-    \subsection{Use Case RF5: Cambiare lingua}
+    \subsection{\textit{Use Case} RF5: Cambiare lingua}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente può cambiare la lingua dei vari testi presenti nel programma
+            Questo \textit{Use Case} descrive come l'utente può cambiare la lingua dei vari testi presenti nel programma
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente preme sul menù a tendina presente nella header e seleziona la sezione riguardante la modifica della lingua
@@ -100,9 +100,9 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente non loggato selezionasse e confermasse la lingua già selezionata, il sistema deve chiudere il pop-up senza apportare alcuna modifica
             \end{enumerate}
 
-    \subsection{Use Case RF6: Eseguire login}
+    \subsection{\textit{Use Case} RF6: Eseguire login}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente non loggato può eseguire il login
+            Questo \textit{Use Case} descrive come l'utente non loggato può eseguire il login
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il login
@@ -110,7 +110,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Il sistema SSO verifica l'identità dell'utente in questione e la ritorna al sistema (Eccezione 1)
                 \item Il sistema controlla che per l'identità certificata dal sistema SSO esista un'account collegato (Eccezione 1)
                 \item Il sistema assegna dunque un'identità all'utente assegnandogli il ruolo di proprietà
-                \item Il sistema successivamente al login sostituisce l'icona del login con l'immagine profilo dell'account al quale si ha fatto l'accesso e reindirizza l'utente allo UseCase "visualizzare città"
+                \item Il sistema successivamente al login sostituisce l'icona del login con l'immagine profilo dell'account al quale si ha fatto l'accesso e reindirizza l'utente allo \textit{Use Case} ``visualizzare città''
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
@@ -130,12 +130,12 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Sondaggista.drawio.png}
-        \caption{Use Case Diagram dell'Utente sondaggista}
+        \caption{\textit{Use Case Diagram} dell'Utente sondaggista}
     \end{figure}
 
-    \subsection{Use Case RF7: Logout}
+    \subsection{\textit{Use Case} RF7: Logout}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente può fare logout
+            Questo \textit{Use Case} descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente sondaggista preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
@@ -143,13 +143,13 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 ricarica la pagina riportando l'utente alla 'visualizzazione città'
             \end{enumerate}
 
-    \subsection{Use Case RF8: Visualizzare i sondaggisti}
+    \subsection{\textit{Use Case} RF8: Visualizzare i sondaggisti}
         \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente sondaggista può visualizzare i sondaggi e le interfacce per gestirli
+            Questo \textit{Use Case} descrive come l'utente sondaggista può visualizzare i sondaggi e le interfacce per gestirli
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item Il sistema mostra nel riquadro in alto a sinistra dello schermo l'interfaccia per la creazione di nuovi sondaggi con relative caselle di testo e pulsante per la creazione
-                \item Il sistema mostra nel riquadro in basso a sinistra dello schermo l'interfaccia per il caricamento dei sondaggi attraverso pulsante o "drag and drop"
+                \item Il sistema mostra nel riquadro in basso a sinistra dello schermo l'interfaccia per il caricamento dei sondaggi attraverso pulsante o ``\textit{drag and drop}''
                 \item Il sistema mostra nel riquadro in alto a destra dello schermo l'elenco dei sondaggi non ancora caricati, o in fase di caricamento, a sistema con relativo stato della sessione (Eccezione 1)
                 \item Il sistema mostra nel riquadro in basso a destra dello schermo l'elenco dei sondaggi già caricati a sistema con relativo stato di caricamento e stato di verifica dei dati inseriti (Eccezione 1)
             \end{enumerate}
@@ -158,14 +158,14 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui non fossero presenti sondaggi all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
 
-    \subsection{Use Case RF9: Gestione sonaggi}
+    \subsection{\textit{Use Case} RF9: Gestione sondaggi}
 %        \begin{figure}[H]
 %            \includegraphics[width=0.8\textwidth]{% Bisogna inserire il path della foto del boss}
 %        \end{figure}
 
-    \subsection{Use Case RF10: Visualizzare i voti}
+    \subsection{\textit{Use Case} RF10: Visualizzare i voti}
         \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente sondaggista può visualizzare i voti e le interfacce per gestirli
+            Questo \textit{Use Case} descrive come l'utente sondaggista può visualizzare i voti e le interfacce per gestirli
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item Il sistema mostra nella parte sinistra dello schermo un riassunto del numero di voti presenti all'interno del sondaggio e in basso una tabella riassuntiva riguardante il numero di voti ricevuti per quartiere
@@ -178,7 +178,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui non fossero presenti voti all'interno della lista il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
 
-    \subsection{Use Case RF11: Gestione voti}
+    \subsection{\textit{Use Case} RF11: Gestione voti}
 %        \begin{figure}[H]
 %            \includegraphics[width=0.8\textwidth]{% Bisogna inserire il path della foto del boss}
 %        \end{figure}
@@ -195,12 +195,12 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Analista.drawio.png}
-        \caption{Use Case Diagram dell'Utente analista}
+        \caption{\textit{Use Case} Diagram dell'Utente analista}
     \end{figure}
 
-    \subsection{Use Case RF7: Logout}
+    \subsection{\textit{Use Case} RF7: Logout}
         \subsubsection{Riassunto}
-            Questo Use Case descrive come l'utente può fare logout
+            Questo \textit{Use Case} descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente sondaggista preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
@@ -208,9 +208,9 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 ricarica la pagina riportando l'utente alla 'visualizzazione città'
             \end{enumerate}
 
-    \subsection{Use Case RF12: Interazione con la tabella}
+    \subsection{\textit{Use Case} RF12: Interazione con la tabella}
         \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente sondaggista visualizzerà i sondaggi e le interfacce per gestirli
+            Questo \textit{Use Case} descrive come l'utente sondaggista visualizzerà i sondaggi e le interfacce per gestirli
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item 
@@ -220,15 +220,15 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item
             \end{enumerate}
 
-    \subsection{Use Case RF13: Accesso completo agli attributi}
+    \subsection{\textit{Use Case} RF13: Accesso completo agli attributi}
         \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente analista può visualizzare, accedere e navigare agli attributi completi riguardanti ogni zona
+            Questo \textit{Use Case} descrive come l'utente analista può visualizzare, accedere e navigare agli attributi completi riguardanti ogni zona
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente seleziona una zona geografica per la quale ricevere maggiori informazioni
                 \item Il sistema mostra nella parte destra dello schermo la categoria di attributi riguardanti la zona selezionata con al di sopra le icone ed il titolo delle varie categorie di attributi selezionabili (Estensione 2)
                 \item L'utente seleziona la categoria di attributi che vuole visualizzare (Eccezione 1)
-                \item Il sistema mostra, ove prima erano presenti gli attributi della precedente categoria, gli attributi appartenenti alla nuova categori selezionata
+                \item Il sistema mostra, ove prima erano presenti gli attributi della precedente categoria, gli attributi appartenenti alla nuova categoria selezionata
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
@@ -236,13 +236,13 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
-                \item Questo UseCase estende lo UseCase "Visualizzazione Zona" dell'utente non loggato
+                \item Questo \textit{Use Case} estende lo \textit{Use Case} ``Visualizzazione Zona'' dell'utente non loggato
                 \item La categoria di attributi selezionata di default è quella degli attributi generali
             \end{enumerate}
 
-    \subsection{Use Case RF14: Analisi attraverso storici}
+    \subsection{\textit{Use Case} RF14: Analisi attraverso storici}
         \subsubsection{Titolo}
-            Questo Use Case descrive come l'utente analista può visualizzare gli storici degli attributi presenti all'interno del programma
+            Questo \textit{Use Case} descrive come l'utente analista può visualizzare gli storici degli attributi presenti all'interno del programma
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item 

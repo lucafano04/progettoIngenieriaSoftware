@@ -39,9 +39,12 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \begin{itemize}
                 \item L'utente non loggato posiziona il cursore all'interno dello spazio dedicato alla mappa
                 \item Se l'utente utilizza la rotella del mouse oppure uno dei pulsanti presenti in uno degli angoli della mappa
-                \item Attraverso le funzionalità fornite da OpenStreetMap la mappa ingrandisce o diminuisce la dimensione dello zoom (Eccezione 1)
+                \item Attraverso le funzionalità fornite da \texttt{OpenStreetMap}\footnote{
+                    \label{note:osm}
+                    $ \text{\texttt{OpenStreetMap}}^{\text{\textregistered}} $ è basato su \textit{dati aperti}, rilasciato con licenza \href{https://opendatacommons.org/licenses/odbl/}{\textit{Open Data Commons Open Database License} (\texttt{ODbL})} da \href{https://osmfoundation.org/}{\textit{\texttt{OpenStreetMap} Foundation} (\texttt{OSMF})}. Per ulteriori informazioni si rimanda al sito ufficiale: \url{https://www.openstreetmap.org/}
+                } la mappa ingrandisce o diminuisce la dimensione dello zoom (Eccezione 1)
                 \item Se l'utente preme e trascina il cursore
-                \item Attraverso le funzionalità fornite da OpenStreetMap la mappa sposta il focus centrale in funzione del cursore (Eccezione 2)
+                \item Attraverso le funzionalità fornite da \texttt{OpenStreetMap}\footref{note:osm} la mappa sposta il focus centrale in funzione del cursore (Eccezione 2)
                 \item Se l'utente non loggato seleziona una delle zone all'interno della visuale della mappa (Estensione 1)
                 \item Il sistema posiziona il focus centrale della mappa al centro della zona selezionata e ne modifica successivamente lo zoom, il colore e lo spessore dei bordi
                 \item Il sistema passa successivamente allo \textit{Use Case} ``Visualizzare zona'' della sezione scelta
@@ -106,9 +109,9 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il login
-                \item Il sistema reindirizza l'utente alla pagina del service provider della provincia di Trento dal quale potrà accedere al login tramite sistema SSO
-                \item Il sistema SSO verifica l'identità dell'utente in questione e la ritorna al sistema (Eccezione 1)
-                \item Il sistema controlla che per l'identità certificata dal sistema SSO esista un'account collegato (Eccezione 1)
+                \item Il sistema reindirizza l'utente alla pagina del service provider della provincia di Trento dal quale potrà accedere al login tramite sistema \texttt{SSO}
+                \item Il sistema \texttt{SSO} verifica l'identità dell'utente in questione e la ritorna al sistema (Eccezione 1)
+                \item Il sistema controlla che per l'identità certificata dal sistema \texttt{SSO} esista un'account collegato (Eccezione 1)
                 \item Il sistema assegna dunque un'identità all'utente assegnandogli il ruolo di proprietà
                 \item Il sistema successivamente al login sostituisce l'icona del login con l'immagine profilo dell'account al quale si ha fatto l'accesso e reindirizza l'utente allo \textit{Use Case} ``visualizzare città''
             \end{enumerate}

@@ -1,10 +1,10 @@
 import Base from './Base';
-import Circoscrizioni from '.';
+import {Circoscrizioni} from '..';
 
 
 type MinimalBase = Base & {
     self: string,
-    circoscrizione: Circoscrizioni.Minimal,
+    circoscrizione: Circoscrizioni.MinimalBase,
     soddisfazioneMedia: number
 }
 

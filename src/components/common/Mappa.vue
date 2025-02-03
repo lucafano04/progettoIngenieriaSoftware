@@ -44,7 +44,8 @@
         }
     }
 
-    function handlerZona(quartiere: Quartieri.Minimal | Circoscrizioni.Minimal) {
+    function handlerZona(quartiere: Quartieri.Minimal | Circoscrizioni.Minimal | undefined) {
+        if(quartiere===undefined) return;
         if(quartiere.self===props.zonaSel){
             mapProp.value.center = [46.06736507521368, 11.12139794405234];
             setTimeout(() => {
@@ -85,17 +86,25 @@
                 <LPolygon 
                     :key="quartiere.self" 
                     :lat-lngs="quartiere.coordinate.map((c: number[]) => [c[1], c[0]])" 
-                    :fillColor="getColorFromSoddisfazione(quartiere.soddisfazioneMedia,zonaSel!==quartiere.self&&zonaSel!=='')" :fill-opacity="0.3" :name="quartiere.nome.toString()" :interactive="true"
-                    @click="handlerZona(quartiere)"
+                    :name="quartiere.nome.toString()"
+                    :interactive="true"
                     :color="zonaSel!==quartiere.self&&zonaSel!==''?'#A0A0A0':'#000000'"
+                    :fill-opacity="0.3"
+                    :fill-color="getColorFromSoddisfazione(quartiere.soddisfazioneMedia || 0, zonaSel?true:false)"
+                    @click="handlerZona(quartiere)"
                     />
             </span>
-            <span v-if="zonaSel!=='' && tipoSel.find((q: Quartieri.Minimal | Circoscrizioni.Minimal) => q.self === zonaSel)">
+            <span v-if="zonaSel!=='' && tipoSel.find(q => q.self === zonaSel)">
                 <LPolygon 
                     :key="zonaSel" 
-                    :lat-lngs="tipoSel.find((q: Quartieri.Minimal | Circoscrizioni.Minimal) => q.self === zonaSel)?.coordinate.map((c: number[]) => [c[1], c[0]]) || []" 
-                    :color="getColorFromSoddisfazione(tipoSel.find((q: Quartieri.Minimal | Circoscrizioni.Minimal) => q.self === zonaSel)?.soddisfazioneMedia || 0)" :fill-opacity="0.3" :name="tipoSel.find((q: Quartieri.Minimal | Circoscrizioni.Minimal) => q.self === zonaSel)?.nome.toString()" :interactive="true"
-                    @click="handlerZona(tipoSel.find((q: Quartieri.Minimal | Circoscrizioni.Minimal) => q.self === zonaSel))"
+                    :lat-lngs="tipoSel.find(q => q.self === zonaSel)?.coordinate.map((c: number[]) => [c[1], c[0]]) || []" 
+                    :color="getColorFromSoddisfazione(tipoSel.find(q => q.self === zonaSel)?.soddisfazioneMedia || 0, false)" 
+                    :fill-opacity="0.3"
+                    :fillColor="getColorFromSoddisfazione(tipoSel.find(q => q.self === zonaSel)?.soddisfazioneMedia || 0, false)"
+                    :name="tipoSel.find(q => q.self === zonaSel)?.nome.toString()"
+                    :interactive="true"
+                    @click="
+                    handlerZona(tipoSel.find(q => q.self === zonaSel))"
                     />
             </span>
         </LMap>

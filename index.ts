@@ -1,6 +1,5 @@
 import db from 'mongoose'; // Import and initialize the database connection
 import app from './app';
-import { RANDOM_SECRET } from './app/variables';
 import { checkTokens } from './app/utils/token';
 
 const PORT = process.env.PORT || 3000; // Define the port for the server
@@ -13,7 +12,6 @@ if(!process.env.JWT_SECRET){
 // Generate a random secret for the session
 
 
-console.log(`[INFO] Random secret: ${RANDOM_SECRET}`);
 
 db.startSession().then(()=>{ // Start a session with the database
     console.log("[INFO] Connected to MongoDB"); // Log that the connection was successful

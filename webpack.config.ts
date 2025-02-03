@@ -20,7 +20,7 @@ export default {
         extensions: [".ts", ".js"]
     },
     output: {
-        filename: "app.js",
+        filename: "app.cjs",
         path: path.resolve(__dirname, "dist", "server")
     }
 };

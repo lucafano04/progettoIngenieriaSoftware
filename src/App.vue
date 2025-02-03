@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { MegaMenu, SplitButton, useToast, Toast, ConfirmDialog } from 'primevue';
+    import { Menubar, SplitButton, useToast, Toast, ConfirmDialog } from 'primevue';
     import { MenuItem } from 'primevue/menuitem';
     import { Ref, ref, watch } from 'vue';
     import { Utenti } from '../types'
@@ -84,7 +84,7 @@
     <div class="tw-p-2 tw-flex tw-flex-col tw-h-dvh">
         <Toast />
         <ConfirmDialog />
-        <MegaMenu :model="menuItems" breakpoint="600px">
+        <Menubar :model="menuItems" breakpoint="600px">
             <template #start>
                 <div class="tw-flex tw-items-center tw-justify-center">
                     <RouterLink to="/">
@@ -106,7 +106,7 @@
                     </span>
                 </SplitButton>
             </template>
-        </MegaMenu>
+        </Menubar>
         <div class="tw-m-5 tw-container tw-mx-auto tw-grow">
             <RouterView />
         </div>

@@ -33,7 +33,10 @@ function getColorFromSoddisfazione(soddisfazione: number, toGrey: boolean = fals
         red = 0;
         green = Math.round(255*((soddisfazione-2.5)/2.5));
     }
-    return toGrey ? `rgb(${red*0.8},${green*0.8},${0})` : `rgb(${red},${green},0)`;
+    // console.log(soddisfazione, toGrey,  toGrey ? `#${(red*0.8).toString(16).split('.')[0].padStart(2, '0')}${(green*0.8).toString(16).split('.')[0].padStart(2, '0')}00` : `#${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}00`);
+    return toGrey ? `#${(red*0.8).toString(16).split('.')[0].padStart(2, '0')}${(green*0.8).toString(16).split('.')[0].padStart(2, '0')}00` : `#${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}00`;
+
+    // return toGrey ? `rgb(${red*0.8},${green*0.8},${0})` : `rgb(${red},${green},0)`;
 }
 
 const misc = {

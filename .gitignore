@@ -8,3 +8,4 @@
 *.toc
 *.out
 .vs
+_minted-*

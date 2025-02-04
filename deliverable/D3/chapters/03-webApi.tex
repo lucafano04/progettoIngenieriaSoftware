@@ -1,0 +1,969 @@
+\chapter{\textit{Web \texttt{APIs}}}
+Le specifiche delle \texttt{APIs} sono state definite secondo le specifiche \texttt{OpenAPI 3.0.3} e disponibili pubblicamente presso \texttt{APIary} al seguente indirizzo: \url{https://satistrento.docs.apiary.io}.
+
+\paragraph{Progettazione e note di design} In fase di progettazione si è scelto di ridurre al minimo la duplicazione degli attributi e delle relazioni tra le entità, in modo da rendere più semplice la manutenzione e l'aggiornamento delle \texttt{APIs} in futuro, dunque è presente un elevato numero di componenti ed ereditarietà tra questi. Inoltre si è seguito il paradigma degli ``\texttt{API} link'' per permettere una navigazione più semplice e intuitiva tra le risorse.
+
+\paragraph{Specifiche} Le specifiche delle \texttt{APIs} sono disponibili al seguente indirizzo: \url{https://github.com/lucafano04/progettoComune/blob/main/APIdoc/api.yaml} e sono riportate di seguito.
+
+
+\begin{minted}[
+  linenos,
+  breaklines,
+  tabsize=2,
+  fontsize=\footnotesize
+]{yaml}
+openapi: 3.0.3
+info:
+  title: Documentazione API progetto "SatisTrento"
+  description: Documentazione API per il progetto "SatisTrento" all'interno del progetto "100 progetti per il comune di Trento" per il corso di Ingegneria del Software a.a. 2024/2025 corso di laurea in Informatica presso l'Università degli Studi di Trento.
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Development server for testing
+  - url: https://progettocomune.onrender.com/api/v1
+    description: Production server
+
+components:
+  schemas:
+    DatiBase:
+      description: Oggetto contenente le informazioni di base di un quartiere.
+      type: object
+      properties:
+        popolazione:
+            type: integer
+            description: Numero di abitanti del quartiere.
+        superficie:
+          type: number
+          description: Superficie del quartiere in km^2.
+          format: double
+        serviziTotali: 
+          type: integer
+          description: Numero totale di servizi presenti nel quartiere.
+        soddisfazioneMedia:
+          type: number
+          description: Soddisfazione media degli abitanti del quartiere.
+          format: double
+          minimum: 0
+          maximum: 100
+        interventiPolizia: 
+          type: integer
+          description: Numero di interventi delle forze dell'ordine nel quartiere.
+        etaMedia:
+          type: number
+          description: Età media degli abitanti del quartiere.
+          format: double
+    ServiziGenerali:
+      description: Oggetto contenente le informazioni sui servizi presenti in un quartiere.
+      type: object
+      properties:
+        areeVerdi:
+          type: integer
+          description: Numero di aree verdi presenti nel quartiere.
+          minimum: 0
+        scuole:
+          type: integer
+          description: Numero di scuole presenti nel quartiere.
+          minimum: 0
+        serviziRistorazione:
+          type: integer
+          description: Numero di servizi di ristorazione presenti nel quartiere.
+          minimum: 0
+        localiNotturni: 
+          type: integer
+          description: Numero di locali notturni presenti nel quartiere.
+          minimum: 0
+    Sicurezza:
+      description: Oggetto contenente le informazioni sulla sicurezza di un quartiere.
+      type: object
+      properties:
+        numeroInterventi:
+          type: integer
+          description: Numero di interventi delle forze dell'ordine nel quartiere.
+          minimum: 0
+        incidenti: 
+          type: integer
+          description: Numero di incidenti nel quartiere.
+          minimum: 0
+        tassoCriminalita:
+          type: number
+          description: Tasso di criminalità del quartiere.
+          format: double
+          minimum: 0
+    Coordinate:
+      description: Array di coordinate che definiscono un quartiere e/o circoscrizione.
+      type: array
+      items: 
+        description: Coordinate nel formato [latitude, longitude].
+        type: array
+        items:
+          type: number
+          format: double
+        minItems: 2
+        maxItems: 2
+      minItems: 1
+      uniqueItems: true
+    Soddisfazione: 
+        type: "number"
+        description: "Soddisfazione media degli abitanti del quartiere."
+        format: "double"
+        minimum: 0
+        maximum: 100
+    CircoscrizioneBaseNC: 
+      description: Oggetto contenente le informazioni di Base di una circoscrizione. (Senza coordinate)
+      type: object
+      properties:
+        self:
+          type: string
+          description: Identificatore univoco della circoscrizione.
+        nome:
+          type: string
+          description: Nome della circoscrizione.
+        soddisfazioneMedia:
+          "$ref": "#/components/schemas/Soddisfazione"
+    CircoscrizioneBase: 
+      description: Oggetto contenente le informazioni di Base di una circoscrizione.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/CircoscrizioneBaseNC"
+      properties:
+        coordinate:
+          "$ref": "#/components/schemas/Coordinate"
+    Circoscrizione:
+      description: Oggetto contenente le informazioni di una circoscrizione.
+      allOf:
+        - "$ref": "#/components/schemas/CircoscrizioneBase"
+        - "$ref": "#/components/schemas/DatiBase"
+      type: object
+      properties:
+        servizi:
+          "$ref": "#/components/schemas/ServiziGenerali"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
+    CircoscrizioneNC:
+      description: Oggetto contenente le informazioni di una circoscrizione. (Senza coordinate)
+      allOf:
+        - "$ref": "#/components/schemas/CircoscrizioneBaseNC"
+        - "$ref": "#/components/schemas/DatiBase"
+      type: object
+      properties:
+        servizi:
+          "$ref": "#/components/schemas/ServiziGenerali"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
+    QuartiereBaseNC:
+      description: Oggetto contenente le informazioni di base di un quartiere. (Senza coordinate)
+      type: object
+      properties:
+        self:
+          type: string
+          description: "Url della risorsa."
+        nome:
+          type: "string"
+          description: "Nome del quartiere."
+        circoscrizione:
+          "$ref": "#/components/schemas/CircoscrizioneBaseNC"
+        soddisfazioneMedia:
+          "$ref": "#/components/schemas/Soddisfazione"
+    QuartiereBase: 
+      description: Oggetto contenente le informazioni di base di un quartiere.
+      type: object
+      allOf:
+        - "$ref": "#/components/schemas/QuartiereBaseNC"
+      properties:
+        circoscrizione:
+          "$ref": "#/components/schemas/CircoscrizioneBase"
+        coordinate:
+          "$ref": "#/components/schemas/Coordinate"
+    Quartiere: 
+      description: Oggetto contenente le informazioni di un quartiere.
+      allOf:
+        - "$ref": "#/components/schemas/QuartiereBase"
+        - "$ref": "#/components/schemas/DatiBase"
+      type: object
+      properties:
+        servizi:
+          "$ref": "#/components/schemas/ServiziGenerali"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
+    QuartiereNC:
+      description: Oggetto contenente le informazioni di un quartiere.
+      allOf:
+        - "$ref": "#/components/schemas/QuartiereBaseNC"
+        - "$ref": "#/components/schemas/DatiBase"
+      type: object
+      properties:
+        servizi:
+          "$ref": "#/components/schemas/ServiziGenerali"
+        sicurezza:
+          "$ref": "#/components/schemas/Sicurezza"
+    User:
+      description: Oggetto contenente le informazioni di un utente.
+      type: object
+      properties:
+        self:
+          type: string
+          description: Url della risorsa.
+        email:
+          type: string
+          description: Email dell'utente.
+        nome:
+          type: string
+          description: Nome dell'utente.
+        cognome:
+          type: string
+          description: Cognome dell'utente.
+        ruolo:
+          type: string
+          enum:
+            - "amministratore"
+            - "analista"
+            - "sondaggista"
+            - "circoscrizione"
+          description: Ruolo dell'utente.
+        imageUrl: 
+          type: string
+          description: Url dell'immagine profilo dell'utente. (gravatar)
+    Session: 
+      description: Oggetto contenente le informazioni di una sessione.
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token di autenticazione dell'utente.
+        user:
+          "$ref": "#/components/schemas/User"
+    Error:
+      description: Oggetto contenente le informazioni di un errore.
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Codice dell'errore.
+        message:
+          type: string
+          description: Messaggio di errore.
+        details:
+          type: string
+          description: Dettagli dell'errore.
+          nullable: true
+    AddSondaggio:
+      description: Oggetto contenente le informazioni per aggiungere un sondaggio.
+      type: object
+      properties:
+        titolo:
+          type: string
+          description: Titolo del sondaggio.
+    SondaggioBase: 
+      description: Oggetto contenente le informazioni di base di un sondaggio.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/AddSondaggio"
+      properties:
+        self:
+          type: string
+          description: URL della risorsa.
+        dataInizio:
+          type: string
+          description: Data di inizio del sondaggio.
+          format: date
+        isAperto:
+          type: boolean
+          description: Indica se il sondaggio è aperto (in corso) o chiuso.
+        statoApprovazione:
+          type: string
+          enum:
+            - "approvato"
+            - "in attesa"
+            - "rifiutato"
+          description: Stato di approvazione del sondaggio.
+        sondaggista:
+          "$ref": "#/components/schemas/User"
+    ElencoSondaggi:
+      description: Array di oggetti contenenti le informazioni di base di un sondaggio (visualizzazione sondaggista/admin).
+      oneOf:
+        - type: array
+          items:
+            "$ref": "#/components/schemas/SondaggioBase"
+        - type: array
+          items:
+            "$ref": "#/components/schemas/Sondaggio"
+    AddVoto:
+      description: Oggetto contenente le informazioni per aggiungere un voto.
+      type: object
+      properties:
+        eta:
+          type: integer
+          description: Età dell'utente che ha effettuato il voto. Può essere null se non specificata.
+          minimum: 0
+          nullable: true
+        voto:
+          type: integer
+          description: Voto assegnato al quartiere.
+          minimum: 1
+          maximum: 5
+        quartiere:
+          type: string
+          description: Identificatore univoco del quartiere.
+    Voto:
+      description: Oggetto contenente le informazioni di un voto.
+      type: object
+      properties:
+        self:
+          type: string
+          description: Identificatore univoco del voto.
+        dataOra:
+          type: string
+          description: Data e ora in cui è stato effettuato il voto.
+          format: date-time
+      allOf:
+        - "$ref": "#/components/schemas/AddVoto"
+    MediaVoti:
+      description: Oggetto semplice contenente la media dei voti di un quartiere.
+      type: object
+      properties:
+        media:
+          type: number
+          description: Media dei voti assegnati al quartiere.
+          format: double
+          minimum: 1
+          maximum: 5
+        quartiere:
+          type: string
+          description: Identificatore univoco della risorsa del quartiere.
+    Sondaggio:
+      description: Oggetto contenente le informazioni di un sondaggio.
+      allOf:
+        - "$ref": "#/components/schemas/SondaggioBase"
+      type: object
+      properties:
+        voti:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Voto"
+          description: Array di oggetti contenenti i voti assegnati al sondaggio.
+        mediaVoti:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MediaVoti"
+          description: Array di oggetti contenenti la media dei voti assegnati ai quartieri presenti nel sondaggio (quelli non presenti non vengono visualizzati).
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token di autenticazione fornito all'utente per accedere alle risorse specifiche protette.
+
+paths:
+  '/quartieri' :
+    description: "Risorsa che restituisce la lista dei quartieri di Trento."
+    get: 
+      summary: "Ottieni lista dei quartieri"
+      description: "Ritorna una lista di tutti i quartieri della città di Trento."
+      parameters:
+        - name: deepData
+          in: query
+          description: "Se impostato a true, restituisce le informazioni complete di ogni quartiere."
+          required: false
+          schema:
+            type: boolean
+            default: false
+          allowEmptyValue: true
+        - name: coordinate
+          in: query
+          description: "Se impostato non impostato o impostato a true restituisce le coordinate di ogni quartiere, altrimenti no."
+          required: false
+          schema:
+            type: boolean
+            default: true
+          allowEmptyValue: true
+      responses: 
+        200: 
+          description: "Risposta con la lista dei quartieri."
+          content:
+            application/json:
+              schema: 
+                oneOf:
+                  - type: array
+                    items: 
+                      "$ref": "#/components/schemas/QuartiereBase"
+                  - type: array
+                    items: 
+                      "$ref": "#/components/schemas/Quartiere"
+                  - type: array
+                    items: 
+                      "$ref": "#/components/schemas/QuartiereNC"
+                  - type: array
+                    items: 
+                      "$ref": "#/components/schemas/QuartiereBaseNC"
+      tags:
+        - Quartieri
+        - Dati Statici
+  '/quartieri/{id}' :
+    description: "Risorsa che restituisce le informazioni di un quartiere di Trento con le informazioni di base e i servizi presenti."
+    parameters:
+      - name: id
+        in: path
+        description: "Identificatore univoco del quartiere."
+        required: true
+        schema:
+          type: string
+      - name: coordinate
+        in: query
+        description: "Se impostato a true, restituisce le coordinate del quartiere, altrimenti no. Impostato di default a true."
+        required: false
+        schema:
+          type: boolean
+          default: true
+        allowEmptyValue: true
+    get: 
+      summary: "Ottieni informazioni di un quartiere"
+      responses: 
+        200:
+          description: "Risposta con le informazioni del quartiere."
+          content:
+            application/json: 
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Quartiere"
+                  - $ref: "#/components/schemas/QuartiereNC"
+        404: 
+          description: "Quartiere non trovato."
+          content: 
+            application/json: 
+              schema: 
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Quartieri
+        - Dati Statici
+  '/circoscrizioni' : 
+    description: "Risorsa che restituisce la lista delle circoscrizioni di Trento."
+    get: 
+      summary: "Ottieni lista delle circoscrizioni"
+      description: "Returns a list of all the districts in the city of Trento."
+      parameters:
+        - name: deepData
+          in: query
+          description: "Se impostato a true, restituisce le informazioni complete di ogni circoscrizione."
+          required: false
+          schema:
+            type: boolean
+            default: false
+          allowEmptyValue: true
+        - name: coordinate
+          in: query
+          description: "Se impostato non impostato o impostato a true restituisce le coordinate di ogni circoscrizione, altrimenti no."
+          required: false
+          schema:
+            type: boolean
+            default: true
+          allowEmptyValue: true
+      responses:
+        200 :
+          description: "Successful response"
+          content:
+            application/json:
+              schema: 
+                oneOf:
+                  - type: "array"
+                    items: 
+                      "$ref": "#/components/schemas/CircoscrizioneBase"
+                  - type: "array"
+                    items: 
+                      "$ref": "#/components/schemas/Circoscrizione"
+                  - type: "array"
+                    items: 
+                      "$ref": "#/components/schemas/CircoscrizioneBaseNC"
+                  - type: "array"
+                    items: 
+                      "$ref": "#/components/schemas/CircoscrizioneNC"
+      tags:
+        - Circoscrizioni
+        - Dati Statici
+  '/circoscrizioni/{id}' :
+    description: "Risorsa che restituisce le informazioni di una circoscrizione di Trento con le informazioni di base e i servizi presenti."
+    parameters:
+      - name: id
+        in: path
+        description: "Identificatore univoco della circoscrizione."
+        required: true
+        schema:
+          type: string
+      - name: coordinate
+        in: query
+        description: "Se impostato a true, restituisce le coordinate della circoscrizione, altrimenti no. Impostato di default a true."
+        required: false
+        schema:
+          type: boolean
+          default: true
+        allowEmptyValue: true
+    get: 
+      summary: "Ottieni informazioni di una circoscrizione"
+      responses: 
+        200:
+          description: "Risposta con le informazioni della circoscrizione."
+          content:
+            application/json: 
+              schema: 
+                oneOf:
+                  - $ref: "#/components/schemas/Circoscrizione"
+                  - $ref: "#/components/schemas/CircoscrizioneNC"
+        404: 
+          description: "Circoscrizione non trovata."
+          content: 
+            application/json: 
+              schema: 
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Circoscrizioni
+        - Dati Statici
+  '/generalInfo' :
+    description: "Risorsa che restituisce le informazioni generali della città di Trento."
+    get: 
+      summary: "Ottieni informazioni generali"
+      description: "Restituisce le informazioni generali della città di Trento."
+      responses: 
+        200 : 
+          description: "Successful response"
+          content: 
+            application/json:
+              schema: 
+                type: "object"
+                properties: 
+                  self:
+                    type: "string"
+                    description: "Url della risorsa."
+                  popolazione :
+                    type: integer
+                    description: "Numero di abitanti della città di Trento."
+                  superficie :
+                    type: number
+                    description: "Superficie della città di Trento in km^2."
+                    format: double
+                  etaMedia :
+                    type: number
+                    description: "Età media degli abitanti della città di Trento."
+                    format: double
+                  soddisfazioneMedia: 
+                    type: number
+                    description: "Soddisfazione media degli abitanti della città di Trento."
+                    format: double
+                    minimum: 0
+                    maximum: 100
+      tags:
+        - Dati Statici
+  '/session':
+    description: "Risorsa che restituisce le informazioni della sessione dell'utente."
+    get:
+      summary: "Ottieni informazioni della sessione"
+      description: "Restituisce le informazioni della sessione dell'utente, se presente."
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sessione non trovata."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Utenti
+    post: 
+      summary: "Crea una nuova sessione (aka login)"
+      description: "Crea una nuova sessione per l'utente. Altrimenti conosciuto come login."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "Email dell'utente."
+                password:
+                  type: string
+                  description: "Password (codificata) dell'utente."
+      responses:
+        201:
+          description: "Sessione creata con successo."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Session"
+          headers:
+            Location: 
+              description: "Url della risorsa creata."
+              schema:
+                type: string
+        400:
+          description: "Dati della sessione non validi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Credenziali non valide."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Utenti
+    delete: 
+      summary: "Elimina la sessione (aka logout)"
+      description: "Elimina la sessione dell'utente revocando il token di autenticazione al server, altrimenti conosciuto come logout."
+      security:
+        - BearerAuth: []
+      responses:
+        204:
+          description: "Sessione eliminata con successo."
+        401:
+          description: "Sessione non trovata."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Utenti
+  '/sondaggi' :
+    description: "Risorsa che restituisce la lista dei sondaggi dell'utente corrente, se amministratore allora restituisce tutti i sondaggi."
+    get: 
+      summary: "Ottieni lista dei sondaggi"
+      description: "Restituisce la lista dei sondaggi dell'utente corrente. Se l'utente è amministratore, restituisce tutti i sondaggi."
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: deepData
+          in: query
+          description: "Se impostato a true, restituisce le informazioni complete di ogni sondaggio."
+          required: false
+          schema:
+            type: boolean
+            default: false
+          allowEmptyValue: true
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ElencoSondaggi"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per visualizzare i sondaggi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+    post: 
+      summary: "Crea un nuovo sondaggio"
+      description: "Crea un nuovo sondaggio. Solo per utenti con ruolo 'sondaggista'."
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddSondaggio"
+      responses:
+        201:
+          description: "Sondaggio creato con successo."
+          headers:
+            Location:
+              description: "Url della risorsa creata."
+              schema:
+                type: string
+        400:
+          description: "Dati del sondaggio non validi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per creare un sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+  '/sondaggi/{id}' :
+    description: "Risorsa che restituisce le informazioni di un sondaggio."
+    parameters:
+      - name: id
+        in: path
+        description: "Identificatore univoco del sondaggio."
+        required: true
+        schema:
+          type: string
+    get: 
+      summary: "Ottieni informazioni di un sondaggio"
+      description: "Restituisce le informazioni di un sondaggio, solo per utenti con ruolo 'sondaggista' o 'amministratore'."
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Sondaggio"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per visualizzare il sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+    patch: 
+      summary: "Modifica un sondaggio"
+      description: "Modifica un sondaggio. Solo per utenti con ruolo 'sondaggista'."
+      security:
+        - BearerAuth: []
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isAperto:
+                  type: boolean
+                  description: "Indica se il sondaggio è aperto (in corso) o chiuso."
+      responses:
+        200:
+          description: "Sondaggio modificato con successo."
+          headers:
+            Location:
+              description: "Url della risorsa modificata."
+              schema:
+                type: string
+        400:
+          description: "Dati del sondaggio non validi."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per modificare il sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+    delete:
+      summary: "Elimina un sondaggio"
+      description: "Elimina un sondaggio. Solo l'utente che ha creato il sondaggio può eliminarlo o un amministratore, se il sondaggio è in attesa. Se il sondaggio è approvato o rifiutato, solo l'amministratore può eliminarlo."
+      security:
+        - BearerAuth: []
+      responses:
+        204:
+          description: "Sondaggio eliminato con successo."
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per eliminare il sondaggio."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+  '/voti' :
+    description: "Risorsa per la gestione dei voti di un sondaggio."
+    parameters:
+      - name: idSondaggio
+        in: query
+        description: "Identificatore univoco del sondaggio."
+        required: true
+        schema:
+          type: string
+    get: 
+      summary: "Ottieni lista dei voti di un sondaggio"
+      description: "Restituisce la lista dei voti assegnati al sondaggio."
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: "Successful response"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Voto"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per visualizzare i voti."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+    post:
+      summary: "Aggiungi un voto"
+      description: "Aggiunge un voto al sondaggio."
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddVoto"
+      responses:
+        201:
+          description: "Voto aggiunto con successo."
+          headers:
+            Location:
+              description: "Url della risorsa creata."
+              schema:
+                type: string
+        400: 
+          description: "Dati del voto non validi."
+          content: 
+            application/json: 
+              schema: 
+                "$ref": "#/components/schemas/Error"
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per aggiungere un voto."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Sondaggio non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+  '/voti/{idVoto}' :
+    description: "Risorsa per la gestione di un voto di un sondaggio."
+    parameters:
+      - name: idVoto
+        in: path
+        description: "Identificatore univoco del voto."
+        required: true
+        schema:
+          type: string
+    delete:
+      summary: "Elimina un voto"
+      description: "Elimina un voto. Solo l'utente che ha effettuato il voto può eliminarlo"
+      security:
+        - BearerAuth: []
+      
+      responses:
+        204:
+          description: "Voto eliminato con successo."
+        401:
+          description: "Utente non autenticato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        403:
+          description: "Utente loggato ma non ha i permessi per eliminare il voto."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        404:
+          description: "Voto non trovato."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+      tags:
+        - Sondaggi
+        - Sondaggista
+\end{minted}

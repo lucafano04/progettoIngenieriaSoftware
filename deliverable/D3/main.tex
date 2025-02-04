@@ -1,6 +1,7 @@
 \documentclass[twoside, a4paper, 10pt]{report}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -12,6 +13,7 @@
 \usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{afterpage}
+\usepackage{minted}
 
 % Ridefinizione per il titolo dei capitoli
 \titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter}{1em}{} 
@@ -108,7 +110,8 @@
     \null
     \thispagestyle{empty}%
     \addtocounter{page}{-1}%
-    \newpage}
+    \newpage
+}
 
 \begin{document}
     \pagestyle{fancy}

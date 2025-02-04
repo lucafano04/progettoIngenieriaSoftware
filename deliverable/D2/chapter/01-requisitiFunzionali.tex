@@ -47,17 +47,19 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Attraverso le funzionalità fornite da \texttt{OpenStreetMap}\footref{note:osm} la mappa sposta il focus centrale in funzione del cursore (Eccezione 2)
                 \item Se l'utente non loggato seleziona una delle zone all'interno della visuale della mappa (Estensione 1)
                 \item Il sistema posiziona il focus centrale della mappa al centro della zona selezionata e ne modifica successivamente lo zoom, il colore e lo spessore dei bordi
-                \item Il sistema passa successivamente allo \textit{Use Case} ``Visualizzare zona'' della sezione scelta
+                \item Il sistema passa successivamente allo \textit{Use Case} ``Visualizzare zona'' della sezione scelta(Eccezione 3)
             \end{itemize}
         \subsubsection{Eccezioni}
             \begin{enumerate}
                 \item Nel caso in cui l'utente non loggato cercasse di aumentare o diminuire lo zoom oltre ai limiti imposti, il sistema deve bloccare la nuova modifica allo zoom
                 \item Nel caso in cui l'utente non loggato cercasse di spostare il focus centrale oltre ai limiti della città, il sistema deve bloccare la nuova modifica allo spostamento del focus centrale
+                \item Nel caso in cui l'utente avesse i permessi necessari, il sistema passerà allo \textit{Use Case} ``Accesso completo agli attributi'' della sezione scelta invece che allo allo \textit{Use Case} ``Visualizzare zona'' della sezione scelta
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
                 \item Nel caso in cui l'utente cliccasse su di una zona già selezionata questa riporterebbe allo \textit{Use Case} ``Visualizzare città''
-                \item L'utente, selezionando il pulsante presente nell'angolo della mappa, potrà visualizzare un menù a pop-up e successivamente modificare la tipologia di divisione presente all'interno della mappa
+                \item L'utente, selezionando il pulsante presente nell'angolo della mappa, potrà visualizzare un menù pop-up e successivamente modificare la tipologia di zona visualizzabile all'interno della mappa.
+                Nel caso in cui l'utente avesse i permessi necessari, sarà inoltre possibile cambiare la tipologia di visualizzazione da mappa a tabella.
             \end{enumerate}
     
     \subsection{\textit{Use Case} RF3: Visualizzare zona}
@@ -75,7 +77,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo \textit{Use Case} descrive come l'utente può accedere e visualizzare l'elenco delle strutture che forniscono un servizio al cittadino
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item L'utente seleziona uno degli attributi presenti a schermo (Eccezione 1)
+                \item Se l'utente seleziona uno degli attributi presenti a schermo (Eccezione 1)
                 \item Il sistema presenta a schermo, ove prima erano presenti gli attributi riguardanti la zona selezionata, una tabella contenente una lista numerata di strutture che offrono il servizio selezionato in precedenza
                 \item Il sistema deve successivamente segnalare sulla mappa la posizione delle varie strutture, attraverso un segnalino contenente il numero identificativo presente in tabella della struttura
             \end{enumerate}
@@ -122,7 +124,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 
 
 \section{\underline{Utente sondaggista}}
-    Di seguito i requisiti associati all'Utente Sondaggista:
+    Di seguito i requisiti associati all'Utente sondaggista:
     \begin{itemize}
         \item \textbf{RF7}: Logout
         \item \textbf{RF8}: Visualizzazione sondaggi
@@ -188,7 +190,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 
 
 \section{\underline{Utente analista}}
-    Di seguito i requisiti associati all'Utente Sondaggista:
+    Di seguito i requisiti associati all'Utente analista:
     \begin{itemize}
         \item \textbf{RF7}: Logout
         \item \textbf{RF12}: Interazione con la tabella
@@ -206,21 +208,33 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo \textit{Use Case} descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item L'utente sondaggista preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
+                \item L'utente analista preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
                 \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
                 ricarica la pagina riportando l'utente alla 'visualizzazione città'
             \end{enumerate}
 
     \subsection{\textit{Use Case} RF12: Interazione con la tabella}
         \subsubsection{Titolo}
-            Questo \textit{Use Case} descrive come l'utente sondaggista visualizzerà i sondaggi e le interfacce per gestirli
+            Questo \textit{Use Case} descrive come l'utente analista visualizzerà e potrà interagire con la tabella
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item 
+                \item L'utente analista posiziona il cursore all'interno dello spazio dedicato alla tabella
+                \item Se l'utente utilizza la rotella del mouse
+                \item La tabella scorre gli elementi presenti all'interno della tabella (Eccezione 1)
+                \item Se l'utente seleziona uno degli attibuti all'interno della riga di intestazione della tabella
+                \item Il sistema ordina le tuple presenti all'interno della tabella in base al dominio dell'attributo
+                \item Se l'utente seleziona l'attributo contenente il nome di una delle zone presenti all'interno del comune
+                \item Il sistema passa dalla visualizzazione tramite tabella a quella tramite mappa
+                \item il sistema sposta il focus centrale della mappa al centro della zona selezionata e ne modifica successivamente lo zoom, il colore e lo spessore dei bordi
+                \item Il sistema passa successivamente allo \textit{Use Case} ``Accesso completo agli attributi'' della sezione scelta
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
-                \item
+                \item Nel caso in cui l'utente analista cercasse di scorrere gli elementi della lista oltre ai limiti imposti, il sistema deve bloccare il nuovo tentativo di scorrimento
+            \end{enumerate}
+        \subsubsection{Estensioni}
+            \begin{enumerate}
+                \item L'utente, selezionando il pulsante presente nell'angolo della tabella, potrà visualizzare un menù pop-up.Successivamente potrà modificare la tipologia di zona presente all'interno della tabella oppure cambiare la tipologia di visualizzazione da tabella a mappa
             \end{enumerate}
 
     \subsection{\textit{Use Case} RF13: Accesso completo agli attributi}
@@ -229,6 +243,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente seleziona una zona geografica per la quale ricevere maggiori informazioni
+                \item Il sistema mostra nella parte sinistra dello schermo la mappa centrata sul centro della zona selezionata
                 \item Il sistema mostra nella parte destra dello schermo la categoria di attributi riguardanti la zona selezionata con al di sopra le icone ed il titolo delle varie categorie di attributi selezionabili (Estensione 2)
                 \item L'utente seleziona la categoria di attributi che vuole visualizzare (Eccezione 1)
                 \item Il sistema mostra, ove prima erano presenti gli attributi della precedente categoria, gli attributi appartenenti alla nuova categoria selezionata
@@ -245,7 +260,93 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 
     \subsection{\textit{Use Case} RF14: Analisi attraverso storici}
         \subsubsection{Titolo}
-            Questo \textit{Use Case} descrive come l'utente analista può visualizzare gli storici degli attributi presenti all'interno del programma
+            Questo \textit{Use Case} descrive come l'utente analista può visualizzare e interagire con gli storici
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item Il sistema mostra a fianco degli attributi presenti all'interno dello \textit{Use Case} ``Accesso completo agli attributi'' il grafico rappresentante l'andamento nel tempo di tale attributo
+                \item L'utente seleziona il grafico
+                \item Il sistema sposta l'attributo selezionato e successivamente posiziona al centro il grafico modificandone le dimensioni (Eccezione 1)
+                \item Se l'utente posiziona il cursore all'interno del grafico
+                \item Il sistema mostrerà tramite messaggio a comparsa lo stato dell'attributo nell'istante di tempo selezionato
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui per un'attributo non fossero reperibili sufficienti dati non sarà presente la propria rappresentazione tramite grafico
+            \end{enumerate}
+
+
+\section{\underline{Utente circoscrizione}}
+    Di seguito i requisiti associati all'Utente circoscrizione:
+    \begin{itemize}
+        \item \textbf{RF7}: Logout
+        \item \textbf{RF15}: Visualizzazione richieste
+        \item \textbf{RF16}: Gestione richieste
+        \item \textbf{RF17}: Gestione ruoli Circoscrizione
+        \item \textbf{RF18}: Modifica informazioni servizi Circoscrizione
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Circoscrizione.drawio.png}
+        \caption{\textit{Use Case} Diagram dell'Utente circoscrizione}
+    \end{figure}
+
+    \subsection{\textit{Use Case} RF7: Logout}
+        \subsubsection{Riassunto}
+            Questo \textit{Use Case} descrive come l'utente può fare logout
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente circoscrizione preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
+                \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
+                ricarica la pagina riportando l'utente alla 'visualizzazione città'
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF15: Visualizzazione richieste}
+        \subsubsection{Titolo}
+
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item
+            \end{enumerate}
+        \subsubsection{Estensioni}
+            \begin{enumerate}
+                \item
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF16: Gestione richieste}
+        \subsubsection{Titolo}
+            
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item 
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item
+            \end{enumerate}
+        \subsubsection{Estensioni}
+            \begin{enumerate}
+                \item
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF17: Gestione ruoli Circoscrizione}
+        \subsubsection{Titolo}
+            
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item 
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item 
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF18: Modifica informazioni servizi Circoscrizione}
+        \subsubsection{Titolo}
+            
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item 

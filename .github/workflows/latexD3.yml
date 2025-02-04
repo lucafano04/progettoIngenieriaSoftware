@@ -1,0 +1,24 @@
+name: LatexD3 CI
+run-name: Building LaTeX Deliverable 3 file
+on: 
+  push:
+      paths:
+        - 'deliverable/D3/**'
+        - 'deliverable/images/**'
+jobs:
+  # Build usign Github Action for LaTeX
+  build_latex:
+      runs-on: self-hosted
+      steps:
+      - name: Set up Git
+        uses: actions/checkout@v4
+      - name: Build LaTeX
+        uses: xu-cheng/latex-action@3.2.0
+        with:
+          working_directory: deliverable/D3
+          root_file: main.tex
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: Deliverable3
+          path: deliverable/D3/main.pdf

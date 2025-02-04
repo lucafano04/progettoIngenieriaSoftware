@@ -2,7 +2,6 @@
     import { DataTable, Column, Button, Skeleton } from 'primevue';
     import { Circoscrizioni, Quartieri } from '../../../types';
     import { ref, watch } from 'vue';
-import { RouterLink } from 'vue-router';
 
 
     const props = defineProps({
@@ -10,7 +9,7 @@ import { RouterLink } from 'vue-router';
         quartieri: { type: Array as () => Quartieri.QuartiereNoC[], required: true },
         circoscrizioni: { type: Array as ()=> Circoscrizioni.CircoscrizioneNoC[], required: true }
     });
-    const emit = defineEmits(["openSettings"]);
+    const emit = defineEmits(["openSettings", "setZonaSel"]);
 
     const cols = [
         {field: 'nome', header: 'Nome', sortable: true},
@@ -50,27 +49,24 @@ import { RouterLink } from 'vue-router';
         if(props.quartCirc)
             selData.value = newVal;
     });
+    const selectedRow = ref<Quartieri.QuartiereNoC | Circoscrizioni.CircoscrizioneNoC | null>(null);
+    watch(() => selectedRow.value, (newVal) => {
+        emit('setZonaSel', newVal ? newVal.self : '');
+    });
 </script>
 <template>
     <div class="tw-rounded" style="height: max(500px, 85vh)">
-        <DataTable :value="selData" scrollable scrollHeight="75vh" stripedRows dataKey="self">
+        <DataTable :value="selData" scrollable scrollHeight="75vh" stripedRows dataKey="self" selectionMode="single" v-model:selection="selectedRow">
             <template #header>
                 <div class="tw-flex tw-justify-between tw-items-center tw-p-2">
                     <span class="tw-font-bold">Elenco {{ props.quartCirc ? 'circoscrizioni' : 'quartieri' }}</span>
                     <Button icon="pi pi-cog" class="tw-p-button-rounded tw-p-button-text" severity="contrast" @click="emit('openSettings')"/>
                 </div>
             </template>
-            <Column key="nome" field="nome" header="Nome" sortable>
-                <template #body="{data}">
-                    <RouterLink :to="'/analisi/' + data.self.split('/').slice(-2).join('/')">{{ data.nome }}</RouterLink>
-                </template>
-            </Column>
-            <Column v-for="col in cols.filter(c => c.field!=='nome')" :key="col.field" :field="col.field" :header="col.header" :sortable="col.sortable">
+            <Column v-for="col in cols" :key="col.field" :field="col.field" :header="col.header" :sortable="col.sortable">
                 <template #body="{data}">
                     {{ 
-                        col.field === 'nome' ?
-                            null
-                        : col.body ? col.body(data) : data[col.field]
+                        col.body ? col.body(data) : data[col.field]
                     }}
                 </template>
             </Column>

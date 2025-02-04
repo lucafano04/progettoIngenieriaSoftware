@@ -9,7 +9,7 @@
     @tailwind utilities;
 }
 
-.dark > * > svg, path {
+.dark > ** > svg, path {
     fill: white;
 }
 .svg-image > svg {

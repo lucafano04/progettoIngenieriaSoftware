@@ -56,14 +56,6 @@
         dropDownItems.value.push({
             divider: true
         });
-        if(user.ruolo === "Analista"){
-            dropDownItems.value.push({
-                label: 'Analisi',
-                icon: 'pi pi-fw pi-chart-line',
-                to: '/analisi',
-                command: () => history.push('/analisi')
-            });
-        }
         if(user.ruolo === "Sondaggista"){
             dropDownItems.value.push({
                 label: 'Sondaggi',

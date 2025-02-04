@@ -16,7 +16,7 @@ import './index.css'
 
 import { getSession } from './utils/utenti';
 import { Utenti } from '../types';
-import { Home, Login, ModificaSondaggio, Sondaggi, Analisi } from './components';
+import { Home, Login, ModificaSondaggio, Sondaggi} from './components';
 
 
 const user = ref<Utenti.User | null>(null);
@@ -30,8 +30,7 @@ const router = createRouter({
         { path: '/login', component: Login , props: { user } },
         { path: '/sondaggi', component: Sondaggi, props: { user } },
         { path: '/sondaggi/:id', component: ModificaSondaggio },
-        { path: '/analisi', component: Analisi },
-        { path: '/analisi/:tipo/:id', component: Analisi },
+        { path: '/analisi/:tipo/:id', component: Home, props: { user } },
     ]
 });
 

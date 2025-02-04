@@ -6,6 +6,8 @@ info:
 servers:
   - url: http://localhost:3000/api/v1
     description: Development server for testing
+  - url: https://progettocomune.onrender.com/api/v1
+    description: Production server
 
 components:
   schemas:

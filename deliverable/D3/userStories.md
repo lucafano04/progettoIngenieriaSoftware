@@ -19,7 +19,7 @@ Il sistema deve permettere a tutti gli utenti di visualizzare gli attributi demo
 - Come utente voglio avere una visualizzazione più dettagliata della zona selezionata e del suo circondario, così da avere una visione più dettagliata di essa e del suo circondario, nonchè per poter navigare più velocemente nelle zone circostanti
 
 ### RF 6 Login (Leggermente Rivisitata)
-Il sistema deve permettere a tutti gli utenti loggati di accedere al loro account premendo il tasto di login presente all'interno della header, il processo di login sarà possibile attraverso l'inserimento di: "Nome Utente" e "Password". Nel caso in cui l'utente non avesse un ruolo abilitato questo verrà reindirizzato alla pagina principale con un messaggio di errore tramite pop-up.Successivamente al processo di autenticazione l'utente verrà reindirizzato alla visualizzazione della città e verrà sostituita l'icona del login con l'icona corrispondente a quella del profilo dal quale si è fatto l'accesso.
+Il sistema deve permettere a tutti gli utenti loggati di accedere al loro account premendo il tasto di login presente all'interno della header, il processo di login sarà possibile attraverso l'inserimento di: "Nome Utente" e "Password". Successivamente al processo di autenticazione l'utente verrà reindirizzato alla visualizzazione della città e verrà sostituita l'icona del login con l'icona corrispondente a quella del profilo dal quale si è fatto l'accesso.
 - Come utente non loggato voglio poter accedere tramite Nome Utente e Password, così da poter avere accesso alle funzionalità fornite dall'account al quale voglio fare l'accesso
 
 ### RF 7 Logout

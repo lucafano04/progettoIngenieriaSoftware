@@ -31,7 +31,7 @@ async function logout() {
         sessionStorage.removeItem('token');
         return true;
     }
-    throw new Error('Errore nel logout ' + await response.text());
+    throw new Error((await response.json()).details);
 }
 async function postSession(email: string, password: string) {
     const hashPassword = await hash(password);
@@ -48,8 +48,8 @@ async function postSession(email: string, password: string) {
         return data.user;
     }
     if(response.status !== 401)
-        throw new Error('Errore nella creazione della sessione ' + await response.text());
-    return false;
+        try {throw new Error('Errore nella creazione della sessione ' + (await response.json())?.details);}catch(err:any ){throw new Error('Errore nella creazione della sessione ' + await response.text());}
+    throw new Error((await response.json()).details);
 }
 async function hash(string: string) {
     const utf8 = new TextEncoder().encode(string);

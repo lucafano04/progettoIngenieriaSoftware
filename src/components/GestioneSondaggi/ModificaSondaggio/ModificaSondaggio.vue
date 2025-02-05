@@ -38,6 +38,8 @@
     const ageRanges:{range: string, value: number | ''}[] = [{range: 'n/a', value: ''}];
     // Riferimento per lo stato del caricamento del voto: true - in caricamento, false - non in caricamento/caricato
     const loadingSend = ref<boolean>(false);
+
+    const disabledDeleteVoto = ref<boolean>(false);
     
     // Aggiunta range di età
     const max = 100;
@@ -105,6 +107,7 @@
      * @param {Voti.Voto} voto il voto da rimuovere
      */ 
     async function removeVoto(voto: Voti.Voto){
+        disabledDeleteVoto.value = true;
         try{
             // Chiamo la funzione per rimuovere il voto
             await deleteVoto(voto);
@@ -118,6 +121,8 @@
                 toast.add({severity: 'error', summary: 'Errore', detail: e.message, life: 5000});
             }else
                 toast.add({severity: 'error', summary: 'Errore', detail: 'Errore sconosciuto', life: 5000});
+        }finally{
+            disabledDeleteVoto.value = false;
         }
     }
     /**

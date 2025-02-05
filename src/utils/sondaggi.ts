@@ -14,7 +14,7 @@ async function getSondaggi(deepData: boolean = false): Promise<Sondaggi.Sondaggi
     if(response.ok)
         return await response.json() as Sondaggi.Sondaggio[];
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
 }
 /**
@@ -37,7 +37,7 @@ async function aggiungiSondaggio(dati: Sondaggi.Add): Promise<string>{
     if(response.ok)
         return response.headers.get('Location') || '';
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
 }
 
@@ -56,7 +56,7 @@ async function getSondaggio(id:string): Promise<Sondaggi.Sondaggio>{
     if(response.status === 200)
         return await response.json() as Sondaggi.Sondaggio;
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
 }
 
@@ -75,7 +75,7 @@ async function modificaSondaggio(id: string, isAperto: boolean): Promise<string>
     if(response.status === 200)
         return response.headers.get('Location') || '';
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nel caricamento dei sondaggi');
 }
 
@@ -93,7 +93,7 @@ async function deleteSondaggio(sondaggio: string) {
     if(response.status === 204)
         return;
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nell\'eliminazione del sondaggio');
 }
 
@@ -111,7 +111,7 @@ async function getVoti(sondaggio: string): Promise<Voti.Voto[]>{
     if(response.status === 200)
         return await response.json() as Voti.Voto[];
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nel caricamento dei voti');
 }
 
@@ -137,7 +137,7 @@ async function addVoto(sondaggio: string, voto: Voti.Add): Promise<string> {
     if(response.status === 201)
         return response.headers.get('Location') || '';
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nell\'aggiunta del voto');
 }
 
@@ -155,7 +155,7 @@ async function deleteVoto(voto: Voti.Voto) {
     if(response.status === 204)
         return;
     if(response.status)
-        throw new Error(await response.text());
+        throw new Error((await response.json()).details);
     throw new Error('Errore sconosciuto nell\'eliminazione del voto');
 }
 

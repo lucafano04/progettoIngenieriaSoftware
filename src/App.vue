@@ -31,7 +31,7 @@
         try{
             const result = await logout();
             if(result){
-                toast.add({severity: 'success', summary: 'Logout', detail: 'Logout effettuato con successo!', life: 5000});
+                toast.add({severity: 'success', summary: 'Logout', detail: 'Logout effettuato con successo', life: 5000});
                 user.value = null;
                 history.push('/');
                 dropDownItems.value = dropDownItems.value.filter((item) => ['Home', 'Cambio Lingua'].includes(item.label as string));

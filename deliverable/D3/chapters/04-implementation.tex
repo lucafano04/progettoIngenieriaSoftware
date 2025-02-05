@@ -1,11 +1,98 @@
 \chapter{Implementazione}
+L'applicazione è stata sviluppata usando il linguaggio di programmazione ``\texttt{TypeScript}'' sia per la parte di \textit{frontend} che per quella di \textit{backend}. Per la parte di \textit{backend} è stato sfruttato il \textit{runtime system} ``\texttt{Node.js}'' e il \textit{framework} ``\texttt{Express.js}'' per la creazione e gestione del \textit{server}. Per la parte di \textit{frontend} è stato utilizzato il \textit{framework} ``\texttt{Vue.js}'' con la libreria ``\texttt{PrimeVue}'' per alcune componenti grafiche. Il \textit{database} utilizzato è ``\texttt{MongoDB}'' e per la gestione delle dipendenze è stato utilizzato ``\texttt{npm}''.\newline
+Si è inoltre scelto di usare \texttt{Vite} come \textit{bundler} per la parte di \textit{frontend} e \texttt{Webpack} per la parte di \textit{backend}. Oltre a questo per alcuni stili della libreria \texttt{PrimeVue} è stato usato \texttt{Tailwind CSS} e come conseguenza è stato usato \texttt{PostCSS} per la gestione dei fogli di stile. \newline
+La scelta di usare \texttt{TypeScript} è scaturita dalla necessità di avere un controllo maggiore sul \textit{type-checking} e per avere una maggiore manutenibilità del codice, è sata creata infatti una vera e propria gerarchia di tipi per la gestione dei dati sia lato \textit{frontend} che lato \textit{backend}. \newline
+La scelta del presente \textit{stack} tecnologico è stata fatta in base al materiale fornito dal corso ed conoscenze pregresse di alcuni membri del gruppo.
 
 \section{Repository Organization}
-
-\section{Branching Strategy e organizzazione del lavoro}
-
-\section{Dependency}
-
+    Il codice del progetto, disponibile presso la seguente repository \url{https://github.com/lucafano04/progettoComune}, è stato organizzato seguendo la seguente struttura:
+    \dirtree{%
+        .1 /.
+        .2 /.github.
+        .3 /workflows\DTcomment{Directory per le action di GitHub (Compilazione \LaTeX{} e test)}.
+        .2 /.vscode\DTcomment{Directory per le impostazioni di Visual Studio Code}.
+        .2 /APIdoc.
+        .3 api.yaml\DTcomment{Documentazione \texttt{API}}.
+        .2 /app\DTcomment{Directory per il codice di \textit{backend}}.
+        .3 /db.
+        .4 /models\DTcomment{Directory per i modelli del \textit{database}}.
+        .4 index.ts\DTcomment{File di inizializzazione del \textit{database}}.
+        .4 schemas.ts\DTcomment{File per la definizione degli schemi del \textit{database}}.
+        .3 /routes\DTcomment{Directory per le rotte e gli \textit{endpoints} delle \texttt{API}}.
+        .3 /utils\DTcomment{Directory per le \textit{utility} di \textit{backend}}.
+        .3 app.ts\DTcomment{File di inizializzazione dell'applicazione \texttt{Express.js}}.
+        .3 variables.ts\DTcomment{File per la definizione delle variabili globali e ambientali}.
+        .2 /deliverable\DTcomment{Directory per i \textit{deliverable} \LaTeX{}}.
+        .3 /D*\DTcomment{Directory per il \textit{deliverable} D*, con * numero del \textit{deliverable}}.
+        .3 /images\DTcomment{Directory comune per le immagini di tutti i \textit{deliverable}}.
+        .2 /src\DTcomment{Directory per il codice di \textit{frontend}}.
+        .3 /assets\DTcomment{Directory per gli \textit{asset} dell'applicazione}.
+        .3 /components\DTcomment{Directory per le componenti dell'applicazione}.
+        .3 /utils\DTcomment{Directory per le \textit{utility} di \textit{frontend}}.
+        .3 App.vue\DTcomment{Componente radice dell'applicazione}.
+        .3 index.css\DTcomment{File per il foglio di stile globale}.
+        .3 main.ts\DTcomment{File di inizializzazione dell'applicazione \texttt{Vue.js}}.
+        .2 /types.
+        .3 /Circoscrizioni\DTcomment{Tipi per le circoscrizioni}.
+        .3 /Dati\DTcomment{Tipi per i dati comuni a circoscrizioni e quartieri}.
+        .3 /Quartieri\DTcomment{Tipi per i quartieri}.
+        .3 /Sondaggi\DTcomment{Tipi per i sondaggi}.
+        .3 /Utenti\DTcomment{Tipi per gli utenti}.
+        .3 /Voti\DTcomment{Tipi per i voti}.
+        .3 index.d.ts\DTcomment{File per il raggruppamento dei tipi}.
+        .2 .env.example\DTcomment{File di esempio per le variabili ambientali}.
+        .2 .gitignore\DTcomment{File per la definizione dei file da ignorare}.
+        .2 index.html\DTcomment{Pagina HTML di base dell'applicazione}.
+        .2 index.ts\DTcomment{File di inizializzazione dell'applicazione}.
+        .2 package.json\DTcomment{File per la definizione delle dipendenze}.
+        .2 pitch.pptx\DTcomment{Presentazione del progetto}.
+        .2 *.config.js\DTcomment{File per la configurazione di \texttt{Webpack}, \texttt{TailWind} e \texttt{PostCSS}. Sostituendo * con la configurazione desiderata}.
+        .2 tsconfig.*.json\DTcomment{File vari per la configurazione di \texttt{TypeScript}. Sostituendo * con la configurazione desiderata}.
+        .2 vite.config.ts\DTcomment{File per la configurazione di \texttt{Vite} per la parte di \textit{frontend}}.
+    }
+\section{\textit{Branching Strategy} e organizzazione del lavoro}
+    Per la gestione del lavoro si è scelto di utilizzare la piattaforma \texttt{GitHub} e di adottare una strategia di \textit{branching} basata su \textit{GitFlow}. In particolare si è deciso di utilizzare i seguenti \textit{branch}:
+    \begin{description}
+        \item[\texttt{main}] \textit{Branch} principale, contiene il codice stabile e funzionante;
+        \item[\texttt{frontend}] \textit{Branch} per lo sviluppo della parte di \textit{frontend};
+        \item[\texttt{MongoDB-Backend}] \textit{Branch} per lo sviluppo della parte di \textit{backend} e del \textit{database};
+        \item[\texttt{D*} e \texttt{modificheD*}] \textit{Branch} per lo sviluppo dei \textit{deliverable} D* e per le modifiche successive;
+        \item[\texttt{UserStory} - \texttt{UserWorkFlow}] \textit{Branch} per la scrittura delle \textit{User Story} il disegno dei \textit{User WorkFlow}. Questi erano \textit{branch} temporanei figli del \textit{branch} \texttt{D2};
+        \item[\textit{altri}] Altri \textit{branch} che sono stati creati per lo sviluppo di \textit{pitch} o prime parti iniziali per il \textit{deliverable} \texttt{D1};
+    \end{description}
+    Come suddivisione dello sviluppo e della scrittura dei \textit{deliverable} si è scelto di assegnare ad ogni membro del gruppo una particolare area di lavoro individuando un responsabile principale per le varie aree di sviluppo e stesura dei documenti, per le slides di \textit{pitch} ognuno ha contribuito in modo equo. Distinguiamo quindi i seguenti ruoli:
+    \begin{description}
+        \item[Luca Facchini] Responsabile della parte pratica di \textit{backend}, \textit{frontend}. Responsabile principale per la scrittura del documento \texttt{D3}. Addetto alla prima scrittura di requisiti funzionali e non funzionali per il \textit{deliverable} D1; 
+        \item[Luca Prigione] Responsabile principale per il documento \texttt{D1} e co-responsabile per il documento \texttt{D2}. Responsabile inoltre per la parte pratica riguardante la struttura del \textit{database}. Addetto alla stesura delle \textit{UserStories} per il \texttt{D3};
+        \item[Enrico Faa] Co-responsabile per il documento \texttt{D2} e responsabile di tutti i grafici presenti su tutti i documenti (\texttt{UserWorkFlow}, \texttt{UseCaseDiagram}, \texttt{ClassDiagram}, \dots). Addetto alla stesura delle \textit{UserStories} per il \texttt{D3} ed addetto alla parte di \textit{Testing} per il \texttt{D3}; Addetto inoltre alla prima stesura 
+    \end{description}
+\section{\textit{Dependency}}
+    \paragraph{Dipendenze principali} Sono state utilizzate le seguenti dipendenze principali:
+    \begin{description}
+        \item[\texttt{express}] per la creazione e gestione del \textit{server} e delle rotte;
+        \item[\texttt{mongoose}] per la gestione del \textit{database};
+        \item[\texttt{mongodb}] per la connessione al \textit{database};
+        \item[\texttt{jsonwebtoken}] per la gestione dei \textit{token} di autenticazione;
+    \end{description}
+    \paragraph{Dipendenze di sviluppo}
+    \begin{description}
+        \item[\texttt{concurrenly}] per l'esecuzione di più comandi in parallelo durante le fasi di sviluppo e \textit{build} del progetto;
+        \item[\texttt{dotenv}] per la gestione delle variabili ambientali;
+        \item[\texttt{jest}] per la gestione dei test;
+        \item[\texttt{nodemon}] per il \textit{hot-reloading} del \textit{server} in fase di sviluppo;
+        \item[\texttt{postcss}] per la gestione dei fogli di stile;
+        \item[\texttt{primevue}] per la creazione di alcune componenti grafiche;
+        \item[\texttt{tailwindcss}] per la disposizione della \textit{responsiveness} delle componenti;
+        \item[\texttt{TypeScript}] per il \textit{type-checking} e la gestione dei tipi;
+        \item[\texttt{ts-node}] per l'esecuzione di codice \texttt{TypeScript} direttamente da \texttt{Node.js};
+        \item[\texttt{vite}] per la compilazione e il \textit{bundling} del codice;
+        \item[\texttt{vue}] per la creazione delle componenti, inoltre i seguenti sotto-moduli sono stati utilizzati:
+            \begin{description}
+                \item[\texttt{vue-router}] per la gestione delle rotte;
+                \item[\texttt{vue-tsc}] per il \textit{type-checking} di \texttt{Vue.js};
+                \item[\texttt{vue-leftlet}] per la gestione delle mappe;
+            \end{description}
+    \end{description}
 \section{Database}
 
 \section{Testing}

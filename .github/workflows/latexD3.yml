@@ -6,7 +6,7 @@ on:
         - 'deliverable/D3/**'
         - 'deliverable/images/**'
 jobs:
-  # Build usign Github Action for LaTeX
+  # Build using Github Action for LaTeX
   build_latex:
       runs-on: self-hosted
       steps:
@@ -17,6 +17,7 @@ jobs:
         with:
           working_directory: deliverable/D3
           root_file: main.tex
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -shell-escape
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:

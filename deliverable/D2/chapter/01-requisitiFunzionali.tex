@@ -309,6 +309,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo \textit{Use Case} descrive come l'utente circoscrizione può visualizzare le richieste e le interfacce per gestirle
         \subsubsection{Descrizione}
             \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente nella header e seleziona il campo riguardante le richieste agli amministratori
                 \item Il sistema mostra nella parte sinistra dello schermo l'interfaccia per l'aggiunta di una nuova richiesta
                 \item Il sistema mostra nel riquadro in alto a destra dello schermo l'elenco delle richieste inviate agli Utenti amministratore per le quali non è ancora stata ricevuta una risposta (Eccezione 1)
                 \item Il sistema mostra nel riquadro in basso a destra dello schermo l'elenco delle richieste per le quali è già stata ricevuta una risposta (Eccezione 1)
@@ -349,16 +350,18 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             Questo \textit{Use Case} descrive come l'utente circoscrizione può gestire i ruoli all'interno della propria circoscrizione
         \subsubsection{Descrizione}
             \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente nella header e seleziona il campo riguardante la gestione dei ruoli
                 \item L'utente circoscrizione inserisce all'interno dell'apposito spazio di testo il codice fiscale dell'utente interessato
                 \item Il sistema presenta a schermo le informazioni dell'utente selezionato (Eccezione 1)
-                \item Se l'utente seleziona la tipologia di ruolo che si vuole assegnare e seleziona il pulsante di conferma
-                \item Il sistema fornisce all'utente il ruolo selezionato in precedenza con validità limitata alla circoscrizione di appartenenza (Eccezione 2)
+                \item Se l'utente seleziona la tipologia di ruolo che si vuole assegnare e seleziona il pulsante di conferma (Eccezione 2)
+                \item Il sistema fornisce all'utente il ruolo selezionato in precedenza con validità limitata alla circoscrizione di appartenenza (Eccezione 3)
                 \item Se l'utente seleziona il pulsante di rimozione ruolo a fianco del ruolo desiderato e seleziona il pulsante di conferma
-                \item Il sistema rimuove all'utente selezionato il ruolo scelto (Eccezione 3)
+                \item Il sistema rimuove all'utente selezionato il ruolo scelto (Eccezione 4)
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
-                \item Nel caso in cui il Codice Fiscale cercato non fosse collegato ad alcun account il sistema deve presentare un messaggio di errore 
+                \item Nel caso in cui il Codice Fiscale cercato non fosse collegato ad alcun account il sistema deve presentare un messaggio di errore
+                \item Nel caso in cui non venisse selezionato alcun ruolo e venisse selezionato il pulsante di conferma il sistema non deve fare nulla
                 \item Nel caso in cui l'utente fosse già in possesso del ruolo selezionato il sistema non deve fare nulla
                 \item Nel caso in cui l'utente provasse a rimuovere un ruolo sul quale non ha possibilità di modifica il tentativo di modifica viene bloccato
             \end{enumerate}
@@ -368,8 +371,9 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         Questo \textit{Use Case} descrive come l'utente può modificare le informazioni riguardanti i servizi presenti all'interno della circoscrizione
         \subsubsection{Descrizione}
             \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente nella header e seleziona il campo riguardante la modifica delle informazioni
                 \item Se l'utente circoscrizione completa gli appositi campi di testo obbligatori e conferma attraverso il pulsante apposito (Eccezione 1)
-                \item Il sistema propaga l'aggiunta all'interno dell'elenco dei servizi dell'apposita circoscrizione
+                \item Il sistema propaga l'aggiunta del servizio all'interno dell'elenco dei servizi dell'apposita circoscrizione
                 \item Se l'utente seleziona uno dei servizi all'interno dell'elenco dei servizi della circoscrizione
                 \item Il sistema presenta al centro dello schermo i dati forniti al momento della registrazione del servizio
                 \item Se l'utente modifica uno dei dati riguardanti il servizio
@@ -382,6 +386,119 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \subsubsection{Eccezioni}
             \begin{enumerate}
                 \item Nel caso in cui l'utente selezionasse il pulsante di conferma prima di aver riempito i campi obbligatori, comparirà a schermo un messaggio di errore e l'azione di aggiunta del servizio verrà bloccata
-                \item Nel caso in cui la modifica rompesse qualche vincolo di dominio dei campi la modifia verrebbe annullata
+                \item Nel caso in cui la modifica rompesse qualche vincolo di dominio dei campi la modifica verrebbe annullata
+                \item Nel caso in cui l'utente non confermasse la decisione di eliminare il servizio verrebbe reindirizzato alla visualizzazione del servizio selezionato in precedenza e il processo di eliminazione verrebbe bloccato
+            \end{enumerate}
+
+
+\section{\underline{Utente amministratore}}
+    Di seguito i requisiti associati all'Utente amministratore:
+    \begin{itemize}
+        \item \textbf{RF7}: Logout
+        \item \textbf{RF19}: Valutazione sondaggi
+        \item \textbf{RF20}: Gestione richieste dalle circoscrizioni
+        \item \textbf{RF21}: Gestione ruoli
+        \item \textbf{RF22}: Modifica informazioni servizi
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{UseCase_diagrams/Amministratore.drawio.png}
+        \caption{\textit{Use Case} Diagram dell'Utente amministratore}
+    \end{figure}
+
+    \subsection{\textit{Use Case} RF7: Logout}
+        \subsubsection{Riassunto}
+            Questo \textit{Use Case} descrive come l'utente può fare logout
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente amministratore preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
+                \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
+                ricarica la pagina riportando l'utente alla 'visualizzazione città'
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF19: Valutazione sondaggi}
+        \subsubsection{Titolo}
+            Questo \textit{Use Case} descrive come l'utente amministratore può valutare i sondaggi 
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente nella header e seleziona il campo riguardante la valutazione dei sondaggi
+                \item Il sistema mostra l'elenco dei sondaggi in attesa (Eccezione 1)
+                \item Se l'utente seleziona un sondaggio
+                \item Il sistema mostra a schermo i dati completi riguardanti il sondaggio selezionato e una lista contenente lo stato dei sondaggi precedentemente caricati dal sondaggista (Eccezione 1)
+                \item Il sistema mostra a schermo i pulsanti di apporvazione o disapprovazione del sondaggio
+                \item Se l'utente approva il sondaggio
+                \item Il sistema aggiunge i voti presenti nel sondaggio a sistema e rimuove il sondaggio dall'elenco dei sondaggi in attesa
+                \item Se l'utente compila i campi appositi e rifiuta il sondaggio (Eccezione 2)
+                \item Il sistema non aggiungei voti presenti nel sondaggio a sistema e restituisce la motivazione al sondaggista di riferimento
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui non fossero presenti sondaggi all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
+                \item Nel caso in cui l'utente amministratore non compilasse il campo 'motivazione' il sistema bloccherà il rifiuto del sondaggio e comparirà un messaggio di errore a schermo
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF20: Gestione richieste dalle circoscrizioni}
+        \subsubsection{Riassunto}
+            Questo \textit{Use Case} descrive come l'utente amministratore può gestire le richieste da parte degli Utenti circoscrizione
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente nella header e seleziona il campo riguardante la gestione delle richieste
+                \item Il sistema mostra l'elenco delle richieste che non hanno ancora ricevuto una risposta (Eccezione 1)
+                \item Se l'utente seleziona una richiesta
+                \item Il sistema mostra a schermo il titolo e il corpo della richiesta, le informazioni riguardanti la circoscrizione dalla quale è stata inviata la richiesta e l'interfaccia di risposta
+                \item Se l'utente compila i campi appositi e conferma l'invio della risposta (Eccezione 2)
+                \item Il sistema invia la risposta agli utenti circoscrizione appositi e rimuove la richiesta dall'elenco delle richieste che non hanno ancora ricevuto una risposta
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui non fossero presenti richieste all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
+                \item Nel caso in cui l'utente selezionasse il pulsante di invio prima di aver riempito i campi necessari, comparirà a schermo un messaggio di errore e l'azione di invio verrà bloccata
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF21: Gestione ruoli}
+        \subsubsection{Riassunto}
+            Questo \textit{Use Case} descrive come l'utente amministratore può gestire i ruoli
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente nella header e seleziona il campo riguardante la gestione dei ruoli
+                \item L'utente amministratore inserisce all'interno dell'apposito spazio di testo il codice fiscale dell'utente interessato
+                \item Il sistema presenta a schermo le informazioni dell'utente selezionato (Eccezione 1)
+                \item Se l'utente seleziona la tipologia di ruolo che si vuole assegnare e seleziona il pulsante di conferma (Eccezione 2)
+                \item Il sistema fornisce all'utente il ruolo selezionato in precedenza (Eccezione 3)
+                \item Se l'utente seleziona il pulsante di rimozione ruolo a fianco del ruolo desiderato e seleziona il pulsante di conferma
+                \item Il sistema rimuove all'utente selezionato il ruolo scelto (Estensione 1)
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui il Codice Fiscale cercato non fosse collegato ad alcun account il sistema deve presentare un messaggio di errore
+                \item Nel caso in cui non venisse selezionato alcun ruolo e venisse selezionato il pulsante di conferma il sistema non deve fare nulla
+                \item Nel caso in cui l'utente fosse già in possesso del ruolo selezionato il sistema non deve fare nulla
+            \end{enumerate}
+        \subsubsection{Estensioni}
+            \begin{enumerate}
+                \item La rimozione del ruolo da parte di un utente amministratore ha successo anche nel caso in cui il ruolo fosse stato assegnato da parte di una circoscrizione o da parte di un'altro account amministratore
+            \end{enumerate}
+
+    \subsection{\textit{Use Case} RF22: Modifica informazioni servizi}
+        \subsubsection{Titolo}
+        Questo \textit{Use Case} descrive come l'utente può modificare le informazioni riguardanti i servizi
+        \subsubsection{Descrizione}
+            \begin{enumerate}
+                \item L'utente preme sul menù a tendina presente nella header e seleziona il campo riguardante la modifica delle informazioni
+                \item Se l'utente amministratore completa gli appositi campi di testo obbligatori e conferma attraverso il pulsante apposito (Eccezione 1)
+                \item Il sistema propaga l'aggiunta del servizio all'interno dell'elenco dei servizi della circoscrizione selezionata precedentemente
+                \item Se l'utente seleziona uno dei servizi all'interno dell'elenco dei servizi
+                \item Il sistema presenta al centro dello schermo i dati forniti al momento della registrazione del servizio
+                \item Se l'utente modifica uno dei dati riguardanti il servizio
+                \item Il sistema propaga la modifica all'interno dell'elenco dei servizi (Eccezione 2)
+                \item Se l'utente seleziona il pulsante per eliminare il servizio
+                \item Il sistema mostra a schemo un pop up per confermare tale azione
+                \item Se l'utente conferma la decisione (Eccezione 3)
+                \item Il sistema propaga l'eliminazione all'interno dell'elenco dei servizi
+            \end{enumerate}
+        \subsubsection{Eccezioni}
+            \begin{enumerate}
+                \item Nel caso in cui l'utente selezionasse il pulsante di conferma prima di aver riempito i campi obbligatori, comparirà a schermo un messaggio di errore e l'azione di aggiunta del servizio verrà bloccata
+                \item Nel caso in cui la modifica rompesse qualche vincolo di dominio dei campi la modifica verrebbe annullata
                 \item Nel caso in cui l'utente non confermasse la decisione di eliminare il servizio verrebbe reindirizzato alla visualizzazione del servizio selezionato in precedenza e il processo di eliminazione verrebbe bloccato
             \end{enumerate}

@@ -96,3 +96,474 @@ La scelta del presente \textit{stack} tecnologico è stata fatta in base al mate
 \section{Database}
 
 \section{Testing}
+
+Testo di introduzione della parte di testing\dots
+
+    \subsection{RF1: Visualizzazione Città}
+        \begin{itemize}
+            \item \textbf{Test Case 1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Apertura dell'applicazione e visualizzazione della homepage come utente non loggato.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} L'applicazione mostra a schermo: sulla sinistra gli attributi demografici e riguardanti la soddisfazione di Trento. Sulla destra la mappa di Trento divisa per quartieri, colorati da rosso a verde in base alla relativa soddisfazione media. In alto a destra l'icona per eseguire il login e il menù drop-down.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Apertura dell'applicazione e visualizzazione della homepage come utente Analista.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account Analista.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} L'applicazione mostra a schermo:  sulla sinistra gli attributi demografici e riguardanti la soddisfazione di Trento. Sulla destra la mappa di Trento divisa per quartieri, colorati da rosso a verde in base alla relativa soddisfazione media. In alto a destra l'immagine di profilo dell'utente, la scritta "Ciao, [nome utente]!", e il menù drop-down.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+        \end{itemize}
+
+
+    \subsection{RF2: Interazione Con La Mappa}
+        \begin{itemize}
+            \item \textbf{Test Case 1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Spostamento del focus della mappa.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Il centro della mappa si sposta nella direzione in cui viene trascinato.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Zoom in/out della mappa utilizzando la rotella del mouse.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La mappa fa zoom in quando la rotella del mouse viene spostata in alto, e fa zoom out quando viene spostata in basso.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Zoom in/out della mappa utilizzando i pulsanti nell'angolo.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La mappa fa zoom in quando il pulsante con il segno "+" viene premuto, e fa zoom out quando viene premuto il pulsante con il segno "-".
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 3.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione di una zona cliccando su di essa nella mappa.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La mappa si sposta alla sinistra dello schermo e muove il suo focus sulla zona cliccata. Gli attributi della zona cliccata vengono mostrati sulla destra dello schermo.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 3.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione di una zona cliccando su di essa sulla mappa quando una zona è gia selezionata.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} Una zona è selezionata.
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 3.1, cliccando su una zona diversa da quella cliccata nel test 3.1.
+                    \item \textbf{Risultato Atteso:} La zona precedentemente selezionata viene deselezionata. La zona cliccata viene selezionata. La mappa rimane sulla sinistra dello schermo.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 3.3}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Deselezione di una zona cliccando su di essa nella mappa.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} Una zona è selezionata
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto i test 3.1 e 3.2, cliccando sulla stessa zona cliccata nel test 3.2.
+                    \item \textbf{Risultato Atteso:} La mappa torna alla destra delle schermo e muove il suo focus per inquadrare tutta Trento. Gli attributi demografici e riguardanti la soddisfazione di Trento vengono mostrati sulla sinistra. La zona cliccata smette di essere selezionata.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}  
+            \item \textbf{Test Case 4.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione della divisione per quartieri.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La mappa mostra Trento divisa per i suoi quartieri.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 4.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione della divisione per circoscrizioni.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La mappa mostra Trento divisa per le sue circoscrizioni.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 5}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Cambio visualizzazione da mappa a tabella.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account Analista.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La mappa viene sostituita da una tabella che mostra il nome e gli attributi demografici e della soddisfazione delle zone.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+        \end{itemize}
+
+
+    \subsection{RF6: Login}
+        \begin{itemize}
+            \item \textbf{Test Case 1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Login in un account.
+                    \item \textbf{Test Data:} [username] di un utente registrato nel sistema, [password] di quell'utente.
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Il login viene effettuato con successo. Una notifica di successo "Login effettuato con successo" appare in alto a destra. Il sistema ritorna automaticamente alla homepage.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Login in un account con password sbagliata.
+                    \item \textbf{Test Data:} [username] di un utente registrato nel sistema, [password] diversa da quella di quell'utente.
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Nessun login viene effettuato. Una notifica di errore "Credenziali errate" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 3}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Login in un account che non esiste.
+                    \item \textbf{Test Data:} [username] non appartenente ad alcun utente registrato nel sistema.
+                    \item \textbf{Precondizioni:} [username] non appartenente ad alcun utente registrato nel sistema.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Nessun login viene effettuato. Una notifica di errore "Credenziali errate" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 4}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Login senza specificare un nome utente.
+                    \item \textbf{Test Data:} [username] vuoto.
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Nessun login viene effettuato. Una notifica di errore "Credenziali errate" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+        \end{itemize}
+
+
+    \subsection{RF7: Logout}
+        \begin{itemize}
+            \item \textbf{Test Case 1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Uscita da un account all'interno della homepage.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account e si trova sulla homepage dell'applicazione.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} L'utente torna allo stato di utente non loggato. Una notifica di successo "Logout effettuato con successo" appare in alto a destra. Il sistema ricarica automaticamente la homepage.
+                    \item \textbf{Risultato Riscontrato:} 
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Uscita da un account Sondaggista all'interno dell'area gestione sondaggi.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account Sondaggista e si trova all'interno dell'area di gestione dei sondaggi.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} L'utente torna allo stato di utente non loggato. Appare una notifica di successo "Logout effettuato con successo". Il sistema ritorna automaticamente alla homepage.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}                
+            \item \textbf{Test Case 3}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Uscita dall'account Sondaggista durante un voto.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account Sondaggista. Il sistema si trova nel mezzo della creazione di un voto, dopo che è stato premuto il primo pulsante "Vota", ma prima di premere il secondo pulsante "Vota".
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:}
+                    \item \textbf{Risultato Riscontrato:} Il voto non viene aggiunto al sondaggio. L'utente torna allo stato di utente non loggato. Appare una notifica di successo "Logout effettuato con successo". Il sistema ritorna automaticamente alla homepage.
+                    \item \textbf{Note:}
+                \end{itemize}                        
+        \end{itemize}
+
+
+    \subsection{RF9: Gestione Sondaggi}
+        \begin{itemize}
+            \item \textbf{Test Case 1.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Creazione di un nuovo sondaggio
+                    \item \textbf{Test Data:} [nome sondaggio] non vuoto.
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Viene creato un nuovo sondaggio con il nome inserito. Una notifica di successo "Sondaggio aggiunto con successo" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 1.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Creazione di due sondaggi con lo stesso nome.
+                    \item \textbf{Test Data:} [nome sondaggio] già inserito nel sistema.
+                    \item \textbf{Precondizioni:} Un sondaggio con lo stesso nome esiste già nel sistema.
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 1.1, inserendo lo stesso [nome sondaggio].
+                    \item \textbf{Risultato Atteso:} Viene creato un secondo sondaggio con lo stesso nome, ma distinto da quello già esistente. Una notifica di successo "Sondaggio aggiunto con successo" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 1.3}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Creazione di un nuovo sondaggio senza nome.
+                    \item \textbf{Test Data:} [nome sondaggio] vuoto
+                    \item \textbf{Precondizioni:} 
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Il sondaggio non viene creato. Una notifica di errore "Nome del sondaggio mancante" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Continuazione di un sondaggio in corso.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} Esiste almeno un sondaggio in corso.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Viene aperta la pagina di gestione del sondaggio selezionato. Sulla sinistra dello schermo vengono mostrati: il numero parziale dei voti nel sondaggio, l'età media parziale dei voti nel sondaggio, e il numero di voti nel sondaggio per ogni quartiere di Trento (i quartieri per i quali non ci sono voti non vengono mostrati). In alto a destra dello schermo viene mostrata l'interfaccia per aggiungere nuovi voti. In basso a destra dello schermo viene mostrata la lista dei voti e i pulsanti "Esci dal sondaggio", "Chiudi e completa la sessione", "Cancella definitivamente".
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 3}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Salvataggio di un sondaggio in corso tramite il pulsante "Esci dal sondaggio".
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Il sondaggio non viene modificato, non viene cancellato, e non viene completato. Il sistema ritorna alla pagina di gestione dei sondaggi.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 4.1} 
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Eliminazione di un sondaggio in corso tramite il pulsante "Cancella definitivamente".
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Il sistema mostra una finestra "Conferma eliminazione", una volta premuto il pulsante "Elimina" il sondaggio viene cancellato. Una notifica di successo "Sondaggio eliminato con successo" appare in alto a destra. Il sistema ritorna alla pagina di gestione dei sondaggi.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 4.2} 
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Annullamento dell'eliminazione nella finestra "Conferma eliminazione".
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 4.1 e aver constatato che la finestra "Conferma eliminazione" viene mostrata quando si preme il pulsante "Cancella definitivamente".
+                    \item \textbf{Risultato Atteso:} Se si preme il pulsante "Annulla" nella finestra "Conferma eliminazione" il sondaggio non viene eliminato. Una notifica di informazione "Operazione annullata" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 5.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Completamento di un sondaggio in corso tramite il pulsante "Chiudi e completa la sessione".
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Il sistema mostra una finestra "Conferma chiusura", una volta premuto il pulsante "Chiudi" il sondaggio viene completato e aggiunto alla lista "Sessioni completate". Il sistema ritorna alla pagina di gestione dei sondaggi.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}                
+            \item \textbf{Test Case 5.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Annullamento del completamento nella finestra "Conferma chiusura".
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 5.1 e aver constatato che la finestra "Conferma chiusura" viene mostrata quando si preme il pulsante "Chiudi e completa la sessione".
+                    \item \textbf{Risultato Atteso:} Se si preme il pulsante "Annulla" nella finestra "Conferma chiusura" il sondaggio non viene completato. Una notifica di informazione "Operazione annullata" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+        \end{itemize}
+
+
+    \subsection{RF11: Gestione Voti}
+        \begin{itemize}
+            \item \textbf{Test Case 1.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Aggiunta di un voto.
+                    \item \textbf{Test Data:} [quartiere] non vuoto, [età] non vuota, [valutazione] selezionata. 
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Viene aperta una pagina di selezione della valutazione, una volta selezionata una valutazione e premuto il pulstane "Vota" il voto viene aggiunto alla lista, il numero dei voti nel sondaggio viene aumentato, e l'età media parziale del sondaggio viene aggiornata. Il sistema presenta una schermata "Grazie per aver votato!", premendo il pulsante "Chiudi" si ritorna alla pagina di gestione del sondaggio.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 1.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Aggiunta di un voto senza specificare il quartiere.
+                    \item \textbf{Test Data:} [quartiere] vuoto.
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Non viene aperta la pagina di selezione della valutazione. Una notifica di errore "Compilare tutti i campi" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 1.3}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Aggiunta di un voto senza specificare l'età.
+                    \item \textbf{Test Data:} [quartiere] non vuoto, [età] vuota.
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 1.1.
+                    \item \textbf{Risultato Atteso:} Il processo di voto procede ugualmente al caso di test 1.1, ma la media parziale del sondaggio rimane uguale.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 1.4}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Annullamento di un voto con il pulsante "Annulla".
+                    \item \textbf{Test Data:} [quartiere] non vuoto.
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 1.1.
+                    \item \textbf{Risultato Atteso:} Il voto non viene aggiunto al sondaggio. Il sistema ritorna alla pagina di gestione del sondaggio.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Eliminazione di un voto.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} Il voto viene eliminato dalla lista dei voti del sondaggio, il numero di voti nel sondaggio diminuisce, e l'età media parziale del sondaggio viene aggiornata. Una notifica di successo "Voto rimosso con successo" appare in alto a destra.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Eliminazione di un voto due volte cliccando di nuovo l'icona di eliminazione prima che il voto sparisca dall'interfaccia.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 2.1 e aver constatato che l'eliminazione dei voti funziona in modo corretto.
+                    \item \textbf{Risultato Atteso:} Al primo click il voto viene eliminato normalmente come nel caso di test 2.1, ad ogni altro click successivo non succede niente.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+        \end{itemize}
+
+
+    \subsection{RF12: Interazione Con La Tabella}
+        \begin{itemize}
+            \item \textbf{Test Case 1.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Spostamento del focus della tabella utilizzando la rotella del mouse.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La tabella scorre in alto quando la rotella del mouse viene spostata in alto, e scorre in basso quando la rotella del mouse viene spostata in basso.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 1.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Spostamento del focus della tabella utilizzando la barra al lato.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La tabella scorre nella direzione in cui viene trascinata la barra al lato.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione di una zona cliccando sulla sua riga nella tabella.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La riga cliccata cambia colore e gli attributi della zona vengono mostrati sulla sinistra dello schermo.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione di una zona cliccando sulla sua riga nella tabella quando una zona è gia selezionata.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} Una zona è selezionata.
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 2.1, cliccando su una riga diversa da quella cliccata nel test 2.1.
+                    \item \textbf{Risultato Atteso:} La zona precedentemente selezionata viene deselezionata. La riga cliccata cambia colore e gli attributi della zona vengono mostrati sulla destra dello schermo.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 2.3}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Deselezione di una zona cliccando sulla sua riga nella tabella.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} Una zona è selezionata.
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto i test 2.1 e 2.2, cliccando sulla stessa riga cliccata nel test 2.2.
+                    \item \textbf{Risultato Atteso:} Gli attributi demografici e riguardanti la soddisfazione di Trento vengono mostrati sulla sinistra. La riga cliccata smette di essere selezionata.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}  
+            \item \textbf{Test Case 3.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione della divisione per quartieri.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La tabella mostra gli attributi generali e riguardanti la soddisfazione dei quartieri di Trento.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 3.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione della divisione per circoscrizioni.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:}
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La tabella mostra gli attributi generali e riguardanti la soddisfazione delle circoscrizioni di Trento.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 4}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Cambio visualizzazione da tabella a mappa.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account Analista.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:}
+                    \item \textbf{Risultato Riscontrato:} La tabella viene sostituita da una mappa di Trento divisa per zone, colorate da rosso a verde in base alla relativa soddisfazione media.
+                    \item \textbf{Note:}
+                \end{itemize}
+        \end{itemize}
+        
+
+    \subsection{RF13: Accesso Completo Agli Attributi}
+        \begin{itemize}
+            \item \textbf{Test Case 1.1}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione di una categori di attributi.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account Analista. Una zona è selezionata.
+                    \item \textbf{Dipendenze:}
+                    \item \textbf{Risultato Atteso:} La scritta del nome della categoria cliccata cambia colore, sulla sinistra dello schermo vengono mostrati gli attributi della zona selezionata appartenenti alla categoria selezionata.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+            \item \textbf{Test Case 1.2}
+                \begin{itemize}
+                    \item \textbf{Descrizione:} Selezione di una categoria di attributi già selezionata.
+                    \item \textbf{Test Data:}
+                    \item \textbf{Precondizioni:} L'utente è loggato in un account Analista. Una zona è selezionata. Una categoria di attributi è selezionata.
+                    \item \textbf{Dipendenze:} Questo test deve essere svolto solo dopo aver svolto il test 1.1, cliccando sulla stessa categoria che è stata cliccata nel test 1.1.
+                    \item \textbf{Risultato Atteso:} La categoria cliccata rimane selezionata.
+                    \item \textbf{Risultato Riscontrato:}
+                    \item \textbf{Note:}
+                \end{itemize}
+        \end{itemize}

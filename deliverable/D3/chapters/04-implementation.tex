@@ -93,8 +93,74 @@ La scelta del presente \textit{stack} tecnologico è stata fatta in base al mate
                 \item[\texttt{vue-leftlet}] per la gestione delle mappe;
             \end{description}
     \end{description}
-\section{Database}
-
+\section{\textit{Database}}
+    Il \textit{database} è stato progettato per contenere le seguenti collezioni:
+    \subsection{Quartiere}
+        La collezione \texttt{Quartiere} viene usata per memorizzare i dati relativi ai quartieri di Trento. Ogni documento della collezione contiene i seguenti campi:
+        \begin{description}
+            \item[\texttt{\_id}] (\texttt{ObjectId}) identificativo univoco del quartiere;
+            \item[\texttt{nome}] (\texttt{String}) nome del quartiere;
+            \item[\texttt{coordinate}] (\texttt{Number[][]}) coordinate del quartiere;
+            \item[\texttt{circoscrizione}] (\texttt{ObjectId}) identificativo della circoscrizione a cui appartiene il quartiere;
+            \item[\texttt{popolazione}] (\texttt{Number}) numero di abitanti del quartiere;
+            \item[\texttt{superficie}] (\texttt{Number}) superficie del quartiere in $km^2$;
+            \item[\texttt{serviziTotali}] (\texttt{Number}) numero totale di servizi presenti nel quartiere;
+            \item[\texttt{interventiPolizia}] (\texttt{Number}) numero di interventi della polizia nel quartiere;
+            \item[\texttt{etaMedia}] (\texttt{Number}) età media degli abitanti del quartiere;
+            \item[\texttt{servizi}] (\texttt{Object}) oggetto contenente i servizi presenti nel quartiere;
+                \begin{description}
+                    \item[\texttt{areeVerdi}] (\texttt{Number}) numero di aree verdi presenti nel quartiere;
+                    \item[\texttt{scuole}] (\texttt{Number}) numero di scuole presenti nel quartiere;
+                    \item[\texttt{serviziRistorazione}] (\texttt{Number}) numero di servizi di ristorazione presenti nel quartiere;
+                    \item[\texttt{localiNotturni}]
+                \end{description}
+            \item[\texttt{sicurezza}] (\texttt{Object}) oggetto contenente i dati relativi alla sicurezza del quartiere;
+                \begin{description}
+                    \item[\texttt{numeroInterventi}] (\texttt{Number}) numero di interventi della polizia nel quartiere;
+                    \item[\texttt{incidenti}] (\texttt{Number}) numero di incidenti nel quartiere;
+                    \item[\texttt{tassoCriminalità}] (\texttt{Number}) tasso di criminalità del quartiere;
+                \end{description}
+        \end{description}
+    \subsection{Circoscrizione}
+        La collezione \texttt{Circoscrizione} viene usata solamente per la memorizzazione delle coordinate e del nome delle circoscrizioni di Trento, questo in quanto i dati relativi alle circoscrizioni vengono estrapolati dai dati dei quartieri stessi. Ogni documento della collezione contiene i seguenti campi:
+        \begin{description}
+            \item[\texttt{\_id}] (\texttt{ObjectId}) identificativo univoco della circoscrizione;
+            \item[\texttt{nome}] (\texttt{String}) nome della circoscrizione;
+            \item[\texttt{coordinate}] (\texttt{Number[][]}) coordinate della circoscrizione;
+        \end{description}
+    \subsection{Sondaggio}
+        La collezione \texttt{Sondaggio} viene usata per memorizzare i dati relativi ai sondaggi effettuati dai sondaggisti, in particolare 
+        Ogni documento della collezione contiene i seguenti campi:
+        \begin{description}
+            \item[\texttt{\_id}] (\texttt{ObjectId}) identificativo univoco del sondaggio;
+            \item[\texttt{titolo}] (\texttt{String}) titolo del sondaggio;
+            \item[\texttt{dataInizio}] (\texttt{Date}) data di inizio del sondaggio;
+            \item[\texttt{isAperto}] (\texttt{Boolean}) \textit{flag} che indica se il sondaggio è aperto o chiuso;
+            \item[\texttt{statoApprovazione}] (\texttt{In attesa|Approvato|Rifiutato}) stato di approvazione del sondaggio;
+            \item[\texttt{sondaggista}] (\texttt{ObjectId}) identificativo del sondaggista;
+        \end{description}
+    \subsection{\textit{User}}
+        La collezione \texttt{User} viene usata per memorizzare i dati relativi agli utenti dell'applicazione. Questa collection viene strutturata in questo modo in quanto per lo scopo del progetto non viene implementato il sistema di autenticazione \texttt{SSO} tramite \texttt{SPID}/\texttt{CIE}/\texttt{TS-CNS}. Nel caso si dovesse implementare un sistema di autenticazione tramite \texttt{SSO} pubblico la collezione conterrebbe solo una associazione tra l'utente e i suoi dati personali.
+        Ogni documento della collezione contiene i seguenti campi:
+        \begin{description}
+            \item[\texttt{\_id}] (\texttt{ObjectId}) identificativo univoco dell'utente;
+            \item[\texttt{nome}] (\texttt{String}) nome dell'utente;
+            \item[\texttt{cognome}] (\texttt{String}) cognome dell'utente;
+            \item[\texttt{email}] (\texttt{String}) email dell'utente;
+            \item[\texttt{password}] (\texttt{String}) password dell'utente;
+            \item[\texttt{ruolo}] (\texttt{Amministratore|Analista|Sondaggista|Circoscrizione}) ruolo dell'utente;
+            \item[\texttt{imageUrl}] (\texttt{String}) \textit{Hash} dell'immagine profilo dell'utente;
+        \end{description}
+    \subsection{Voto}
+        La collezione \texttt{Voto} viene usata per memorizzare i voti dati dai cittadini ai quartieri. Ogni documento della collezione contiene i seguenti campi:
+        \begin{description}
+            \item[\texttt{\_id}] (\texttt{ObjectId}) identificativo univoco del voto;
+            \item[\texttt{eta}] (\texttt{Number}) età del votante;
+            \item[\texttt{voto}] (\texttt{Number}) voto dato al quartiere;
+            \item[\texttt{quartiere}] (\texttt{ObjectId}) identificativo del quartiere votato;
+            \item[\texttt{dataOra}] (\texttt{Date}) data e ora del voto;
+            \item[\texttt{sondaggio}] (\texttt{ObjectId}) identificativo del sondaggio a cui il voto è associato;
+        \end{description}
 \section{Testing}
 
 Testo di introduzione della parte di testing\dots

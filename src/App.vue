@@ -80,7 +80,7 @@
             <template #start>
                 <div class="tw-flex tw-items-center tw-justify-center">
                     <RouterLink to="/">
-                        <img src="./assets/iconaNome.png" alt="icona" class="tw-mr-2 tw-h-10" />
+                        <img src="./assets/iconaNomeBlack.png" alt="icona" class="tw-mr-2 tw-h-10" />
                     </RouterLink>
                     </div>
             </template>

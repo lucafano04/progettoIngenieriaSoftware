@@ -6,10 +6,10 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 \section{\underline{Utente non loggato}}
     Di seguito i requisiti associati all'Utente non loggato:
     \begin{itemize}
-        \item \textbf{RF1}: Visualizzazione città
-        \item \textbf{RF2}: Interazione con la mappa
-        \item \textbf{RF3}: Visualizzazione zona
-        \item \textbf{RF4}: Elenco strutture
+        \item \textbf{RF1}: Visualizzare città
+        \item \textbf{RF2}: Interagire con la mappa
+        \item \textbf{RF3}: Visualizzare zona
+        \item \textbf{RF4}: Visualizzare elenco strutture
         \item \textbf{RF5}: Multi lingua
         \item \textbf{RF6}: Login
     \end{itemize}
@@ -53,7 +53,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \begin{enumerate}
                 \item Nel caso in cui l'utente non loggato cercasse di aumentare o diminuire lo zoom oltre ai limiti imposti, il sistema deve bloccare la nuova modifica allo zoom
                 \item Nel caso in cui l'utente non loggato cercasse di spostare il focus centrale oltre ai limiti della città, il sistema deve bloccare la nuova modifica allo spostamento del focus centrale
-                \item Nel caso in cui l'utente avesse i permessi necessari, il sistema passerà allo \textit{Use Case} ``Accesso completo agli attributi'' della sezione scelta invece che allo allo \textit{Use Case} ``Visualizzare zona'' della sezione scelta
+                \item Nel caso in cui l'utente avesse i permessi necessari, il sistema passerà allo \textit{Use Case} ``Visualizzare attributi completi'' della sezione scelta invece che allo allo \textit{Use Case} ``Visualizzare zona'' della sezione scelta
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
@@ -126,11 +126,11 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 \section{\underline{Utente sondaggista}}
     Di seguito i requisiti associati all'Utente sondaggista:
     \begin{itemize}
-        \item \textbf{RF7}: Logout
-        \item \textbf{RF8}: Visualizzazione sondaggi
-        \item \textbf{RF9}: Gestione sondaggi
-        \item \textbf{RF10}: Visualizzazione voti
-        \item \textbf{RF11}: Gestione voti
+        \item \textbf{RF7}: Eseguire logout
+        \item \textbf{RF8}: Visualizzare i sondaggi
+        \item \textbf{RF9}: Gestire i sondaggi
+        \item \textbf{RF10}: Visualizzare i voti
+        \item \textbf{RF11}: Gestire i voti
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -138,17 +138,17 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \caption{\textit{Use Case Diagram} dell'Utente sondaggista}
     \end{figure}
 
-    \subsection{\textit{Use Case} RF7: Logout}
+    \subsection{\textit{Use Case} RF7: Eseguire logout}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente sondaggista preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
                 \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
-                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzazione città''
+                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzare città''
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF8: Visualizzare i sondaggisti}
+    \subsection{\textit{Use Case} RF8: Visualizzare i sondaggi}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente sondaggista può visualizzare i sondaggi e le interfacce per gestirli
         \subsubsection{Descrizione}
@@ -163,7 +163,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui non fossero presenti sondaggi all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF9: Gestione sondaggi}
+    \subsection{\textit{Use Case} RF9: Gestire i sondaggi}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente può gestire i sondaggi
 %             \begin{figure}[H]
@@ -185,7 +185,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui non fossero presenti voti all'interno della lista il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF11: Gestione voti}
+    \subsection{\textit{Use Case} RF11: Gestire i voti}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente può gestire i voti
 %             \begin{figure}[H]
@@ -196,10 +196,10 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 \section{\underline{Utente analista}}
     Di seguito i requisiti associati all'Utente analista:
     \begin{itemize}
-        \item \textbf{RF7}: Logout
-        \item \textbf{RF12}: Interazione con la tabella
-        \item \textbf{RF13}: Accesso completo agli attributi
-        \item \textbf{RF14}: Analisi attraverso storici
+        \item \textbf{RF7}: Eseguire logout
+        \item \textbf{RF12}: Interagire con la tabella
+        \item \textbf{RF13}: Visualizzare attributi completi
+        \item \textbf{RF14}: Analizzare storico dei dati
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -207,17 +207,17 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \caption{\textit{Use Case} Diagram dell'Utente analista}
     \end{figure}
 
-    \subsection{\textit{Use Case} RF7: Logout}
+    \subsection{\textit{Use Case} RF7: Eseguire logout}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente analista preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
                 \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
-                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzazione città''
+                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzare città''
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF12: Interazione con la tabella}
+    \subsection{\textit{Use Case} RF12: Interagire con la tabella}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente analista visualizzerà e potrà interagire con la tabella
         \subsubsection{Descrizione}
@@ -230,7 +230,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Se l'utente seleziona l'attributo contenente il nome di una delle zone presenti all'interno del comune
                 \item Il sistema passa dalla visualizzazione tramite tabella a quella tramite mappa
                 \item il sistema sposta il focus centrale della mappa al centro della zona selezionata e ne modifica successivamente lo zoom, il colore e lo spessore dei bordi
-                \item Il sistema passa successivamente allo \textit{Use Case} ``Accesso completo agli attributi'' della sezione scelta
+                \item Il sistema passa successivamente allo \textit{Use Case} ``visualizzare attributi completi'' della sezione scelta
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
@@ -241,7 +241,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item L'utente, selezionando il pulsante presente nell'angolo della tabella, potrà visualizzare un menù pop-up.Successivamente potrà modificare la tipologia di zona presente all'interno della tabella oppure cambiare la tipologia di visualizzazione da tabella a mappa
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF13: Accesso completo agli attributi}
+    \subsection{\textit{Use Case} RF13: Visualizzare attributi completi}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente analista può visualizzare, accedere e navigare agli attributi completi riguardanti ogni zona
         \subsubsection{Descrizione}
@@ -258,16 +258,16 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
-                \item Questo \textit{Use Case} estende lo \textit{Use Case} ``Visualizzazione Zona'' dell'utente non loggato
+                \item Questo \textit{Use Case} estende lo \textit{Use Case} ``Visualizzare Zona'' dell'utente non loggato
                 \item La categoria di attributi selezionata di default è quella degli attributi generali
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF14: Analisi attraverso storici}
+    \subsection{\textit{Use Case} RF14: Analizzare storico dei dati}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente analista può visualizzare e interagire con gli storici
         \subsubsection{Descrizione}
             \begin{enumerate}
-                \item Il sistema mostra a fianco degli attributi presenti all'interno dello \textit{Use Case} ``Accesso completo agli attributi'' il grafico rappresentante l'andamento nel tempo di tale attributo
+                \item Il sistema mostra a fianco degli attributi presenti all'interno dello \textit{Use Case} ``Visualizzare attributi completi'' il grafico rappresentante l'andamento nel tempo di tale attributo
                 \item L'utente seleziona il grafico
                 \item Il sistema sposta l'attributo selezionato e successivamente posiziona al centro il grafico modificandone le dimensioni (Eccezione 1)
                 \item Se l'utente posiziona il cursore all'interno del grafico
@@ -282,11 +282,11 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 \section{\underline{Utente circoscrizione}}
     Di seguito i requisiti associati all'Utente circoscrizione:
     \begin{itemize}
-        \item \textbf{RF7}: Logout
-        \item \textbf{RF15}: Visualizzazione richieste
-        \item \textbf{RF16}: Gestione richieste
-        \item \textbf{RF17}: Gestione ruoli Circoscrizione
-        \item \textbf{RF18}: Modifica informazioni servizi Circoscrizione
+        \item \textbf{RF7}: Eseguire logout
+        \item \textbf{RF15}: Visualizzare richieste
+        \item \textbf{RF16}: Gestire richieste
+        \item \textbf{RF17}: Gestire ruoli Circoscrizione
+        \item \textbf{RF18}: Modificare informazioni servizi Circoscrizione
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -294,17 +294,17 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \caption{\textit{Use Case} Diagram dell'Utente circoscrizione}
     \end{figure}
 
-    \subsection{\textit{Use Case} RF7: Logout}
+    \subsection{\textit{Use Case} RF7: Eseguire logout}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente circoscrizione preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
                 \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
-                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzazione città''
+                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzare città''
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF15: Visualizzazione richieste}
+    \subsection{\textit{Use Case} RF15: Visualizzare richieste}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente circoscrizione può visualizzare le richieste e le interfacce per gestirle
         \subsubsection{Descrizione}
@@ -319,7 +319,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui non fossero presenti richieste all'interno di uno degli elenchi il sistema mostrerà a schermo un messaggio per avvisare che tale sezione risulta vuota
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF16: Gestione richieste}
+    \subsection{\textit{Use Case} RF16: Gestire richieste}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente può gestire le richieste per gli Utenti ammisistratore
         \subsubsection{Descrizione}
@@ -332,7 +332,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Se l'utente seleziona una delle richieste e seleziona il pulsante per eliminare la richiesta (Eccezione 2)
                 \item Il sistema mostra a schemo un pop up per confermare tale azione
                 \item Se l'utente conferma la decisione (Eccezione 3)
-                \item Il sistema elimina la richiesta e riporta l'utente allo \textit{Use Case} ``Visualizzazione richieste''
+                \item Il sistema elimina la richiesta e riporta l'utente allo \textit{Use Case} ``Visualizzare richieste''
             \end{enumerate}
         \subsubsection{Eccezioni}
             \begin{enumerate}
@@ -345,7 +345,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui per la richiesta selezionata fosse disponibile la risposta da parte di un utente amministratore tale messaggio verrebbe presentato al seguito del messaggio di richiesta 
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF17: Gestione ruoli Circoscrizione}
+    \subsection{\textit{Use Case} RF17: Gestire ruoli Circoscrizione}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente circoscrizione può gestire i ruoli all'interno della propria circoscrizione
         \subsubsection{Descrizione}
@@ -366,7 +366,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente provasse a rimuovere un ruolo sul quale non ha possibilità di modifica il tentativo di modifica viene bloccato
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF18: Modifica informazioni servizi Circoscrizione}
+    \subsection{\textit{Use Case} RF18: Modificare informazioni servizi Circoscrizione}
         \subsubsection{Riassunto}
         Questo \textit{Use Case} descrive come l'utente può modificare le informazioni riguardanti i servizi presenti all'interno della circoscrizione
         \subsubsection{Descrizione}
@@ -394,11 +394,11 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
 \section{\underline{Utente amministratore}}
     Di seguito i requisiti associati all'Utente amministratore:
     \begin{itemize}
-        \item \textbf{RF7}: Logout
-        \item \textbf{RF19}: Valutazione sondaggi
-        \item \textbf{RF20}: Gestione richieste dalle circoscrizioni
-        \item \textbf{RF21}: Gestione ruoli
-        \item \textbf{RF22}: Modifica informazioni servizi
+        \item \textbf{RF7}: Eseguire logout
+        \item \textbf{RF19}: Valutare sondaggi
+        \item \textbf{RF20}: Gestire richieste dalle circoscrizioni
+        \item \textbf{RF21}: Gestire ruoli
+        \item \textbf{RF22}: Modificare informazioni servizi
     \end{itemize}
     \begin{figure}[H]
         \centering
@@ -406,17 +406,17 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \caption{\textit{Use Case} Diagram dell'Utente amministratore}
     \end{figure}
 
-    \subsection{\textit{Use Case} RF7: Logout}
+    \subsection{\textit{Use Case} RF7: Eseguireogout}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente può fare logout
         \subsubsection{Descrizione}
             \begin{enumerate}
                 \item L'utente amministratore preme sul menù a tendina presente all'interno della header e seleziona la sezione riguardante il logout
                 \item Il sistema scollega lo user dall'account al quale era collegato riportandolo allo stato di utente non loggato, infine 
-                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzazione città''
+                ricarica la pagina riportando l'utente allo \textit{Use Case} ``visualizzare città''
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF19: Valutazione sondaggi}
+    \subsection{\textit{Use Case} RF19: Valutare sondaggi}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente amministratore può valutare i sondaggi 
         \subsubsection{Descrizione}
@@ -437,7 +437,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente amministratore non compilasse il campo ``motivazione'' il sistema bloccherà il rifiuto del sondaggio e comparirà un messaggio di errore a schermo
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF20: Gestione richieste dalle circoscrizioni}
+    \subsection{\textit{Use Case} RF20: Gestire richieste dalle circoscrizioni}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente amministratore può gestire le richieste da parte degli Utenti circoscrizione
         \subsubsection{Descrizione}
@@ -455,7 +455,7 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
                 \item Nel caso in cui l'utente selezionasse il pulsante di invio prima di aver riempito i campi necessari, comparirà a schermo un messaggio di errore e l'azione di invio verrà bloccata
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF21: Gestione ruoli}
+    \subsection{\textit{Use Case} RF21: Gestire ruoli}
         \subsubsection{Riassunto}
             Questo \textit{Use Case} descrive come l'utente amministratore può gestire i ruoli
         \subsubsection{Descrizione}
@@ -477,10 +477,10 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
         \subsubsection{Estensioni}
             \begin{enumerate}
                 \item La rimozione del ruolo da parte di un utente amministratore ha successo anche nel caso in cui il ruolo fosse stato assegnato da parte di una circoscrizione o da parte di un'altro account amministratore
-                \item Questo \textit{Use Case} estende lo \textit{Use Case} ``Gestione ruoli Circoscrizione'' dell'utente circoscrizione
+                \item Questo \textit{Use Case} estende lo \textit{Use Case} ``Gestire ruoli Circoscrizione'' dell'utente circoscrizione
             \end{enumerate}
 
-    \subsection{\textit{Use Case} RF22: Modifica informazioni servizi}
+    \subsection{\textit{Use Case} RF22: Modificare informazioni servizi}
         \subsubsection{Riassunto}
         Questo \textit{Use Case} descrive come l'utente può modificare le informazioni riguardanti i servizi
         \subsubsection{Descrizione}
@@ -505,5 +505,5 @@ Di seguito vengono riportati i requisiti funzionali (\texttt{RF}) del programma 
             \end{enumerate}
         \subsubsection{Estensioni}
             \begin{enumerate}
-                \item Questo \textit{Use Case} estende lo \textit{Use Case} ``Modifica informazioni servizi Circoscrizione'' dell'utente circoscrizione
+                \item Questo \textit{Use Case} estende lo \textit{Use Case} ``Modificare informazioni servizi Circoscrizione'' dell'utente circoscrizione
             \end{enumerate}

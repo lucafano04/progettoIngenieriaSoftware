@@ -18,6 +18,8 @@ jobs:
           working_directory: deliverable/D3
           root_file: main.tex
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -shell-escape
+      - name: Update permission before post-processing for minted package
+        run: sudo chown -R $USER:$USER .
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:

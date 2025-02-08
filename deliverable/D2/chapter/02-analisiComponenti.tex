@@ -4,7 +4,7 @@
 \section{Definizione dei componenti}
     Definiamo di seguito i componenti del sistema con le relative funzionalità.
     
-    \subsection{\texttt{CMP1}: Gestione Grafici}
+    \subsection{\texttt{CMP1}: Gestione grafici}
         \subsubsection{Descrizione} 
             Il componente si occupa della funzionalità di generare per ogni attributo un grafico storico. Tale grafico raffigura l'andamento del relativo attributo in un dato arco di tempo.
         \subsubsection{Interfaccia richiesta - selezione attributo:}
@@ -14,7 +14,7 @@
         \subsubsection{Interfaccia fornita - grafico:}
             il componente fornisce dunque il grafico raffigurante l'andamento nel tempo dell'attributo fornito.
     
-    \subsection{\texttt{CMP2}: Gestione Lingua}
+    \subsection{\texttt{CMP2}: Gestione lingua}
         \subsubsection{Descrizione} 
             Il componente si occupa della funzionalità di generare in base alla lingua selezionata il testo presente nella pagina basandosi sui testi presenti all'interno di file JSON appositi.
         \subsubsection{Interfaccia richiesta - selezione lingua:}
@@ -23,7 +23,7 @@
         \subsubsection{Interfaccia fornita - testo:}
             il componente fornisce il testo necessario tradotto in base alla lingua selezionata in precedenza.
 
-    \subsection{\texttt{CMP3}: Gestione Mappa e Tabella}
+    \subsection{\texttt{CMP3}: Gestione mappa e tabella}
         \subsubsection{Descrizione}
             Il componente si occcupa di fornire all'utente una rappresentazione dettagliata della città e delle suoi zone geografiche. Attraverso il seguente componente è inoltre possibile selezionare una delle zone geografiche per la quali si vuole ricevere maggiori informazioni. 
         \subsubsection{Interfaccia richiesta - selezione zona:}
@@ -37,7 +37,7 @@
         \subsubsection{Interfaccia fornita - zona selezionata:}
             indica agli altri componenti la zona selezionata sulla quale andranno effettuate, nel caso in cui si possedessero le autorizzazioni necessarie, le seguenti operazioni.
     
-    \subsection{\texttt{CMP4}: Gestione Attributi}
+    \subsection{\texttt{CMP4}: Gestione attributi}
         \subsubsection{Descrizione}
             Il componente si occupa di fornire all'utente tutte le informazioni necessarie riguardo le zone geografiche o i servizi presenti all'interno di esse. Il seguente componente è dunque in grado di generare diverse rappresentazioni degli attributi in base alle autorizzazioni, alla zona o al servizio selezionato che arrivano in ingresso alle varie interfacce richieste.
         \subsubsection{Interfaccia richiesta - testo:}
@@ -47,7 +47,7 @@
         \subsubsection{Interfaccia richiesta - servizio selezionato:}
             indica l'attributo per il quale bisogna visualizzare la lista dei servizi che svolgono un ruolo attivo, all'interno della zona selezionata, all'interno dell'ambito di tale attributo. Nel caso in cui non vi fosse un'attributo selezionato verrà utilizzata quella di default, ovvero nessun attributo.
         \subsubsection{Interfaccia richiesta - autorizzazione:}
-            segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
         \subsubsection{Interfaccia richiesta - attributi:}
             nella seguente interfaccia vengono richiesti al \textit{CMP} ``Gestione Database'' gli attributi di  interesse.
         \subsubsection{Interfaccia fornita - selezione attributo:}
@@ -55,7 +55,7 @@
         \subsubsection{Interfaccia fornita - valore attributi:}
             l'interfaccia fornisce una rappresentazione degli attributi presenti in base ai dati forniti all'interno delle interfacce richieste.
 
-    \subsection{\texttt{CMP5}: Gestione Database}
+    \subsection{\texttt{CMP5}: Gestione database}
         \subsubsection{Descrizione} 
             il componente si occupa di fornire la raccolta dei dati più importanti. Salva nel database tutti i dati relativi alle categorie e agli attributi stessi, tiene inoltre traccia dei voti e integra ciò con i voti presenti all'interno dei sondaggi valutati positivamente.
         \subsubsection{Interfaccia richiesta - dati database:}
@@ -63,7 +63,7 @@
         \subsubsection{Interfaccia richiesta - dati strutture modificati:}
             raccolta dei dati appartenenti ad una struttura che ha appena subito una modifica.
         \subsubsection{Interfaccia richiesta - cancellazione sondaggio:}
-            codice identificativo che permette la rimozione di un sondaggio e di tutti i voti collegati al corrispettivo sondaggio.
+            codice identificativo che permette la rimozione di un sondaggio e di tutti i voti collegati al corrispettivo sondaggio dal database.
         \subsubsection{Interfaccia richiesta - sondaggi approvati:}
             codice identificativo che permette l'aggiunta di un sondaggio all'interno della lista di sondaggi accettati e l'aggiunta di tutti i voti collegati al corrispettivo sondaggio.
         \subsubsection{Interfaccia fornita - attributi:}
@@ -75,17 +75,115 @@
         \subsubsection{Descrizione}
             il componente si occupa di permettere agli utenti che ne hanno l'autorizzazione di poter gestire i dati sui quali possono esercitare il controllo.
         \subsubsection{Interfaccia richiesta - autorizzazione:}
-            segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
         \subsubsection{Interfaccia richiesta - modifica dei dati:}
             dati appartenenti ad una struttura i quali, in seguito, verranno inviati al database per poter essere modificati.
         \subsubsection{Interfaccia fornita - dati strutture modificati:}
             insieme dei dati appartenenti alla struttura che ha appena subito una modifica da un'utente autorizzato a compiere tale operazione.
 
-    \subsection{\texttt{*}: nome}
+    \subsection{\texttt{CMP7}: Gestione invio richieste}
         \subsubsection{Descrizione}
-        \subsubsection{Interfaccia richiesta - nome:}
-        \subsubsection{Interfaccia fornita - nome:}
+            il componente si occupa di inviare le richieste, fornite da utenti con le corrispettive autorizzazioni, al \textit{CMP} ``Gestione invio risposte'' e di gestire la corrispettiva risposta. Le richieste permetteranno di mettere in contatto diretto le circoscrizioni e il comune permettendo una comunicazione più efficente.
+        \subsubsection{Interfaccia richiesta - testo richiesta:}
+            rappresenta il testo completo della richiesta fornito dalla circoscrizione.
+        \subsubsection{Interfaccia richiesta - risposte:}
+            racchiude il testo completo della risposta fornito dal comune, il codice identificativo della richiesta e il codice identificativo dell'utente che ha risposta alla richiesta.
+        \subsubsection{Interfaccia richiesta - autorizzazione:}
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+        \subsubsection{Interfaccia fornita - testo risposte:}
+            racchiude il testo completo della richiesta fornito dalla circoscrizione con in coda il testo completo della risposta contrassegnato dall'utente che ha risposto.
+        \subsubsection{Interfaccia fornita - richieste:}
+            rappresenta il testo completo della richiesta, il codice identificativo della richiesta, il codice identificativo della circoscrizione ed il codice identificativo dell'utente che ha inviato la richiesta.
+
+    \subsection{\texttt{CMP8}: Gestione invio risposte}
+        \subsubsection{Descrizione}
+            il componente si occupa di fornire le risposte per le richieste inviate dal \textit{CMP} ``Gestione invio risposte''. Le risposte permetteranno di semplificare la comunicazione diretta tra le circoscrizioni ed il comune stesso basandosi su di un servizio più efficente.
+        \subsubsection{Interfaccia richiesta - richieste:}
+            rappresenta il testo completo della richiesta, il codice identificativo della richiesta, il codice identificativo della circoscrizione ed il codice identificativo dell'utente che ha inviato la richiesta.
+        \subsubsection{Interfaccia richiesta - testo risposta:}
+            rappresenta il testo completo della risposta fornito dal comune.
+        \subsubsection{Interfaccia richiesta - autorizzazione:}
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+        \subsubsection{Interfaccia fornita - risposte:}
+            racchiude il testo completo della risposta fornito dal comune, il codice identificativo della richiesta e il codice identificativo dell'utente che ha risposta alla richiesta.
+        \subsubsection{Interfaccia fornita - testo richieste:}
+            rappresenta il testo completo della richiesta, il nome della circoscrizione ed il nome dell'utente che ha inviato la richiesta.
+
+    \subsection{\texttt{CMP9}: Gestione voti}
+        \subsubsection{Descrizione}
+            il componente si occupa di permettere ai sondaggisti di aggiungere o eliminare i voti. Nel momento di aggiunta del voto oltre al valore del voto devono anche essere inserite una serie di informazioni base del cittadino votante.
+        \subsubsection{Interfaccia richiesta - autorizzazione:}
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+        \subsubsection{Interfaccia richiesta - informazioni cittadino:}
+            insieme dei dati riguardanti l'età e il quartiere di provenienza del cittadino votante.
+        \subsubsection{Interfaccia richiesta - valore voto:}
+            valore numerico che rappresenta il grado di soddisfazione del cittadino.
+        \subsubsection{Interfaccia fornita - voti:}
+            insieme di informazioni che racchiude l'insieme dei voti e delle informazioni generiche riguardanti i cittadini che hanno votato.
+
+    \subsection{\texttt{CMP10}: Gestione sondaggi}
+        \subsubsection{Descrizione}
+            il componente si occupa di permettere ai sondaggisti di modificare, aggiungere, completare o eliminare i sondaggi. Nel momento in cui un sondaggio viene eliminato tale informazione viene propagata anche al \textit{CMP} ``Gestione database''. Nel momento in cui un sondaggio viene completato il sondaggio viene inviato al \textit{CMP} ``approvazione sondaggi'' in modo che possa venire valutato dagli utenti amministratore.
+        \subsubsection{Interfaccia richiesta - voti:}
+            insieme di informazioni che racchiude l'insieme dei voti e delle informazioni generiche riguardanti i cittadini che hanno votato.
+        \subsubsection{Interfaccia richiesta - autorizzazione:}
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+        \subsubsection{Interfaccia fornita - sondaggi completati:}
+            insieme delle informazioni formato dall'insieme dei voti, l'insieme delle informazioni generiche riguardanti i cittadini che hanno votato e il codice identificativo del sondaggista.
+        \subsubsection{Interfaccia fornita - cancellazione sondaggio:}
+            codice identificativo che permette la rimozione di un sondaggio e di tutti i voti collegati al corrispettivo sondaggio dal database.
+
+    \subsection{\texttt{CMP11}: Gestione approvazione sondaggi}
+        \subsubsection{Descrizione}
+            il componente si occupa di permettere agli utenti amministratore di monitorare i sondaggi contrassegnati come completati prima che questi possano venire caricati a sistema. Tale processo permette agli utenti amministratori di controllare da come e da chi sono stati eseguiti i sondaggi, permettendo loro di monitorare a priori i dati che vengono inviati all'interno del database. 
+        \subsubsection{Interfaccia richiesta - sondaggi completati:}
+            insieme delle informazioni formato dall'insieme dei voti, l'insieme delle informazioni generiche riguardanti i cittadini che hanno votato e il codice identificativo del sondaggista.
+        \subsubsection{Interfaccia richiesta - autorizzazione:}
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+        \subsubsection{Interfaccia richiesta - approvazione:}
+            viene richiesto all'utente amministratore di selezionare se il sondaggio è pronto o meno per essere caricato all'interno del database.
+        \subsubsection{Interfaccia fornita - sondaggi approvati:}
+            codice identificativo che permette l'aggiunta di un sondaggio all'interno della lista di sondaggi accettati e l'aggiunta di tutti i voti collegati al corrispettivo sondaggio.
+    
+    \subsection{\texttt{CMP12}: Gestione ruoli utente}
+        \subsubsection{Descrizione}
+            il componente si occupa di aggiungere, rimuovere o modificare i ruoli dei vari utenti. Tale funzionalità permette di aggiungere o rimuovere le funzionalità alle quali un'utente può avere accesso. 
+        \subsubsection{Interfaccia richiesta - codice fiscale:}
+            si tratta del codice identificativo attraverso il quale il componente riesce a selezionare l'utente che subirà le modifiche ai ruoli.
+        \subsubsection{Interfaccia richiesta - tipologia di ruolo:}
+            codice identificativo del ruolo che si vuole andare ad aggiungere/rimuovere.
+        \subsubsection{Interfaccia richiesta - autorizzazione:}
+            bit che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
+        \subsubsection{Interfaccia fornita - ruoli utenti:}
+            insieme delle informazioni che determinano a quali ruoli sono autorizzati i diversi utenti all'interno del programma.
+
+    \subsection{\texttt{CMP13}: Gestione autenticazione}
+        \subsubsection{Descrizione}
+            il componente si occupa di verificare l'identità dell'utente che sta effettuando l'accesso all'interno del sistema. Il componente si basa su un sistema di autenticazione SSO attraverso il quale è in grado di fornire all'utente l'accesso al corrispettivo ruolo. Tale componente include le funzionalità di login e di logout.
+        \subsubsection{Interfaccia richiesta - autenticazione utente SSO:}
+            autorizzazione all'accesso al sistema preveniente dall'SSO che, previo controllo delle credenziali inserite dall'utente, conferma che tali credenziali sono corrette. Confermando dunque l'identità dell'utente.
+        \subsubsection{Interfaccia richiesta - richiesta di login:}
+            richiesta da parte dell'utente di poter essere reindirizzato al sistema SSO di preferenza per poter accedere ad alcune funzionalità.
+        \subsubsection{Interfaccia richiesta - richiesta di logout:}
+            richiesta da parte dell'utente di poter essere scollegato dal ruolo al quale l'utente è temporaneamente connesso, riportando così l'utente al ruolo di ``Utente non loggato''.
+        \subsubsection{Interfaccia fornita - richiesta a servizi SSO:}
+            reindirizzamento dell'utente verso il sistema SSO scelto per l'inserimento delle proprie credenziali.
+        \subsubsection{Interfaccia fornita - autenticazione:}
+        codice univoco che identifica il ruolo che l'utente ha all'interno del programma, ovvero l'insieme delle funzioanlità alle quali le divese tipologie di utenti hanno accesso.
+    
+    \subsection{\texttt{CMP14}: Gestione autorizzazioni}
+        \subsubsection{Descrizione}
+            il componente si occupa di gestire i vari diritti e privilegi che hanno i diversi utenti in base al ruolo che questi hanno. Questo componente richiede le informazioni sui ruoli degli utenti e il ruolo fornito dall'autorizzazione e in base a ciò determina a quali funzionalità questo utente può avere accesso. 
+        \subsubsection{Interfaccia richiesta - ruoli utenti:}
+            insieme delle informazioni che determinano a quali ruoli sono autorizzati i diversi utenti all'interno del programma.
+        \subsubsection{Interfaccia richiesta - autenticazione:}
+            codice univoco che identifica il ruolo che l'utente ha all'interno del programma, ovvero l'insieme delle funzioanlità alle quali le divese tipologie di utenti hanno accesso.
+        \subsubsection{Interfaccia fornita - autorizzazione:}
+            insieme di bit in uscita che determinano se l'utente ha il permesso necessario per compiere o meno un'azione.
 
 \section{Diagramma dei componenti}
-    Se necessario inserire breve descrizione del diagramma.
-
+    Viene riportato di seguito un diagramma complessivo di tutti i componenti di sistema e le loro interconnessioni descritte in precedenza.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{ComponentDiagrams/ComponentDiagram.drawio.png}
+    \end{figure}

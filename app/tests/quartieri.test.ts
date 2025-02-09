@@ -3,6 +3,7 @@ import { mongoose } from '../db';
 import request from 'supertest';
 import app from '../app';
 import { Quartieri } from '../../types';
+import { RESPONSE_MESSAGES } from '../variables';
 
 
 const QUARTIERE_VALIDO = '674046040edc403969cceaef';
@@ -146,10 +147,20 @@ describe('GET `/quartieri/:id`', () => {
     test('Quartiere inesistente - IdValido', async () => {
         const response = await request(app).get('/api/v1/quartieri/674046040edc403969cceae0');
         expect(response.status).toBe(404);
+        expect(response.body).toMatchObject({
+            code: 404,
+            message: RESPONSE_MESSAGES[404],
+            details: expect.any(String),
+        })
     });
     test('Quartiere inesistente - IdNonValido', async () => {
         const response = await request(app).get('/api/v1/quartieri/123');
         expect(response.status).toBe(400);
+        expect(response.body).toMatchObject({
+            code: 400,
+            message: RESPONSE_MESSAGES[400],
+            details: expect.any(String),
+        })
     });
     test('Quartiere esistente senza coordinate', async () => {
         const response = await request(app).get(`/api/v1/quartieri/${QUARTIERE_VALIDO}?coordinate=false`);

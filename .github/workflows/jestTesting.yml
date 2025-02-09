@@ -37,6 +37,8 @@ jobs:
                     MONGO_DB_PASS: ${{ secrets.MONGO_DB_PASS }}
                     MONGO_DB_CLUSTER: ${{ vars.MONGO_DB_CLUSTER }}
                     MONGO_DB_APP_NAME: ${{ vars.MONGO_DB_APP_NAME }}
+                    JWT_SECRET: ${{ vars.JWT_SECRET }}
                     PORT: 3000
                     BASE_API: '/api/v1'
-                    JWT_SECRET: ${{ vars.JWT_SECRET }}
+                    AVATAR_BASE: 'https://gravatar.com/avatar/'
+                    AVATAR_QUERY: 's=400&d=identicon&r=x'

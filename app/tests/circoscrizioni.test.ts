@@ -3,6 +3,7 @@ import { mongoose } from '../db';
 import request from 'supertest';
 import app from '../app';
 import { Circoscrizioni } from '../../types';
+import { RESPONSE_MESSAGES } from '../variables';
 
 const CIRCOSCRIZIONE_VALIDA = '674042d50edc403969cceaac';
 
@@ -118,10 +119,20 @@ describe('GET `/circoscrizioni/:id`', () => {
     test('Circoscrizione non esistente - ID non valido', async () => {
         const response = await request(app).get('/api/v1/circoscrizioni/123');
         expect(response.status).toBe(400);
+        expect(response.body).toMatchObject({
+            code: 400,
+            message: RESPONSE_MESSAGES[400],
+            details: expect.any(String),
+        });
     });
     test('Circoscrizione non esistente - ID valido', async () => {
         const response = await request(app).get('/api/v1/circoscrizioni/123456789012345678901234');
         expect(response.status).toBe(404);
+        expect(response.body).toMatchObject({
+            code: 404,
+            message: RESPONSE_MESSAGES[404],
+            details: expect.any(String),
+        });
     });
     test('Circoscrizione esistente - Coordinate false', async () => {
         const response = await request(app).get(`/api/v1/circoscrizioni/${CIRCOSCRIZIONE_VALIDA}?coordinate=false`);

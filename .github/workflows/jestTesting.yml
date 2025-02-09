@@ -1,0 +1,38 @@
+name: 'Node.js Jest Testing'
+run-name: 'Running Jest Testing for Node.js'
+
+on:
+    push:
+        paths:
+            - 'src/**'
+            - 'tests/**'
+            - 'package.json'
+            - 'jest.config.js'
+            - '.github/workflows/jestTesting.yml'
+    pull_request:
+        paths:
+            - 'src/**'
+            - 'tests/**'
+            - 'package.json'
+            - 'jest.config.js'
+            - '.github/workflows/jestTesting.yml'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v2
+
+            -   name: Setup Node.js
+                uses: actions/setup-node@v2
+                with:
+                    node-version: '20'
+
+            -   name: Install dependencies
+                run: npm install
+            -   name: Setup environment variables
+                run: echo "MONGO_DB_USER= ${{ vars.MONGO_DB_USER }}\nMONGO_DB_PASS= ${{ secrets.MONGO_DB_PASS }}\nMONGO_DB_CLUSTER= ${{ vars.MONGO_DB_CLUSTER }}\nMONGO_DB_APP_NAME= ${{ vars.MONGO_DB_APP_NAME }}\nPORT= 3000\nBASE_API= '/api/v1'\nJWT_SECRET= ${{ vars.JWT_SECRET }}" >> .env
+            -   name: Run Jest Testing
+                run: npm test

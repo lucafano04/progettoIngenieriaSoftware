@@ -26,6 +26,7 @@
   "homepage": "https://github.com/lucafano04/progettoComune#readme",
   "dependencies": {
     "@primevue/themes": "^4.2.3",
+    "@tailwindcss/postcss": "^4.0.5",
     "@types/jsonwebtoken": "^9.0.7",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue-leaflet/vue-leaflet": "^0.10.1",

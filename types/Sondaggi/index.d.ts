@@ -5,7 +5,7 @@ import Minimal from './Minimal';
 import Sondaggio from './Sondaggio';
 
 
-export {
+export type{
     Add,
     Base,
     DB,

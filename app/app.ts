@@ -1,4 +1,5 @@
 import express, {Express} from 'express' // Import the express library
+import path from 'path';
 import { circoscrizioni, generalInfo, quartieri, session, sondaggi, voti} from './routes';
 import { BASE_URL } from './variables';
 import { checker } from './utils/token';
@@ -46,5 +47,6 @@ app.use(BASE_URL + '/voti', checker, voti);
 // Imposto il router per i sondaggi
 app.use(BASE_URL + '/sondaggi', checker, sondaggi);
 
+app.use('/',express.static('./dist/client'));
 
 export default app; // Export the app object

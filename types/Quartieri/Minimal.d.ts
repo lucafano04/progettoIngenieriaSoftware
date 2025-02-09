@@ -1,4 +1,4 @@
-import MinimalBase from "MinimalBase";
+import MinimalBase from "./MinimalBase";
 import {Coordinate} from "..";
 
 type Minimal = MinimalBase & Coordinate;

@@ -1,7 +1,7 @@
 type Errors = {
     code: number,
-    message: String,
-    details?: String
+    message: string,
+    details?: string
 }
 
 export default Errors;

@@ -2,7 +2,7 @@ import Base from "./Base";
 import DB from "./DB";
 import User from "./User";
 
-export {
+export type{
     Base,
     DB,
     User,

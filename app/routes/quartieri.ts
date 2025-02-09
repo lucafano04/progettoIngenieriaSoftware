@@ -84,7 +84,7 @@ router.get('/', async (req, res) => {
                 // Ottengo i sondaggi approvati
                 const mediaVoti = await getMediaVoti(quartiere);
                 // Creo l'oggetto da restituire
-                const quartiereRet: Quartieri.Minimal = {
+                const quartiereRet: Quartieri.Minimal | Quartieri.MinimalBase = {
                     self: `${BASE_URL}/quartieri/${quartiere._id}`,
                     nome: quartiere.nome,
                     ...coordinate ? { coordinate: quartiere.coordinate } : {},

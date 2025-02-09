@@ -1,5 +1,5 @@
 type Base = {
-    nome: String,
+    nome: string,
 }
 
 export default Base;

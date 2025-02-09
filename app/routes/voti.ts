@@ -118,17 +118,17 @@ router.post('/',async(req,res)=>{
     const {eta,voto,quartiere} = req.body;
 
     //mi assicuro che tutti i dati siano presenti e rispondo con un errore in caso contrario
-    if(!eta || !voto || !quartiere){
+    if(!voto || !quartiere){
         const response: Errors ={
             code: 400,
             message: RESPONSE_MESSAGES[400],
-            details: `Campi età, voto, quartiere mancanti`,
+            details: `Campi voto, quartiere mancanti`,
         }
         res.status(400).json(response)
         return;
     }
     //controllo che l'età non sia un numero negativo
-    if(typeof eta !== 'number' || eta<0){
+    if((typeof eta !== 'number' || eta<0)&& eta!==undefined){
         const response: Errors ={
             code: 400,
             message: RESPONSE_MESSAGES[400],

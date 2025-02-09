@@ -1,6 +1,6 @@
-type Minimal = {
-    eta: number | undefined,
-    voto: number,
+import Base from './Base';
+
+type Minimal = Base & {
     dataOra: Date
 }
 

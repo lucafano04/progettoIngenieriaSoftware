@@ -1,5 +1,5 @@
 import Minimal from "./Minimal";
-import Dati from "../Dati";
+import {Dati} from "..";
 
 type Quartiere = Dati.DatiSpecifici & Minimal;
 

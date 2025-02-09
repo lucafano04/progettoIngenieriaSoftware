@@ -4,7 +4,7 @@ import DB from "./DB";
 import Minimal from "./Minimal";
 import MinimalBase from "./MinimalBase";
 
-export {
+export type{
     Circoscrizione,
     CircoscrizioneNoC,
     DB,

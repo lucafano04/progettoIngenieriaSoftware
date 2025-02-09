@@ -1,1 +1,16 @@
-\chapter{Deployment}
+\chapter{\textit{Deployment}}
+
+\paragraph{\textit{Live-Demo}} I \textit{deployment} sono stati effettuati su un unico \textit{cluster} di \texttt{render.com} tramite il quale si gestisce anche l'automazione di \texttt{CD}. L'url per accedere all'applicazione è \url{https://satistrento.onrender.com/}. Per accedere alle aree riservate è necessario utilizzare delle credenziali:
+\begin{description}
+    \item[Utente Sondaggista] \texttt{sondaggista@test.com} - \texttt{password}
+    \item[Utente Analista] \texttt{analista@test.com} - \texttt{password}
+\end{description}
+Altre tipologie di utenti precedentemente definite dai requisiti funzionali non sono state implementate.
+
+
+\paragraph{\texttt{CI}/\texttt{CD}}
+    Come precedentemente descritto il \textit{deployment} è stato automatizzato tramite \texttt{GitHub Actions} e \texttt{render.com}, questo ad ogni commit sul branch \texttt{main} effettua il \textit{deployment} in modo automatico della nuova versione dell'applicazione. \newline
+    Per la parte di \texttt{CI} sono stati implementati dei \textit{tests} tramite \texttt{Jest} e \texttt{supertest} per verificare il corretto funzionamento delle \textit{API} e delle funzionalità dell'applicazione, queste sono state automatizzate dal file \texttt{.github/workflows/jestTesting.yml} presente nella repository del progetto, inoltre in quanto si è usato \texttt{TypeScript} è stato scelto di verificare anche la correttezza del codice tramite la \texttt{GitHub Action} definita nel file \texttt{.github/workflows/buildTS.yaml}.
+
+\paragraph{\textit{Help}}
+    Per problemi sulla \textit{live-demo} contattare Luca Facchini all'indirizzo \href{mailto:luca.facchini-1@studenti.unitn.it}{luca.facchini-1@studenti.unitn.it} in quanto è il solo abilitato ad accedere alla dashboard di \texttt{render.com} e quindi a poter risolvere eventuali problemi.

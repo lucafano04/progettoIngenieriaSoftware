@@ -426,6 +426,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Quartiere"
                   - $ref: "#/components/schemas/QuartiereNC"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         404: 
           description: "Quartiere non trovato."
           content: 
@@ -507,6 +513,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Circoscrizione"
                   - $ref: "#/components/schemas/CircoscrizioneNC"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         404: 
           description: "Circoscrizione non trovata."
           content: 
@@ -565,6 +577,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/User"
+        400:
+          description: "Sessione non valida."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -736,6 +754,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Sondaggio"
+        400: 
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -816,6 +840,12 @@ paths:
       responses:
         204:
           description: "Sondaggio eliminato con successo."
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -860,6 +890,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Voto"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -945,6 +981,12 @@ paths:
       responses:
         204:
           description: "Voto eliminato con successo."
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:

@@ -144,7 +144,7 @@ router.get('/:id', async (req, res) => {
         // Calcolo la media dei voti del quartiere
         const mediaVoti = await getMediaVoti(quartiereDB);
         // Creo l'oggetto da restituire
-        const quartiere: Quartieri.Quartiere = {
+        const quartiere: Quartieri.Quartiere | Quartieri.QuartiereNoC= {
             self: `${BASE_URL}/quartieri/${quartiereDB._id}`,
             nome: quartiereDB.nome,
             coordinate: quartiereDB.coordinate,

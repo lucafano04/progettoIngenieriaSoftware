@@ -28,3 +28,6 @@ app.listen(PORT, () => {    // Start the server on port 3000
 
 // Imposto una funzione che chiama in automatico 
 checkTokens();
+
+// Export the app for testing purposes
+export default app;

@@ -412,6 +412,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Quartiere"
                   - $ref: "#/components/schemas/QuartiereNC"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         404: 
           description: "Quartiere non trovato."
           content: 
@@ -493,6 +499,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Circoscrizione"
                   - $ref: "#/components/schemas/CircoscrizioneNC"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         404: 
           description: "Circoscrizione non trovata."
           content: 

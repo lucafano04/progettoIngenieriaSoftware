@@ -1,0 +1,53 @@
+name: 'Node.js & Vue.js TypeScript Compilation'
+run-name: 'Running TypeScript Compilation for Node.js & Vue.js'
+on:
+    push:
+        paths:
+            - 'src/**'
+            - 'tests/**'
+            - 'package.json'
+            - 'tsconfig.json'
+            - '.github/workflows/buildTS.yaml'
+            - 'app/**'
+            - 'types/**'
+            - 'public/**'
+            - 'index.html'
+            - 'vue.config.js'
+            - 'index.ts'
+            - '*.app.json'
+            - '*.config.ts'
+            - '*.config.js'
+            - '*.config.json'
+    pull_request:
+        paths:
+            - 'src/**'
+            - 'tests/**'
+            - 'package.json'
+            - 'tsconfig.json'
+            - '.github/workflows/buildTS.yaml'
+            - 'app/**'
+            - 'types/**'
+            - 'public/**'
+            - 'index.html'
+            - 'vue.config.js'
+            - 'index.ts'
+            - '*.app.json'
+            - '*.config.ts'
+            - '*.config.js'
+            - '*.config.json'
+
+
+jobs:
+    compile_ts:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v2
+            -   name: Setup Node.js
+                uses: actions/setup-node@v2
+                with:
+                    node-version: '20'
+            -   name: Install dependencies
+                run: npm install
+            -   name: Compile TypeScript
+                run: npm run build

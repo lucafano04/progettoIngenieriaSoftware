@@ -563,6 +563,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/User"
+        400:
+          description: "Sessione non valida."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -734,6 +740,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Sondaggio"
+        400: 
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -814,6 +826,12 @@ paths:
       responses:
         204:
           description: "Sondaggio eliminato con successo."
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -858,6 +876,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Voto"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -943,6 +967,12 @@ paths:
       responses:
         204:
           description: "Voto eliminato con successo."
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:

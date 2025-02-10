@@ -9,3 +9,6 @@
 *.out
 .vs
 _minted-*
+node_modules
+*.env
+dist

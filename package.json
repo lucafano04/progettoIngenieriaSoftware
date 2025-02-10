@@ -1,0 +1,65 @@
+{
+  "name": "progetto-comune",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "nodemon",
+    "start:client": "vite --host",
+    "build": "concurrently \"npm run build:server\" \"npm run build:client\"",
+    "build:server": "tsx ./node_modules/webpack/bin/webpack.js --config ./webpack.config.ts",
+    "build:client": "vue-tsc -b && vite build",
+    "preview:client": "vite preview",
+    "deploy:server": "tsx -r dotenv/config ./dist/server/app.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucafano04/progettoComune.git"
+  },
+  "author": "Luca Facchini & Luca Prigione & Enrico Faa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucafano04/progettoComune/issues"
+  },
+  "homepage": "https://github.com/lucafano04/progettoComune#readme",
+  "dependencies": {
+    "@primevue/themes": "^4.2.5",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.13.0",
+    "mongoose": "^8.10.0",
+    "primeflex": "^3.3.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.2.5",
+    "tailwindcss-primeui": "^0.4.0",
+    "ts-loader": "^9.5.2",
+    "tsx": "^4.19.2",
+    "vite": "^6.1.0",
+    "vite-svg-loader": "^5.1.0",
+    "vue-router": "^4.5.0",
+    "vue-tsc": "^2.2.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/webpack-node-externals": "^3.0.4",
+    "leaflet": "^1.9.4",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.4.49",
+    "sass-embedded": "^1.83.4",
+    "tailwindcss": "3.4.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "type": "module"
+}

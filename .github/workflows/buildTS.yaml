@@ -41,13 +41,21 @@ jobs:
     compile_ts:
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout repository
+              - name: Checkout code
                 uses: actions/checkout@v2
-            -   name: Setup Node.js
+
+              - name: Set up Node.js
                 uses: actions/setup-node@v2
                 with:
-                    node-version: '20'
-            -   name: Install dependencies
+                  node-version: '22'
+        
+              - name: Remove node_modules and package-lock.json
+                run: |
+                  rm -rf node_modules
+                  rm -f package-lock.json
+        
+              - name: Install dependencies
                 run: npm install
-            -   name: Compile TypeScript
-                run: npm run build
+        
+              - name: Build client
+                run: npm run build:client

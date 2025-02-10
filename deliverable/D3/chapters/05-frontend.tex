@@ -53,7 +53,7 @@ Di seguito viene illustrato la parte di \textit{FrontEnd} del progetto. Verranno
         \end{figure}
         Nella Figura \Ref{fig:frontend-login-success} è possibile vedere come si presenta il messaggio di login effettuato con successo. Questo viene visualizzato per $3$ secondi in caso di login effettuato con successo.\newline
         Si noti come il presente ``formato'' di \textit{feedback} sia stato implementato per tutte le pagine della \textit{web-app} in caso di un qualsiasi errore, viene difatti mostrato la scritta ``successo'', o altra equivalente, ed una breve descrizione di cosa è stato effettuato con successo.
-\section{funzionalità Analista}
+\section{Funzionalità Analista}
     Nella seguente sezione verranno illustrate le funzionalità disponibili per gli utenti con ruolo ``analista''. Questi utenti hanno accesso a funzionalità specifiche per la loro mansione e non disponibili agli altri utenti.
     \begin{figure}[H]
         \centering
@@ -95,4 +95,53 @@ Di seguito viene illustrato la parte di \textit{FrontEnd} del progetto. Verranno
             \label{fig:frontend-analista-tabella-selezionato}
         \end{figure}
         La figura \Ref{fig:frontend-analista-tabella-selezionato} mostra come si presenta la visualizzazione di un ``quartiere'' o una ``circoscrizione'' selezionata in visualizzazione tabella. Questa situazione è una unione della selezione nel caso della figura \Ref{fig:frontend-analista-quartiere} e della visualizzazione in tabella della figura \Ref{fig:frontend-analista-tabella}. Da questa visualizzazione è possibile tornare alla visualizzazione dei dati della città selezionando il ``quartiere'' o la ``circoscrizione'' selezionata oppure è possibile cambiare ``quartiere'' o ``circoscrizione'' selezionando un altro ``quartiere'' o ``circoscrizione'' dalla tabella, in questo caso la riga selezionata verrà evidenziata ed i dati relativi al ``quartiere'' o alla ``circoscrizione'' selezionata verranno visualizzati.
-\section{funzionalità Sondaggista}
+\section{Funzionalità Sondaggista}
+    Si illustrano in questa sezione tutte le funzionalità disponibili per gli utenti con ruolo ``sondaggista''. Questi utenti hanno accesso a funzionalità specifiche per effettuare sondaggi, gestirli ed inviarli per l'approvazione. La visualizzazione della \textit{Home Page} per gli utenti con ruolo ``sondaggista'' è la stessa di quella degli altri utenti, come mostrato nella figura \Ref{fig:frontend-home}.
+    \subsubsection{Gestione sondaggi}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{frontend/sondaggista_home.png}
+            \caption{Pagina di gestione dei sondaggi}
+            \label{fig:frontend-sondaggista}
+        \end{figure}
+        Nella figura \Ref{fig:frontend-sondaggista} è possibile vedere la pagina di gestione dei sondaggi per gli utenti con ruolo ``sondaggista''. Da questa pagina è possibile iniziare un nuovo sondaggio tramite il modulo con pulsante nella parte superiore-sinistra della pagina, caricare un sondaggio da un file \textit{.csv} tramite il pulsante nella parte inferiore-sinistra della pagina\footnote{Funzionalità non implementata} ed infine è possibile vedere l'elenco dei sondaggi in corso e quelli inviati per l'approvazione. Possiamo distinguere come lo stato del sondaggio, oltre che riportato nella riga stessa del sondaggio, sia rappresentato da un colore diverso per ogni stato. In particolare, il colore verde indica che il sondaggio è stato approvato, il colore giallo indica che il sondaggio è in attesa di approvazione o se presente sotto la voce ``Sessioni in lavorazione'' indica che il sondaggio è in corso, il colore rosso indica che il sondaggio è stato rifiutato.\newline
+        I sondaggi ``in lavorazione'' ovvero quelli in corso, sono visualizzati in una sezione separata rispetto a quelli inviati per l'approvazione. Questo in quanto i sondaggi in corso sono quelli che possono essere modificati e completati, mentre quelli inviati per l'approvazione non possono più essere modificati dai sondaggisti. È presente per questi sondaggi un pulsante per visualizzare e riprendere il sondaggio, in modo da poterlo completare e inviare per l'approvazione.
+    \newpage
+    \subsubsection{Pagina gestione sondaggio}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{frontend/gestione_sondaggio.png}
+            \caption{Pagina di gestione di un sondaggio}
+            \label{fig:frontend-gestione-sondaggio}
+        \end{figure}
+        La pagina mostrata dalla figura \Ref{fig:frontend-gestione-sondaggio} si può dividere in quattro aree, sulla parte sinistra è possibile individuare le ``Statistiche parziali'' ovvero: il numero di voti raccolti fino ad ora, l'età media dei votanti, ed una tabella contenente il numero di voti per ogni quartiere di provenienza dei votanti. Nel riquadro che occupa la parte superiore centrale e superiore destra è presente il pre-modulo per l'inserimento di un voto all'interno del sondaggio, questi si compongono di due selettori del tipo ``menù a discesa'', uno per il quartiere di appartenenza (obbligatorio impostarne il valore) ed uno per l'età del votante (opzionale). Nella parte centrale inferiore è presente l'elenco dei voti già inseriti, per motivi di \textit{privacy} si è scelto di non mostrare il voto, ma solo un identificativo ed l'orario di inserimento, questo in quanto la possibilità di eliminare un voto è fornita solo per la correzione di errori. Infine nella parte inferiore destra sono presenti i controlli per uscire dal sondaggio e tornare all'elenco dei sondaggi, per inviare il sondaggio per l'approvazione e per eliminare il sondaggio.
+    \subsubsection{Dettaglio invio sondaggio/eliminazione sondaggio}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.4\textwidth]{frontend/dettaglio_conferma_chiusura.png}
+            \caption{Dettaglio invio sondaggio}
+            \label{fig:frontend-conferma-chiusura}
+        \end{figure}
+        Nella figura \Ref{fig:frontend-conferma-chiusura} è possibile vedere il dettaglio della finestra di conferma per l'invio del sondaggio per l'approvazione. Questa finestra di conferma è presente anche per l'eliminazione del sondaggio, col pulsante di eliminazione colorato di rosso ed altri testi, ma con la stessa struttura. Questa finestra di conferma è presente per evitare eliminazioni accidentali di sondaggi o invii accidentali per l'approvazione.
+    \subsubsection{Processo di voto}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{frontend/dettaglio_voto.png}
+            \caption{Dettaglio pagina di voto}
+            \label{fig:frontend-voto}
+        \end{figure}
+        Dalla presente figura \Ref{fig:frontend-voto} si può notare come si presenta al votante l'interfaccia di voto dopo che il sondaggista ha compilato ``quartiere'' ed opzionalmente ``età'' del votante e premuto il tasto ``vota''. 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{frontend/dettaglio_voto_selezionato.png}
+            \caption{Dettaglio pagina di voto con voto selezionato}
+            \label{fig:frontend-voto-selezionato}
+        \end{figure}
+        Dalla figura \Ref{fig:frontend-voto-selezionato} si può notare come si presenta al votante l'interfaccia di voto dopo che il votante ha selezionato il voto. Il voto è selezionabile tramite un click su uno dei pulsanti con il voto desiderato. Una volta selezionato il voto il pulsante selezionato verrà evidenziato con un colore diverso dagli altri pulsanti. Una volta selezionato il voto è possibile confermare il voto premendo il pulsante ``vota'' oppure se sono stati commessi degli errori nella pre-compilazione del voto è possibile annullare il voto premendo il pulsante ``annulla''.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{frontend/dettaglio_post_voto.png}
+            \caption{Dettaglio pagina di voto post-voto}
+            \label{fig:frontend-voto-post}
+        \end{figure}
+        Una volta che l'utente ha confermato il voto, verrà visualizzata la pagina di conferma del voto come mostrato nella figura \Ref{fig:frontend-voto-post}. A questo punto il dispositivo dovrebbe essere restituito al sondaggista il quale tornerà tramite il pulsante ``chiudi'' alla pagina di gestione del sondaggio.

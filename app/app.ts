@@ -49,4 +49,13 @@ app.use(BASE_URL + '/sondaggi', checker, sondaggi);
 
 app.use('/',express.static('./dist/client'));
 
+// Dato che è una app Vue, tutte le route devono essere gestite dal client se non sono sate gestite dal server prima, inoltre se la route rispetta la BASE_URL, allora deve essere gestita dal server tramite 404
+app.use(BASE_URL+'/*', (req, res) => {
+    res.status(404).sendFile(path.resolve('./dist/client/index.html'));
+});
+
+app.use('*', (req, res) => {
+    res.sendFile(path.resolve('./dist/client/index.html'));
+});
+
 export default app; // Export the app object

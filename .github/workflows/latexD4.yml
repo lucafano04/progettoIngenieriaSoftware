@@ -1,0 +1,23 @@
+name: LatexD1 CI
+run-name: Building LaTeX Deliverable 1 file
+on: 
+  push:
+      paths:
+        - 'deliverable/D4/**'
+jobs:
+  # Build using Github Action for LaTeX
+  build_latex:
+      runs-on: self-hosted
+      steps:
+      - name: Set up Git
+        uses: actions/checkout@v4
+      - name: Build LaTeX
+        uses: xu-cheng/latex-action@3.2.0
+        with:
+          working_directory: deliverable/D4
+          root_file: main.tex
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: Deliverable1
+          path: deliverable/D4/main.pdf

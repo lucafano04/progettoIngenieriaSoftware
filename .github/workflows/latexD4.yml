@@ -1,5 +1,5 @@
-name: LatexD1 CI
-run-name: Building LaTeX Deliverable 1 file
+name: LatexD4 CI
+run-name: Building LaTeX Deliverable 4 file
 on: 
   push:
       paths:

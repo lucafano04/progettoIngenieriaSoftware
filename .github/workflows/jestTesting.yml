@@ -42,3 +42,4 @@ jobs:
                     BASE_API: '/api/v1'
                     AVATAR_BASE: 'https://gravatar.com/avatar/'
                     AVATAR_QUERY: 's=400&d=identicon&r=x'
+                    RANDOM_SECRET: ${{ secrets.RANDOM_SECRET }}

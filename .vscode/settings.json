@@ -15,6 +15,7 @@
         "primevue",
         "SatisTrento",
         "SPID",
+        "supertest",
         "toastservice"
     ],
     "editor.wordWrap": "on",

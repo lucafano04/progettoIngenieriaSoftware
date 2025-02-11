@@ -1,0 +1,538 @@
+\chapter{\textit{User Stories}}
+Vengono di seguito riportate le \textit{User Stories} (\texttt{US}) identificate per la parte che si è andata a implementare del progetto \ProjectTitle. Le \texttt{US} sono state individuate a partire dai requisiti funzionali (\texttt{RF}) descritti dal documento di analisi dei requisiti (\texttt{D1}).
+
+\section*{User Story 1: Visualizzare gli attributi}
+    Come utente voglio poter visualizzare gli attributi demografici e riguardanti la soddisfazione della città, così da poter avere delle informazioni dettagliate della città
+    \subsection*{Criteri di accettazione:}
+            \begin{itemize}
+                \item Tutti gli utenti possono visualizzare gli attributi demografici e riguardanti la soddisfazione di Trento
+            \end{itemize}
+    \subsection*{TASKS - User Story 1:}
+        \begin{enumerate}
+            \item \textbf{Implementare richiesta dei dati al database}  
+                \begin{itemize}  
+                    \item Creare l'API necessaria per richiedere al database i dati degli attributi di Trento
+                    \item Configurare l'applicazione per utilizzare l'API per richiedere i dati degli attributi di Trento
+                \end{itemize}
+            \item \textbf{Mostrare gli attributi a schermo} 
+                \begin{itemize}
+                    \item Creare un'interfaccia che mostri i valori degli attributi
+                    \item Impostare l'interfaccia per mostrare gli attributi nel punto giusto sullo schermo
+                \end{itemize}
+            \item \textbf{Testare che gli attributi vengano visualizzati correttamente} 
+                \begin{itemize}
+                    \item Verificare che i valori degli attributi siano corretti
+                    \item Verificare che i valori degli attributi siano collocati nel posto giusto sullo schermo
+                \end{itemize}
+        \end{enumerate}
+\section*{User Story 2: Visualizzare la mappa suddivisa per zone}  
+Come utente voglio visualizzare la mappa del comune di Trento divisa per zone, così da poter distinguere la divisione delle varie aree della città e il grado di soddisfazione medio che vi è in esse  
+\subsection*{Criteri di accettazione:}  
+\begin{itemize}  
+    \item L'utente può vedere la mappa di Trento
+    \item La mappa è suddivisa in zone ben definite  
+    \item Ogni zona è colorata in base al suo grado di soddisfazione medio
+\end{itemize}  
+\subsection*{TASKS - User Story 2:}  
+\begin{enumerate}  
+    \item \textbf{Implementare la mappa}  
+        \begin{itemize}  
+            \item Aggiungere all'interfaccia la mappa di Trento
+        \end{itemize}  
+    \item \textbf{Dividere la mappa in zone}  
+        \begin{itemize}  
+            \item Implementare la divisione della mappa secondo i confini delle zone
+        \end{itemize}  
+    \item \textbf{Configurare la colorazione delle zone}  
+        \begin{itemize}  
+            \item Associare a ogni valore di soddisfazione media un colore  
+            \item Implementare la logica che colora le zone in base alla soddisfazione
+        \end{itemize}  
+    \item \textbf{Testare la corretta visualizzazione delle zone}  
+        \begin{itemize}  
+            \item Verificare che la mappa sia inserita nell'interfaccia correttamente
+            \item Verificare che la mappa sia suddivisa correttamente  
+            \item Verificare che i colori delle zone siano corretti 
+        \end{itemize}  
+\end{enumerate}  
+\section*{User Story 3: Spostare il focus della mappa}  
+Come utente voglio poter spostare il focus della mappa, così da poter cambiare l'area geografica che sto visualizzando
+\subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente può spostare il focus centrale della mappa  
+    \end{itemize}  
+    
+    \subsection*{TASKS - User Story 3:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare lo spostamento del focus}  
+            \begin{itemize}  
+                \item Fare in modo che sia possibile spostare il focus della mappa
+                \item Modificare la posizione del focus della mappa in base all'input dell'utente
+            \end{itemize}  
+        \item \textbf{Testare lo spostamento del focus}  
+            \begin{itemize}  
+                \item Verificare che il focus della mappa si sposti con l'input dell'utente
+                \item Verificare che il focus della mappa si sposti nella direzione corretta
+            \end{itemize}  
+    \end{enumerate}  
+\section*{User Story 4: Ingrandire/rimpicciolire la mappa}  
+Come utente voglio poter ingrandire o rimpicciolire la mappa, così da poter avere una visione più chiara dell'area geografica che sto visualizzando
+\subsection*{Criteri di accettazione:}  
+\begin{itemize}  
+    \item L'utente può ingrandire la mappa
+    \item L'utente può rimpicciolire la mappa
+\end{itemize}  
+
+\subsection*{TASKS - User Story 4:}  
+\begin{enumerate}  
+    \item \textbf{Implementare il sistema di modifica della grandezza della mappa}  
+        \begin{itemize}  
+            \item Fare in modo che sia possibile impostare la grandezza della mappa
+            \item Modificare la grandezza della mappa in base all'input dell'utente
+        \end{itemize}  
+    \item \textbf{Testare la modifica della grandezza della mappa}  
+        \begin{itemize}  
+            \item Verificare che la mappa si ingrandisca e si rimpicciolisca con l'input dell'utente
+        \end{itemize}  
+\end{enumerate}
+\section*{User Story 5: Selezionare le zone}  
+    Come utente voglio poter selezionare una zona della città, così da poter ricevere informazioni più dettagliate riguardanti quella zona
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente può selezionare una zona
+        \item L'utente può deselezionare una zona
+    \end{itemize}  
+    \subsection*{TASKS - User Story 5:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare la selezione}  
+            \begin{itemize}  
+                \item Implementare la logica di selezione di una zona e deselezione se viene selezionata di nuovo
+            \end{itemize}  
+        \item \textbf{Testare il sistema di selezione}  
+            \begin{itemize}  
+                \item Verificare che sia possibile selezionare una zona
+                \item Verificare che sia possibilie deselezionare la zona selezionata
+            \end{itemize}  
+    \end{enumerate}
+\section*{User Story 6: Visualizzare gli attributi delle zone}
+    Come utente voglio poter visualizzare gli attributi demografici e riguardanti la soddisfazione della zona che ho selezionato. Così da poter avere accesso alle informazioni specifiche che cerco
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item Quando una zona è selezionata, l'utente può vedere gli attributi demografici e riguardanti la soddisfazione di quella zona
+        \item Quando nessuna zona è selezionata, l'utente può vedere gli attributi demografici e riguardanti la soddisfazione di Trento
+    \end{itemize}  
+    \subsection*{TASKS - User Story 6:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare richiesta dei dati delle zone al database}  
+            \begin{itemize}  
+                \item Creare l'API necessaria richiedere al database i dati di una zona
+                \item Configurare l'applicazione per utilizzare l'API per richiedere i dati della zona selezionata
+            \end{itemize}
+        \item \textbf{Creare l'interfaccia di visualizzazione degli attributi}  
+            \begin{itemize}  
+                \item Configurare l'interfaccia grafica per mostrare gli attributi di una zona quando viene selezionata
+                \item Configurare l'interfaccia per tornare a mostrare gli attributi di Trento quando nessuna zona è selezionata
+            \end{itemize}  
+        \item \textbf{Testare la visualizzazione delle zone}  
+            \begin{itemize}  
+                \item Verificare che quando una zona è selezionata i suoi attributi vengono mostrati nell'interfaccia
+                \item Verificare che quando nessuna zona è selezionata l'interfaccia mostra gli attributi di Trento
+                \item Verificare che i valori degli attributi mostrati siano corretti
+                \item Verificare che gli attributi delle zone siano nel posto giusto sullo schermo
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 7: Cambiare la tipologia di zone}  
+    Come utente voglio poter cambiare la tipologia di zona con la quale si può interagire sulla mappa, così da poter ricevere informazioni riguardanti l'area geografica di preferenza senza complicare l'utlizzo della mappa
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente può cambiare la divisione per zone da quartieri a circoscrizioni
+        \item L'utente può cambiare la divisione per zone da circoscrizioni a quartieri
+    \end{itemize}  
+    \subsection*{TASKS - User Story 7:}  
+    \begin{enumerate}  
+        \item \textbf{Creare l'interfaccia di selezione}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che permette all'utente di selezionare la tipologia di zone da visualizzare
+            \end{itemize}  
+        \item \textbf{Implementare il cambiamento di tipologia di zona}  
+            \begin{itemize}  
+                \item Fare in modo che, quando la tipologia di zona scelta cambia, la mappa viene ricaricata per essere divisa nel modo giusto
+            \end{itemize}  
+        \item \textbf{Testare lo scambio della tipologia di zona}  
+            \begin{itemize}  
+                \item Verificare che sia possibile selezionare la tipologia di zona
+                \item Verificare che la mappa venga ricaricata con la divisione corretta
+                \item Verificare che, una volta cambiata la tipologia di zona, gli attributi delle zone mostrati dall'interfaccia siano corretti
+            \end{itemize}  
+    \end{enumerate}
+\section*{User Story 8: Visualizzare la tabella}  
+    Come utente analista voglio poter visualizzare le zone della città attraverso una tabella, così da poter visualizzare le zone geografiche attraverso il mio ordinamento di preferenza
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L’utente analista può decidere di visualizzare la tabella
+        \item Gli altri utenti non possono visualizzare la tabella
+    \end{itemize}  
+    \subsection*{TASKS - User Story 8:}  
+    \begin{enumerate}  
+        \item \textbf{Creare l'interfaccia di selezione}  
+            \begin{itemize}  
+                \item Creare l’interfaccia che permette all’utente analista di decidere di visualizzare la mappa o la tabella
+            \end{itemize}  
+        \item \textbf{Creare la tabella}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che mostra i dati delle zone nella forma di una tabella 
+            \end{itemize}  
+        \item \textbf{Testare la visualizzazione della tabella}  
+            \begin{itemize}  
+                \item Verificare che l'utente analista possa decidere di visualizzare la tabella
+                \item Verificare che la tabella mostri i dati delle zone in modo corretto
+                \item Verificare che, una volta cambiata la tipologia di zona, la tabella continui a mostrare gli attributi in modo corretto
+                \item Verificare che, una volta selezionata la visualizzazione in tabella, sia possibile tornare alla visualizzazione della mappa
+            \end{itemize}  
+    \end{enumerate}
+\section*{User Story 9: Login}
+    Come utente non loggato voglio poter accedere al mio account tramite Nome Utente e Password, così da poter avere accesso alle funzionalità fornite al mio account
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente non loggato può inserire Nome Utente e Password
+        \item Se le credenziali sono valide, l'utente può accedere al suo account
+        \item Se le credenziali non sono valide, un messaggio di errore appropriato viene presentato
+    \end{itemize}  
+    \subsection*{TASKS - User Story 9:}  
+    \begin{enumerate}  
+        \item \textbf{Creare il form delle credenziali}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che permette all'utente di inserire il proprio Nome Utente, la propria Password, e di inviare le credenziali per eseguire l'accesso
+            \end{itemize}  
+        \item \textbf{Implementare i controlli di autenticazione}  
+            \begin{itemize}  
+                \item Implementare la logica di controllo sulle credenziali per verificare se sono valide
+                \item Implementare la logica che determina quale messaggio di errore presentare se le credenziali non sono valide
+            \end{itemize}  
+        \item \textbf{Aggiungere i messaggi di errore}  
+            \begin{itemize}  
+                \item Creare il messaggio di errore che viene presentato se la password è errata
+                \item Creare il messaggio di errore che viene presentato se il Nome Utente non corrisponde a nessun utente nel sistema
+                \item Creare il messaggio di errore che viene presentato se Nome Utente o Password sono mancanti
+            \end{itemize}  
+        \item \textbf{Testare il funzionamento del login}  
+            \begin{itemize}  
+                \item Verificare che il form delle credenziali funzioni correttamente
+                \item Verificare che sia possibile accedere a un account inserendo le credenziali corrette
+                \item Verificare che i messaggi di errore giusti vengono presentati se le credenziali non sono valide
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 10: Logout}
+    Come utente loggato voglio poter scollegarmi dall'account al quale sono attualmente collegato, così da non permettere ad altre persone di usare il mio account o da potermi collegare a un altro account
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente loggato può scollegarsi dal proprio account
+        \item Appena scollegato dal proprio account, l'utente viene reindirizzato alla pagina principale dell'applicazione
+    \end{itemize}  
+    \subsection*{TASKS - User Story 10:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare l'uscita dall'account}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che permette all'utente di uscire dal proprio account
+                \item Implementare il ricaricamento della pagina principale una volta eseguito il logout
+            \end{itemize}  
+        \item \textbf{Testare il funzionamento del logout}  
+            \begin{itemize}  
+                \item Verificare che l'uscita dall'account viene effettuata correttamente
+                \item Verificare che, una volta eseguito il logout, viene ricaricata la pagina principale
+                \item Verificare che, una volta eseguito il logout, non è possibile accedere alle funzionalità riservate all'utente loggato
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 11: Visualizzare i sondaggi}
+    Come sondaggista voglio poter visualizzare i vari sondaggi con il nome ed il relativo stato di completamento, così da poter distinguere lo stato dei vari sondaggi e così sapere quali di questi sono stati completati, quali sono da finire, quali da modificare e quali da eliminare
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può visualizzare il nome dei propri sondaggi
+        \item L'utente sondaggista può visualizzare lo stato di completamento dei propri sondaggi
+    \end{itemize}  
+    \subsection*{TASKS - User Story 11:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare richiesta dei sondaggi al database}  
+            \begin{itemize}  
+                \item Creare l'API necessaria per richiedere al database la lista dei sondaggi appartenenti a un certo utente sondaggista
+                \item Configurare l'applicazione per utilizzare l'API per richiedere i sondaggi appartenenti all'utente che è loggato
+            \end{itemize}
+        \item \textbf{Creare l'interfaccia di visualizzazione dei sondaggi}  
+            \begin{itemize}  
+                \item Creare l'interfaccia grafica che mostra all'utente la lista dei propri sondaggi, e mostri per ognuno il relativo nome e stato di completamento
+            \end{itemize} 
+        \item \textbf{Testare il funzionamente della visualizzazione dei sondaggi}  
+            \begin{itemize}  
+                \item Verificare che l'interfaccia mostri tutti i sondaggi appartenenti all'utente sondaggista che è loggato
+                \item Verificare che le informazioni sui sondaggi mostrate (nome e stato di completamento) siano corrette
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 12: Creare sondaggi}
+    Come sondaggista voglio poter creare nuovi sondaggi, così da poter cominciare a raccogliere voti
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può creare sondaggi che vengono immagazzinati nel database
+        \item L'utente sondaggista può inserire il nome di ogni sondaggio che crea
+        \item Se l'utente sondaggista prova a creare un sondaggio senza nome, un messaggio di errore appropriato viene presentato
+    \end{itemize}  
+    \subsection*{TASKS - User Story 12:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare la creazione di sondaggi nel database}  
+            \begin{itemize}  
+                \item Creare l'API necessaria per creare un nuovo sondaggio e inserirlo nel database
+                \item Configurare l'applicazione per utilizzare l'API per creare un sondaggio
+            \end{itemize} 
+        \item \textbf{Creare il form per creare un sondaggio}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che permette all'utente sondaggista di inserire il nome del sondaggio e di crearlo
+            \end{itemize} 
+        \item \textbf{Creare i messaggi di errore}  
+            \begin{itemize}  
+                \item Creare il messaggio di errore che viene presentato se si cerca di creare un sondaggio senza nome
+            \end{itemize} 
+        \item \textbf{Testare la creazione dei sondaggi}  
+            \begin{itemize}  
+                \item Verificare che l'utente sondaggista possa inserire il nome del sondaggio e crearlo attraverso il form
+                \item Verificare che quando un utente sondaggista crea un sondaggio esso viene memorizzato nel database
+                \item Verificare che il messaggio di errore giusto viene mostrato quando un utente sondaggista cerca di creare un sondaggio senza nome
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 13: Salvare e continuare sondaggi}
+    Come sondaggista voglio poter salvare i miei sondaggi e continuarli in un secondo momento, così da poter lavorare sui sondaggi quando voglio
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può salvare un suo sondaggio in corso
+        \item L'utente sondaggista può continuare un suo sondaggio salvato 
+        \item Se un sondaggio non è in corso, l'utente sondaggista non può più continuarlo
+    \end{itemize}  
+    \subsection*{TASKS - User Story 13:}  
+    \begin{enumerate}  
+        \item \textbf{Creare l'interfaccia di gestione dei sondaggi}  
+            \begin{itemize}   
+                \item Creare l'interfaccia che permette all'utente sondaggista di selezionare un sondaggio in corso e continuarlo
+                \item Aggiungere all'interfaccia un pulsante che permette all'utente sondaggista di salvare il sondaggio
+                \item Impostare l'interfaccia per essere accessibile solo per i sondaggi che sono ancora in corso
+            \end{itemize} 
+        \item \textbf{Testare il salvataggio dei sondaggi}  
+            \begin{itemize}  
+                \item Verificare che l'utente sondaggista possa salvare un sondaggio tramite il pulsante nell'interfaccia
+            \end{itemize} 
+        \item \textbf{Testare la continuazione dei sondaggi}  
+            \begin{itemize}  
+                \item Verificare che l'utente sondaggista possa continuare un sondaggio in corso, e che i dati del sondaggio non cambino da quando è stato salvato
+                \item Verificare che l'utente sondaggista non possa continuare sondaggi che non sono più in corso
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 14: Eliminare sondaggi}
+    Come sondaggista voglio poter eliminare i miei sondaggi, così da poter rimuovere sondaggi sbagliati o creati per errore
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può eliminare un suo sondaggio che è ancora in corso 
+        \item Se un sondaggio non è in corso, l'utente sondaggista non può più eliminarlo
+    \end{itemize}  
+    \subsection*{TASKS - User Story 14:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare l'eliminazione dei sondaggi dal database}  
+            \begin{itemize}  
+                \item Creare l'API necessaria per eliminare un sondaggio dal database
+                \item Configurare l'applicazione per utilizzare l'API per eliminare il sondaggio selezionato dall'utente sondaggista
+            \end{itemize} 
+        \item \textbf{Creare il pulsante di eliminazione del sondaggio}  
+            \begin{itemize}  
+                \item Aggiungere all'interfaccia di gestione del sondaggio un pulsante per eliminare il sondaggio
+            \end{itemize} 
+        \item \textbf{Testare l'eliminazione dei sondaggi}  
+            \begin{itemize}  
+                \item Verificare che il pulsante di eliminazione presente nell'interfaccia di gestione sondaggio funzioni correttamente
+                \item Verificare che quando un sondaggio viene eliminato esso viene permanentemente rimosso dal database
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 15: Completare sondaggi}
+    Come sondaggista voglio poter completare i miei sondaggi in corso, così da poter aggiungere al sistema i dati che ho raccolto
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può completare i suoi sondaggi in corso
+        \item Una volta completati, i sondaggi non vengono più considerati in corso
+    \end{itemize}  
+    \subsection*{TASKS - User Story 15:}  
+    \begin{enumerate}  
+        \item \textbf{Creare il pulsante di completamento del sondaggio}  
+            \begin{itemize}  
+                \item Aggiungere all'interfaccia di gestione del sondaggio un pulsante per completare il sondaggio
+            \end{itemize} 
+        \item \textbf{Testare il completamento dei sondaggi}  
+            \begin{itemize}  
+                \item Verificare che il pulsante di completamento presente nell'interfaccia di gestione sondaggio funzioni correttamente
+                \item Verificare che quando un sondaggio viene completato esso non sia più considerato in corso dal sistema
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 16: Visualizzazione dei voti}
+    Come sondaggista voglio poter visualizzare le statistiche parziali dei voti nei miei sondaggi in corso, così da poter monitorare l'andamento del sondaggio e lo svolgimento corretto dei voti
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può vedere la lista dei voti nei suoi sondaggi in corso
+        \item L'utente sondaggista può vedere il numero totale di voti nei suoi sondaggi, l'età media parziale dei voti nei suoi sondaggi, e il numero di voti nei suoi sondaggi divisi per quartiere
+    \end{itemize}  
+    \subsection*{TASKS - User Story 16:}  
+    \begin{enumerate}  
+        \item \textbf{Aggiungere la lista dei voti all'interfaccia}  
+            \begin{itemize}  
+                \item Aggiungere all'interfaccia di gestione del sondaggio la lista dei voti presenti nel sondaggio
+            \end{itemize} 
+        \item \textbf{Implementare la logica delle statistiche parziali}  
+            \begin{itemize}  
+                \item Implementare la logica di calcolo dell'età media dei voti presenti nel sondaggio, tenendo conto dei voti senza età
+                \item Implementare la logica che suddivide i voti presenti nel sondaggio in base al loro quartiere e produce il numero totale dei voti per ogni quartiere
+            \end{itemize}
+        \item \textbf{Aggiungere le statistiche parziali all'interfaccia}  
+            \begin{itemize}  
+                \item Aggiungere all'interfaccia di gestione del sondaggio il numero totale dei voti nel sondaggio
+                \item Aggiungere all'interfaccia di gestione del sondaggio l'età media parziale dei voti nel sondaggio
+                \item Aggiungere all'interfaccia di gestione del sondaggio il numero totale di voti per ogni quartiere
+            \end{itemize} 
+        \item \textbf{Testare la visualizzazione dei voti}  
+            \begin{itemize}  
+                \item Verificare che la lista dei voti, il numero totale dei voti, l'età media parziale, e il numero di voti totale per ogni quartiere vengano mostrati nell'interfaccia di gestione del sondaggio
+                \item Verificare che la lista dei voti contenga tutti i voti presenti nel sondaggio
+                \item Verificare che i valori del numero totale di voti, dell'età media parziale, e del numero di voti totale per ogni quartiere siano corretti
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 17: Aggiungere voti}
+    Come sondaggista voglio poter aggiungere un voto a un mio sondaggio in corso, così da permettere al cittadino di esprimere il proprio grado di soddisfazione rispetto alle attività del comune per la zona nella quale abita e per la sua città
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può aggiungere il voto di un cittadino a un suo sondaggio in corso inserendo il quartiere del cittadino che sta votando e, opzionalmente, l'età.
+        \item Il cittadino può compilare il form di voto per esprimere il suo grado di soddisfazione
+        \item I voti aggiunti ai sondaggi vengono memorizzati nel database
+        \item Se il sondaggista prova ad aggiungere un voto senza inserire il quartiere del cittadino, un messaggio di errore appropriato viene presentato
+    \end{itemize}  
+    \subsection*{TASKS - User Story 17:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare l'aggiunta di voti al database}  
+            \begin{itemize}  
+                \item Creare l'API necessaria per creare un nuovo voto, aggiungerlo ad un sondaggio esistente, e inserirlo nel database
+                \item Configurare l'applicazione per utilizzare l'API per aggiungere il voto creato al sondaggio in corso
+            \end{itemize} 
+        \item \textbf{Aggiungere il form di creazione di un voto}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che permette all'utente sondaggista di inserire il quartiere del cittadino che sta votando, l'età del cittadino (opzionalmente), e di iniziare il processo di aggiunta del voto
+            \end{itemize} 
+        \item \textbf{Aggiungere il form di voto}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che permette all'utente di selezionare il suo grado di soddisfazione e confermare il suo voto
+            \end{itemize} 
+        \item \textbf{Creare i messaggi di errore}  
+            \begin{itemize}  
+                \item Creare il messaggio di errore che viene presentato quando il sondaggista prova ad aggiungere un voto senza inserire il quartiere di provenienza del cittadino
+            \end{itemize} 
+        \item \textbf{Testare l'aggiunta di nuovi voti}  
+            \begin{itemize}  
+                \item Verificare che l'interfaccia di creazione di un voto e il form di voto funzionino correttamente
+                \item Verificare che sia possibile aggiungere un voto sia inserendo il quartiere e l'età del cittadino sia inserendo solo il quartiere
+                \item Verificare che, se non si inserisce il quartiere, il messaggio di errore giusto viene presentato
+                \item Verificare che, una volta aggiunto un voto a un sondaggio, esso viene memorizzato nel database
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 18: Eliminare i voti}
+    Come sondaggista voglio poter eliminare i voti di un sondaggio, così da poter correggere eventuali voti errati
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente sondaggista può eliminare un voto di un suo sondaggio in corso
+    \end{itemize}  
+    \subsection*{TASKS - User Story 18:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare l'eliminazione dei voti dal database}  
+            \begin{itemize}  
+                \item Creare l'API necessaria per eliminare un voto dal database
+                \item Configurare l'applicazione per utilizzare l'API per eliminare il voto selezionato dall'utente
+            \end{itemize} 
+        \item \textbf{Creare il pulsante di eliminazione dei voti}  
+            \begin{itemize}  
+                \item Aggiungere a ogni voto nella lista di voti nell'interfaccia di gestione del sondaggio un pulsante per eliminare quel voto
+            \end{itemize}
+        \item \textbf{Testare l'eliminazione dei voti}  
+            \begin{itemize}  
+                \item Verificare che il pulsante di eliminazione presente nella lista dei voti funzioni correttamente
+                \item Verificare che quando un voto viene eliminato esso viene permanentemente rimosso dal sistema
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 19: Spostare il focus della tabella}
+    Come analista voglio poter modificare il focus principale della tabella, così da poter visualizzare i dati appartenenti a zone non visibili in tabella
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente analista può spostare il focus della tabella in alto e in basso
+    \end{itemize}  
+    \subsection*{TASKS - User Story 19:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare lo spostamento della tabella}  
+            \begin{itemize}  
+                \item Implementare la possibilità di spostare in alto o in basso il focus della tabella
+                \item Modificare la posizione del focus della tabella an base all'input dell'utente
+            \end{itemize} 
+        \item \textbf{Testare lo spostamento del focus della tabella}  
+            \begin{itemize}  
+                \item Verificare che il focus della tabella si sposti in alto e in basso con l'input dell'utente
+                \item Verificare che il focus della tabella si sposti nella direzione corretta
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 20: Interagire con la tabella}
+    Come analista voglio poter interagire con la tabella, così da poter selezionare la zona che mi interessa
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente analista può interagire con una riga della tabella e selezionare la relativa zona
+    \end{itemize}  
+    \subsection*{TASKS - User Story 20:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare l'interazione della tabella}  
+            \begin{itemize}  
+                \item Configurare l'interfaccia della tabella per selezionare una zona quando l'utente analista interagisce con la relativa riga della tabella
+            \end{itemize} 
+        \item \textbf{Testare l'interazione con la tabella}  
+            \begin{itemize}  
+                \item Verificare che l'utente possa interagire con le righe della tabella per selezionare la relativa zona
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 21: Visualizzare tutti gli attributi}
+    Come analista voglio poter visualizzare un maggior numero di attributi riguardanti una data zona geografica, così da poter comprendere a fondo le motivazioni di un corrispettivo livello di soddisfazione
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente analista può vedere l'insieme completo di tutti gli attributi della zona selezionata
+    \end{itemize}  
+    \subsection*{TASKS - User Story 21:}  
+    \begin{enumerate}  
+        \item \textbf{Implementare la richiesta dei dati completi al database}  
+            \begin{itemize}  
+                \item Creare l'API necessaria per richiedere al database i dati di tutti gli attributi di una zona
+                \item Configurare l'applicazione per richiedere i dati di tutti gli attributi quando l'utente analista seleziona una zona
+            \end{itemize} 
+        \item \textbf{Testare la visualizzazione di tutti gli attributi}  
+            \begin{itemize}  
+                \item Verificare che tutti gli attributi, e non solo quelli demografici e riguardanti la soddisfazione media, vengono mostrati all'utente analista
+                \item Verificare che i valori degli attributi mostrati siano corretti
+                \item Verificare che i valori degli attributi siano collocati nel posto giusto sullo schermo
+            \end{itemize} 
+    \end{enumerate}
+\section*{User Story 22: Scegliere la categoria di attributi}
+    Come analista, quando sto visualizzando gli attributi di una zona, voglio vedere gli attributi suddivisi per categoria e selezionare quale categoria di attributi visualizzare, così da avere una visione chiara e organizzata dei dati
+    \subsection*{Criteri di accettazione:}  
+    \begin{itemize}  
+        \item L'utente analista può selezionare la categoria di attributi che vuole visualizzare
+    \end{itemize}  
+    \subsection*{TASKS - User Story 22:}  
+    \begin{enumerate} 
+        \item \textbf{Suddividere gli attributi in categorie}  
+            \begin{itemize}  
+                \item Identificare le categorie di attributi
+                \item Assegnare ogni attributo a una categoria
+            \end{itemize} 
+        \item \textbf{Implementare la selezione della categoria di attributi}  
+            \begin{itemize}  
+                \item Creare l'interfaccia che permette all'utente analista di selezionare una delle categorie di attributi
+                \item Configurare l'interfaccia di visualizzazione degli attributi per mostrare gli attributi appartenenti alla categoria selezionata dall'utente analista
+            \end{itemize} 
+        \item \textbf{Testare la selezione della categoria di attributi}  
+            \begin{itemize}  
+                \item Verificare che l'utente analista possa selezionare le categorie di attributi
+                \item Verificare che l'interfaccia di visualizzazione degli attributi mostri gli attributi della categoria selezionata in modo corretto
+            \end{itemize} 
+    \end{enumerate}

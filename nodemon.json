@@ -1,0 +1,5 @@
+{
+    "watch": ["app"],
+    "ext": "ts,json",
+    "exec": "tsx -r dotenv/config ./index.ts"
+}

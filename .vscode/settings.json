@@ -1,19 +1,29 @@
 {
     "cSpell.words": [
+        "abit",
+        "confirmationservice",
         "DescrizionediProgetto",
+        "lngs",
         "loggati",
         "loggato",
         "OSMF",
+        "openapi",
         "pdfauthor",
         "pdfkeywords",
         "pdfsubject",
+        "primeicons",
+        "primeui",
+        "primevue",
         "SatisTrento",
-        "SPID"
+        "SPID",
+        "toastservice"
     ],
     "editor.wordWrap": "on",
     "conventionalCommits.scopes": [
         "D1",
         "D2",
-        "D3"
+        "D3",
+        "backend",
+        "frontend"
     ]
 }

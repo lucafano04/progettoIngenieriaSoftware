@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     const { email, password } = req.body;
     
     // Check if the email and password are present
-    if(!email || !password || !email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)){
+    if(!email || !password){
         const response: Errors = {
             code: 400,
             message: RESPONSE_MESSAGES[400],

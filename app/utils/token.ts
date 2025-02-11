@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { Errors } from '../../types';
-import { JWT_SECRET, RANDOM_SECRET } from '../variables';
+import { JWT_SECRET, RANDOM_SECRET, RESPONSE_MESSAGES } from '../variables';
 
 const revokeList = new Set<string>();
 
@@ -15,7 +15,7 @@ function checker(req: Request, res: Response, next: NextFunction) {
     if(!token){
         const response: Errors = {
             code: 401,
-            message: 'Unauthorized',
+            message: RESPONSE_MESSAGES[401],
             details: 'Token not found'
         }
         res.status(401).json(response);
@@ -26,7 +26,7 @@ function checker(req: Request, res: Response, next: NextFunction) {
     if(parts.length !== 2){
         const response: Errors = {
             code: 401,
-            message: 'Unauthorized',
+            message: RESPONSE_MESSAGES[401],
             details: 'Token format is invalid'
         }
         res.status(401).json(response);
@@ -38,7 +38,7 @@ function checker(req: Request, res: Response, next: NextFunction) {
         if(err){
             const response: Errors = {
                 code: 401,
-                message: 'Unauthorized',
+                message: RESPONSE_MESSAGES[401],
                 details: 'Token is invalid'
             }
             res.status(401).json(response);
@@ -47,7 +47,7 @@ function checker(req: Request, res: Response, next: NextFunction) {
         if(revokeList.has(parts[1])){
             const response: Errors = {
                 code: 401,
-                message: 'Unauthorized',
+                message: RESPONSE_MESSAGES[401],
                 details: 'Token has been revoked'
             }
             res.status(401).json(response);

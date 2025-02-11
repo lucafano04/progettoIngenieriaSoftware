@@ -1,0 +1,61 @@
+name: 'Node.js & Vue.js TypeScript Compilation'
+run-name: 'Running TypeScript Compilation for Node.js & Vue.js'
+on:
+    push:
+        paths:
+            - 'src/**'
+            - 'tests/**'
+            - 'package.json'
+            - 'tsconfig.json'
+            - '.github/workflows/buildTS.yaml'
+            - 'app/**'
+            - 'types/**'
+            - 'public/**'
+            - 'index.html'
+            - 'vue.config.js'
+            - 'index.ts'
+            - '*.app.json'
+            - '*.config.ts'
+            - '*.config.js'
+            - '*.config.json'
+    pull_request:
+        paths:
+            - 'src/**'
+            - 'tests/**'
+            - 'package.json'
+            - 'tsconfig.json'
+            - '.github/workflows/buildTS.yaml'
+            - 'app/**'
+            - 'types/**'
+            - 'public/**'
+            - 'index.html'
+            - 'vue.config.js'
+            - 'index.ts'
+            - '*.app.json'
+            - '*.config.ts'
+            - '*.config.js'
+            - '*.config.json'
+
+
+jobs:
+    compile_ts:
+        runs-on: ubuntu-latest
+        steps:
+              - name: Checkout code
+                uses: actions/checkout@v2
+
+              - name: Set up Node.js
+                uses: actions/setup-node@v2
+                with:
+                  node-version: '22'
+        
+              - name: Remove node_modules and package-lock.json
+                run: |
+                  rm -rf node_modules
+                  rm -f package-lock.json
+        
+              - name: Install dependencies
+                run: npm install
+        
+              - name: Build client
+                run: npm run build:client

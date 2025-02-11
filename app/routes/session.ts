@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     }
     // Set the payload for the JWT
     const payload: Utenti.User = {
-        self: `${BASE_URL}/users/${user._id}`,
+        self: `${BASE_URL}/user/${user._id}`,
         email: user.email,
         nome: user.nome,
         cognome: user.cognome,
@@ -75,13 +75,15 @@ router.post('/', async (req, res) => {
 });
 router.get('/', token.checker, async (req, res) => {
     const { user } = req.body;
-    res.status(200).json({
+    const response: Utenti.User = {
+        self: user.self,
         email: user.email,
         nome: user.nome,
         cognome: user.cognome,
         ruolo: user.ruolo,
         imageUrl: user.imageUrl
-    });
+    };
+    res.status(200).json(response);
 });
 
 router.delete('/', token.checker, async (req, res) => {

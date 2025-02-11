@@ -192,7 +192,7 @@ router.post('/',async(req,res)=>{
         if(!quartiereDB){
             const response: Errors ={
                 code: 400,
-                message: "Bad Request",
+                message: RESPONSE_MESSAGES[400],
                 details: `Quartiere ${quartiere} non esistente nel database`,
             }
             res.status(400).json(response)

@@ -1,6 +1,8 @@
 import MinimalBase from "./MinimalBase";
-import {Coordinate} from "..";
+import {Coordinate, Circoscrizioni} from "..";
 
-type Minimal = MinimalBase & Coordinate;
+type Minimal = MinimalBase & Coordinate & {
+    circoscrizione: Circoscrizioni.Minimal
+}
 
 export default Minimal;

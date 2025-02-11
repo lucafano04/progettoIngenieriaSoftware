@@ -55,7 +55,7 @@ router.get('/',async(req,res)=>{
         //per creare i tipi Sondaggio e Minimal mi servono anche le informazioni sul sondaggista, quindi prendo la lista di sondaggisti dal database e li mappo a tipi Utente.User
         const utentiDB = await db.models.User.find({ruolo: 'Sondaggista'});
         const utenti = utentiDB.map((udb)=> ({
-                self:`${BASE_URL}/utenti/${udb._id}`,
+                self:`${BASE_URL}/user/${udb._id}`,
                 email: udb.email,
                 nome: udb.nome,
                 cognome: udb.cognome,
@@ -217,7 +217,7 @@ router.get('/:id',async (req,res)=>{
     //per creare il tipo Sondaggio mi servono anche le informazioni sul sondaggista, quindi prendo la lista di sondaggisti dal database e li mappo a tipi Utente.User
     const utentiDB = await db.models.User.find({ruolo: 'Sondaggista'});
     const utenti = utentiDB.map(udb =>({
-            self:`${BASE_URL}/utenti/${udb._id}`,
+            self:`${BASE_URL}/user/${udb._id}`,
             email: udb.email,
             nome: udb.nome,
             cognome: udb.cognome,
@@ -342,8 +342,8 @@ router.delete('/:id',async (req,res)=>{
     }
 
 
-    //mi assicuro che l'utente che sta facendo la richiesta sia il sondaggista che ha creato il sondaggio, altrimenti rispondo con un errore
-    const puoEliminare=(user.ruolo == 'Sondaggista' && sondaggioDB.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())) && sondaggioDB.isAperto);
+    // Da specifica API: "Elimina un sondaggio. Solo l'utente che ha creato il sondaggio può eliminarlo o un amministratore, se il sondaggio è in attesa. Se il sondaggio è approvato o rifiutato, solo l'amministratore può eliminarlo."
+    const puoEliminare=(user.ruolo == 'Sondaggista' && sondaggioDB.sondaggista.equals(new Types.ObjectId(user.self.split('/').pop())) && sondaggioDB.isAperto) || (user.ruolo == 'Amministratore' && !sondaggioDB.isAperto && sondaggioDB.statoApprovazione === 'Rifiutato');
     if(!puoEliminare){
         const response: Errors ={
             code: 403,

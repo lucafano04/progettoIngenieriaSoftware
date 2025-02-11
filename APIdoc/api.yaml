@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:3000/api/v1
     description: Development server for testing
-  - url: https://progettocomune.onrender.com/api/v1
+  - url: https://satistrento.onrender.com/
     description: Production server
 
 components:
@@ -201,10 +201,10 @@ components:
         ruolo:
           type: string
           enum:
-            - "amministratore"
-            - "analista"
-            - "sondaggista"
-            - "circoscrizione"
+            - "Amministratore"
+            - "Analista"
+            - "Sondaggista"
+            - "Circoscrizione"
           description: Ruolo dell'utente.
         imageUrl: 
           type: string
@@ -258,9 +258,9 @@ components:
         statoApprovazione:
           type: string
           enum:
-            - "approvato"
-            - "in attesa"
-            - "rifiutato"
+            - "Approvato"
+            - "In attesa"
+            - "Rifiutato"
           description: Stato di approvazione del sondaggio.
         sondaggista:
           "$ref": "#/components/schemas/User"
@@ -412,6 +412,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Quartiere"
                   - $ref: "#/components/schemas/QuartiereNC"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         404: 
           description: "Quartiere non trovato."
           content: 
@@ -493,6 +499,12 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Circoscrizione"
                   - $ref: "#/components/schemas/CircoscrizioneNC"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         404: 
           description: "Circoscrizione non trovata."
           content: 
@@ -553,12 +565,6 @@ paths:
                 "$ref": "#/components/schemas/User"
         401:
           description: "Utente non autenticato."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        404:
-          description: "Sessione non trovata."
           content:
             application/json:
               schema:
@@ -722,6 +728,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Sondaggio"
+        400: 
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -802,6 +814,12 @@ paths:
       responses:
         204:
           description: "Sondaggio eliminato con successo."
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -846,6 +864,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Voto"
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:
@@ -931,6 +955,12 @@ paths:
       responses:
         204:
           description: "Voto eliminato con successo."
+        400:
+          description: "ID proposto non valido."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
           content:

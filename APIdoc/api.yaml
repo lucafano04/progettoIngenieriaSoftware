@@ -201,10 +201,10 @@ components:
         ruolo:
           type: string
           enum:
-            - "amministratore"
-            - "analista"
-            - "sondaggista"
-            - "circoscrizione"
+            - "Amministratore"
+            - "Analista"
+            - "Sondaggista"
+            - "Circoscrizione"
           description: Ruolo dell'utente.
         imageUrl: 
           type: string

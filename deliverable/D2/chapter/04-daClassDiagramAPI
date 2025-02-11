@@ -1,0 +1,38 @@
+\chapter{Dal Class Diagram alle API}
+Riportiamo di seguito una tabella con la mappatura tra i metodi presenti nel diagramma delle classi del capitolo precedente e le API individuate nel documento D3.
+
+{\footnotesize
+    \begin{xltabular}{\textwidth}{|l|X|X|X|X|X|}
+
+        \hline \multicolumn{1}{|l|}{\textbf{Classe}} & \multicolumn{1}{X|}{\textbf{Metodo}} & \multicolumn{1}{X|}{\textbf{HTTP Method}} & \multicolumn{1}{X|}{\textbf{URL + Params}} & \multicolumn{1}{X|}{\textbf{Request}} & \multicolumn{1}{X|}{\textbf{Response}} \\ \hline 
+        \endfirsthead
+        
+        \multicolumn{6}{l}%
+        {Tabella continuata dalla pagina precedente} \\
+        \hline \multicolumn{1}{|l|}{\textbf{Classe}} & \multicolumn{1}{X|}{\textbf{Metodo}} & \multicolumn{1}{X|}{\textbf{HTTP Method}} & \multicolumn{1}{X|}{\textbf{URL + Params}} & \multicolumn{1}{X|}{\textbf{Request}} & \multicolumn{1}{X|}{\textbf{Response}} \\ \hline 
+        \endhead
+        
+        \hline \multicolumn{6}{|r|}{{Tabella continuata nella pagina successiva}}\\ \hline
+        \endfoot
+        
+        \hline
+        \endlastfoot
+    
+        \hline
+        Utente\_Non\_Loggato & login() & GET & /session & \{nomeUtente, password\} & 200, JWT token  \\ \hline
+         Utente\_Non\_Loggato & visualizza città() & GET & /quartieri deepData=false & - & 200, quartiere.Minimal[] \\ \hline
+        Utente\_Non\_Loggato & visualizza città() & GET & /circoscrizioni deepData=false& - & 200, circoscrizione.Minimal[] \\ \hline
+        Utente\_Non\_Loggato & visualizza zona(zona) & GET & /quartieri/:\{id\} deepData=false & - & 200, quartiere.Minimal  \\ \hline
+        Utente\_Non\_Loggato & visualizza zona(zona) & GET & /circoscrizioni/:\{id\} deepData=false& - & 200, circoscrizione.Minimal \\ \hline
+        Utente & logout() & DELETE & /session & - & 204  \\ \hline
+        Utente\_Analista & visualizza città() & GET & /quartieri/ deepData=true & - & 200, quartiere.Quartiere[]  \\ \hline
+        Utente\_Analista & visualizza città() & GET & /circoscrizioni deepData=true & - & 200, circoscrizione.Circoscrizione[] \\ \hline
+        Utente\_Analista & visualizza dettagliatamente(zona) & GET & /quartieri/:\{id\} deepData=true & - & 200, quartiere.Quartiere  \\ \hline
+        Utente\_Analista & visualizza dettagliatamente(zona) & GET & /circoscrizioni/:\{id\} deepData=true & - & 200, circoscrizione.Circoscrizione  \\ \hline
+        Utente\_Sondaggista & create\_sondaggio() & POST & /sondaggi & - & 201  \\ \hline
+        Utente\_Sondaggista & delete\_sondaggio() & DELETE & /sondaggi/:\{id\} & - & 204  \\ \hline
+        Utente\_Sondaggista & close\_sondaggio() & PATCH & /sondaggi/:\{id\} & - & 200  \\ \hline
+        Utente\_Sondaggista & create\_voto() & POST & /voti /:\{idSondaggio\} & \{voto, eta, quartiere\} & 201  \\ \hline
+        Utente\_Sondaggista & delete\_voto() & DELETE & /voti/:\{idVoto\} & - & 204  \\ \hline
+    \end{xltabular}
+    }

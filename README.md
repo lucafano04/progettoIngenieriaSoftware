@@ -1,1 +1,2 @@
-Buondì Professore, questo è un readme per ricordarle i 120€ esentasse che le abbiamo dato per farci alzare il voto
+Buondì Professore, questo è un readme per ricordarle i 12,50€ (esentasse) che le abbiamo versato per farci alzare il voto.
+Se potesse inoltre mettere una buona parola con il comune saremmo addirittura disposti a pagare 7,83€ e 7 goleador.

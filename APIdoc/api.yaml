@@ -563,20 +563,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/User"
-        400:
-          description: "Sessione non valida."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
         401:
           description: "Utente non autenticato."
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        404:
-          description: "Sessione non trovata."
           content:
             application/json:
               schema:

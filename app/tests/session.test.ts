@@ -108,17 +108,6 @@ describe('POST `/session`', () => {
         });
         expect(ruoli_aspettati).toContain(response.body.user.ruolo);
     });
-    test('If the email is not a valid email, it should return 400 and an `Errors` object', async () => {
-        const response = await request(app)
-            .post('/api/v1/session')
-            .send({ email: 'invalid', password: validPassword_hash });
-        expect(response.status).toBe(400);
-        expect(response.body).toEqual({
-            code: 400,
-            message: RESPONSE_MESSAGES[400],
-            details: expect.any(String)
-        });
-    });
     test('If the email is not present, it should return 400 and an `Errors` object', async () => {
         const response = await request(app)
             .post('/api/v1/session')

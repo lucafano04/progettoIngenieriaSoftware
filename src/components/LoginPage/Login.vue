@@ -41,8 +41,8 @@
             <div class="tw-bg-gray-700 dark:tw-bg-gray-300 tw-p-8 tw-rounded-lg tw-shadow-lg tw-w-96"> <!-- TODO: Cambiare le classi tw-bg-gray-700 dark:tw-bg-gray-300 quando la palette è pronta -->
                 <h1 class="tw-text-2xl tw-font-bold tw-text-center tw-mb-4 dark:tw-text-black tw-text-white">Login</h1>
                 <FloatLabel variant="on" class="tw-mb-4">
-                    <InputText v-model="email" class="tw-w-full" itemid="email" :disabled="loading" />
-                    <label for="email">Email</label>
+                    <InputText v-model="email" class="tw-w-full" itemid="username" :disabled="loading" />
+                    <label for="username">Nome Utente</label>
                 </FloatLabel>
                 <FloatLabel variant="on" class="tw-mb-4">
                     <InputText v-model="password" class="tw-w-full" itemid="password" type="password" :disabled="loading" />

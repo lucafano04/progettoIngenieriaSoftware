@@ -25,7 +25,7 @@
 
     \subsection{\texttt{CMP3}: Gestione mappa e tabella}
         \subsubsection{Descrizione}
-            Il componente si occcupa di fornire all'utente una rappresentazione dettagliata della città e delle suoi zone geografiche. Attraverso il seguente componente è inoltre possibile selezionare una delle zone geografiche per la quali si vuole ricevere maggiori informazioni. 
+            Il componente si occupa di fornire all'utente una rappresentazione dettagliata della città e delle suoi zone geografiche. Attraverso il seguente componente è inoltre possibile selezionare una delle zone geografiche per la quali si vuole ricevere maggiori informazioni. 
         \subsubsection{Interfaccia richiesta - Selezione zona:}
             Attraverso la seguente interfaccia il componente riceve dall'utente la zona geografica sulla quale vuole ricevere maggiori informazioni. Nel caso in cui non vi fosse una zona selezionata verrà utilizzata quella di default, ovvero l'intero comune.
         \subsubsection{Interfaccia richiesta - Testo:}
@@ -45,7 +45,7 @@
         \subsubsection{Interfaccia richiesta - Zona selezionata:}
             Indica la zona per la quale bisogna visualizzare gli attributi principali. Nel caso in cui non vi fosse una zona selezionata verrà utilizzata quella di default, ovvero l'intero comune.
         \subsubsection{Interfaccia richiesta - Servizio selezionato:}
-            Indica l'attributo per il quale bisogna visualizzare la lista dei servizi che svolgono un ruolo attivo, all'interno della zona selezionata, all'interno dell'am\texttt{bit}o di tale attributo. Nel caso in cui non vi fosse un'attributo selezionato verrà utilizzata quella di default, ovvero nessun attributo.
+            Indica l'attributo per il quale bisogna visualizzare la lista dei servizi che svolgono un ruolo attivo, all'interno della zona selezionata, all'interno dell'ambito di tale attributo. Nel caso in cui non vi fosse un'attributo selezionato verrà utilizzata quella di default, ovvero nessun attributo.
         \subsubsection{Interfaccia richiesta - Autorizzazione:}
             \texttt{Bit} che segnala se l'utente ha il permesso necessario per compiere o meno un'azione.
         \subsubsection{Interfaccia richiesta - Attributi:}
@@ -57,11 +57,11 @@
 
     \subsection{\texttt{CMP5}: Gestione database}
         \subsubsection{Descrizione} 
-            il componente si occupa di fornire la raccolta dei dati più importanti. Salva nel database tutti i dati relativi alle categorie e agli attributi stessi, tiene inoltre traccia dei voti e integra ciò con i voti presenti all'interno dei sondaggi valutati positivamente.
+            Il componente si occupa di fornire la raccolta dei dati più importanti. Salva nel database tutti i dati relativi alle categorie e agli attributi stessi, tiene inoltre traccia dei voti e integra ciò con i voti presenti all'interno dei sondaggi valutati positivamente.
         \subsubsection{Interfaccia richiesta - Dati database:}
             Raccolta di tutti i dati presenti all'interno del database, questi dati riguardano gli attributi per il \texttt{CMP} ``Gestione Attributi'' e i voti per i vari \texttt{CMP} correlati.
         \subsubsection{Interfaccia richiesta - Dati strutture modificati:}
-            Raccolta dei dati appartenenti ad una struttura che ha appena su\texttt{bit}o una modifica.
+            Raccolta dei dati appartenenti ad una struttura che ha appena subito una modifica.
         \subsubsection{Interfaccia richiesta - Cancellazione sondaggio:}
             Codice identificativo che permette la rimozione di un sondaggio e di tutti i voti collegati al corrispettivo sondaggio dal database.
         \subsubsection{Interfaccia richiesta - Sondaggi approvati:}
@@ -79,11 +79,11 @@
         \subsubsection{Interfaccia richiesta - Modifica dei dati:}
             Dati appartenenti ad una struttura i quali, in seguito, verranno inviati al database per poter essere modificati.
         \subsubsection{Interfaccia fornita - Dati strutture modificati:}
-            Insieme dei dati appartenenti alla struttura che ha appena su\texttt{bit}o una modifica da un'utente autorizzato a compiere tale operazione.
+            Insieme dei dati appartenenti alla struttura che ha appena subito una modifica da un'utente autorizzato a compiere tale operazione.
 
     \subsection{\texttt{CMP7}: Gestione invio richieste}
         \subsubsection{Descrizione}
-            Il componente si occupa di inviare le richieste, fornite da utenti con le corrispettive autorizzazioni, al \texttt{CMP} ``Gestione invio risposte'' e di gestire la corrispettiva risposta. Le richieste permetteranno di mettere in contatto diretto le circoscrizioni e il comune permettendo una comunicazione più efficente.
+            Il componente si occupa di inviare le richieste, fornite da utenti con le corrispettive autorizzazioni, al \texttt{CMP} ``Gestione invio risposte'' e di gestire la corrispettiva risposta. Le richieste permetteranno di mettere in contatto diretto le circoscrizioni e il comune permettendo una comunicazione più efficiente.
         \subsubsection{Interfaccia richiesta - Testo richiesta:}
             Rappresenta il testo completo della richiesta fornito dalla circoscrizione.
         \subsubsection{Interfaccia richiesta - Risposte:}
@@ -97,7 +97,7 @@
 
     \subsection{\texttt{CMP8}: Gestione invio risposte}
         \subsubsection{Descrizione}
-            Il componente si occupa di fornire le risposte per le richieste inviate dal \texttt{CMP} ``Gestione invio risposte''. Le risposte permetteranno di semplificare la comunicazione diretta tra le circoscrizioni ed il comune stesso basandosi su di un servizio più efficente.
+            Il componente si occupa di fornire le risposte per le richieste inviate dal \texttt{CMP} ``Gestione invio risposte''. Le risposte permetteranno di semplificare la comunicazione diretta tra le circoscrizioni ed il comune stesso basandosi su di un servizio più efficiente.
         \subsubsection{Interfaccia richiesta - Richieste:}
             Rappresenta il testo completo della richiesta, il codice identificativo della richiesta, il codice identificativo della circoscrizione ed il codice identificativo dell'utente che ha inviato la richiesta.
         \subsubsection{Interfaccia richiesta - Testo risposta:}
@@ -159,17 +159,17 @@
 
     \subsection{\texttt{CMP13}: Gestione autenticazione}
         \subsubsection{Descrizione}
-            Il componente si occupa di verificare l'identità dell'utente che sta effettuando l'accesso all'interno del sistema. Il componente si basa su un sistema di autenticazione SSO attraverso il quale è in grado di fornire all'utente l'accesso al corrispettivo ruolo. Tale componente include le funzionalità di login e di logout.
-        \subsubsection{Interfaccia richiesta - Autenticazione utente SSO:}
-            Autorizzazione all'accesso al sistema preveniente dall'SSO che, previo controllo delle credenziali inserite dall'utente, conferma che tali credenziali sono corrette. Confermando dunque l'identità dell'utente.
+            Il componente si occupa di verificare l'identità dell'utente che sta effettuando l'accesso all'interno del sistema. Il componente si basa su un sistema di autenticazione \texttt{SSO} attraverso il quale è in grado di fornire all'utente l'accesso al corrispettivo ruolo. Tale componente include le funzionalità di login e di logout.
+        \subsubsection{Interfaccia richiesta - Autenticazione utente \texttt{SSO}:}
+            Autorizzazione all'accesso al sistema preveniente dal \texttt{SSO} che, previo controllo delle credenziali inserite dall'utente, conferma che tali credenziali sono corrette. Confermando dunque l'identità dell'utente.
         \subsubsection{Interfaccia richiesta - Richiesta di login:}
-            Richiesta da parte dell'utente di poter essere reindirizzato al sistema SSO di preferenza per poter accedere ad alcune funzionalità.
+            Richiesta da parte dell'utente di poter essere reindirizzato al sistema \texttt{SSO} di preferenza per poter accedere ad alcune funzionalità.
         \subsubsection{Interfaccia richiesta - Richiesta di logout:}
             Richiesta da parte dell'utente di poter essere scollegato dal ruolo al quale l'utente è temporaneamente connesso, riportando così l'utente al ruolo di ``Utente non loggato''.
-        \subsubsection{Interfaccia fornita - Richiesta a servizi SSO:}
-            Reindirizzamento dell'utente verso il sistema SSO scelto per l'inserimento delle proprie credenziali.
+        \subsubsection{Interfaccia fornita - Richiesta a servizi \texttt{SSO}:}
+            Reindirizzamento dell'utente verso il sistema \texttt{SSO} scelto per l'inserimento delle proprie credenziali.
         \subsubsection{Interfaccia fornita - Autenticazione:}
-            Codice univoco che identifica il ruolo che l'utente ha all'interno del programma, ovvero l'insieme delle funzioanlità alle quali le divese tipologie di utenti hanno accesso.
+            Codice univoco che identifica il ruolo che l'utente ha all'interno del programma, ovvero l'insieme delle funzionalità alle quali le diverse tipologie di utenti hanno accesso.
     
     \subsection{\texttt{CMP14}: Gestione autorizzazioni}
         \subsubsection{Descrizione}
@@ -177,11 +177,11 @@
         \subsubsection{Interfaccia richiesta - Ruoli utenti:}
             Insieme delle informazioni che determinano a quali ruoli sono autorizzati i diversi utenti all'interno del programma.
         \subsubsection{Interfaccia richiesta - Autenticazione:}
-            Codice univoco che identifica il ruolo che l'utente ha all'interno del programma, ovvero l'insieme delle funzioanlità alle quali le divese tipologie di utenti hanno accesso.
+            Codice univoco che identifica il ruolo che l'utente ha all'interno del programma, ovvero l'insieme delle funzionalità alle quali le diverse tipologie di utenti hanno accesso.
         \subsubsection{Interfaccia fornita - Autorizzazione:}
             Insieme di \texttt{bit} in uscita che determinano se l'utente ha il permesso necessario per compiere o meno un'azione.
-            \newpage
 
+\newpage
 \section{Diagramma dei componenti}
     Viene riportato di seguito un diagramma complessivo di tutti i componenti di sistema e le loro interconnessioni descritte in precedenza.
     \begin{figure}[H]

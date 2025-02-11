@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     }
     // Set the payload for the JWT
     const payload: Utenti.User = {
-        self: `${BASE_URL}/users/${user._id}`,
+        self: `${BASE_URL}/user/${user._id}`,
         email: user.email,
         nome: user.nome,
         cognome: user.cognome,

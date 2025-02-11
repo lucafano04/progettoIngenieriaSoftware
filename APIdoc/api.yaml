@@ -258,9 +258,9 @@ components:
         statoApprovazione:
           type: string
           enum:
-            - "approvato"
-            - "in attesa"
-            - "rifiutato"
+            - "Approvato"
+            - "In attesa"
+            - "Rifiutato"
           description: Stato di approvazione del sondaggio.
         sondaggista:
           "$ref": "#/components/schemas/User"

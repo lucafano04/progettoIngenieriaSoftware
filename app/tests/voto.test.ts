@@ -199,7 +199,7 @@ describe('POST `/voti`', () => {
             .set('Authorization', `Bearer ${token}`)
             .send({ 
                 voto: 5,
-                eta; 24,
+                eta: 24,
                 quartiere: VALID_QUARTIERE
             });
         checkError(response, 400);

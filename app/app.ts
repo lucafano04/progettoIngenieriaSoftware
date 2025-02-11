@@ -1,7 +1,7 @@
 import express, {Express} from 'express' // Import the express library
 import path from 'path';
 import { circoscrizioni, generalInfo, quartieri, session, sondaggi, voti} from './routes';
-import { BASE_URL } from './variables';
+import { BASE_URL, RESPONSE_MESSAGES } from './variables';
 import { checker } from './utils/token';
 // To access the database connection, use db.mongoose for the mongoose object and db.schemas for a object containing the schemas
 
@@ -50,11 +50,11 @@ app.use(BASE_URL + '/sondaggi', checker, sondaggi);
 app.use('/',express.static('./dist/client'));
 
 // Dato che è una app Vue, tutte le route devono essere gestite dal client se non sono sate gestite dal server prima, inoltre se la route rispetta la BASE_URL, allora deve essere gestita dal server tramite 404
-app.use(BASE_URL+'/*', (req, res) => {
-    res.status(404).sendFile(path.resolve('./dist/client/index.html'));
+app.all(BASE_URL+'/*', (req, res) => {
+    res.status(404).json({code: 404, message: RESPONSE_MESSAGES[404], details: 'Route not found'});
 });
 
-app.use('*', (req, res) => {
+app.all('*', (req, res) => {
     res.sendFile(path.resolve('./dist/client/index.html'));
 });
 

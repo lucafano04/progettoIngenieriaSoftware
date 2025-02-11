@@ -165,29 +165,211 @@ La scelta del presente \textit{stack} tecnologico è stata fatta in base al mate
         \end{description}
 \section{Testing}
 
-    Per ognuno dei requisiti funzionali implementati nell'applicazione sono stati individuati dei casi di test per assicurare la loro corretta implementazione e, in generale, il corretto funzionamento degli elementi di frontend e backend del sistema, anche in situazioni di casi limite.
-    \begin{table}[H]
+    Per ognuno degli endpoint dell'API implementati nell'applicazione sono stati individuati dei casi di test per assicurare la loro corretta implementazione e, in generale, il corretto funzionamento degli elementi di backend del sistema, anche in situazioni di casi limite.
+    L’implementazione dei test è organizzata in file .test.ts locati nella cartella \textit{tests}.
+
         \footnotesize
         \centering
-        \begin{tabularx}{\textwidth}{|l|X|X|X|c|X|X|c|}
+        \begin{xltabular}{\textwidth}{|l|X|X|X|c|X|X|c|}
+
+            \hline \multicolumn{1}{|l|}{\textbf{N.}} & \multicolumn{1}{X|}{\textbf{Descrizione}} & \multicolumn{1}{X|}{\textbf{\textit{Test Data}}} & \multicolumn{1}{X|}{\textbf{Precondizioni}} & \multicolumn{1}{c|}{\textbf{Dipendenze}} & \multicolumn{1}{X|}{\textbf{Risultato Atteso}} & \multicolumn{1}{X|}{\textbf{Risultato Riscontrato}} & \multicolumn{1}{c|}{\textbf{Note}}\\ \hline 
+            \endfirsthead
+            
+            \multicolumn{8}{l}%
+            {Tabella continuata dalla pagina precedente} \\
+            \hline \multicolumn{1}{|l|}{\textbf{N.}} & \multicolumn{1}{X|}{\textbf{Descrizione}} & \multicolumn{1}{X|}{\textbf{\textit{Test Data}}} & \multicolumn{1}{X|}{\textbf{Precondizioni}} & \multicolumn{1}{c|}{\textbf{Dipendenze}} & \multicolumn{1}{X|}{\textbf{Risultato Atteso}} & \multicolumn{1}{X|}{\textbf{Risultato Riscontrato}} & \multicolumn{1}{c|}{\textbf{Note}}\\ \hline
+            \endhead
+            
+            \hline \multicolumn{8}{|r|}{{Tabella continuata nella pagina successiva}} \hline
+            \endfoot
+            
             \hline
-            \textbf{N.} & \textbf{Descrizione} & \textbf{\textit{Data}} & \textbf{Precondizioni} & \textbf{Dipendenze} & \textbf{Risultato Atteso} & \textbf{Risultato Riscontrato} & \textbf{Note} \\
+            \endlastfoot
+        
             \hline
-            1 & Ottenimento lista quartieri base senza coordinate & \textit{deepData=false}, \textit{coordinate=false} & - & - & Lista quartieri senza coordinate & Lista quartieri senza coordinate & - \\
+            1.1 & Ottenimento lista quartieri base senza coordinate & \textit{deepData=false}, \textit{coordinate=false} & - & - & Lista quartieri senza coordinate & Lista quartieri senza coordinate & - \\
             \hline
-            1.1 & Ottenimento lista quartieri base con coordinate & \textit{deepData=false} \textit{coordinate=true} & - & - & Lista quartieri con coordinate & Lista quartieri con coordinate & - \\
+            1.2 & Ottenimento lista quartieri base con coordinate & \textit{deepData=false} \textit{coordinate=true} & - & - & Lista quartieri con coordinate & Lista quartieri con coordinate & - \\
             \hline
-            1.2 & Ottenimento lista quartieri dettagliata senza coordinate & \textit{deepData=true} \textit{coordinate=false} & - & - & Lista quartieri dettagliata senza coordinate & Lista quartieri dettagliata senza coordinate & - \\
+            1.3 & Ottenimento lista quartieri dettagliata senza coordinate & \textit{deepData=true} \textit{coordinate=false} & - & - & Lista quartieri dettagliata senza coordinate & Lista quartieri dettagliata senza coordinate & - \\
             \hline
-            1.3 & Ottenimento lista quartieri dettagliata con coordinate & \textit{deepData=true} \textit{coordinate=true} & - & - & Lista quartieri dettagliata con coordinate & Lista quartieri dettagliata con coordinate & - \\
+            1.4 & Ottenimento lista quartieri dettagliata con coordinate & \textit{deepData=true} \textit{coordinate=true} & - & - & Lista quartieri dettagliata con coordinate & Lista quartieri dettagliata con coordinate & - \\
             \hline
-            2 & Ottenimento singolo quartiere con coordinate & \textit{quartiereId}, \textit{coordinate=true} & Il quartiere deve esistere & - & Quartiere con coordinate & Quartiere con coordinate & - \\
+            2.1 & Ottenimento singolo quartiere con coordinate & \textit{quartiereId}, \textit{coordinate=true} & Il quartiere deve esistere & - & Quartiere con coordinate & Quartiere con coordinate & - \\
             \hline
-            2.1 & Ottenimento singolo quartiere senza coordinate & \textit{quartiereId}, \textit{coordinate=false} & Il quartiere deve esistere & - & Quartiere senza coordinate & Quartiere senza coordinate & - \\
+            2.2 & Ottenimento singolo quartiere senza coordinate & \textit{quartiereId}, \textit{coordinate=false} & Il quartiere deve esistere & - & Quartiere senza coordinate & Quartiere senza coordinate & - \\
             \hline
-            2.2 & Ottenimento quartiere non esistente & \textit{quartiereId}, \textit{coordinate=any} & Il quartiere non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            2.3 & Ottenimento quartiere non esistente & \textit{quartiereId}, \textit{coordinate=any} & Il quartiere non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
             \hline
-            2.3 & Ottenimento quartiere con \texttt{ID} non valido & \textit{quartiereId}, \textit{coordinate=any} & Il \texttt{ID} del quartiere deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            2.4 & Ottenimento quartiere con \texttt{ID} non valido & \textit{quartiereId}, \textit{coordinate=any} & Il \texttt{ID} del quartiere non deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
             \hline
-        \end{tabularx}
-    \end{table}
+            3.1 & Ottenimento lista circoscrizioni base senza coordinate & \textit{deepData=false}, \textit{coordinate=false} & - & - & Lista circoscrizioni senza coordinate & Lista circoscrizioni senza coordinate & - \\
+            \hline
+            3.2 & Ottenimento lista circoscrizioni base con coordinate & \textit{deepData=false} \textit{coordinate=true} & - & - & Lista circoscrizioni con coordinate & Lista circoscrizioni con coordinate & - \\
+            \hline
+            3.3 & Ottenimento lista circoscrizioni dettagliata senza coordinate & \textit{deepData=true} \textit{coordinate=false} & - & - & Lista circoscrizioni dettagliata senza coordinate & Lista circoscrizioni dettagliata senza coordinate & - \\
+            \hline
+            3.4 & Ottenimento lista circoscrizioni dettagliata con coordinate & \textit{deepData=true} \textit{coordinate=true} & - & - & Lista circoscrizioni dettagliata con coordinate & Lista circoscrizioni dettagliata con coordinate & - \\
+            \hline
+            4.1 & Ottenimento singola circoscrizione con coordinate & \textit{circoscrizioneId}, \textit{coordinate=true} & La circoscrizione deve esistere & - & Circoscrizione con coordinate & Circoscrizione con coordinate & - \\
+            \hline
+            4.2 & Ottenimento singola circoscrizione senza coordinate & \textit{circoscrizioneId}, \textit{coordinate=false} & La circoscrizione deve esistere & - & Circoscrizione senza coordinate & Circoscrizione senza coordinate & - \\
+            \hline
+            4.3 & Ottenimento circoscrizione non esistente & \textit{circoscrizioneId}, \textit{coordinate=any} & La circoscrizione non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            \hline
+            4.4 & Ottenimento circoscrizione con \texttt{ID} non valido & \textit{circoscrizioneId}, \textit{coordinate=any} & Il \texttt{ID} della circoscrizione non deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            5 & Ottenimento informazioni generali di Trento & - & - & - & Informazioni generali della città di Trento & Informazioni generali della città di Trento & - \\
+            \hline
+            6.1 & Ottenimento informazioni di una sessione & \textit{JWT token} & Il token deve essere valido & - & Informazioni dell'utente & Informazioni dell'utente & - \\
+            \hline
+            6.2 & Ottenimento informazioni di una sessione revocata & \textit{JWT token} & Il token deve essere valido e corrispondere a una sessione che è stata revocata & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            6.3 & Ottenimento informazioni di una sessione non valida & \textit{JWT token} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            6.4 & Ottenimento informazioni di una sessione con token in format sbagliato & \textit{JWT token} & Il token deve essere in un format sbagliato & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            7.1 & Creazione sessione & \textit{nomeUtente}, \textit{password} & Le credenziali devono essere valide & - & JWT token valido, informazioni dell'utente & JWT token valido, informazioni dell'utente & - \\
+            \hline
+            7.2 & Creazione sessione senza nome utente & \textit{password} & - & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            7.3 & Creazione sessione senza password & \textit{nomeUtente} & - & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            7.4 & Creazione sessione con password errata & \textit{nomeUtente}, \textit{password} & Il nome utente deve essere valido, ma la password non deve essere quella di quell'utente & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            8.1 & Revoca sessione & \textit{JWT token} & Il token deve essere valido & - & La sessione viene revocata & La sessione viene revocata & - \\
+            \hline
+            8.2 & Revoca sessione senza token & - & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            8.3 & Revoca sessione con token non valido & \textit{JWT token} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            8.4 & Revoca sessione con token un format sbagliato & \textit{JWT token} & Il token deve essere in un format sbagliato & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            9.1 & Ottenimento lista sondaggi base sondaggista & \textit{JWT token}, \textit{deepData=false} & Il token deve essere valido e appartenente a un utente sondaggista & - & Lista sondaggi base del sondaggista & Lista sondaggi base del sondaggista & - \\
+            \hline
+            9.2 & Ottenimento lista sondaggi dettagliata sondaggista & \textit{JWT token}, \textit{deepData=true} & Il token deve essere valido e appartenere a un utente sondaggista & - & Lista dettagliata dei sondaggi del sondaggista & Lista dettagliata dei sondaggi del sondaggista & - \\
+            \hline
+            9.3 & Ottenimento lista sondaggi base amministratore & \textit{JWT token}, \textit{deepData=false} & Il token deve essere valido e appartenente a un utente amministratore & - & Lista sondaggi base & Lista sondaggi base & - \\
+            \hline
+            9.4 & Ottenimento lista sondaggi dettagliata amministratore & \textit{JWT token}, \textit{deepData=true} & Il token deve essere valido e appartenere a un utente amministratore & - & Lista dettagliata dei sondaggi & Lista dettagliata dei sondaggi & - \\
+            \hline
+            9.5 & Ottenimento lista sondaggi senza token & \textit{deepData=any} & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            9.6 & Ottenimento lista sondaggi con token non valido & \textit{JWT token}, \textit{deepData=any} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            9.7 & Ottenimento lista sondaggi senza autorizzazione & \textit{JWT token}, \textit{deepData=any} & Il token deve essere valido ma non appartenente a un utente sondaggista o amministratore & - & Errore \textt{403} & Errore \textt{403} & - \\
+            \hline
+            10.1 & Creazione sondaggio & \textit{JWT token}, \textit{titoloSondaggio} & Il token deve essere valido e appartenente a un utente sondaggista & - & Creazione sondaggio con titolo dato & Creazione sondaggio con titolo dato & - \\
+            \hline
+            10.2 & Creazione sondaggio senza titolo & \textit{JWT token} & Il token deve essere valido e appartenente a un utente sondaggista & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            10.3 & Creazione sondaggio con titolo vuoto & \textit{JWT token}, \textit{titoloSondaggio} & Il token deve essere valido e appartenente a un utente sondaggista, il titolo deve essere vuoto & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            10.4 & Creazione sondaggio senza token & \textit{titoloSondaggio} & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            10.5 & Creazione sondaggio con token non valido & \textit{JWT token}, \textit{titoloSondaggio} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \textt{401} & - \\
+            \hline
+            10.6 & Creazione sondaggio senza autorizzazione & \textit{JWT token}, \textit{titoloSondaggio} & il token deve essere valido ma non appartenente a un utente sondaggista & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            11.1 & Ottenimento singolo sondaggio sondaggista & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere & - & Informazioni sondaggio & Informazioni sondaggio & - \\
+            \hline
+            11.2 & Ottenimento singolo sondaggio amministratore & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un amministratore, il sondaggio deve esistere & - & Informazioni sondaggio & Informazioni sondaggio & - \\
+            \hline
+            11.3 & Ottenimento singolo sondaggio non esistente & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un utente sondaggista, il sondaggio non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            \hline
+            11.4 & Ottenimento singolo sondaggio con \texttt{ID} non valido & \textit{JWT token}, \textit{sondaggioId} & Il \texttt{ID} del sondaggio non deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            11.5 & Ottenimento singolo sondaggio senza token & \textit{sondaggioId} & - & - & Errore \textt{401} & Errore \textt{401} & - \\
+            \hline
+            11.6 & Ottenimento singolo sondaggio con token non valido & \textit{JWT token}, \textit{sondaggioId} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            11.7 & Ottenimento singolo sondaggio senza autorizzazione & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido ma non appartenente a un amministratore o al sondaggista proprietario del sondaggio & - & Errore \textt{403} & Errore \textt{403} & - \\
+            \hline
+            12.1 & Chiusura sondaggio & \textit{JWT token}, \textit{sondaggioId}, \textit{isAperto=false} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, il sondaggio deve essere aperto & - & Chiusura del sondaggio & Chiusura del sondaggio & - \\
+            \hline
+            12.2 & Chiusura sondaggio non esistente & \textit{JWT token}, \textit{sondaggioId}, \textit{isAperto=any} & Il token deve essere valido e appartenente a un sondaggista, il sondaggio non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            \hline
+            12.3 & Chiusura sondaggio con \texttt{ID} non valido & \textit{JWT token}, \textit{sondaggioId}, \textit{isAperto=any} & Il token deve essere valido e appartenente a un sondaggista, il \texttt{ID} del sondaggio non deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            12.4 & Chiusura sondaggio senza token & \textit{sondaggioId}, \textit{isAperto=any} & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            12.5 & Chiusura sondaggio con token non valido & \textit{JWT token}, \textit{sondaggioId}, \textit{isAperto=any} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            12.6 & Chiusura sondaggio senza autorizzazione & \textit{JWT token}, \textit{sondaggioId}, \textit{isAperto=any} & Il token deve essere valido ma non appartenente al sondaggista proprietario del sondaggio & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            12.7 & Chiusura sondaggio senza body & \textit{JWT token}, \textit{sondaggioId}, & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            12.8 & Chiusura sondaggio già chiuso & \textit{JWT token}, \textit{sondaggioId}, \textit{isAperto=false} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, il sondaggio deve essere chiuso & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            13.1 & Eliminazione sondaggio & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, il sondaggio deve essere aperto & - & Eliminazione del sondaggio & Eliminazione del sondaggio & - \\
+            \hline
+            13.2 & Eliminazione sondaggio rifiutato amministratore & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un amministratore, il sondaggio deve esistere, il sondaggio deve essere chiuso e rifiutato & - & Eliminazione del sondaggio & Eliminazione del sondaggio & - \\
+            \hline
+            13.3 & Eliminazione sondaggio non esistente & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un sondaggista o un amministratore, il sondaggio non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            \hline
+            13.4 & Eliminazione sondaggio con \texttt{ID} non valido & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente un sondaggista o un amministratore, il \texttt{ID} del sondaggio non deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            13.5 & Eliminazione sondaggio senza token & \textit{sondaggioId} & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            13.6 & Eliminazione sondaggio con token non valido & \textit{JWT token}, \textit{sondaggioId} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            13.7 & Eliminazione sondaggio senza autorizzazione & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido ma non appartenente al sondaggista proprietario del sondaggio o un amministratore & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            13.8 & Eliminazione sondaggio chiuso sondaggista & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, il sondaggio deve essere chiuso & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            13.9 & Eliminazione sondaggio aperto amministratore & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un amministratore, il sondaggio deve esistere, il sondaggio deve essere aperto & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            13.10 & Eliminazione sondaggio accettato amministratore & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un amministratore, il sondaggio deve esistere, il sondaggio deve essere chiuso e accettato & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            14.1 & Ottenimento lista voti & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere & - & Lista voti del sondaggio & Lista voti del sondaggio & - \\
+            \hline
+            14.2 & Ottenimento lista voti di sondaggio non esistente & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un sondaggista, il sondaggio non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            \hline
+            14.3 & Ottenimento lista voti con \texttt{ID} sondaggio non valido & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente a un sondaggista, il \texttt{ID} del sondaggio non deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            14.4 & Ottenimento lista voti senza token & \textit{JWT token}, \textit{sondaggioId} & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            14.5 & Ottenimento lista voti con token non valido & \textit{JWT token}, \textit{sondaggioId} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            14.6 & Ottenimento lista voti senza autorizzazione & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido ma non appartenente al sondaggista proprietario del sondaggio & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            15.1 & Aggiunta voto & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, il quartiere deve esistere & - & Creazione voto nel sondaggio & Creazione voto nel sondaggio & - \\
+            \hline
+            15.2 & Aggiunta voto senza età & \textit{JWT token}, \textit{sondaggioId}, \textit{eta=null}, \textit{voto}, \textit{quartiere} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, il quartiere deve esistere & - & Creazione voto nel sondaggio & Creazione voto nel sondaggio & - \\
+            \hline
+            15.3 & Aggiunta voto con \texttt{eta} non valida & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, \textit{eta}<0 oppure \textit{eta}>100 & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            15.4 & Aggiunta voto a sondaggio senza valore voto & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{quartiere} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            15.5 & Aggiunta voto con valore \textit{voto} non valido & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, \textit{voto}<1 oppure \textit{voto}>5 & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            15.6 & Aggiunta voto senza quartiere & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            15.7 & Aggiunta voto con quartiere non esistente & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere, il quartiere non deve esistere & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            15.8 & Aggiunta voto vuoto & \textit{JWT token}, \textit{sondaggioId} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio deve esistere & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            15.9 & Aggiunta voto con \texttt{ID} sondaggio non valido & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token deve essere valido e appartenente a un sondaggista, il \texttt{ID} del sondaggio non deve essere valido & - & Errore \texttt{40} & Errore \texttt{40} & - \\
+            \hline
+            15.10 & Aggiunta voto in sondaggio non esistente & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio, il sondaggio non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            \hline
+            15.11 & Aggiunta voto senza token & \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            15.12 & Aggiunta voto con token non valido & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            15.13 & Aggiunta voto senza autorizzazione & \textit{JWT token}, \textit{sondaggioId}, \textit{eta}, \textit{voto}, \textit{quartiere} & Il token deve essere valido ma non appartenente al sondaggista proprietario del sondaggio & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+            16.1 & Eliminazione voto & \textit{JWT token}, \textit{votoId} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio che contiene il voto, il voto deve esistere & - & Eliminazione voto dal sondaggio & Eliminazione voto dal sondaggio & - \\
+            \hline
+            16.1 & Eliminazione voto non esistente & \textit{JWT token}, \textit{votoId} & Il token deve essere valido e appartenente a un sondaggista, il voto non deve esistere & - & Errore \texttt{404} & Errore \texttt{404} & - \\
+            \hline
+            16.1 & Eliminazione voto con \texttt{ID} non valido & \textit{JWT token}, \textit{votoId} & Il token deve essere valido e appartenente al sondaggista proprietario del sondaggio che contiene il voto, il \texttt{ID} del voto non deve essere valido & - & Errore \texttt{400} & Errore \texttt{400} & - \\
+            \hline
+            16.1 & Eliminazione voto senza token & \textit{JWT token}, \textit{votoId} & - & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            16.1 & Eliminazione voto con token non valido & \textit{JWT token}, \textit{votoId} & Il token non deve essere valido & - & Errore \texttt{401} & Errore \texttt{401} & - \\
+            \hline
+            16.1 & Eliminazione voto senza autorizzazione & \textit{JWT token}, \textit{votoId} & Il token deve essere valido ma non appartenente al sondaggista proprietario del sondaggio che contiene il voto & - & Errore \texttt{403} & Errore \texttt{403} & - \\
+            \hline
+        \end{xltabular}
+
